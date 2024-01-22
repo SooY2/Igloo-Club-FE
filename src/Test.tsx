@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 const Test = () => {
-  return <div css={style}>Test</div>;
+  return <div css={style}></div>;
 };
 
 export default Test;
