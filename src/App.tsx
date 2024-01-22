@@ -1,4 +1,4 @@
-import Test from './Test.tsx';
+import Test from '@components/Test';
 
 function App() {
   return (

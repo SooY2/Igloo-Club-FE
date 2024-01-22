@@ -21,6 +21,19 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true, //ts에서 Synthetic기본 import허용
+
+    /* path and alias */
+    "baseUrl": "./src/common",
+    "paths": {
+      "@apis/*": ["apis/*"],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
+      "@hooks/*": ["hooks/*"],
+      "@styles/*": ["styles/*"],
+      "@type/*": ["type/*"],
+      "@utils/*": ["utils/*"],
+    },
   },
   "include": ["src", "svg.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
