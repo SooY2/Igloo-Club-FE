@@ -13,7 +13,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './tsconfig.json',
+    // project: './tsconfig.json',
     ecmaFeatures: {
       jsx: true,
       tsx: true,
@@ -29,5 +29,6 @@ module.exports = {
     'import/prefer-default-export': 'off', //확장자명 on
     'import/extensions': ['off'], //확장자명 on
     'react/react-in-jsx-scope': 'off', //React import
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
   },
 };
