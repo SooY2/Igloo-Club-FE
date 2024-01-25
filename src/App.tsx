@@ -1,19 +1,15 @@
 import { RouterProvider } from 'react-router-dom';
 import router from './Router';
+import { Global, ThemeProvider } from '@emotion/react';
+import globalStyles from './common/styles/globalStyles';
+import { theme } from './common/styles/theme';
 
 function App() {
   return (
-    <div
-      css={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        minWidth: '360px',
-      }}
-    >
+    <ThemeProvider theme={theme}>
+      <Global styles={globalStyles} />
       <RouterProvider router={router} />
-    </div>
+    </ThemeProvider>
   );
 }
 
