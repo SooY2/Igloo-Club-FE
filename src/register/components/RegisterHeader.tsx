@@ -3,11 +3,13 @@ import { ArrowLeft } from '../assets/svgs/0_index';
 import styled from '@emotion/styled';
 
 const RegisterHeader = ({
-  isFirst,
+  isFirst = false,
   percent,
+  onPrev,
 }: {
-  isFirst: boolean;
+  isFirst?: boolean;
   percent: number;
+  onPrev?: () => void;
 }) => {
   return (
     <header css={headerStyles}>
@@ -15,7 +17,7 @@ const RegisterHeader = ({
         {isFirst ? (
           <ExitBtn type="button">그만두기</ExitBtn>
         ) : (
-          <CustomArrowLeft />
+          <CustomArrowLeft onClick={onPrev} />
         )}
       </div>
       <ProgressBar max={100} value={percent} />

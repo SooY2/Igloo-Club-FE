@@ -19,6 +19,11 @@ export const articleStyles = css`
   height: 100%;
 `;
 
+export const sectionStyles = css`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const Button = styled.button<{ isActive: boolean }>`
   width: 100%;
   height: 5.4rem;

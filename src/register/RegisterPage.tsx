@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import {
   약관동의,
+  전화번호입력,
   전화번호인증,
   회사이메일인증,
   닉네임입력,
@@ -16,6 +17,7 @@ const Register = () => {
   const [퍼널, setStep] = useFunnel(
     [
       '약관동의',
+      '전화번호입력',
       '전화번호인증',
       '회사이메일인증',
       '닉네임입력',
@@ -24,13 +26,19 @@ const Register = () => {
       '기본프로필입력1',
       '기본프로필입력2',
     ] as const,
-    '약관동의',
+    '전화번호입력',
   );
   return (
     <RagisterLayout>
       <퍼널>
         <퍼널.Step name="약관동의">
-          <약관동의 onNext={() => setStep('전화번호인증')} />
+          <약관동의 onNext={() => setStep('전화번호입력')} />
+        </퍼널.Step>
+        <퍼널.Step name="전화번호입력">
+          <전화번호입력
+            onPrev={() => setStep('약관동의')}
+            onNext={() => setStep('전화번호인증')}
+          />
         </퍼널.Step>
         <퍼널.Step name="전화번호인증">
           <전화번호인증 onNext={() => setStep('회사이메일인증')} />
