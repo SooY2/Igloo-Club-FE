@@ -11,7 +11,7 @@ import styled from '@emotion/styled';
 import onlyAbleNumber from '../../common/utils/onlyAbleNumber';
 import { NavTypesProps } from '../types/navTypes';
 import { css } from '@emotion/react';
-import useRegisterTimer from '../utils/registerTimer';
+import useRegisterTimer from '../hooks/useRegisterTimer';
 
 const 전화번호인증 = ({ onPrev, onNext }: NavTypesProps) => {
   const [isActive, setIsActive] = useState(false);
@@ -25,6 +25,11 @@ const 전화번호인증 = ({ onPrev, onNext }: NavTypesProps) => {
   const handleSubmit = () => {
     //서버통신
     onNext();
+  };
+
+  //인증번호 재정송
+  const handleReRequest = () => {
+    //서버통신
   };
 
   return (
@@ -56,7 +61,7 @@ const 전화번호인증 = ({ onPrev, onNext }: NavTypesProps) => {
               <StBasicInputExplain>
                 인증 메세지가 오지 않나요?
               </StBasicInputExplain>
-              <StRequest>인증번호 재전송</StRequest>
+              <StRequest onClick={handleReRequest}>인증번호 재전송</StRequest>
             </div>
           </div>
         </section>
