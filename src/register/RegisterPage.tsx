@@ -63,5 +63,7 @@ export default Register;
 const RagisterLayout = styled.section`
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 100%;
+  padding: 2.5rem 2rem 3.3rem;
 `;

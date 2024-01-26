@@ -64,6 +64,7 @@ const globalStyles = css`
   input,
   button,
   textarea {
+    background-color: transparent;
     border: 0;
     outline: 0;
   }

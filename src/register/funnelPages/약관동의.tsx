@@ -1,12 +1,9 @@
-import * as St from '../styles/pageLayout';
+import RegisterHeader from '../components/RegisterHeader';
 
 const 약관동의 = () => {
   return (
     <>
-      <header css={St.headerStyles}>
-        <div>그만두기</div>
-        <progress></progress>
-      </header>
+      <RegisterHeader isFirst={true} percent={20} />
       <article>
         <section>내용내용</section>
         <button>다음으로</button>
