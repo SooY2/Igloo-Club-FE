@@ -25,7 +25,7 @@ const 전화번호입력 = ({ onPrev, onNext }: NavTypesProps) => {
 
   return (
     <>
-      <RegisterHeader percent={15} onPrev={onPrev} />
+      <RegisterHeader percent={20} onPrev={onPrev} />
       <article css={St.articleStyles}>
         <section css={St.sectionStyles}>
           <TitleBox>

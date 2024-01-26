@@ -26,7 +26,7 @@ const Register = () => {
       '기본프로필입력1',
       '기본프로필입력2',
     ] as const,
-    '전화번호입력',
+    '전화번호인증',
   );
   return (
     <RagisterLayout>
@@ -41,7 +41,10 @@ const Register = () => {
           />
         </퍼널.Step>
         <퍼널.Step name="전화번호인증">
-          <전화번호인증 onNext={() => setStep('회사이메일인증')} />
+          <전화번호인증
+            onPrev={() => setStep('전화번호입력')}
+            onNext={() => setStep('회사이메일인증')}
+          />
         </퍼널.Step>
         <퍼널.Step name="회사이메일인증">
           <회사이메일인증 onNext={() => setStep('닉네임입력')} />
