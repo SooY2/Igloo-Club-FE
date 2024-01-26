@@ -34,6 +34,7 @@ const FONT = ({ family, size, style, weight, lineheight }: Font): string => `
   font-style: ${style};
   font-weight: ${weight};
   line-height: ${lineheight};
+  letter-spacing: -0.03rem;
 `;
 
 const fonts = {
@@ -70,6 +71,13 @@ const fonts = {
     size: 1.8,
     style: 'normal',
     weight: 600,
+    lineheight: 'normal',
+  }),
+  body1: FONT({
+    family: 'Pretendard Variable',
+    size: 1.5,
+    style: 'normal',
+    weight: 700,
     lineheight: 'normal',
   }),
   body1b: FONT({
