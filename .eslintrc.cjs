@@ -7,6 +7,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:storybook/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
@@ -30,5 +31,10 @@ module.exports = {
     'import/extensions': ['off'], //확장자명 on
     'react/react-in-jsx-scope': 'off', //React import
     'react/no-unknown-property': ['error', { ignore: ['css'] }],
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
   },
 };
