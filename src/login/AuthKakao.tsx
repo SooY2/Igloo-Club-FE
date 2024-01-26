@@ -5,7 +5,7 @@ const AuthKakao = () => {
 
   console.log(AUTHORIZE_CODE);
 
-  return <div>AuthKakao</div>;
+  return <div>Auth Kakao</div>;
 };
 
 export default AuthKakao;
