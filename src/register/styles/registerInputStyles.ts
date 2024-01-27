@@ -24,3 +24,8 @@ export const StBasicInputExplain = styled.p`
   color: ${({ theme }) => theme.colors.gray6};
   ${({ theme }) => theme.fonts.body3};
 `;
+
+export const StErrorExplain = styled.p`
+  color: ${({ theme }) => theme.colors.warning_red};
+  ${({ theme }) => theme.fonts.body3};
+`;

@@ -28,7 +28,7 @@ const Register = () => {
       '기본프로필입력1',
       '기본프로필입력2',
     ] as const,
-    '회사이메일인증',
+    '닉네임입력',
   );
   return (
     <RagisterLayout>
@@ -61,7 +61,10 @@ const Register = () => {
           />
         </Funnel.Step>
         <Funnel.Step name="닉네임입력">
-          <닉네임입력 onNext={() => setStep('성별생년월일')} />
+          <닉네임입력
+            onPrev={() => setStep('회사이메일입력')}
+            onNext={() => setStep('성별생년월일')}
+          />
         </Funnel.Step>
         <Funnel.Step name="성별생년월일">
           <성별생년월일 onNext={() => setStep('SNS계정')} />
