@@ -26,7 +26,7 @@ const 성별생년월일 = ({ onPrev, onNext }: NavTypesProps) => {
 
   return (
     <>
-      <RegisterHeader percent={25} onPrev={onPrev} />
+      <RegisterHeader percent={70} onPrev={onPrev} />
       <article css={St.articleStyles}>
         <section css={St.sectionStyles}>
           <TitleBox>

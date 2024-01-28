@@ -28,7 +28,7 @@ const Register = () => {
       '기본프로필입력1',
       '기본프로필입력2',
     ] as const,
-    '성별생년월일',
+    'SNS계정',
   );
   return (
     <RagisterLayout>
@@ -73,7 +73,10 @@ const Register = () => {
           />
         </Funnel.Step>
         <Funnel.Step name="SNS계정">
-          <SNS계정 onNext={() => setStep('기본프로필입력1')} />
+          <SNS계정
+            onPrev={() => setStep('성별생년월일')}
+            onNext={() => setStep('기본프로필입력1')}
+          />
         </Funnel.Step>
         <Funnel.Step name="기본프로필입력1">
           <기본프로필입력1 onNext={() => setStep('기본프로필입력2')} />
