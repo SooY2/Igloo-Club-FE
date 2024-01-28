@@ -22,6 +22,7 @@ export const articleStyles = css`
 export const sectionStyles = css`
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 `;
 
 export const Button = styled.button<{ isActive: boolean }>`
