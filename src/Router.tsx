@@ -2,7 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import Login from './login';
 import AuthKakao from './login/AuthKakao';
 import Landing from './landing/Landing';
-import MainPage from './mainpage/MainPage';
+import MainPage from './main/mainPage';
+import Profile from './main/profile';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: 'mainpage',
     element: <MainPage />,
+  },
+  {
+    path: 'profile',
+    element: <Profile />,
   },
 ]);
 

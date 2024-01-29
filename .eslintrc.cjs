@@ -31,10 +31,7 @@ module.exports = {
     'import/extensions': ['off'], //확장자명 on
     'react/react-in-jsx-scope': 'off', //React import
     'react/no-unknown-property': ['error', { ignore: ['css'] }],
-  },
-  settings: {
-    react: {
-      version: 'detect',
-    },
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
   },
 };

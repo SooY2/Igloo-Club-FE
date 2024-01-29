@@ -4,7 +4,27 @@ import emotionReset from 'emotion-reset';
 const globalStyles = css`
   ${emotionReset};
 
-  @font-face {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  html {
+    font-size: 62.5%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     font-family:
       'Pretendard Variable',
       Pretendard,
@@ -21,25 +41,6 @@ const globalStyles = css`
       'Segoe UI Emoji',
       'Segoe UI Symbol',
       sans-serif;
-  }
-
-  * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    -ms-overflow-style: none; /* for Internet Explorer, Edge */
-    scrollbar-width: none; /* for Firefox */
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
-  body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
   }
 
   :root {
@@ -63,8 +64,13 @@ const globalStyles = css`
   input,
   button,
   textarea {
+    background-color: transparent;
     border: 0;
     outline: 0;
+  }
+
+  span {
+    white-space: pre-line;
   }
 `;
 
