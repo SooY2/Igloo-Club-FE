@@ -32,9 +32,4 @@ module.exports = {
     'react/react-in-jsx-scope': 'off', //React import
     'react/no-unknown-property': ['error', { ignore: ['css'] }],
   },
-  settings: {
-    react: {
-      version: 'detect',
-    },
-  },
 };
