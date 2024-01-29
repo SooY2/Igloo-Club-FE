@@ -4,6 +4,7 @@ import AuthKakao from './login/AuthKakao';
 import Landing from './landing/Landing';
 import MainPage from './main/mainPage';
 import Profile from './main/profile';
+import FinishMatch from './main/finishMatch';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
     path: 'profile',
     element: <Profile />,
   },
+  { path: 'finishmatch', element: <FinishMatch /> },
 ]);
 
 export default router;

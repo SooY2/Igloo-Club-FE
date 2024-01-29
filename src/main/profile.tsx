@@ -53,7 +53,7 @@ const Profile = () => {
         </div>
         <div css={Middle.Notice}>
           <div css={Middle.NoticeTitle}>
-            <span>나의 외적인 매력은</span>
+            <span>이건 알아두세요!</span>
           </div>
           <div css={Middle.NoticeList}>
             <span></span>
@@ -69,12 +69,15 @@ const Profile = () => {
   );
 };
 
+export default Profile;
+
 const Container = css`
   display: flex;
   flex-direction: column;
-  padding-top: 3.6rem;
   width: 100%;
   height: 100%;
+  padding-top: 3.6rem;
+  overflow: auto;
   background-color: #e0cfcf;
 `;
 
@@ -90,6 +93,7 @@ const Top = {
     padding-top: 2.5rem;
     color: ${theme.colors.gray8};
     ${theme.fonts.title}
+
     white-space: pre-line;
   `,
 
@@ -100,6 +104,7 @@ const Top = {
     margin-bottom: 3.2rem;
     color: ${theme.colors.gray9};
     ${theme.fonts.subtitle2m};
+
     white-space: pre-line;
   `,
 
@@ -108,29 +113,29 @@ const Top = {
   `,
 
   InfoBox: css`
-    width: 37rem;
-    height: 13rem;
     display: flex;
     flex-direction: column;
+    width: 37rem;
+    height: 13rem;
     padding-top: 2.2rem;
     padding-left: 2rem;
-    border-radius: 10px;
     background-color: ${theme.colors.gray0};
+    border-radius: 10px;
   `,
 
   InfoTitle: css`
     display: flex;
-    color: #000000;
+    color: #000;
     ${theme.fonts.body1b};
   `,
 
   InfoSubtitle: css`
     display: flex;
-    color: ${theme.colors.gray7};
     font-size: 1.3rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    color: ${theme.colors.gray7};
   `,
 };
 
@@ -139,6 +144,7 @@ const Middle = {
     display: flex;
     flex-direction: column;
     padding-left: 2.7rem;
+    margin-bottom: 15rem;
   `,
 
   ExAttr: css`
@@ -157,6 +163,7 @@ const Middle = {
     height: 3.7rem;
     color: ${theme.colors.black};
     ${theme.fonts.body2r};
+
     border-radius: 30px;
   `,
 
@@ -176,6 +183,7 @@ const Middle = {
     height: 3.7rem;
     color: ${theme.colors.black};
     ${theme.fonts.body2r};
+
     border-radius: 30px;
   `,
 
@@ -195,21 +203,19 @@ const Middle = {
     height: 3.7rem;
     color: ${theme.colors.black};
     ${theme.fonts.body2r};
+
     border-radius: 30px;
   `,
 };
 
 const Bottom = {
   Wrapper: css`
-    margin-top: 5.2rem;
-    background: ${theme.colors.white};
-    position: relative;
+    display: flex;
   `,
 
   SendBtn: css`
     position: fixed;
     bottom: 0;
+    background-color: ${theme.colors.white};
   `,
 };
-
-export default Profile;

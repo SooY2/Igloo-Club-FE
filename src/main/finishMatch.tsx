@@ -16,6 +16,11 @@ export default FinishMatch;
 
 const Container = css`
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding-top: 3.6rem;
+  background-color: #e0cfcf;
 `;
 
 const Top = {
