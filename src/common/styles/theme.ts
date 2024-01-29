@@ -34,6 +34,7 @@ const FONT = ({ family, size, style, weight, lineheight }: Font): string => `
   font-style: ${style};
   font-weight: ${weight};
   line-height: ${lineheight};
+  letter-spacing: -0.03rem;
 `;
 
 const fonts = {

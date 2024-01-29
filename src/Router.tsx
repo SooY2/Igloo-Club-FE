@@ -5,6 +5,7 @@ import Landing from './landing/Landing';
 import MainPage from './main/mainPage';
 import Profile from './main/profile';
 import FinishMatch from './main/finishMatch';
+import Register from './register/RegisterPage';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: 'login',
     element: <Login />,
+  },
+  {
+    path: 'register',
+    element: <Register />,
   },
   {
     path: '/oauth/kakao/callback',
