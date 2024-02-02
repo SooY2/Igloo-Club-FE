@@ -19,7 +19,7 @@ const 닉네임입력 = ({ onPrev, onNext }: NavTypesProps) => {
 
   const handleSubmit = () => {
     //서버통신
-
+    console.log(nickName);
     //중복일경우
     setIsValid(true);
     onNext();

@@ -21,6 +21,8 @@ const 성별생년월일 = ({ onPrev, onNext }: NavTypesProps) => {
 
   const handleSubmit = () => {
     //서버통신
+    const formattedDate: string = `${birth.substring(0, 4)}-${birth.substring(4, 6)}-${birth.substring(6)}`;
+    console.log(gender, formattedDate);
     onNext();
   };
 
@@ -52,7 +54,9 @@ const 성별생년월일 = ({ onPrev, onNext }: NavTypesProps) => {
                 type="text"
                 placeholder="생년월일을 숫자만 차례대로 입력하세요  예) 20020506"
                 value={birth}
-                onChange={(e) => setBirth(onlyAbleNumber(e.target.value))}
+                onChange={(e) =>
+                  setBirth(onlyAbleNumber(e.target.value.slice(0, 8)))
+                }
               />
             </RegisterBasicInput>
           </div>

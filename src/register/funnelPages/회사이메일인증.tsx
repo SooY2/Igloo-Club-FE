@@ -5,13 +5,14 @@ import * as St from '../styles/registerStyles';
 import styled from '@emotion/styled';
 import { NavTypesProps } from '../types/navTypes';
 import useRegisterTimer from '../hooks/useRegisterTimer';
+import AuthenticationSixNum from '../components/AuthenticationSixNum';
 
 const 회사이메일인증 = ({ onPrev, onNext }: NavTypesProps) => {
   const [isActive] = useState(true);
-  // const [authentication, setAuthentication] = useState<number[]>([]);
+  const [authentication, setAuthentication] = useState<string>('');
 
   const handleSubmit = () => {
-    //서버통신
+    console.log(authentication);
     onNext();
   };
 
@@ -32,7 +33,7 @@ const 회사이메일인증 = ({ onPrev, onNext }: NavTypesProps) => {
               gap: '3.5rem',
             }}
           >
-            <div>인증번호 입력창</div>
+            <AuthenticationSixNum setAuthentication={setAuthentication} />
             <StTimer>{useRegisterTimer(300)}</StTimer>
           </div>
           <StExplain>
