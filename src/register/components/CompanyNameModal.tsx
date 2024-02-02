@@ -3,74 +3,44 @@ import { css } from '@emotion/react';
 import RegisterBtn from './RegisterBtn';
 import { StBasicInput } from '../styles/registerInputStyles';
 import { CancelIcon } from '../assets/svgs/0_index';
-import { useEffect, useState } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
+import RadioItem from './RadioItem';
 
 const COMPANYLIST = ['멋쟁이사자처럼', '멋사', 'LIKELION', '(주)멋사'];
 
-const CompanyItem = ({
-  name,
-  onClick,
+const CompanyNameModal = ({
+  onCancel,
+  onSelect,
 }: {
-  name: string;
-  onClick: () => void;
+  onCancel: () => void;
+  onSelect: Dispatch<SetStateAction<string>>;
 }) => {
-  return (
-    <StCompanyLabel onClick={onClick}>
-      <StCompanyItem type="checkbox" />
-      <StCompanyName>{name}</StCompanyName>
-    </StCompanyLabel>
-  );
-};
-
-const StCompanyLabel = styled.label`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const StCompanyItem = styled.input`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-
-  &:checked + p {
-    color: ${({ theme }) => theme.colors.white};
-    background-color: ${({ theme }) => theme.colors.pressed_primary};
-  }
-`;
-
-const StCompanyName = styled.p`
-  padding: 1rem 1.7rem;
-  color: ${({ theme }) => theme.colors.black};
-  cursor: pointer;
-  border: 1px solid ${({ theme }) => theme.colors.gray3};
-  border-radius: 30px;
-
-  ${({ theme }) => theme.fonts.body2r};
-`;
-
-const CompanyNameModal = ({ onCancel }: { onCancel: () => void }) => {
   const [isActive, setIsActive] = useState(false);
-  const [select, setSelect] = useState<string[]>([]);
+  const [select, setSelect] = useState('');
+  const [newCompany, setNewCompany] = useState('');
+  const [isAdd, setIsAdd] = useState(false);
 
   useEffect(() => {
-    console.log(select);
-    if (select.length > 0) setIsActive(true);
+    if (select || newCompany) setIsActive(true);
     else setIsActive(false);
-  }, [select]);
+  }, [select, newCompany]);
 
   const handleSelect = (value: string): void => {
-    if (select.includes(value)) {
-      setSelect(select.filter((item) => item !== value));
-    } else {
-      setSelect([...select, value]);
+    if (value === '추가하기') {
+      setIsAdd(true);
+      return;
     }
+    setSelect(value);
+  };
+
+  const handelNewCompany = (e: ChangeEvent<HTMLInputElement>) => {
+    setNewCompany(e.target.value);
   };
 
   return (
@@ -79,23 +49,39 @@ const CompanyNameModal = ({ onCancel }: { onCancel: () => void }) => {
         <article>
           <div css={companyListStyle}>
             {COMPANYLIST.map((item) => (
-              <CompanyItem
+              <RadioItem
                 key={item}
-                name={item}
-                onClick={() => handleSelect(item)}
+                name="company"
+                value={item}
+                onRadioChange={handleSelect}
               />
             ))}
+            <RadioItem
+              name="company"
+              value={'추가하기'}
+              onRadioChange={handleSelect}
+            />
           </div>
         </article>
         <div css={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
           <StCompanyInput
             type="text"
             placeholder="위 목록에 없다면 여기에 입력"
+            value={newCompany}
+            onChange={handelNewCompany}
+            disabled={!isAdd}
           />
           <RegisterBtn
             isActive={isActive}
             content="선택 완료"
-            onClick={() => {}}
+            onClick={() => {
+              if (select) {
+                onSelect(select);
+              } else {
+                onSelect(newCompany);
+              }
+              onCancel();
+            }}
           />
         </div>
         <CustomCancelIcon onClick={onCancel} />

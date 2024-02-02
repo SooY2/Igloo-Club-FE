@@ -10,13 +10,12 @@ import { NavTypesProps } from '../types/navTypes';
 
 const 전화번호입력 = ({ onPrev, onNext }: NavTypesProps) => {
   const [isActive, setIsActive] = useState(false);
-  const [mobileCarrier, setMobileCarrier] = useState('');
   const [phoneNum, setPhoneNum] = useState('');
 
   useEffect(() => {
-    if (mobileCarrier && phoneNum) setIsActive(true);
+    if (phoneNum) setIsActive(true);
     else setIsActive(false);
-  }, [mobileCarrier, phoneNum]);
+  }, [phoneNum]);
 
   const handleSubmit = () => {
     //서버통신
@@ -32,31 +31,18 @@ const 전화번호입력 = ({ onPrev, onNext }: NavTypesProps) => {
             <St.Title>간편한 알림 서비스를 제공하기 위해</St.Title>
             <St.Title>회원님의 전화번호가 필요해요</St.Title>
           </TitleBox>
-          <div
-            css={{ display: 'flex', flexDirection: 'column', gap: '3.9rem' }}
+
+          <RegisterBasicInput
+            label="휴대폰 번호"
+            explain="카카오톡 메세지를 통해 발송되는 인증번호를 확인하세요"
           >
-            <RegisterBasicInput label="통신사">
-              <StBasicInput
-                type="text"
-                placeholder="통신사를 선택해 주세요."
-                value={mobileCarrier}
-                onChange={(e) => {
-                  setMobileCarrier(e.target.value);
-                }}
-              />
-            </RegisterBasicInput>
-            <RegisterBasicInput
-              label="휴대폰 번호"
-              explain="카카오톡 메세지를 통해 발송되는 인증번호를 확인하세요"
-            >
-              <StBasicInput
-                type="text"
-                placeholder="휴대폰 번호를 띄어쓰기 없이 입력해 주세요"
-                value={phoneNum}
-                onChange={(e) => setPhoneNum(onlyAbleNumber(e.target.value))}
-              />
-            </RegisterBasicInput>
-          </div>
+            <StBasicInput
+              type="text"
+              placeholder="휴대폰 번호를 띄어쓰기 없이 입력해 주세요"
+              value={phoneNum}
+              onChange={(e) => setPhoneNum(onlyAbleNumber(e.target.value))}
+            />
+          </RegisterBasicInput>
         </section>
         <RegisterBtn
           isActive={isActive}

@@ -45,11 +45,11 @@ const checkRadioContainerStyles = css`
   align-items: center;
 `;
 
-const StRadioInput = styled.input`
+export const StRadioInput = styled.input`
   display: none;
 `;
 
-const StRadioSpan = styled.span`
+export const StRadioSpan = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;

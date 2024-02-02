@@ -13,13 +13,13 @@ import CompanyNameModal from '../components/CompanyNameModal';
 const 회사이메일입력 = ({ onPrev, onNext }: NavTypesProps) => {
   const [isActive, setIsActive] = useState(false);
   const [email, setEmail] = useState('');
-  const [companyName] = useState('');
   const [modal, setModal] = useState(false);
+  const [company, setCompany] = useState('');
 
   useEffect(() => {
-    if (companyName && email) setIsActive(true);
+    if (company && email) setIsActive(true);
     else setIsActive(false);
-  }, [companyName, email]);
+  }, [company, email]);
 
   const handleSubmit = () => {
     //서버통신
@@ -55,7 +55,7 @@ const 회사이메일입력 = ({ onPrev, onNext }: NavTypesProps) => {
                   type="text"
                   placeholder="재직 중이신 회사명을 선택해 주세요."
                   disabled
-                  value={companyName}
+                  value={company}
                 />
                 <StCompanyName />
               </div>
@@ -73,6 +73,7 @@ const 회사이메일입력 = ({ onPrev, onNext }: NavTypesProps) => {
           onCancel={() => {
             setModal(false);
           }}
+          onSelect={setCompany}
         />
       )}
     </>
