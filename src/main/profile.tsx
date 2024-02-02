@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { theme } from '../common/styles/theme';
-import { ArrowLeft } from '../common/assets/svgs/index';
-import SendNungilBtn from '../common/components/mainPageComs/SendBtn';
+import { ArrowLeft } from './assets/svgs/index';
+import SendNungilBtn from './components/SendBtn';
 
 const Profile = () => {
   return (

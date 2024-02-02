@@ -1,5 +1,7 @@
+/** 매칭 완료 페이지 **/
+
 import { css } from '@emotion/react';
-import { Xicon } from '../common/assets/svgs/index';
+import { Xicon } from './assets/svgs/index';
 
 const FinishMatch = () => {
   return (

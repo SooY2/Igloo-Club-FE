@@ -1,58 +1,41 @@
-import { useState, useEffect } from 'react';
+/** 메인 페이지 **/
+
 import { css } from '@emotion/react';
 import { theme } from '../common/styles/theme';
-import { Arrow } from '../common/assets/svgs/index';
+import instance from '../common/apis/axiosInstanse';
+import NavBar from '../common/components/NavBar';
+import PickProfileBtn from './components/PickProfileBtn';
+import CustomSelect from './components/CustomSelect';
 
 const MainPage = () => {
-  const [selected, setSelected] = useState<string>('광화문');
-  const [count, setCount] = useState<number>(5);
+  // const [count, setCount] = useState(5);
 
-  const selectList = ['광화문', '판교'];
+  const handleGetAllProfile = async () => {
+    try {
+      const res = await instance.get('/api/nungil/nungils?status=RECOMMENDED', {
+        params: {
+          page: 0,
+          size: 3,
+        },
+      });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSelect = (value: string) => {
-    setSelected(value);
-  };
-
-  const SelectBtn = () => {
-    handleSelect(selected === '광화문' ? '판교' : '광화문');
-  };
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      setCount((count) => (count = 1));
-    }, 60000);
-    if (count === 0) {
-      clearInterval(id);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
     }
-    return () => clearInterval(id);
-  }, [count]);
+  };
+
+  handleGetAllProfile(); // 이 부분을 useEffect 내로 이동
 
   return (
     <div css={Container}>
       <div css={Top.Wrapper}>
-        <div css={Top.Title}>
-          <div css={Top.Titletop}>
-            <select
-              css={Top.Selectbox}
-              onChange={handleSelect}
-              value={selected}
-            >
-              {selectList.map((item) => (
-                <option value={item} key={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-            <button type="button" onClick={SelectBtn}>
-              <Arrow />
-            </button>
-            <span>에 위치한</span>
-          </div>
-          <div css={Top.Titlebottom}>
-            <span>오늘의 인연을 소개해 드릴게요</span>
-          </div>
+        <div css={Top.TitleTop}>
+          <CustomSelect />
+          <span>에 위치한</span>
+        </div>
+        <div css={Top.TitleBottom}>
+          <span>오늘의 인연을 소개해 드릴게요</span>
         </div>
         <div css={Top.Subtitle}>
           <span>마음이 가는 당신만의 인연에게 눈길을 보내세요.</span>
@@ -72,6 +55,12 @@ const MainPage = () => {
           <span>내가 받은 인연 프로필</span>
         </div>
       </div>
+      <div css={PickBtn}>
+        <PickProfileBtn />
+      </div>
+      <div css={Navigation}>
+        <NavBar />
+      </div>
     </div>
   );
 };
@@ -79,48 +68,45 @@ const MainPage = () => {
 export default MainPage;
 
 const Container = css`
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 3.6rem;
   width: 100%;
   height: 100%;
+  padding-top: 3.6rem;
   background-color: #e0cfcf;
 `;
 
 const Top = {
   Wrapper: css`
-    height: 9.2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    height: 9.2rem;
     padding-left: 2.6rem;
+    margin-bottom: 1.5rem;
   `,
 
-  Title: css`
-    display: flex;
-    flex-direction: column;
-    ${theme.fonts.title};
-    gap: 0.3rem;
-  `,
-
-  Titletop: css`
+  TitleTop: css`
     display: flex;
     flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    ${theme.fonts.title};
   `,
 
-  Titlebottom: css`
-    display: flex;
+  TitleBottom: css`
+    ${theme.fonts.title};
   `,
 
   Selectbox: css`
     width: 5.8rem;
-    appearance: none;
-    border: none;
     color: ${theme.colors.primary};
-    border-bottom: 0.2rem solid;
-    ${theme.fonts.title};
+    appearance: none;
     background-color: transparent;
+    border: none;
+    border-bottom: 2px solid;
+    ${theme.fonts.title};
   `,
 
   Subtitle: css`
@@ -132,45 +118,45 @@ const Top = {
 
 const Middle = {
   Wrapper: css`
-    width: 38rem;
-    height: 9.2rem;
     display: flex;
     flex-direction: column;
+    width: 34.2rem;
+    height: 9.2rem;
     padding-top: 1.9rem;
     padding-left: 2.1rem;
-    border-radius: 10px;
     margin-bottom: 3.9rem;
     margin-left: 2rem;
     background-color: ${theme.colors.gray0};
+    border-radius: 10px;
   `,
 
   Title: css`
     display: flex;
-    color: ${theme.colors.gray7};
-    text-align: center;
+    padding-bottom: 0.5rem;
     font-size: 11px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    padding-bottom: 0.5rem;
+    color: ${theme.colors.gray7};
+    text-align: center;
   `,
 
   Subtitle: css`
     display: flex;
     flex-direction: row;
+    gap: 0.3rem;
     align-items: center;
     color: ${theme.colors.gray8};
     ${theme.fonts.body2m};
-    gap: 0.3rem;
   `,
 
   Timer: css`
     display: flex;
-    color: ${theme.colors.gray8};
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    color: ${theme.colors.gray8};
   `,
 };
 
@@ -182,10 +168,26 @@ const Bottom = {
 
   Title: css`
     display: flex;
-    color: ${theme.colors.gray8};
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    color: ${theme.colors.gray8};
   `,
 };
+
+const PickBtn = css`
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  z-index: 999;
+  margin-bottom: 8.2rem;
+  transform: translateX(-50%);
+`;
+
+const Navigation = css`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: ${theme.colors.white};
+`;
