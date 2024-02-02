@@ -9,17 +9,23 @@ const AuthKakao = () => {
 
   const handleKakaoSignIn = async () => {
     try {
-      const data = await signInInstance.post('/api/auth/kakao', {
+      const res = await signInInstance.post('/api/auth/kakao', {
         code: AUTHORIZE_CODE,
       });
-      console.log(data);
-      // localStorage.setItem('ACCESS_TOKEN', accessToken);
+      console.log(res);
+
+      const { accessToken } = res.data;
+      if (accessToken) {
+        localStorage.setItem('ACCESS_TOKEN', accessToken);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  handleKakaoSignIn();
+  if (AUTHORIZE_CODE) {
+    handleKakaoSignIn();
+  }
 
   return <div>Auth Kakao</div>;
 };
