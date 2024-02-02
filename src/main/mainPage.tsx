@@ -25,7 +25,7 @@ const MainPage = () => {
     }
   };
 
-  handleGetAllProfile(); // 이 부분을 useEffect 내로 이동
+  handleGetAllProfile();
 
   return (
     <div css={Container}>
