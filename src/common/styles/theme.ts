@@ -68,7 +68,7 @@ const fonts = {
   }),
   subtitle3: FONT({
     family: 'Pretendard Variable',
-    size: 1.8,
+    size: 1.6,
     style: 'normal',
     weight: 600,
     lineheight: 'normal',
@@ -91,7 +91,7 @@ const fonts = {
     family: 'Pretendard Variable',
     size: 1.5,
     style: 'normal',
-    weight: 600,
+    weight: 500,
     lineheight: 'normal',
   }),
   body1r: FONT({
@@ -118,6 +118,13 @@ const fonts = {
   body2r: FONT({
     family: 'Pretendard Variable',
     size: 1.4,
+    style: 'normal',
+    weight: 400,
+    lineheight: 'normal',
+  }),
+  body3m: FONT({
+    family: 'Pretendard Variable',
+    size: 1.3,
     style: 'normal',
     weight: 400,
     lineheight: 'normal',

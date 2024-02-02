@@ -68,6 +68,10 @@ const globalStyles = css`
     border: 0;
     outline: 0;
   }
+
+  span {
+    white-space: pre-line;
+  }
 `;
 
 export default globalStyles;

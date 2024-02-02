@@ -9,9 +9,6 @@ export const signInInstance = axios.create({
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
 });
 
 export default instance;
@@ -26,7 +23,7 @@ instance.interceptors.request.use(
       return config;
     }
 
-    config.headers.Authorization = ACCESS_TOKEN;
+    config.headers.Authorization = `Bearer ${ACCESS_TOKEN}`;
 
     return config;
   },
