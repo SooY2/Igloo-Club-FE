@@ -2,9 +2,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import Login from './login';
 import AuthKakao from './login/AuthKakao';
 import Landing from './landing/Landing';
-import MainPage from './main/mainPage';
-import Profile from './main/profile';
-import FinishMatch from './main/finishMatch';
+import MainPage from './main/pages/mainPage';
+import DetailPage from './main/pages/DetailPage';
+import FinishMatch from './main/pages/finishMatch';
 import Register from './register/RegisterPage';
 
 const router = createBrowserRouter([
@@ -29,8 +29,8 @@ const router = createBrowserRouter([
     element: <MainPage />,
   },
   {
-    path: 'profile',
-    element: <Profile />,
+    path: 'detailpage',
+    element: <DetailPage />,
   },
   { path: 'finishmatch', element: <FinishMatch /> },
 ]);
