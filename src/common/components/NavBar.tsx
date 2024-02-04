@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
-import HomeBtn000 from '../assets/svgs/index';
-import ChatBtn000 from '../assets/svgs/index';
-import HeartBtn000 from '../assets/svgs/index';
-import PeopleBtn000 from '../assets/svgs/index';
-import HomeBtnGRAY from '../assets/svgs/index';
-import ChatBtnGRAY from '../assets/svgs/index';
-import HeartBtnGRAY from '../assets/svgs/index';
-import PeopleBtnGRAY from '../assets/svgs/index';
+import HomeBtn000 from '../assets/svgs/home-black.svg';
+import ChatBtn000 from '../assets/svgs/chat-black.svg';
+import HeartBtn000 from '../assets/svgs/heart-black.svg';
+import PeopleBtn000 from '../assets/svgs/people-black.svg';
+import HomeBtnGRAY from '../assets/svgs/home-white.svg';
+import ChatBtnGRAY from '../assets/svgs/chat-white.svg';
+import HeartBtnGRAY from '../assets/svgs/heart-white.svg';
+import PeopleBtnGRAY from '../assets/svgs/people-white.svg';
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const NavBar = () => {
 
   const handleClickPeopleBtn = () => {
     setActiveBtn('people');
-    navigate('/mypage');
+    navigate('/');
   };
 
   return (
@@ -69,12 +69,12 @@ export default NavBar;
 const Container = css`
   display: flex;
   flex-direction: row;
-  gap: 7.6rem;
+  gap: 7rem;
   align-items: center;
   width: 100%;
   height: 6.2rem;
   padding-right: 5rem;
-  padding-left: 5.1rem;
+  padding-left: 5rem;
 `;
 
 const NavButton = css`
