@@ -5,11 +5,16 @@ import * as St from '../styles/registerStyles';
 import { StBasicInput, StErrorExplain } from '../styles/registerInputStyles';
 import { RegisterBasicInput } from '../components/RegisterInputs';
 import styled from '@emotion/styled';
-import { NavTypesProps } from '../types/navTypes';
+import { ExtendedNavTypesProps } from '../types/navTypes';
 
-const 닉네임입력 = ({ onPrev, onNext }: NavTypesProps) => {
+const 닉네임입력 = ({
+  onPrev,
+  onNext,
+  handleRegisterValue,
+  registerValues,
+}: ExtendedNavTypesProps) => {
   const [isActive, setIsActive] = useState(false);
-  const [nickName, setNickName] = useState('');
+  const [nickName, setNickName] = useState(registerValues.nickname);
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
@@ -18,8 +23,9 @@ const 닉네임입력 = ({ onPrev, onNext }: NavTypesProps) => {
   }, [nickName]);
 
   const handleSubmit = () => {
-    //서버통신
-    console.log(nickName);
+    if (handleRegisterValue) {
+      handleRegisterValue({ ...registerValues, nickname: nickName });
+    }
     //중복일경우
     setIsValid(true);
     onNext();

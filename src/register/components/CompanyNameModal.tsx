@@ -11,29 +11,43 @@ import {
   useState,
 } from 'react';
 import RadioItem from './RadioItem';
-
-const COMPANYLIST = ['멋쟁이사자처럼', '멋사', 'LIKELION', '(주)멋사'];
+import instance from '../../common/apis/axiosInstanse';
 
 const CompanyNameModal = ({
   onCancel,
   onSelect,
+  email,
 }: {
   onCancel: () => void;
   onSelect: Dispatch<SetStateAction<string>>;
+  email: string;
 }) => {
   const [isActive, setIsActive] = useState(false);
   const [select, setSelect] = useState('');
   const [newCompany, setNewCompany] = useState('');
   const [isAdd, setIsAdd] = useState(false);
+  const [companyNameList, setCompanyNameList] = useState<string[]>([]);
 
   useEffect(() => {
-    if (select || newCompany) setIsActive(true);
-    else setIsActive(false);
+    getCompany();
+  }, []);
+
+  useEffect(() => {
+    if (select || newCompany) {
+      setIsActive(true);
+      return;
+    }
+    if (select === '추가하기' && newCompany === '') {
+      setIsActive(false);
+      return;
+    }
+    setIsActive(false);
   }, [select, newCompany]);
 
   const handleSelect = (value: string): void => {
     if (value === '추가하기') {
       setIsAdd(true);
+      setIsActive(false);
       return;
     }
     setSelect(value);
@@ -43,26 +57,36 @@ const CompanyNameModal = ({
     setNewCompany(e.target.value);
   };
 
+  const getCompany = async () => {
+    try {
+      const { data } = await instance.get(`/api/company?email=${email}`);
+      setCompanyNameList(data.companyNameList);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <StContainer>
       <StModal>
-        <article>
-          <div css={companyListStyle}>
-            {COMPANYLIST.map((item) => (
-              <RadioItem
-                key={item}
-                name="company"
-                value={item}
-                onRadioChange={handleSelect}
-              />
-            ))}
+        <div css={companyListStyle}>
+          {companyNameList.map((item) => (
             <RadioItem
+              key={item}
               name="company"
-              value={'추가하기'}
+              value={item}
+              label={item}
               onRadioChange={handleSelect}
             />
-          </div>
-        </article>
+          ))}
+          <RadioItem
+            name="company"
+            value={'추가하기'}
+            label="추가하기"
+            onRadioChange={handleSelect}
+          />
+        </div>
+
         <div css={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
           <StCompanyInput
             type="text"
@@ -117,6 +141,7 @@ const companyListStyle = css`
   display: flex;
   flex-wrap: wrap;
   gap: 0.7rem;
+  width: 100%;
 `;
 
 const StCompanyInput = styled(StBasicInput)`

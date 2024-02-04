@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import RegisterBtn from '../components/RegisterBtn';
 import RegisterHeader from '../components/RegisterHeader';
 import * as St from '../styles/registerStyles';
@@ -9,8 +9,24 @@ import { NavTypesProps } from '../types/navTypes';
 import { ArrowRight } from '../assets/svgs/0_index';
 import { css } from '@emotion/react';
 import CompanyNameModal from '../components/CompanyNameModal';
+import instance from '../../common/apis/axiosInstanse';
 
-const 회사이메일입력 = ({ onPrev, onNext }: NavTypesProps) => {
+type SetEmailInfoType = Dispatch<
+  SetStateAction<{
+    email: string;
+    companyName: string;
+  }>
+>;
+
+export interface ExtendedNavTypesProps extends NavTypesProps {
+  setEmailInfo: SetEmailInfoType;
+}
+
+const 회사이메일입력 = ({
+  onPrev,
+  onNext,
+  setEmailInfo,
+}: ExtendedNavTypesProps) => {
   const [isActive, setIsActive] = useState(false);
   const [email, setEmail] = useState('');
   const [modal, setModal] = useState(false);
@@ -21,8 +37,20 @@ const 회사이메일입력 = ({ onPrev, onNext }: NavTypesProps) => {
     else setIsActive(false);
   }, [company, email]);
 
-  const handleSubmit = () => {
-    //서버통신
+  const handleSubmit = async () => {
+    try {
+      await instance.post('/api/company/email', {
+        email: email,
+      });
+      setEmailInfo((prevEmailInfo) => ({
+        ...prevEmailInfo,
+        email: email,
+        companyName: company,
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+
     onNext();
   };
 
@@ -70,6 +98,7 @@ const 회사이메일입력 = ({ onPrev, onNext }: NavTypesProps) => {
       </article>
       {modal && (
         <CompanyNameModal
+          email={email}
           onCancel={() => {
             setModal(false);
           }}

@@ -4,11 +4,27 @@ import { ChangeEvent } from 'react';
 interface RadioItemProps {
   name: string;
   value: string;
-  onRadioChange: (value: string) => void;
+  children?: React.ReactNode;
+  onRadioChange: (value: string, name?: string) => void;
+  profile?: boolean;
+  label?: string;
+  checkedValue?: string;
 }
 
-const RadioItem = ({ value, name, onRadioChange }: RadioItemProps) => {
+const RadioItem = ({
+  value,
+  name,
+  onRadioChange,
+  children,
+  profile,
+  label,
+  checkedValue,
+}: RadioItemProps) => {
   const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (profile) {
+      onRadioChange(event.target.value, name);
+      return;
+    }
     onRadioChange(event.target.value);
   };
   return (
@@ -18,8 +34,9 @@ const RadioItem = ({ value, name, onRadioChange }: RadioItemProps) => {
         name={name}
         value={value}
         onChange={handleRadioChange}
+        checked={checkedValue === value}
       />
-      <StRadioSpan>{value}</StRadioSpan>
+      <StRadioSpan>{children ? children : label}</StRadioSpan>
     </StCompanyLabel>
   );
 };

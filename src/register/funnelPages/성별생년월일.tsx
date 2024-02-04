@@ -5,14 +5,21 @@ import * as St from '../styles/registerStyles';
 import { StBasicInput } from '../styles/registerInputStyles';
 import { RegisterBasicInput } from '../components/RegisterInputs';
 import styled from '@emotion/styled';
-import { NavTypesProps } from '../types/navTypes';
+import { ExtendedNavTypesProps } from '../types/navTypes';
 import onlyAbleNumber from '../../common/utils/onlyAbleNumber';
 import Radio from '../components/Radio';
 
-const 성별생년월일 = ({ onPrev, onNext }: NavTypesProps) => {
+const 성별생년월일 = ({
+  onPrev,
+  onNext,
+  handleRegisterValue,
+  registerValues,
+}: ExtendedNavTypesProps) => {
   const [isActive, setIsActive] = useState(false);
-  const [gender, setGender] = useState('');
-  const [birth, setBirth] = useState('');
+  const [gender, setGender] = useState(registerValues.sex);
+  const [birth, setBirth] = useState(
+    registerValues.birthdate.replace(/[-]/g, ''),
+  );
 
   useEffect(() => {
     if (gender && birth) setIsActive(true);
@@ -20,9 +27,15 @@ const 성별생년월일 = ({ onPrev, onNext }: NavTypesProps) => {
   }, [gender, birth]);
 
   const handleSubmit = () => {
-    //서버통신
     const formattedDate: string = `${birth.substring(0, 4)}-${birth.substring(4, 6)}-${birth.substring(6)}`;
-    console.log(gender, formattedDate);
+    if (handleRegisterValue) {
+      handleRegisterValue({
+        ...registerValues,
+        sex: gender,
+        birthdate: formattedDate,
+      });
+    }
+
     onNext();
   };
 
@@ -44,9 +57,12 @@ const 성별생년월일 = ({ onPrev, onNext }: NavTypesProps) => {
             >
               <Radio
                 name="gender"
-                value1="여성"
-                value2="남성"
+                value1="FEMALE"
+                value2="MALE"
+                label1="여성"
+                label2="남성"
                 onRadioChange={setGender}
+                checkedValue={gender}
               />
             </RegisterBasicInput>
             <RegisterBasicInput label="생년월일">

@@ -29,7 +29,7 @@ const 전화번호인증 = ({ onPrev, onNext }: NavTypesProps) => {
 
   //인증번호 재정송
   const handleReRequest = () => {
-    //서버통신
+    onPrev();
   };
 
   return (

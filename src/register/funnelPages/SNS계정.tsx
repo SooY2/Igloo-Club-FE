@@ -8,13 +8,30 @@ import {
 } from '../styles/registerInputStyles';
 import { RegisterBasicInput } from '../components/RegisterInputs';
 import styled from '@emotion/styled';
-import { NavTypesProps } from '../types/navTypes';
+import { ExtendedNavTypesProps } from '../types/navTypes';
 import Radio from '../components/Radio';
 
-const SNS계정 = ({ onPrev, onNext }: NavTypesProps) => {
+const SNS계정 = ({
+  onPrev,
+  onNext,
+  handleRegisterValue,
+  registerValues,
+}: ExtendedNavTypesProps) => {
   const [isActive, setIsActive] = useState(false);
-  const [sns, setSNS] = useState('');
-  const [snsId, setSnsId] = useState('');
+  const [sns, setSNS] = useState(
+    registerValues.contactKakao
+      ? '카카오톡'
+      : registerValues.contactInstagram
+        ? '인스타그램'
+        : '',
+  );
+  const [snsId, setSnsId] = useState(
+    registerValues.contactKakao
+      ? registerValues.contactKakao
+      : registerValues.contactInstagram
+        ? registerValues.contactInstagram
+        : '',
+  );
 
   useEffect(() => {
     if (sns && snsId) setIsActive(true);
@@ -22,8 +39,12 @@ const SNS계정 = ({ onPrev, onNext }: NavTypesProps) => {
   }, [sns, snsId]);
 
   const handleSubmit = () => {
-    //서버통신
-    console.log(sns, snsId);
+    if (handleRegisterValue) {
+      if (sns === '카카오톡')
+        handleRegisterValue({ ...registerValues, contactKakao: snsId });
+      if (sns === '인스타그램')
+        handleRegisterValue({ ...registerValues, contactInstagram: snsId });
+    }
     onNext();
   };
 
@@ -45,6 +66,7 @@ const SNS계정 = ({ onPrev, onNext }: NavTypesProps) => {
                 value1="카카오톡"
                 value2="인스타그램"
                 onRadioChange={setSNS}
+                checkedValue={sns}
               />
             </RegisterBasicInput>
 

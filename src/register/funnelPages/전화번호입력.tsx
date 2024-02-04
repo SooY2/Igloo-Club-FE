@@ -7,18 +7,25 @@ import { RegisterBasicInput } from '../components/RegisterInputs';
 import styled from '@emotion/styled';
 import onlyAbleNumber from '../../common/utils/onlyAbleNumber';
 import { NavTypesProps } from '../types/navTypes';
+// import instance from '../../common/apis/axiosInstanse';
 
 const 전화번호입력 = ({ onPrev, onNext }: NavTypesProps) => {
   const [isActive, setIsActive] = useState(false);
   const [phoneNum, setPhoneNum] = useState('');
 
   useEffect(() => {
-    if (phoneNum) setIsActive(true);
+    if (phoneNum.length === 11) setIsActive(true);
     else setIsActive(false);
   }, [phoneNum]);
 
-  const handleSubmit = () => {
-    //서버통신
+  const handleSubmit = async () => {
+    // try {
+    //   await instance.post('api/member/phone/authentication', {
+    //     phoneNumber: phoneNum,
+    //   });
+    // } catch (error) {
+    //   console.error(error); // 오류 처리
+    // }
     onNext();
   };
 
