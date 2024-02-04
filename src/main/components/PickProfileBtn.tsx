@@ -48,4 +48,8 @@ const PickBtn = css`
   text-align: center;
   background: ${theme.colors.primary};
   border-radius: 25px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
