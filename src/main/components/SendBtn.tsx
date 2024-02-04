@@ -59,4 +59,8 @@ const SendBtn = css`
   text-align: center;
   background-color: ${theme.colors.primary};
   border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
