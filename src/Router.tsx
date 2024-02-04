@@ -9,8 +9,6 @@ import Register from './register/RegisterPage';
 import NungilList from './nungilList/pages/nungilList';
 import ReceivedDetailPage from './nungilList/pages/receivedDetailPage';
 import SendDetailPage from './nungilList/pages/sendDetailPage';
-import MyPage from './mypage/pages/myPage';
-import EditProfilePage from './mypage/pages/editProfilePage';
 
 const router = createBrowserRouter([
   {
@@ -41,8 +39,6 @@ const router = createBrowserRouter([
   { path: 'nungillist', element: <NungilList /> },
   { path: 'receiveddetailpage', element: <ReceivedDetailPage /> },
   { path: 'senddetailpage', element: <SendDetailPage /> },
-  { path: 'mypage', element: <MyPage /> },
-  { path: 'editprofilepage', element: <EditProfilePage /> },
 ]);
 
 export default router;
