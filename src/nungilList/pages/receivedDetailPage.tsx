@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
 import ArrowLeftNav from '../../common/components/ArrowLeftNav';
 import DetailProfile from '../../common/pages/detailprofile';
-import SendNungilBtn from '../components/SendBtn';
+import AcceptNungilBtn from '../components/AcceptBtn';
 import { useNavigate } from 'react-router-dom';
 
-const DetailPage = () => {
+const ReceivedDetailPage = () => {
   const navigate = useNavigate();
 
   const ClickArrowLeft = () => {
-    navigate('/mainPage');
+    navigate('/nungillist');
   };
 
   return (
@@ -18,13 +18,13 @@ const DetailPage = () => {
       </button>
       <DetailProfile />
       <div css={SendBtn}>
-        <SendNungilBtn />
+        <AcceptNungilBtn />
       </div>
     </div>
   );
 };
 
-export default DetailPage;
+export default ReceivedDetailPage;
 
 const Container = css`
   display: flex;

@@ -4,13 +4,10 @@ import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import { theme } from '../styles/theme';
 import instance from '../apis/axiosInstanse';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft } from '../../main/assets/svgs/index';
+import { useLocation } from 'react-router-dom';
 
 const DetailProfile = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { state } = location;
+  const { state } = useLocation();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [profileData, setProfileData] = useState<any>('');
 
@@ -20,10 +17,6 @@ const DetailProfile = () => {
   #${profileData.age}세 남성이고 #${profileData.job}\n 
   얼굴은 #${profileData.animalFace} 
   키는 #${profileData.height}cm\n 성격 유형은 #${profileData.mbti}`;
-
-  const ClickArrowLeft = () => {
-    navigate('/mainPage');
-  };
 
   console.log(state);
 
@@ -44,12 +37,11 @@ const DetailProfile = () => {
     };
 
     handleGetDetailProfile();
-  }, []);
+  }, [state.nungilId]);
 
   return (
     <div css={Container}>
       <div css={Top.Wrapper}>
-        <ArrowLeft onClick={ClickArrowLeft} />
         <div css={Top.Title}>{title}</div>
         <div css={Top.Detail}>
           {context.split('\n').map((line, index) => (

@@ -9,7 +9,7 @@ import NavBar from '../../common/components/NavBar';
 import ProfileCard from '../../common/components/ProfileCard';
 import PickProfileBtn from '../components/PickProfileBtn';
 import CustomSelect from '../components/CustomSelect';
-import { ProfileDataTypesProps } from '../types/ProfileDataTypesProps';
+import { ProfileDataTypesProps } from '../../common/type/ProfileDataTypesProps';
 import { Watch } from '../assets/svgs/index';
 
 const MainPage = () => {
@@ -134,7 +134,7 @@ const Middle = {
     gap: 0.6rem;
     align-items: center;
     width: 34.2rem;
-    height: 9.2rem;
+    height: 4rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
     padding-left: 4.5rem;
@@ -163,7 +163,7 @@ const Bottom = {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    width: 34.2rem;
+    width: 100%;
     padding-left: 2.6rem;
     margin-bottom: 8.2rem;
     font-size: 18px;
@@ -190,6 +190,5 @@ const PickBtn = css`
 const Navigation = css`
   position: fixed;
   bottom: 0;
-  width: 100%;
   background-color: ${theme.colors.white};
 `;

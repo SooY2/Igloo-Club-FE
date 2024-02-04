@@ -3,4 +3,5 @@ export interface ProfileDataTypesProps {
   job: string;
   description: string;
   nungilId: number;
+  memberId: number;
 }

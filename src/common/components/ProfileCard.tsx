@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import { theme } from '../styles/theme';
-import { ProfileDataTypesProps } from '../../main/types/ProfileDataTypesProps';
+import { ProfileDataTypesProps } from '../type/ProfileDataTypesProps';
 
 const ProfileCard = ({
   profileData,
   ClickProfileCard,
 }: {
   profileData: ProfileDataTypesProps[] | null;
-  ClickProfileCard: (nungilId: number) => void;
+  ClickProfileCard: (nungilId: number, memberId: number) => void;
 }) => {
   // const [text, setText] = useState('');
   // const textarea = useRef(null);
@@ -18,7 +18,7 @@ const ProfileCard = ({
         <div
           key={profile.nungilId}
           css={Profile}
-          onClick={() => ClickProfileCard(profile.nungilId)}
+          onClick={() => ClickProfileCard(profile.nungilId, profile.memberId)}
         >
           <img />
           <div css={ProfileDetail}>
@@ -37,11 +37,14 @@ const Container = css`
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
+  width: 100%;
+  background: ${theme.colors.white};
 `;
 
 const Profile = css`
   display: flex;
   flex-direction: row;
+  width: 34.2rem;
   padding-top: 2.4rem;
   padding-bottom: 2.9rem;
   padding-left: 2.3rem;
