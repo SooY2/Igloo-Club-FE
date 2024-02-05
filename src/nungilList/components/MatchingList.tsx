@@ -32,7 +32,7 @@ const MatchingList = () => {
   }, []);
 
   const ClickProfileBtn = (nungilId: number) => {
-    navigate('/finishmatch', { state: { nungilId } });
+    navigate(`/finishmatch/${nungilId}`, { state: { nungilId } });
   };
 
   return (

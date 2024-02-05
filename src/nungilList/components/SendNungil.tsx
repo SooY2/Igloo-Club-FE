@@ -32,7 +32,7 @@ const SendNungil = () => {
   }, []);
 
   const ClickProfileBtn = (nungilId: number) => {
-    navigate('/senddetailpage', { state: { nungilId } });
+    navigate(`/senddetailpage/${nungilId}`, { state: { nungilId } });
   };
 
   return (

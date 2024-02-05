@@ -6,7 +6,7 @@ import { theme } from '../../common/styles/theme';
 import { useLocation, useNavigate } from 'react-router-dom';
 import instance from '../../common/apis/axiosInstanse';
 import StartChatBtn from '../components/StartChatBtn';
-import 추천지도 from '../components/Map';
+import Map from '../components/Map';
 import { Xicon } from '../assets/svgs/index';
 import { Notify } from '../assets/svgs/index';
 
@@ -87,7 +87,7 @@ const FinishMatch = () => {
           </span>
         </div>
         <div css={Place.Map}>
-          <추천지도 />
+          <Map />
         </div>
         <div css={Place.InfoBox}>
           <ul css={Place.InfoPlaceName}>
