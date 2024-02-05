@@ -44,7 +44,7 @@ const landingStyles = css`
   height: 100%;
 `;
 const StImg = styled.img`
-  width: 20rem;
+  width: 10rem;
 `;
 const StTitle = styled.h1`
   color: ${({ theme }) => theme.colors.primary};
