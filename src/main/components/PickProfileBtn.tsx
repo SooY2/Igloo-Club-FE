@@ -2,18 +2,22 @@ import { css } from '@emotion/react';
 import { theme } from '../../common/styles/theme';
 import instance from '../../common/apis/axiosInstanse';
 
-const PickProfileBtn = () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const PickProfileBtn = ({ ProfileData }: any) => {
   const handleClickBtn = async () => {
     try {
       const res = await instance.post('/api/nungil/recommend', {
-        isPayed: true,
+        isPayed: false,
       });
+      const { companyName, job, description } = res.data;
+      console.log(companyName);
 
-      console.log(res);
+      ProfileData({ companyName, job, description });
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <div css={Container}>
       <button type="button" onClick={handleClickBtn} css={PickBtn}>
@@ -44,4 +48,8 @@ const PickBtn = css`
   text-align: center;
   background: ${theme.colors.primary};
   border-radius: 25px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
