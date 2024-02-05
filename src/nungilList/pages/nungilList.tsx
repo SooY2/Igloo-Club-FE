@@ -118,5 +118,4 @@ const Navigation = css`
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: ${theme.colors.white};
 `;

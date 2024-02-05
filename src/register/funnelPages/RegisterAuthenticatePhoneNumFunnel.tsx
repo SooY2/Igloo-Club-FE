@@ -12,8 +12,13 @@ import onlyAbleNumber from '../../common/utils/onlyAbleNumber';
 import { NavTypesProps } from '../types/navTypes';
 import { css } from '@emotion/react';
 import useRegisterTimer from '../hooks/useRegisterTimer';
+import instance from '../../common/apis/axiosInstanse';
 
-const 전화번호인증 = ({ onPrev, onNext }: NavTypesProps) => {
+interface PhoneNumProps extends NavTypesProps {
+  phoneNum: string;
+}
+
+const 전화번호인증 = ({ onPrev, onNext, phoneNum }: PhoneNumProps) => {
   const [isActive, setIsActive] = useState(false);
   const [authentication, setAuthentication] = useState('');
 
@@ -22,14 +27,21 @@ const 전화번호인증 = ({ onPrev, onNext }: NavTypesProps) => {
     else setIsActive(false);
   }, [authentication]);
 
-  const handleSubmit = () => {
-    //서버통신
-    onNext();
+  const handleSubmit = async () => {
+    try {
+      await instance.post('/api/member/phone/verification', {
+        code: authentication,
+        phoneNumber: phoneNum,
+      });
+      onNext();
+    } catch (error) {
+      console.error(error); // 오류 처리
+    }
   };
 
   //인증번호 재정송
   const handleReRequest = () => {
-    //서버통신
+    onPrev();
   };
 
   return (

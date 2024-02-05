@@ -6,6 +6,7 @@ import { theme } from '../../common/styles/theme';
 import { useLocation, useNavigate } from 'react-router-dom';
 import instance from '../../common/apis/axiosInstanse';
 import StartChatBtn from '../components/StartChatBtn';
+import Map from '../components/Map';
 import { Xicon } from '../assets/svgs/index';
 import { Notify } from '../assets/svgs/index';
 
@@ -85,15 +86,17 @@ const FinishMatch = () => {
             두 분의 의견을 반영하여 최적의 첫만남 장소를 골라봤어요 📝
           </span>
         </div>
-        <div css={Place.Map}></div>
+        <div css={Place.Map}>
+          <Map />
+        </div>
         <div css={Place.InfoBox}>
           <ul css={Place.InfoPlaceName}>
             <li css={Place.InfoTitle}>장소명</li>
-            <li css={Place.InfoContent}>울랄라</li>
+            <li css={Place.InfoContent}></li>
           </ul>
           <ul css={Place.InfoAddress}>
             <li css={Place.InfoTitle}>주소</li>
-            <li css={Place.InfoContent}>울랄라</li>
+            <li css={Place.InfoContent}></li>
           </ul>
         </div>
       </div>
@@ -264,16 +267,16 @@ const Place = {
   `,
 
   Map: css`
-    display: flex;
+    z-index: 1;
   `,
 
   InfoBox: css`
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
+    justify-content: center;
     width: 34rem;
     height: 8.7rem;
-    padding-top: 2rem;
     padding-left: 2rem;
     margin-top: 1.4rem;
     margin-bottom: 5rem;
@@ -313,4 +316,5 @@ const Place = {
 const StartBtn = css`
   position: fixed;
   bottom: 0;
+  z-index: 999;
 `;

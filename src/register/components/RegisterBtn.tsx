@@ -18,7 +18,7 @@ export default RegisterBtn;
 
 const Button = styled.button<{ isActive: boolean }>`
   width: 100%;
-  height: 5.4rem;
+  min-height: 5.4rem;
   color: ${({ theme, isActive }) =>
     isActive ? theme.colors.white : theme.colors.gray5};
   background-color: ${({ theme, isActive }) =>

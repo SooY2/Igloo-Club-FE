@@ -1,18 +1,48 @@
 import { useState } from 'react';
+import axios from 'axios';
 import RegisterBtn from '../components/RegisterBtn';
 import RegisterHeader from '../components/RegisterHeader';
 import * as St from '../styles/registerStyles';
 import styled from '@emotion/styled';
 import { NavTypesProps } from '../types/navTypes';
 import useRegisterTimer from '../hooks/useRegisterTimer';
+import AuthenticationSixNum from '../components/AuthenticationSixNum';
+import instance from '../../common/apis/axiosInstanse';
 
-const 회사이메일인증 = ({ onPrev, onNext }: NavTypesProps) => {
+interface EmailInfo {
+  email: string;
+  companyName: string;
+}
+
+export interface ExtendedNavTypesProps extends NavTypesProps {
+  emailInfo: EmailInfo;
+}
+
+const 회사이메일인증 = ({
+  onPrev,
+  onNext,
+  emailInfo,
+}: ExtendedNavTypesProps) => {
   const [isActive] = useState(true);
-  // const [authentication, setAuthentication] = useState<number[]>([]);
+  const [authentication, setAuthentication] = useState<string>('');
 
-  const handleSubmit = () => {
-    //서버통신
-    onNext();
+  const handleSubmit = async () => {
+    console.log(authentication, emailInfo.email, emailInfo.companyName);
+    try {
+      await instance.post('/api/company/verification', {
+        code: authentication.toUpperCase(),
+        email: emailInfo.email,
+        companyName: emailInfo.companyName,
+      });
+      onNext();
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.data?.code === 'WRONG_AUTH_CODE')
+          alert('인증번호를 다시 입력해주세요');
+      } else {
+        console.log('An unexpected error occurred:', error);
+      }
+    }
   };
 
   return (
@@ -32,7 +62,7 @@ const 회사이메일인증 = ({ onPrev, onNext }: NavTypesProps) => {
               gap: '3.5rem',
             }}
           >
-            <div>인증번호 입력창</div>
+            <AuthenticationSixNum setAuthentication={setAuthentication} />
             <StTimer>{useRegisterTimer(300)}</StTimer>
           </div>
           <StExplain>
