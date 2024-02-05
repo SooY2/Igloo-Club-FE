@@ -16,7 +16,7 @@ const NavBar = () => {
 
   const handleClickHomeBtn = () => {
     setActiveBtn('home');
-    navigate('/mainPage');
+    navigate('/main-page');
   };
 
   const handleClickChatBtn = () => {

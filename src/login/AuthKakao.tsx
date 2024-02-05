@@ -14,10 +14,11 @@ const AuthKakao = () => {
         code: AUTHORIZE_CODE,
       });
 
-      const { accessToken } = res.data;
+      const { accessToken, isProfileRegistered } = res.data;
       if (accessToken) {
         localStorage.setItem('ACCESS_TOKEN', accessToken);
-        navigate('/register');
+        if (isProfileRegistered) navigate('/main-page');
+        else navigate('/register');
       }
     } catch (error) {
       console.log(error);

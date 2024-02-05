@@ -14,11 +14,11 @@ import {
   기본프로필입력2,
 } from './funnelPages/0_index';
 import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Registertypes } from './types/registerTypes';
 
 const Register = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [Funnel, setStep] = useFunnel(
     [
       '약관동의',
@@ -139,7 +139,9 @@ const Register = () => {
         <Funnel.Step name="기본프로필입력2">
           <기본프로필입력2
             onPrev={() => setStep('기본프로필입력1')}
-            onNext={() => {}}
+            onNext={() => {
+              navigate('/main-page');
+            }}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
           />

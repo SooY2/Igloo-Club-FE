@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     element: <AuthKakao />,
   },
   {
-    path: 'mainpage',
+    path: 'main-page',
     element: <MainPage />,
   },
   {

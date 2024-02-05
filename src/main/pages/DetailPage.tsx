@@ -8,7 +8,7 @@ const DetailPage = () => {
   const navigate = useNavigate();
 
   const ClickArrowLeft = () => {
-    navigate('/mainPage');
+    navigate('/main-page');
   };
 
   return (

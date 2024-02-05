@@ -37,7 +37,8 @@ const 회사이메일인증 = ({
       onNext();
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
-        console.log('Response Data:', error.response?.data?.code);
+        if (error.response?.data?.code === 'WRONG_AUTH_CODE')
+          alert('인증번호를 다시 입력해주세요');
       } else {
         console.log('An unexpected error occurred:', error);
       }
