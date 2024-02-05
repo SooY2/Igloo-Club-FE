@@ -60,6 +60,7 @@ const StButton = styled.button`
   width: 100%;
   height: 5.2rem;
   padding-left: 2rem;
+  color: #34221d;
   text-align: center;
   background-color: #fae100;
   background-image: url('https://www.innergarm.com/design/rtx22/re_2022/kakao_login_icon.svg');
