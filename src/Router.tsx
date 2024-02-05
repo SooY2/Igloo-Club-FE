@@ -30,17 +30,17 @@ const router = createBrowserRouter([
     element: <AuthKakao />,
   },
   {
-    path: 'mainpage',
+    path: 'main-page',
     element: <MainPage />,
   },
   {
-    path: 'detailpage',
+    path: 'detailpage/:nungilId',
     element: <DetailPage />,
   },
-  { path: 'finishmatch', element: <FinishMatch /> },
+  { path: 'finishmatch/:nungilId', element: <FinishMatch /> },
   { path: 'nungillist', element: <NungilList /> },
-  { path: 'receiveddetailpage', element: <ReceivedDetailPage /> },
-  { path: 'senddetailpage', element: <SendDetailPage /> },
+  { path: 'receiveddetailpage/:nungilId', element: <ReceivedDetailPage /> },
+  { path: 'senddetailpage/:nungilId', element: <SendDetailPage /> },
   { path: 'mypage', element: <MyPage /> },
   { path: 'editprofilepage', element: <EditProfilePage /> },
 ]);

@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
 import ArrowLeftNav from '../../common/components/ArrowLeftNav';
 import DetailProfile from '../../common/pages/detailprofile';
 import SendNungilBtn from '../components/SendBtn';
-import { useNavigate } from 'react-router-dom';
 
 const DetailPage = () => {
   const navigate = useNavigate();
 
   const ClickArrowLeft = () => {
-    navigate('/mainPage');
+    navigate('/main-page');
   };
 
   return (
@@ -36,4 +36,5 @@ const Container = css`
 const SendBtn = css`
   position: fixed;
   bottom: 0;
+  width: 100%;
 `;

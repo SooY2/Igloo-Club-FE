@@ -13,8 +13,10 @@ const DetailProfile = () => {
 
   const title = `안녕하세요!\n 저는 ${profileData.nickname}이라고 합니다.`;
 
+  const genderText = profileData.sex === 'MALE' ? '남성' : '여성';
+
   const context = `#${profileData.companyName}에 재직 중인\n 
-  #${profileData.age}세 남성이고 #${profileData.job}\n 
+  #${profileData.age}세 ${genderText}이고 #${profileData.job}\n 
   얼굴은 #${profileData.animalFace} 
   키는 #${profileData.height}cm\n 성격 유형은 #${profileData.mbti}`;
 
@@ -38,6 +40,8 @@ const DetailProfile = () => {
 
     handleGetDetailProfile();
   }, [state.nungilId]);
+
+  console.log(profileData.hobbyAllocationList);
 
   return (
     <div css={Container}>
@@ -64,19 +68,34 @@ const DetailProfile = () => {
           <div css={Middle.ExAttrTitle}>
             <span>나의 외적인 매력은</span>
           </div>
-          <div css={Middle.ExAttrList}></div>
+          <div css={Middle.ExAttrList}>
+            {Array.isArray(profileData.faceDepictionAllocationList) &&
+              profileData.faceDepictionAllocationList?.map(
+                (attr: string, index: number) => <div key={index}>{attr}</div>,
+              )}
+          </div>
         </div>
         <div css={Middle.InAttr}>
           <div css={Middle.InAttrTitle}>
             <span>나의 내적인 매력은</span>
           </div>
-          <div css={Middle.InAttrList}></div>
+          <div css={Middle.InAttrList}>
+            {Array.isArray(profileData.personalityDepictionAllocationList) &&
+              profileData.personalityDepictionAllocationList?.map(
+                (attr: string, index: number) => <div key={index}>{attr}</div>,
+              )}
+          </div>
         </div>
         <div css={Middle.Notice}>
           <div css={Middle.NoticeTitle}>
             <span>이건 알아두세요!</span>
           </div>
-          <div css={Middle.NoticeList}></div>
+          <div css={Middle.NoticeList}>
+            {Array.isArray(profileData.hobbyAllocationList) &&
+              profileData.hobbyAllocationList?.map(
+                (attr: string, index: number) => <div key={index}>{attr}</div>,
+              )}
+          </div>
         </div>
       </div>
     </div>
