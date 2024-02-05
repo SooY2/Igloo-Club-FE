@@ -12,25 +12,56 @@ export const Title = styled.p`
   ${({ theme }) => theme.fonts.subtitle1};
 `;
 
+export const SubTitle = styled.p`
+  color: ${({ theme }) => theme.colors.gray7};
+  ${({ theme }) => theme.fonts.body2r};
+`;
+
 export const articleStyles = css`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  overflow-y: scroll;
 `;
 
 export const sectionStyles = css`
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  margin-bottom: 7.3rem;
 `;
 
-export const Button = styled.button<{ isActive: boolean }>`
+export const StBtnExplain = styled.p`
+  color: ${({ theme }) => theme.colors.gray6};
+  ${({ theme }) => theme.fonts.body3};
+`;
+
+export const StBasicTextArea = styled.textarea`
   width: 100%;
-  height: 5.4rem;
-  color: ${({ theme, isActive }) =>
-    isActive ? theme.colors.white : theme.colors.gray5};
-  background-color: ${({ theme, isActive }) =>
-    isActive ? theme.colors.primary : theme.colors.gray2};
-  border-radius: 15px;
+  height: 16.9rem;
+  padding: 1.9rem 1.8rem;
+  word-break: break-all;
+  resize: none;
+  background-color: #fafafa;
+  border-radius: 5px;
+
+  ${({ theme }) => theme.fonts.body2r};
+
+  &::placeholder {
+    line-height: 2rem;
+    color: ${({ theme }) => theme.colors.gray5};
+  }
+`;
+
+export const StBasicTextCnt = styled.p`
+  align-self: flex-end;
+  color: ${({ theme }) => theme.colors.gray7};
+  ${({ theme }) => theme.fonts.body3};
+`;
+
+export const checkBoxContainerStyles = css`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 3.2rem;
 `;

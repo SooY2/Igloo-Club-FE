@@ -6,23 +6,37 @@ interface RadioProps {
   name: string;
   value1: string;
   value2: string;
-  onRadioChange: (value: string) => void; //부모에 선택된 input 태그를 event 째로 넘겨줌
+  label1?: string;
+  label2?: string;
+  onRadioChange: (value: string, name?: string) => void;
+  column?: boolean;
+  checkedValue: string;
 }
 
-const Radio = ({ name, value1, value2, onRadioChange }: RadioProps) => {
+const Radio = ({
+  name,
+  value1,
+  value2,
+  onRadioChange,
+  column,
+  label1,
+  label2,
+  checkedValue,
+}: RadioProps) => {
   const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onRadioChange(event.target.value);
+    onRadioChange(event.target.value, name);
   };
   return (
-    <div css={checkRadioContainerStyles}>
+    <div css={column ? checkRadioColumnStyles : checkRadioContainerStyles}>
       <label>
         <StRadioInput
           type="radio"
           name={name}
           value={value1}
           onChange={handleRadioChange}
+          checked={checkedValue === value1}
         />
-        <StRadioSpan>{value1}</StRadioSpan>
+        <StRadioSpan>{label1 ? label1 : value1}</StRadioSpan>
       </label>
       <label>
         <StRadioInput
@@ -30,8 +44,9 @@ const Radio = ({ name, value1, value2, onRadioChange }: RadioProps) => {
           name={name}
           value={value2}
           onChange={handleRadioChange}
+          checked={checkedValue === value2}
         />
-        <StRadioSpan>{value2}</StRadioSpan>
+        <StRadioSpan>{label2 ? label2 : value2}</StRadioSpan>
       </label>
     </div>
   );
@@ -45,15 +60,23 @@ const checkRadioContainerStyles = css`
   align-items: center;
 `;
 
-const StRadioInput = styled.input`
+const checkRadioColumnStyles = css`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+`;
+
+export const StRadioInput = styled.input`
   display: none;
 `;
 
-const StRadioSpan = styled.span`
+export const StRadioSpan = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
   width: fit-content;
+  min-width: 4.5rem;
   padding: 1rem 1.7rem;
   border: 1px solid ${({ theme }) => theme.colors.gray3};
   border-radius: 30px;
