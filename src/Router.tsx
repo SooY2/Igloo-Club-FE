@@ -11,6 +11,7 @@ import ReceivedDetailPage from './nungilList/pages/receivedDetailPage';
 import SendDetailPage from './nungilList/pages/sendDetailPage';
 import MyPage from './mypage/pages/myPage';
 import EditProfilePage from './mypage/pages/editProfilePage';
+import Chat from './chat/Chat';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
   { path: 'senddetailpage', element: <SendDetailPage /> },
   { path: 'mypage', element: <MyPage /> },
   { path: 'editprofilepage', element: <EditProfilePage /> },
+  { path: 'chat', element: <Chat /> },
 ]);
 
 export default router;

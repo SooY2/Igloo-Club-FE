@@ -21,7 +21,7 @@ const NavBar = () => {
 
   const handleClickChatBtn = () => {
     setActiveBtn('chat');
-    navigate('/');
+    navigate('/chat');
   };
 
   const handleClickHeartBtn = () => {
