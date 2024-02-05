@@ -99,7 +99,7 @@ const ProfileCard = {
     padding-top: 2.4rem;
     padding-bottom: 2.9rem;
     padding-left: 2.3rem;
-    margin-left: 2.7rem;
+    margin-left: 2.3rem;
     color: ${theme.colors.white};
     background: linear-gradient(116deg, #ff6264 0%, #ffa490 96.79%);
     ${theme.fonts.body2b};
@@ -192,5 +192,5 @@ const Bottom = {
 const Navigation = css`
   position: fixed;
   bottom: 0;
-  background-color: ${theme.colors.white};
+  width: 100%;
 `;

@@ -36,9 +36,11 @@ const SendNungilBtn = () => {
 export default SendNungilBtn;
 
 const Container = css`
-  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   height: 9rem;
-  padding: 1.7rem 2.3rem;
   background: ${theme.colors.white};
   border-top: 1px solid #e3e3e3;
 `;
@@ -49,7 +51,7 @@ const SendBtn = css`
   gap: 0.9rem;
   align-items: center;
   justify-content: center;
-  width: 38rem;
+  width: 34.8rem;
   height: 5.5rem;
   font-size: 16px;
   font-style: normal;

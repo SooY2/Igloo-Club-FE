@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-const 추천지도 = () => {
+const Map = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [, setMap] = useState<any>();
 
@@ -39,7 +39,7 @@ const 추천지도 = () => {
   return <div id="map" css={MapContainer}></div>;
 };
 
-export default 추천지도;
+export default Map;
 
 const MapContainer = css`
   width: 34rem;

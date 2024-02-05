@@ -32,7 +32,7 @@ const ReceivedNungil = () => {
   }, []);
 
   const ClickProfileBtn = (nungilId: number) => {
-    navigate('/receiveddetailpage', { state: { nungilId } });
+    navigate(`/receiveddetailpage/${nungilId}`, { state: { nungilId } });
   };
 
   return (

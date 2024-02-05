@@ -36,4 +36,5 @@ const Container = css`
 const SendBtn = css`
   position: fixed;
   bottom: 0;
+  width: 100%;
 `;
