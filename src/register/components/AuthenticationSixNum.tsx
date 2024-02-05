@@ -19,14 +19,18 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
   ({ onInputChange, index }, ref) => {
     const [value, setValue] = useState('');
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      setValue(event.target.value.slice(0, 1));
-      onInputChange(event, index);
+      const val = event.target.value.toUpperCase();
+
+      if (val.match(/^[A-Z0-9]$/) || val === '') {
+        setValue(val);
+        onInputChange(event, index);
+      }
     };
 
     return (
       <StInput
         ref={ref}
-        type="number"
+        type="text"
         maxLength={1}
         onChange={handleChange}
         value={value}
@@ -52,26 +56,32 @@ const AuthenticationSixNum = ({
 }) => {
   const totalInputs = 6;
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const [code, setCode] = useState(Array(totalInputs).fill(''));
 
-  useEffect(() => {
-    inputRefs.current = Array(totalInputs).fill(null);
-  }, []);
-
+  // 입력값이 변경될 때마다 호출될 함수
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement>,
     index: number,
   ) => {
-    setAuthentication((prev) =>
-      prev ? prev + event.target.value : event.target.value,
-    );
+    const newCode = [...code];
+    newCode[index] = event.target.value.slice(0, 1); // 현재 입력 필드의 값을 가져옵니다.
+    setCode(newCode); // 로컬 상태를 업데이트합니다.
 
+    // 다음 입력 필드로 포커스 이동 또는 이전 입력 필드로 포커스 이동
     if (event.target.value && index < totalInputs - 1) {
       inputRefs.current[index + 1]?.focus();
-    }
-    if (event.target.value.length === 0) {
+    } else if (event.target.value === '' && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
   };
+
+  // 모든 입력 필드가 채워졌는지 확인하고, 완료되면 상태 업데이트
+  useEffect(() => {
+    const completedCode = code.join('');
+    if (completedCode.length === totalInputs) {
+      setAuthentication(completedCode);
+    }
+  }, [code, setAuthentication]);
 
   return (
     <div css={inputBoxStyles}>

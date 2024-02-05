@@ -30,10 +30,11 @@ const 회사이메일인증 = ({
     console.log(authentication, emailInfo.email, emailInfo.companyName);
     try {
       await instance.post('/api/company/verification', {
-        code: authentication,
+        code: authentication.toUpperCase(),
         email: emailInfo.email,
         companyName: emailInfo.companyName,
       });
+      onNext();
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         console.log('Response Data:', error.response?.data?.code);
@@ -41,7 +42,6 @@ const 회사이메일인증 = ({
         console.log('An unexpected error occurred:', error);
       }
     }
-    onNext();
   };
 
   return (

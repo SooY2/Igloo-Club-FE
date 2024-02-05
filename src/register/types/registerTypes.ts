@@ -17,5 +17,5 @@ export interface Registertypes {
   description: string;
   // 선택 사항
   markerList?: string[];
-  hobbyList?: string[];
+  hobbyList: string[];
 }

@@ -58,3 +58,10 @@ export const StBasicTextCnt = styled.p`
   color: ${({ theme }) => theme.colors.gray7};
   ${({ theme }) => theme.fonts.body3};
 `;
+
+export const checkBoxContainerStyles = css`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 3.2rem;
+`;

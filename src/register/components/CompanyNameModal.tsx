@@ -33,22 +33,22 @@ const CompanyNameModal = ({
   }, []);
 
   useEffect(() => {
-    if (select || newCompany) {
+    if (select && select !== '추가하기') {
       setIsActive(true);
+      setIsAdd(false);
       return;
     }
     if (select === '추가하기' && newCompany === '') {
       setIsActive(false);
       return;
     }
-    setIsActive(false);
+    setIsActive(true);
   }, [select, newCompany]);
 
   const handleSelect = (value: string): void => {
     if (value === '추가하기') {
       setIsAdd(true);
       setIsActive(false);
-      return;
     }
     setSelect(value);
   };
@@ -77,13 +77,15 @@ const CompanyNameModal = ({
               value={item}
               label={item}
               onRadioChange={handleSelect}
+              checkedValue={select}
             />
           ))}
           <RadioItem
             name="company"
-            value={'추가하기'}
+            value="추가하기"
             label="추가하기"
             onRadioChange={handleSelect}
+            checkedValue={select}
           />
         </div>
 
@@ -99,10 +101,10 @@ const CompanyNameModal = ({
             isActive={isActive}
             content="선택 완료"
             onClick={() => {
-              if (select) {
-                onSelect(select);
-              } else {
+              if (select === '추가하기') {
                 onSelect(newCompany);
+              } else {
+                onSelect(select);
               }
               onCancel();
             }}

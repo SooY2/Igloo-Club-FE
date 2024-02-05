@@ -60,7 +60,6 @@ const 기본프로필입력1 = ({
   const handleSubmit = () => {
     if (!handleRegisterValue || !values.height) return;
     handleRegisterValue(values);
-    console.log(values);
     onNext();
   };
 

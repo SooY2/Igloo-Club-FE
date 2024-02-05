@@ -3,11 +3,12 @@ import RegisterBtn from '../components/RegisterBtn';
 import RegisterHeader from '../components/RegisterHeader';
 import * as St from '../styles/registerStyles';
 import { StBasicInput } from '../styles/registerInputStyles';
-import { RegisterBasicInput } from '../components/RegisterInputs';
+import {
+  RegisterArrowInput,
+  RegisterBasicInput,
+} from '../components/RegisterInputs';
 import styled from '@emotion/styled';
 import { NavTypesProps } from '../types/navTypes';
-import { ArrowRight } from '../assets/svgs/0_index';
-import { css } from '@emotion/react';
 import CompanyNameModal from '../components/CompanyNameModal';
 import instance from '../../common/apis/axiosInstanse';
 
@@ -77,17 +78,14 @@ const 회사이메일입력 = ({
                 onChange={(e) => setEmail(e.target.value)}
               />
             </RegisterBasicInput>
-            <RegisterBasicInput label="회사명">
-              <div css={companyNameStyles} onClick={() => setModal(true)}>
-                <StBasicInput
-                  type="text"
-                  placeholder="재직 중이신 회사명을 선택해 주세요."
-                  disabled
-                  value={company}
-                />
-                <StCompanyName />
-              </div>
-            </RegisterBasicInput>
+            <RegisterArrowInput label="회사명" onClick={() => setModal(true)}>
+              <StBasicInput
+                type="text"
+                placeholder="재직 중이신 회사명을 선택해 주세요."
+                disabled
+                value={company}
+              />
+            </RegisterArrowInput>
           </div>
         </section>
         <RegisterBtn
@@ -113,15 +111,4 @@ export default 회사이메일입력;
 
 const TitleBox = styled(St.TitleBox)`
   margin-bottom: 5.4rem;
-`;
-
-const companyNameStyles = css`
-  position: relative;
-  width: 100%;
-`;
-
-const StCompanyName = styled(ArrowRight)`
-  position: absolute;
-  top: 0;
-  right: 0.7rem;
 `;

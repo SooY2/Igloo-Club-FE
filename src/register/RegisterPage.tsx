@@ -9,11 +9,11 @@ import {
   회사이메일인증,
   닉네임입력,
   성별생년월일,
-  SNS계정,
+  // SNS계정,
   기본프로필입력1,
   기본프로필입력2,
 } from './funnelPages/0_index';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import { Registertypes } from './types/registerTypes';
 
@@ -32,13 +32,15 @@ const Register = () => {
       '기본프로필입력1',
       '기본프로필입력2',
     ] as const,
-    '닉네임입력',
+    '약관동의',
   );
 
   const [emailInfo, setEmailInfo] = useState({
     email: '',
     companyName: '',
   });
+
+  const [phoneNum, setPhoneNum] = useState('');
 
   const [registerValues, setRegisterValues] = useState<Registertypes>({
     nickname: '',
@@ -61,10 +63,6 @@ const Register = () => {
     hobbyList: [],
   });
 
-  useEffect(() => {
-    console.log(registerValues);
-  }, [registerValues]);
-
   const handleRegisterValue = (data: Registertypes) => {
     setRegisterValues((prevValues) => ({
       ...prevValues,
@@ -82,12 +80,14 @@ const Register = () => {
           <전화번호입력
             onPrev={() => setStep('약관동의')}
             onNext={() => setStep('전화번호인증')}
+            setPhoneNum={setPhoneNum}
           />
         </Funnel.Step>
         <Funnel.Step name="전화번호인증">
           <전화번호인증
             onPrev={() => setStep('전화번호입력')}
             onNext={() => setStep('회사이메일입력')}
+            phoneNum={phoneNum}
           />
         </Funnel.Step>
         <Funnel.Step name="회사이메일입력">
@@ -115,22 +115,22 @@ const Register = () => {
         <Funnel.Step name="성별생년월일">
           <성별생년월일
             onPrev={() => setStep('닉네임입력')}
-            onNext={() => setStep('SNS계정')}
+            onNext={() => setStep('기본프로필입력1')}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
           />
         </Funnel.Step>
-        <Funnel.Step name="SNS계정">
+        {/* <Funnel.Step name="SNS계정">
           <SNS계정
             onPrev={() => setStep('성별생년월일')}
             onNext={() => setStep('기본프로필입력1')}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
           />
-        </Funnel.Step>
+        </Funnel.Step> */}
         <Funnel.Step name="기본프로필입력1">
           <기본프로필입력1
-            onPrev={() => setStep('SNS계정')}
+            onPrev={() => setStep('닉네임입력')}
             onNext={() => setStep('기본프로필입력2')}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}

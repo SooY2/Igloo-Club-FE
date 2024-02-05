@@ -3,15 +3,28 @@ import RegisterBtn from '../components/RegisterBtn';
 import RegisterHeader from '../components/RegisterHeader';
 import * as St from '../styles/registerStyles';
 import { StBasicInput } from '../styles/registerInputStyles';
-import { RegisterBasicInput } from '../components/RegisterInputs';
+import {
+  RegisterArrowInput,
+  RegisterBasicInput,
+} from '../components/RegisterInputs';
 import styled from '@emotion/styled';
 import { ExtendedNavTypesProps } from '../types/navTypes';
 import { css } from '@emotion/react';
 import RadioItem from '../components/RadioItem';
-import { ALCOHOL, SMOKE } from '../constants/profileConstants';
+import {
+  ALCOHOL,
+  FACEDEPICTION,
+  HOBBY,
+  PERSONALITYDEPICTION,
+  SMOKE,
+} from '../constants/profileConstants';
 import { limitMaxLength } from '../../common/utils/limitMaxLength';
 import { Registertypes } from '../types/registerTypes';
 import instance from '../../common/apis/axiosInstanse';
+import FaceDepictionList from '../components/FaceDepictionList';
+import { findLabelByValue } from '../../common/utils/findLabelByValue';
+import PersonalityDepiction from '../components/PersonalityDepiction';
+import HobbyList from '../components/HobbyList';
 
 const MAXLEN = 100;
 
@@ -23,7 +36,10 @@ const 기본프로필입력2 = ({
   const [isActive, setIsActive] = useState(false);
   const [descriptionCnt, setDescriptionCnt] = useState(0);
   const [values, setValues] = useState<Registertypes>(registerValues);
-
+  const [showFaceDepiction, setShowFaceDepction] = useState(false);
+  const [showPersonalityDepiction, setShowPersonalityDepiction] =
+    useState(false);
+  const [showHobby, setShowHobby] = useState(false);
   useEffect(() => {
     const {
       alcohol,
@@ -68,8 +84,10 @@ const 기본프로필입력2 = ({
   const handleSubmit = async () => {
     try {
       await instance.post('/api/member', values);
+      console.log(values);
       onNext();
     } catch (err) {
+      console.log(values);
       console.log(err);
     }
   };
@@ -122,26 +140,49 @@ const 기본프로필입력2 = ({
                 ))}
               </div>
             </RegisterBasicInput>
-            <RegisterBasicInput label="나의 외모 묘사">
+            <RegisterArrowInput
+              label="나의 외모 묘사"
+              onClick={() => setShowFaceDepction(true)}
+            >
               <StBasicInput
                 type="text"
                 placeholder="자신의 외모를 설명할 수 있는 키워드를 선택해 주세요."
-                value={values.faceDepictionList}
-                onChange={(e) => {
-                  handleValues([e.target.value], 'faceDepictionList');
-                }}
+                value={findLabelByValue(
+                  FACEDEPICTION,
+                  values.faceDepictionList,
+                )}
+                disabled={true}
               />
-            </RegisterBasicInput>
-            <RegisterBasicInput label="나의 성격 묘사">
+            </RegisterArrowInput>
+            <RegisterArrowInput
+              label="나의 성격 묘사"
+              onClick={() => {
+                setShowPersonalityDepiction(true);
+              }}
+            >
               <StBasicInput
                 type="text"
                 placeholder="자신의 성격을 설명할 수 있는 키워드를 선택해 주세요."
-                value={values.personalityDepictionList}
-                onChange={(e) => {
-                  handleValues([e.target.value], 'personalityDepictionList');
-                }}
+                value={findLabelByValue(
+                  PERSONALITYDEPICTION,
+                  values.personalityDepictionList,
+                )}
+                disabled={true}
               />
-            </RegisterBasicInput>
+            </RegisterArrowInput>
+            <RegisterArrowInput
+              label="나의 취미"
+              onClick={() => {
+                setShowHobby(true);
+              }}
+            >
+              <StBasicInput
+                type="text"
+                placeholder="평소 나의 취미를 선책해 주세요."
+                value={findLabelByValue(HOBBY, values.hobbyList)}
+                disabled={true}
+              />
+            </RegisterArrowInput>
             <RegisterBasicInput label="소개글">
               <div
                 css={{
@@ -180,6 +221,27 @@ const 기본프로필입력2 = ({
           />
         </div>
       </article>
+      {showFaceDepiction && (
+        <FaceDepictionList
+          values={values.faceDepictionList}
+          handleValues={handleValues}
+          setShowFaceDepiction={setShowFaceDepction}
+        />
+      )}
+      {showPersonalityDepiction && (
+        <PersonalityDepiction
+          values={values.personalityDepictionList}
+          handleValues={handleValues}
+          setShowFaceDepiction={setShowPersonalityDepiction}
+        />
+      )}
+      {showHobby && (
+        <HobbyList
+          values={values.hobbyList}
+          handleValues={handleValues}
+          setShowFaceDepiction={setShowHobby}
+        />
+      )}
     </>
   );
 };
