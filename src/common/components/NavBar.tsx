@@ -63,10 +63,9 @@ const Container = css`
   flex-direction: row;
   gap: 7rem;
   align-items: center;
-  justify-content: start;
   width: 100%;
   height: 6.2rem;
-  padding-left: 4.3rem;
+  padding: 0 4rem;
   background-color: ${theme.colors.white};
 `;
 

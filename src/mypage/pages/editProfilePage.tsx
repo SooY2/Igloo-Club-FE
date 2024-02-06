@@ -31,6 +31,7 @@ export default EditProfilePage;
 const Container = css`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
   padding-top: 2.5rem;
@@ -63,6 +64,7 @@ const Middle = {
 };
 
 const FinishBtn = css`
-  position: fixed;
+  position: sticky;
   bottom: 0;
+  z-index: 999;
 `;

@@ -13,9 +13,11 @@ const SendDetailPage = () => {
 
   return (
     <div css={Container}>
-      <button onClick={ClickArrowLeft}>
-        <ArrowLeftNav />
-      </button>
+      <div>
+        <button onClick={ClickArrowLeft}>
+          <ArrowLeftNav />
+        </button>
+      </div>
       <DetailProfile />
       <div css={SendBtn}>
         <FinishSendNungilBtn />
@@ -29,11 +31,12 @@ export default SendDetailPage;
 const Container = css`
   display: flex;
   flex-direction: column;
-  align-items: start;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const SendBtn = css`
-  position: fixed;
+  position: sticky;
   bottom: 0;
   z-index: 999;
 `;

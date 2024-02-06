@@ -43,7 +43,7 @@ const Container = css`
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
-  align-items: start;
+  align-items: center;
   width: 100%;
   background: ${theme.colors.white};
 `;

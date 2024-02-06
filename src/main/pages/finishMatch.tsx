@@ -112,6 +112,7 @@ export default FinishMatch;
 const Container = css`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
   padding-top: 3.6rem;
@@ -125,6 +126,7 @@ const Top = {
     display: flex;
     flex-direction: column;
     align-items: start;
+    padding-right: 3rem;
     padding-bottom: 3.3rem;
     padding-left: 3rem;
     border-bottom: 10px solid ${theme.colors.gray0};
@@ -156,10 +158,10 @@ const Top = {
   NotiBox: css`
     display: flex;
     flex-direction: column;
-    width: 34rem;
-    height: 9.7rem;
-    padding-top: 1.5rem;
-    padding-left: 1.3rem;
+    justify-content: center;
+    min-width: 33rem;
+    height: 9rem;
+    padding: 0 1.3rem;
     margin-top: 2.3rem;
     background-color: #f8f9fd;
     border-radius: 8px;
@@ -190,9 +192,7 @@ const Recommend = {
   Wrapper: css`
     display: flex;
     flex-direction: column;
-    padding-top: 3.1rem;
-    padding-bottom: 4.4rem;
-    padding-left: 3rem;
+    padding: 3.1rem 3rem 4.4rem;
     border-bottom: 10px solid ${theme.colors.gray0};
   `,
 
@@ -214,9 +214,9 @@ const Recommend = {
   RecoBox: css`
     display: flex;
     flex-direction: row;
-    gap: 18rem;
+    gap: 17rem;
     align-items: center;
-    width: 34rem;
+    min-width: 30rem;
     height: 5.9rem;
     padding-left: 1.8rem;
     margin-top: 0.9rem;
@@ -246,9 +246,7 @@ const Place = {
   Wrapper: css`
     display: flex;
     flex-direction: column;
-    padding-top: 3.1rem;
-    padding-bottom: 8rem;
-    padding-left: 3rem;
+    padding: 3rem 3rem 8rem;
   `,
 
   Title: css`
@@ -314,7 +312,7 @@ const Place = {
 };
 
 const StartBtn = css`
-  position: fixed;
+  position: sticky;
   bottom: 0;
   z-index: 999;
 `;

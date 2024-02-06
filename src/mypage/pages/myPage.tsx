@@ -95,11 +95,11 @@ const ProfileCard = {
   Wrapper: css`
     display: flex;
     flex-direction: row;
-    width: 34.2rem;
+    min-width: 34.2rem;
     padding-top: 2.4rem;
     padding-bottom: 2.9rem;
     padding-left: 2.3rem;
-    margin-left: 2.3rem;
+    margin: 0 2.3rem;
     color: ${theme.colors.white};
     background: linear-gradient(116deg, #ff6264 0%, #ffa490 96.79%);
     ${theme.fonts.body2b};

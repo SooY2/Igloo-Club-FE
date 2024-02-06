@@ -143,11 +143,10 @@ const Middle = {
     gap: 0.4rem;
     align-items: center;
     justify-content: center;
-    width: 34.2rem;
+    min-width: 33rem;
     height: 4rem;
-    padding: 0 1rem;
-    padding-top: 1.2rem;
-    padding-bottom: 1.2rem;
+    padding: 1.2rem 2.2rem;
+    margin-right: 2rem;
     margin-bottom: 3.9rem;
     margin-left: 2rem;
     font-size: 13px;
@@ -182,7 +181,7 @@ const Bottom = {
     flex-direction: column;
     gap: 1.5rem;
     width: 100%;
-    padding-left: 2.6rem;
+    padding: 0 2.6rem;
     margin-bottom: 8.2rem;
     font-size: 18px;
     font-style: normal;
