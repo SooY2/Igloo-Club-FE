@@ -30,11 +30,10 @@ const Container = css`
   display: flex;
   flex-direction: column;
   align-items: start;
-  width: 100%;
 `;
 
 const SendBtn = css`
   position: fixed;
   bottom: 0;
-  width: 100%;
+  z-index: 999;
 `;
