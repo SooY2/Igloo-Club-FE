@@ -12,11 +12,9 @@ const FinishSendBtn = () => {
 export default FinishSendBtn;
 
 const Container = css`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
   height: 9rem;
+  padding: 1.6rem 2.3rem 4.8rem;
   background: ${theme.colors.white};
   border-top: 1px solid #e3e3e3;
 `;
@@ -27,16 +25,17 @@ const SendBtn = css`
   gap: 0.9rem;
   align-items: center;
   justify-content: center;
-  width: 34.8rem;
+  width: 100%;
   height: 5.5rem;
-  font-size: 16px;
+  padding: 1.5rem 10rem;
+  font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   color: #b7bcc5;
   text-align: center;
   background-color: #e8e9ef;
-  border-radius: 10px;
+  border-radius: 15px;
 
   &:hover {
     cursor: pointer;
