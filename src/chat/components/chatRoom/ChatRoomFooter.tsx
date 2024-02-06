@@ -1,0 +1,51 @@
+import styled from '@emotion/styled';
+import { ChatSubmit } from '../../assets/svgs/0_index';
+
+const ChatRoomFooter = () => {
+  return (
+    <StContainer>
+      <StTextarea placeholder="메시지 보내기" />
+      <StChatSubmit>
+        <ChatSubmit />
+      </StChatSubmit>
+    </StContainer>
+  );
+};
+
+export default ChatRoomFooter;
+
+const StContainer = styled.footer`
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2rem 2rem 2.3rem;
+`;
+
+const StTextarea = styled.textarea`
+  width: 100%;
+  height: 4rem;
+  padding: 1rem 1.7rem;
+  text-justify: center;
+  word-wrap: break-word;
+  resize: none;
+  background-color: #f2f3f5;
+  border-radius: 27px;
+  ${({ theme }) => theme.fonts.body1m};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.gray5};
+    ${({ theme }) => theme.fonts.body1m};
+  }
+`;
+
+const StChatSubmit = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+`;

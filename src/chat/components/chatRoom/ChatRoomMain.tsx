@@ -31,7 +31,7 @@ const containerStyles = css`
   gap: 1.5rem;
   justify-content: end;
   width: 100%;
-  height: calc(100vh - 15rem);
+  height: calc(100vh - 16rem);
   padding: 0 2.4rem;
   margin-top: 6.8rem;
 `;

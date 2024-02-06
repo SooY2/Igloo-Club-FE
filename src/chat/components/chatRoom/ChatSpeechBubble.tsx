@@ -9,17 +9,18 @@ const ChatSpeechBubble = ({ chatData }: { chatData: ChatDataTypes }) => {
   const { animalFace, content, isSender, createdAt } = chatData;
   return (
     <StBubbleContainer isSender={isSender} createdAt={createdAt}>
-      <StBubble isSender={isSender}>
-        <AnimalProfile animalFace={animalFace} />
-        {content}
-      </StBubble>
+      {isSender && <AnimalProfile animalFace={animalFace} />}
+      <StBubble isSender={isSender}>{content}</StBubble>
     </StBubbleContainer>
   );
 };
 
 export default ChatSpeechBubble;
 
-const StBubbleContainer = styled.div<{ isSender: boolean; createdAt: string }>`
+const StBubbleContainer = styled.div<{
+  isSender: boolean;
+  createdAt: string;
+}>`
   position: relative;
   display: flex;
   gap: 0.5rem;
@@ -48,6 +49,7 @@ const StBubble = styled.div<{ isSender: boolean }>`
   width: fit-content;
   max-width: 25rem;
   padding: 1.2rem;
+  margin-left: ${({ isSender }) => (isSender ? '0.7rem' : '0')};
   color: ${({ theme, isSender }) =>
     isSender ? theme.colors.black : theme.colors.white};
   background-color: ${({ theme, isSender }) =>

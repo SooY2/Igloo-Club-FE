@@ -1,28 +1,28 @@
 export const CHATDATA = {
   content: [
     {
-      animalFace: 'FOX',
+      animalFace: '여우상',
       sender: '회사1 남자1',
       content: '엽떡 먹고 싶다',
       createdAt: '2024-02-03T03:47:47',
       isSender: false,
     },
     {
-      animalFace: 'DOG',
+      animalFace: '강아지상',
       sender: '하늘소',
       content: '밥 뭐 먹을까?',
       createdAt: '2024-02-03T03:47:46',
       isSender: true,
     },
     {
-      animalFace: 'FOX',
+      animalFace: '여우상',
       sender: '회사1 남자1',
       content: '반가워!',
       createdAt: '2024-02-03T03:47:44',
       isSender: false,
     },
     {
-      animalFace: 'DOG',
+      animalFace: '강아지상',
       sender: '하늘소',
       content: '안녕',
       createdAt: '2024-02-03T03:47:42',

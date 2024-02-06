@@ -6,6 +6,7 @@ import ChatRoomMain from './ChatRoomMain';
 import ChatRoomHeader from './ChatRoomHeader';
 import { css } from '@emotion/react';
 import { ChatDataTypes } from '../../types/chatDataTypes';
+import ChatRoomFooter from './ChatRoomFooter';
 
 /** 채팅방 컴포넌트입니다 */
 const ChatRoom = () => {
@@ -28,7 +29,7 @@ const ChatRoom = () => {
     <section css={chatRoomStyles}>
       <ChatRoomHeader />
       <ChatRoomMain chatData={chatData} />
-      <footer></footer>
+      <ChatRoomFooter />
     </section>
   );
 };
