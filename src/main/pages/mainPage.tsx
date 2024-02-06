@@ -6,6 +6,7 @@ import { theme } from '../../common/styles/theme';
 import instance from '../../common/apis/axiosInstanse';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../common/components/NavBar';
+import NowMatching from '../components/NowMatching';
 import ProfileCard from '../../common/components/ProfileCard';
 import PickProfileBtn from '../components/PickProfileBtn';
 import CustomSelect from '../components/CustomSelect';
@@ -83,12 +84,15 @@ const MainPage = () => {
         )}
       </div>
       <div css={Bottom.Wrapper}>
-        <span>내가 받은 인연 프로필</span>
-        <ProfileCard
-          profileData={profileData}
-          ClickProfileCard={ClickProfileBtn}
-          css={Bottom.ProfileData}
-        />
+        {matchingTime ? (
+          <ProfileCard
+            profileData={profileData}
+            ClickProfileCard={ClickProfileBtn}
+            css={Bottom.ProfileData}
+          />
+        ) : (
+          <NowMatching />
+        )}
       </div>
       <div css={PickBtn}>
         <PickProfileBtn ProfileData={ClickPickProfile} />
