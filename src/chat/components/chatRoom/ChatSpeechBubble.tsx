@@ -2,22 +2,49 @@ import styled from '@emotion/styled';
 
 import AnimalProfile from '../../../common/components/AnimalProfile';
 import { ChatDataTypes } from '../../types/chatDataTypes';
+import { formatAMPM } from '../../../common/utils/formatAmPm';
 
 const ChatSpeechBubble = ({ chatData }: { chatData: ChatDataTypes }) => {
   console.log(chatData);
-  const { animalFace, content, isSender } = chatData;
+  const { animalFace, content, isSender, createdAt } = chatData;
   return (
-    <StBubble isSender={isSender}>
-      <AnimalProfile animalFace={animalFace} />
-      {content}
-    </StBubble>
+    <StBubbleContainer isSender={isSender} createdAt={createdAt}>
+      <StBubble isSender={isSender}>
+        <AnimalProfile animalFace={animalFace} />
+        {content}
+      </StBubble>
+    </StBubbleContainer>
   );
 };
 
 export default ChatSpeechBubble;
 
-const StBubble = styled.div<{ isSender: boolean }>`
+const StBubbleContainer = styled.div<{ isSender: boolean; createdAt: string }>`
+  position: relative;
+  display: flex;
+  gap: 0.5rem;
+  align-items: end;
   align-self: ${({ isSender }) => (isSender ? 'first' : 'end')};
+
+  ${({ isSender, createdAt, theme }) =>
+    isSender
+      ? `
+    &:after {
+      content: "${formatAMPM(createdAt)}";
+      color: ${theme.colors.gray6};
+      ${theme.fonts.caption};
+    }
+  `
+      : `
+    &:before {
+      content: "${formatAMPM(createdAt)}";
+      color: ${theme.colors.gray6};
+      ${theme.fonts.caption};
+    }
+  `};
+`;
+
+const StBubble = styled.div<{ isSender: boolean }>`
   width: fit-content;
   max-width: 25rem;
   padding: 1.2rem;
