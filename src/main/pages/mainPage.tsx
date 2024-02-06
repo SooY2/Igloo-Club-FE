@@ -95,7 +95,9 @@ const MainPage = () => {
         )}
       </div>
       <div css={PickBtn}>
-        <PickProfileBtn ProfileData={ClickPickProfile} />
+        {matchingTime ? (
+          <PickProfileBtn ProfileData={ClickPickProfile} />
+        ) : null}
       </div>
       <div css={Navigation}>
         <NavBar />
