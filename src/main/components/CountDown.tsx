@@ -7,7 +7,7 @@ const calculateTimeLeft = () => {
 
   targetTime.setHours(15, 0, 0, 0);
 
-  if (now.getHours() < 15) {
+  if (now.getHours() >= 15) {
     targetTime.setDate(targetTime.getDate() + 1);
   }
 

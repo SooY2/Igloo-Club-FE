@@ -68,36 +68,36 @@ const MainPage = () => {
         {matchingTime ? (
           <div css={Middle.TimeBox}>
             <Watch />
+            <span>내가 뽑은 프로필은 매일</span>
+            <span css={Middle.PrimaryText}>오전 11시</span>
+            <span>에 일괄 삭제돼요</span>
+          </div>
+        ) : (
+          <div css={Middle.TimeBox}>
+            <Watch />
             <span>오늘 눈길 매칭 마감까지</span>
             <span css={Middle.PrimaryText}>
               <CountDown onMatchingTime={handleMatchingTime} />
             </span>
             <span>남았어요!</span>
           </div>
-        ) : (
-          <div css={Middle.TimeBox}>
-            <Watch />
-            <span>내가 뽑은 프로필은 매일</span>
-            <span css={Middle.PrimaryText}>오전 11시</span>
-            <span>에 일괄 삭제돼요</span>
-          </div>
         )}
       </div>
       <div css={Bottom.Wrapper}>
         {matchingTime ? (
+          <NowMatching />
+        ) : (
           <ProfileCard
             profileData={profileData}
             ClickProfileCard={ClickProfileBtn}
             css={Bottom.ProfileData}
           />
-        ) : (
-          <NowMatching />
         )}
       </div>
       <div css={PickBtn}>
-        {matchingTime ? (
+        {matchingTime ? null : (
           <PickProfileBtn ProfileData={ClickPickProfile} />
-        ) : null}
+        )}
       </div>
       <div css={Navigation}>
         <NavBar />
