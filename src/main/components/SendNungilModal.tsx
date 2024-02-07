@@ -8,10 +8,12 @@ import { CheckPink } from '../assets/svgs';
 const SendNungilModal = ({
   nungilId,
   nickname,
+  successApi,
   closeModal,
 }: {
   nungilId: number;
   nickname: string;
+  successApi: () => void;
   closeModal: () => void;
 }) => {
   const [isApiSuccess, setIsApiSuccess] = useState<boolean>(false);
@@ -28,8 +30,8 @@ const SendNungilModal = ({
           nungilId: nungilId,
         },
       });
-      console.log('눈길 보내기 완료');
       setIsApiSuccess(true);
+      successApi();
     } catch (error) {
       console.log(error);
     }
@@ -87,7 +89,6 @@ const StModalContainer = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  padding: 0;
   background: rgb(0 0 0 / 50%);
 `;
 
@@ -193,6 +194,7 @@ const StFinishMent = styled.span`
 
 const StCompleteMent = styled.span`
   padding-top: 1.5rem;
+  padding-bottom: 3rem;
   font-size: 1.3rem;
   font-style: normal;
   font-weight: 700;

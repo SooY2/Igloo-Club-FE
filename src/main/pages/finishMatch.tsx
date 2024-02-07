@@ -115,7 +115,6 @@ const Container = css`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  padding-top: 1.5rem;
   overflow: auto;
   white-space: pre-line;
   background-color: ${theme.colors.white};
@@ -126,7 +125,7 @@ const Top = {
     display: flex;
     flex-direction: column;
     align-items: start;
-    padding: 0 3rem 3.3rem;
+    padding: 3rem;
     border-bottom: 10px solid ${theme.colors.gray0};
   `,
 
@@ -158,7 +157,7 @@ const Top = {
     flex-direction: column;
     justify-content: center;
     min-width: 33rem;
-    height: 9rem;
+    height: 10rem;
     padding: 0 1.3rem;
     margin-top: 2.3rem;
     background-color: #f8f9fd;
@@ -180,7 +179,7 @@ const Top = {
   NotiContent: css`
     padding-top: 0.7rem;
     padding-left: 2.9rem;
-    line-height: 1.8rem;
+    line-height: 2%.5rem;
     color: #86929f;
     ${theme.fonts.body3m};
   `,
@@ -213,7 +212,7 @@ const Recommend = {
   RecoBox: css`
     display: flex;
     flex-direction: row;
-    gap: 17rem;
+    gap: 16rem;
     align-items: center;
     min-width: 30rem;
     height: 5.9rem;
@@ -245,7 +244,7 @@ const Place = {
   Wrapper: css`
     display: flex;
     flex-direction: column;
-    padding: 3rem 3rem 8rem;
+    padding: 3rem 3rem 0;
   `,
 
   Title: css`
@@ -256,7 +255,7 @@ const Place = {
   SubTitle: css`
     margin-top: 0.9rem;
     margin-bottom: 1.8rem;
-    font-size: 13px;
+    font-size: 1.3rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -265,6 +264,7 @@ const Place = {
 
   Map: css`
     z-index: 1;
+    display: flex;
   `,
 
   InfoBox: css`
@@ -272,11 +272,11 @@ const Place = {
     flex-direction: column;
     gap: 1.5rem;
     justify-content: center;
-    width: 34rem;
+    min-width: 30rem;
     height: 8.7rem;
     padding-left: 2rem;
     margin-top: 1.4rem;
-    margin-bottom: 5rem;
+    margin-bottom: 4rem;
     background-color: #fafafa;
     border-radius: 5px;
   `,

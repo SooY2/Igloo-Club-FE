@@ -11,7 +11,7 @@ const SendNungilBtn = ({
   nungilId: number;
   nickname: string;
 }) => {
-  const isSent = useState<boolean>(false);
+  const [isSent, setIsSent] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleClick = () => {
@@ -34,6 +34,7 @@ const SendNungilBtn = ({
         <SendNungilModal
           nungilId={nungilId}
           nickname={nickname}
+          successApi={() => setIsSent(true)}
           closeModal={() => setIsModalOpen(false)}
         />
       )}
