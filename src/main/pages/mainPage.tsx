@@ -28,8 +28,6 @@ const MainPage = () => {
         },
       });
 
-      console.log(res.data.content);
-
       setProfileData(res.data.content);
     } catch (error) {
       console.log(error);
@@ -45,8 +43,8 @@ const MainPage = () => {
     handleGetAllProfile();
   };
 
-  const ClickProfileBtn = (nungilId: number) => {
-    navigate(`/detailpage/${nungilId}`, { state: { nungilId } });
+  const ClickProfileBtn = (nungilId: number, nickname: string) => {
+    navigate(`/detailpage/${nungilId}`, { state: { nungilId, nickname } });
   };
 
   const handleMatchingTime = (newTime) => {
@@ -114,7 +112,7 @@ const Container = css`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding-top: 3.6rem;
+  padding-top: 1.5rem;
   overflow: auto;
   background: ${theme.colors.white};
 `;
@@ -124,6 +122,7 @@ const Top = {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    justify-content: center;
     height: 9.2rem;
     padding-left: 2.6rem;
     margin-bottom: 1.5rem;

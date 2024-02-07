@@ -68,7 +68,7 @@ const Container = css`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  padding-top: 3.6rem;
+  padding-top: 1.5rem;
   overflow: auto;
   background: ${theme.colors.white};
 `;

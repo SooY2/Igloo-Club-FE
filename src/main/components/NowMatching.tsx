@@ -17,7 +17,9 @@ const NowMatching = () => {
       <Lock />
       <StNotiTitle>{title}</StNotiTitle>
       <StNotiContent>{content}</StNotiContent>
-      <StEditProfile onClick={ClickEditBtn}>내 프로필 수정하기</StEditProfile>
+      <StEditProfile type="button" onClick={ClickEditBtn}>
+        내 프로필 수정하기
+      </StEditProfile>
     </StNotiContainer>
   );
 };

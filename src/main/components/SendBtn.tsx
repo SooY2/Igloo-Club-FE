@@ -1,34 +1,31 @@
+import { useState } from 'react';
 import { css } from '@emotion/react';
 import { useLocation } from 'react-router-dom';
-import instance from '../../common/apis/axiosInstanse';
 import { theme } from '../../common/styles/theme';
 import { Lightning } from '../assets/svgs/index';
+import SendNungilModal from './SendNungilModal';
 
 const SendNungilBtn = () => {
-  const location = useLocation();
-  const { state } = location;
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { state } = useLocation();
 
-  console.log('send :', state.nungilId);
-
-  const handleClickBtn = async () => {
-    try {
-      await instance.post('/api/nungil/send?', null, {
-        params: {
-          nungilId: state.nungilId,
-        },
-      });
-      console.log('눈길 보내기 완료');
-    } catch (error) {
-      console.log(error);
-    }
+  const handleClick = () => {
+    setIsModalOpen(true);
   };
 
   return (
     <div css={Container}>
-      <button type="button" onClick={handleClickBtn} css={SendBtn}>
+      <button type="button" onClick={handleClick} css={SendBtn}>
         <Lightning />
         눈길 보내기
       </button>
+      {isModalOpen && (
+        <SendNungilModal
+          nungilId={state.nungilId}
+          nickname={state.nickname}
+          closeModal={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 };

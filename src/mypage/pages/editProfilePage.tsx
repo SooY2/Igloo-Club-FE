@@ -34,7 +34,7 @@ const Container = css`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  padding-top: 2.5rem;
+  padding-top: 1.5rem;
   overflow: auto;
   background: ${theme.colors.white};
 `;
@@ -44,7 +44,7 @@ const Top = {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-left: 2.1rem;
+    padding-left: 2rem;
     color: ${theme.colors.gray9};
     ${theme.fonts.body2b};
   `,

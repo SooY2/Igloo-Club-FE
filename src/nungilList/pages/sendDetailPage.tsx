@@ -33,6 +33,7 @@ const Container = css`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  padding-top: 1.5rem;
 `;
 
 const SendBtn = css`

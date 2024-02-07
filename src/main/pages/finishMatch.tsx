@@ -115,7 +115,7 @@ const Container = css`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  padding-top: 3.6rem;
+  padding-top: 1.5rem;
   overflow: auto;
   white-space: pre-line;
   background-color: ${theme.colors.white};
@@ -126,15 +126,13 @@ const Top = {
     display: flex;
     flex-direction: column;
     align-items: start;
-    padding-right: 3rem;
-    padding-bottom: 3.3rem;
-    padding-left: 3rem;
+    padding: 0 3rem 3.3rem;
     border-bottom: 10px solid ${theme.colors.gray0};
   `,
 
   Notify: css`
     padding-top: 5.3rem;
-    font-size: 13px;
+    font-size: 1.3rem;
     font-style: normal;
     font-weight: 600;
     color: ${theme.colors.primary};
@@ -192,6 +190,7 @@ const Recommend = {
   Wrapper: css`
     display: flex;
     flex-direction: column;
+    justify-content: start;
     padding: 3.1rem 3rem 4.4rem;
     border-bottom: 10px solid ${theme.colors.gray0};
   `,
@@ -218,7 +217,7 @@ const Recommend = {
     align-items: center;
     min-width: 30rem;
     height: 5.9rem;
-    padding-left: 1.8rem;
+    padding: 0 1.8rem;
     margin-top: 0.9rem;
     background: ${theme.colors.gray0};
     border-radius: 17px;
@@ -228,14 +227,14 @@ const Recommend = {
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 13px;
+    font-size: 1.3rem;
     font-style: normal;
     font-weight: 700;
     color: ${theme.colors.gray8};
   `,
 
   RecoContent: css`
-    font-size: 13px;
+    font-size: 1.3rem;
     font-style: normal;
     font-weight: 600;
     color: ${theme.colors.gray7};
