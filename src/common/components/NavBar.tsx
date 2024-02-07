@@ -33,7 +33,7 @@ const NavBar = () => {
       </button>
       <button
         type="button"
-        onClick={() => handleClickBtn('chat', '/')}
+        onClick={() => handleClickBtn('chat', '/chat')}
         css={NavButton}
       >
         {activeBtn === 'chat' ? <ChatBtn000 /> : <ChatBtnGRAY />}
