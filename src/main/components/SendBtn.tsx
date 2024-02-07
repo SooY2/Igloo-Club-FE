@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { css } from '@emotion/react';
-import { useLocation } from 'react-router-dom';
 import { theme } from '../../common/styles/theme';
 import { Lightning } from '../assets/svgs/index';
 import SendNungilModal from './SendNungilModal';
 
-const SendNungilBtn = () => {
+const SendNungilBtn = ({
+  nungilId,
+  nickname,
+}: {
+  nungilId: number;
+  nickname: string;
+}) => {
+  const isSent = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const { state } = useLocation();
 
   const handleClick = () => {
     setIsModalOpen(true);
@@ -15,14 +20,20 @@ const SendNungilBtn = () => {
 
   return (
     <div css={Container}>
-      <button type="button" onClick={handleClick} css={SendBtn}>
-        <Lightning />
-        눈길 보내기
-      </button>
+      {isSent ? (
+        <button type="button" onClick={handleClick} css={SendBtn}>
+          <Lightning />
+          눈길 보내기
+        </button>
+      ) : (
+        <button type="button" css={FinishBtn}>
+          이미 상대방에게 눈길을 보냈어요
+        </button>
+      )}
       {isModalOpen && (
         <SendNungilModal
-          nungilId={state.nungilId}
-          nickname={state.nickname}
+          nungilId={nungilId}
+          nickname={nickname}
           closeModal={() => setIsModalOpen(false)}
         />
       )}
@@ -59,6 +70,29 @@ const SendBtn = css`
   color: ${theme.colors.white};
   text-align: center;
   background-color: ${theme.colors.primary};
+  border-radius: 15px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const FinishBtn = css`
+  display: flex;
+  flex-direction: row;
+  gap: 0.9rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 5.5rem;
+  padding: 1.5rem 7rem;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  color: #b7bcc5;
+  text-align: center;
+  background-color: #e8e9ef;
   border-radius: 15px;
 
   &:hover {

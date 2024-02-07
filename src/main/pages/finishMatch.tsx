@@ -6,7 +6,7 @@ import { theme } from '../../common/styles/theme';
 import { useLocation, useNavigate } from 'react-router-dom';
 import instance from '../../common/apis/axiosInstanse';
 import StartChatBtn from '../components/StartChatBtn';
-import Map from '../components/Map';
+import Map from '../../common/components/Map';
 import { Xicon } from '../assets/svgs/index';
 import { Notify } from '../assets/svgs/index';
 

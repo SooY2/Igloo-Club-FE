@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import instance from '../../common/apis/axiosInstanse';
+import { Xicon } from '../assets/svgs';
 import { Check } from '../assets/svgs';
 import { CheckPink } from '../assets/svgs';
 
@@ -20,6 +21,7 @@ const SendNungilModal = ({
     '눈길 보내기를 완료했어요!\n 당신의 인연과 빠르게 매칭해드릴게요 ⚡️';
 
   const ClickSendBtn = async () => {
+    console.log(nungilId);
     try {
       await instance.post('/api/nungil/send?', null, {
         params: {
@@ -42,6 +44,9 @@ const SendNungilModal = ({
   return (
     <StModalContainer onClick={handleOutsideClick}>
       <StModalWrapper>
+        <StXBtn type="button" onClick={closeModal}>
+          <Xicon />
+        </StXBtn>
         <StModalTitle>{title}</StModalTitle>
         <StModalSubTitle>보낸 눈길은 상대방의 수락 후 매칭돼요</StModalSubTitle>
         {isApiSuccess ? (
@@ -92,13 +97,20 @@ const StModalWrapper = styled.div`
   align-items: center;
   justify-content: center;
   min-width: 34rem;
-  height: 23.7rem;
   background: ${({ theme }) => theme.colors.white};
   border-radius: 10px;
 `;
 
+const StXBtn = styled.button`
+  display: flex;
+  flex-direction: row;
+  padding-top: 2rem;
+  padding-left: 28rem;
+`;
+
 const StModalTitle = styled.span`
   display: flex;
+  padding-top: 1.5rem;
   font-size: 1.8rem;
   font-style: normal;
   font-weight: 700;
@@ -143,6 +155,7 @@ const StNoBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 4rem;
   margin-top: 1.9rem;
   background: ${({ theme }) => theme.colors.white};
 `;
