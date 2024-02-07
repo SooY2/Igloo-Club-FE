@@ -5,4 +5,5 @@ export interface ProfileDataTypesProps {
   description: string;
   nungilId: number;
   memberId: number;
+  nickname: string;
 }

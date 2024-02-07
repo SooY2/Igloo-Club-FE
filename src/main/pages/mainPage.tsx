@@ -39,8 +39,8 @@ const MainPage = () => {
   }, []);
 
   const ClickPickProfile = () => {
-    setProfileData([]);
     handleGetAllProfile();
+    setProfileData([]);
   };
 
   const ClickProfileBtn = (nungilId: number, nickname: string) => {

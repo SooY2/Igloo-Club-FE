@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 import { theme } from '../../common/styles/theme';
 import NavBar from '../../common/components/NavBar';
+import ToggleBtn from '../components/ToggleBtn';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -11,10 +12,6 @@ const MyPage = () => {
   };
 
   const ClickPreferBtn = () => {
-    navigate('/');
-  };
-
-  const ClickBlockBtn = () => {
     navigate('/');
   };
 
@@ -33,7 +30,6 @@ const MyPage = () => {
         </div>
         <div css={ProfileCard.Bottom}></div>
       </div>
-      {/*오른쪽에 둘 버튼들 너가 피그마에 토글로 바꿔달라 남겨놨길래 일단 안 넣어놨어*/}
       <div css={Top.Wrapper}>
         <button type="button" onClick={ClickEditBtn} css={Top.TopStyle}>
           <span>프로필 수정</span>
@@ -43,10 +39,10 @@ const MyPage = () => {
           <span>선호하는 이성</span>
           <button type="button" onClick={ClickPreferBtn}></button>
         </button>
-        <button type="button" onClick={ClickBlockBtn} css={Top.TopStyleBottom}>
+        <div css={Top.TopStyleBottom}>
           <span>아는 사람 만나지 않기</span>
-          <button type="button" onClick={ClickBlockBtn}></button>
-        </button>
+          <ToggleBtn />
+        </div>
       </div>
       <div css={Middle.Wrapper}>
         <button type="button" onClick={ClickEditBtn} css={Middle.MiddleStyle}>
@@ -143,6 +139,7 @@ const Top = {
   TopStyleBottom: css`
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     padding-bottom: 2.2rem;
     color: ${theme.colors.gray9};
     ${theme.fonts.body1m};
