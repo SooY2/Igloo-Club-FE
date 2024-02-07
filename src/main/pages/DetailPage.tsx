@@ -13,9 +13,11 @@ const DetailPage = () => {
 
   return (
     <div css={Container}>
-      <button onClick={ClickArrowLeft}>
-        <ArrowLeftNav />
-      </button>
+      <div>
+        <button onClick={ClickArrowLeft}>
+          <ArrowLeftNav />
+        </button>
+      </div>
       <DetailProfile />
       <div css={SendBtn}>
         <SendNungilBtn />
@@ -29,12 +31,13 @@ export default DetailPage;
 const Container = css`
   display: flex;
   flex-direction: column;
-  align-items: start;
+  justify-content: space-between;
   width: 100%;
+  padding-top: 1.5rem;
 `;
 
 const SendBtn = css`
-  position: fixed;
+  position: sticky;
   bottom: 0;
   z-index: 999;
 `;

@@ -1,34 +1,31 @@
+import { useState } from 'react';
 import { css } from '@emotion/react';
 import { useLocation } from 'react-router-dom';
-import instance from '../../common/apis/axiosInstanse';
 import { theme } from '../../common/styles/theme';
 import { Lightning } from '../assets/svgs/index';
+import SendNungilModal from './SendNungilModal';
 
 const SendNungilBtn = () => {
-  const location = useLocation();
-  const { state } = location;
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { state } = useLocation();
 
-  console.log('send :', state.nungilId);
-
-  const handleClickBtn = async () => {
-    try {
-      await instance.post('/api/nungil/send?', null, {
-        params: {
-          nungilId: state.nungilId,
-        },
-      });
-      console.log('눈길 보내기 완료');
-    } catch (error) {
-      console.log(error);
-    }
+  const handleClick = () => {
+    setIsModalOpen(true);
   };
 
   return (
     <div css={Container}>
-      <button type="button" onClick={handleClickBtn} css={SendBtn}>
+      <button type="button" onClick={handleClick} css={SendBtn}>
         <Lightning />
         눈길 보내기
       </button>
+      {isModalOpen && (
+        <SendNungilModal
+          nungilId={state.nungilId}
+          nickname={state.nickname}
+          closeModal={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 };
@@ -36,9 +33,12 @@ const SendNungilBtn = () => {
 export default SendNungilBtn;
 
 const Container = css`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
   height: 9rem;
-  padding: 1.6rem 2.7rem 4.8rem;
+  padding: 0 2.2rem;
   background: ${theme.colors.white};
   border-top: 1px solid #e3e3e3;
 `;
@@ -51,7 +51,7 @@ const SendBtn = css`
   justify-content: center;
   width: 100%;
   height: 5.5rem;
-  padding: 1.5rem 14rem;
+  padding: 1.5rem 10rem;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
