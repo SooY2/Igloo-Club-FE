@@ -6,6 +6,7 @@ import { theme } from '../../common/styles/theme';
 import instance from '../../common/apis/axiosInstanse';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../common/components/NavBar';
+import NowMatching from '../components/NowMatching';
 import ProfileCard from '../../common/components/ProfileCard';
 import PickProfileBtn from '../components/PickProfileBtn';
 import CustomSelect from '../components/CustomSelect';
@@ -27,8 +28,6 @@ const MainPage = () => {
         },
       });
 
-      console.log(res.data.content);
-
       setProfileData(res.data.content);
     } catch (error) {
       console.log(error);
@@ -40,12 +39,12 @@ const MainPage = () => {
   }, []);
 
   const ClickPickProfile = () => {
-    setProfileData([]);
     handleGetAllProfile();
+    setProfileData([]);
   };
 
-  const ClickProfileBtn = (nungilId: number) => {
-    navigate(`/detailpage/${nungilId}`, { state: { nungilId } });
+  const ClickProfileBtn = (nungilId: number, nickname: string) => {
+    navigate(`/detailpage/${nungilId}`, { state: { nungilId, nickname } });
   };
 
   const handleMatchingTime = (newTime) => {
@@ -83,15 +82,20 @@ const MainPage = () => {
         )}
       </div>
       <div css={Bottom.Wrapper}>
-        <span>내가 받은 인연 프로필</span>
-        <ProfileCard
-          profileData={profileData}
-          ClickProfileCard={ClickProfileBtn}
-          css={Bottom.ProfileData}
-        />
+        {matchingTime ? (
+          <ProfileCard
+            profileData={profileData}
+            ClickProfileCard={ClickProfileBtn}
+            css={Bottom.ProfileData}
+          />
+        ) : (
+          <NowMatching />
+        )}
       </div>
       <div css={PickBtn}>
-        <PickProfileBtn ProfileData={ClickPickProfile} />
+        {matchingTime ? (
+          <PickProfileBtn ProfileData={ClickPickProfile} />
+        ) : null}
       </div>
       <div css={Navigation}>
         <NavBar />
@@ -108,7 +112,7 @@ const Container = css`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding-top: 3.6rem;
+  padding-top: 1.5rem;
   overflow: auto;
   background: ${theme.colors.white};
 `;
@@ -118,6 +122,7 @@ const Top = {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    justify-content: center;
     height: 9.2rem;
     padding-left: 2.6rem;
     margin-bottom: 1.5rem;
@@ -143,11 +148,10 @@ const Middle = {
     gap: 0.4rem;
     align-items: center;
     justify-content: center;
-    width: 34.2rem;
+    min-width: 33rem;
     height: 4rem;
-    padding: 0 1rem;
-    padding-top: 1.2rem;
-    padding-bottom: 1.2rem;
+    padding: 1.2rem 2.2rem;
+    margin-right: 2rem;
     margin-bottom: 3.9rem;
     margin-left: 2rem;
     font-size: 13px;
@@ -172,7 +176,6 @@ const Middle = {
     font-style: normal;
     font-weight: 700;
     color: ${theme.colors.primary};
-    text-align: center;
   `,
 };
 
@@ -182,7 +185,7 @@ const Bottom = {
     flex-direction: column;
     gap: 1.5rem;
     width: 100%;
-    padding-left: 2.6rem;
+    padding: 0 2.6rem;
     margin-bottom: 8.2rem;
     font-size: 18px;
     font-style: normal;

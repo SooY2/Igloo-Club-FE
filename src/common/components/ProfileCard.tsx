@@ -8,18 +8,15 @@ const ProfileCard = ({
   ClickProfileCard,
 }: {
   profileData: ProfileDataTypesProps[] | null;
-  ClickProfileCard: (nungilId: number, memberId: number) => void;
+  ClickProfileCard: (nungilId: number, nickname: string) => void;
 }) => {
-  // const [text, setText] = useState('');
-  // const textarea = useRef(null);
-
   return (
     <div css={Container}>
       {profileData.map((profile) => (
         <div
           key={profile.nungilId}
           css={Profile.Wrapper}
-          onClick={() => ClickProfileCard(profile.nungilId, profile.memberId)}
+          onClick={() => ClickProfileCard(profile.nungilId, profile.nickname)}
         >
           <div css={Profile.Top}>
             <AnimalProfile animalFace={profile.animalFace} />
@@ -43,7 +40,7 @@ const Container = css`
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
-  align-items: start;
+  align-items: center;
   width: 100%;
   background: ${theme.colors.white};
 `;

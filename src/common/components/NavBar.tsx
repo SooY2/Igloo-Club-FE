@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { css } from '@emotion/react';
 import { theme } from '../styles/theme';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   HomeBtn000,
   ChatBtn000,
@@ -15,42 +14,53 @@ import {
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const [activeBtn, setActiveBtn] = useState<string>('home');
+  const location = useLocation();
 
-  const handleClickBtn = (btn: string, path: string) => {
-    setActiveBtn(btn);
-    navigate(path);
+  const handleActiveBtn = (path: string) => {
+    if (location.pathname === path) {
+      return 'active';
+    } else {
+      return 'inactive';
+    }
   };
 
   return (
     <div css={Container}>
       <button
         type="button"
-        onClick={() => handleClickBtn('home', '/main-page')}
+        onClick={() => navigate('/main-page')}
         css={NavButton}
       >
-        {activeBtn === 'home' ? <HomeBtn000 /> : <HomeBtnGRAY />}
+        {handleActiveBtn('/main-page') === 'active' ? (
+          <HomeBtn000 />
+        ) : (
+          <HomeBtnGRAY />
+        )}
+      </button>
+      <button type="button" onClick={() => navigate('/chat')} css={NavButton}>
+        {handleActiveBtn('/chat') === 'active' ? (
+          <ChatBtn000 />
+        ) : (
+          <ChatBtnGRAY />
+        )}
       </button>
       <button
         type="button"
-        onClick={() => handleClickBtn('chat', '/chat')}
+        onClick={() => navigate('/nungillist')}
         css={NavButton}
       >
-        {activeBtn === 'chat' ? <ChatBtn000 /> : <ChatBtnGRAY />}
+        {handleActiveBtn('/nungillist') === 'active' ? (
+          <HeartBtn000 />
+        ) : (
+          <HeartBtnGRAY />
+        )}
       </button>
-      <button
-        type="button"
-        onClick={() => handleClickBtn('heart', '/nungillist')}
-        css={NavButton}
-      >
-        {activeBtn === 'heart' ? <HeartBtn000 /> : <HeartBtnGRAY />}
-      </button>
-      <button
-        type="button"
-        onClick={() => handleClickBtn('people', '/mypage')}
-        css={NavButton}
-      >
-        {activeBtn === 'people' ? <PeopleBtn000 /> : <PeopleBtnGRAY />}
+      <button type="button" onClick={() => navigate('/mypage')} css={NavButton}>
+        {handleActiveBtn('/mypage') === 'active' ? (
+          <PeopleBtn000 />
+        ) : (
+          <PeopleBtnGRAY />
+        )}
       </button>
     </div>
   );
@@ -63,10 +73,9 @@ const Container = css`
   flex-direction: row;
   gap: 7rem;
   align-items: center;
-  justify-content: start;
   width: 100%;
   height: 6.2rem;
-  padding-left: 4.3rem;
+  padding: 0 4rem;
   background-color: ${theme.colors.white};
 `;
 
