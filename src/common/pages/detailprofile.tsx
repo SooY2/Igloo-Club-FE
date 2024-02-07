@@ -41,8 +41,6 @@ const DetailProfile = () => {
     handleGetDetailProfile();
   }, [state.nungilId]);
 
-  console.log(profileData.hobbyAllocationList);
-
   return (
     <div css={Container}>
       <div css={Top.Wrapper}>
@@ -58,7 +56,7 @@ const DetailProfile = () => {
           <div css={Top.InfoTitle}>
             <span>저는요, 👋🏻</span>
           </div>
-          <div css={Top.InfoSubtitle}>
+          <div css={Top.InfoContent}>
             <span>{profileData.description}</span>
           </div>
         </div>
@@ -69,10 +67,14 @@ const DetailProfile = () => {
             <span>나의 외적인 매력은</span>
           </div>
           <div css={Middle.ExAttrList}>
-            {Array.isArray(profileData.faceDepictionAllocationList) &&
-              profileData.faceDepictionAllocationList?.map(
-                (attr: string, index: number) => <div key={index}>{attr}</div>,
-              )}
+            {profileData?.faceDepictionAllocationList &&
+              profileData.faceDepictionAllocationList
+                .split(',')
+                .map((attr: string, index: number) => (
+                  <div key={index} css={Middle.AllocationList}>
+                    {attr.trim()}
+                  </div>
+                ))}
           </div>
         </div>
         <div css={Middle.InAttr}>
@@ -80,10 +82,14 @@ const DetailProfile = () => {
             <span>나의 내적인 매력은</span>
           </div>
           <div css={Middle.InAttrList}>
-            {Array.isArray(profileData.personalityDepictionAllocationList) &&
-              profileData.personalityDepictionAllocationList?.map(
-                (attr: string, index: number) => <div key={index}>{attr}</div>,
-              )}
+            {profileData?.personalityDepictionAllocationList &&
+              profileData.personalityDepictionAllocationList
+                .split(',')
+                .map((attr: string, index: number) => (
+                  <div key={index} css={Middle.AllocationList}>
+                    {attr.trim()}
+                  </div>
+                ))}
           </div>
         </div>
         <div css={Middle.Notice}>
@@ -91,10 +97,14 @@ const DetailProfile = () => {
             <span>이건 알아두세요!</span>
           </div>
           <div css={Middle.NoticeList}>
-            {Array.isArray(profileData.hobbyAllocationList) &&
-              profileData.hobbyAllocationList?.map(
-                (attr: string, index: number) => <div key={index}>{attr}</div>,
-              )}
+            {profileData?.hobbyAllocationList &&
+              profileData.hobbyAllocationList
+                .split(',')
+                .map((attr: string, index: number) => (
+                  <div key={index} css={Middle.AllocationList}>
+                    {attr.trim()}
+                  </div>
+                ))}
           </div>
         </div>
       </div>
@@ -107,7 +117,7 @@ export default DetailProfile;
 const highlightKeywords = (line) => {
   return (
     <div>
-      {line.split(/(#\w+)/).map((part, index) =>
+      {line.split(/(#[^\s]+)/).map((part, index) =>
         part.startsWith('#') ? (
           <span key={index} css={Top.HashtagText}>
             {part}
@@ -170,9 +180,7 @@ const Top = {
     display: flex;
     flex-direction: column;
     width: 34rem;
-    height: 13rem;
-    padding-top: 2.2rem;
-    padding-left: 2rem;
+    padding: 2.2rem 3rem 2.3rem 2.3rem;
     background-color: ${theme.colors.gray0};
     border-radius: 10px;
   `,
@@ -183,12 +191,14 @@ const Top = {
     ${theme.fonts.body1b};
   `,
 
-  InfoSubtitle: css`
+  InfoContent: css`
     display: flex;
+    padding-top: 1.1rem;
     font-size: 1.3rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    line-height: 2rem;
     color: ${theme.colors.gray7};
   `,
 };
@@ -203,6 +213,7 @@ const Middle = {
 
   ExAttr: css`
     display: flex;
+    flex-direction: column;
     margin-top: 3.8rem;
   `,
 
@@ -214,15 +225,15 @@ const Middle = {
 
   ExAttrList: css`
     display: flex;
-    height: 3.7rem;
-    color: ${theme.colors.black};
-    ${theme.fonts.body2r};
-
-    border-radius: 30px;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    white-space: nowrap;
   `,
 
   InAttr: css`
     display: flex;
+    flex-direction: column;
     margin-top: 3.8rem;
   `,
 
@@ -234,15 +245,15 @@ const Middle = {
 
   InAttrList: css`
     display: flex;
-    height: 3.7rem;
-    color: ${theme.colors.black};
-    ${theme.fonts.body2r};
-
-    border-radius: 30px;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    white-space: nowrap;
   `,
 
   Notice: css`
     display: flex;
+    flex-direction: column;
     margin-top: 3.8rem;
   `,
 
@@ -254,10 +265,22 @@ const Middle = {
 
   NoticeList: css`
     display: flex;
-    height: 3.7rem;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    white-space: nowrap;
+  `,
+
+  AllocationList: css`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.5rem 0.9rem;
     color: ${theme.colors.black};
     ${theme.fonts.body2r};
 
+    background-color: ${theme.colors.white};
+    border: 1px solid ${theme.colors.gray3};
     border-radius: 30px;
   `,
 };
