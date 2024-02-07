@@ -1,0 +1,55 @@
+export const CHATDATA = {
+  content: [
+    {
+      animalFace: '여우상',
+      sender: '회사1 남자1',
+      content: '엽떡 먹고 싶다',
+      createdAt: '2024-02-03T03:47:47',
+      isSender: false,
+    },
+    {
+      animalFace: '강아지상',
+      sender: '하늘소',
+      content: '밥 뭐 먹을까?',
+      createdAt: '2024-02-03T03:47:46',
+      isSender: true,
+    },
+    {
+      animalFace: '여우상',
+      sender: '회사1 남자1',
+      content: '반가워!',
+      createdAt: '2024-02-03T03:47:44',
+      isSender: false,
+    },
+    {
+      animalFace: '강아지상',
+      sender: '하늘소',
+      content: '안녕',
+      createdAt: '2024-02-03T03:47:42',
+      isSender: true,
+    },
+  ],
+  pageable: {
+    sort: {
+      empty: false,
+      sorted: true,
+      unsorted: false,
+    },
+    offset: 0,
+    pageNumber: 0,
+    pageSize: 12,
+    unpaged: false,
+    paged: true,
+  },
+  size: 12,
+  number: 0,
+  sort: {
+    empty: false,
+    sorted: true,
+    unsorted: false,
+  },
+  first: true,
+  last: true,
+  numberOfElements: 4,
+  empty: false,
+};
