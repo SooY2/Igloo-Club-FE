@@ -20,6 +20,7 @@ const ChatRoomBox = ({
   chatRoomId,
 }: ChatRoomProps) => {
   const navigate = useNavigate();
+
   return (
     <article
       css={containerStyles}

@@ -4,17 +4,29 @@ import AnimalProfile from '../../../common/components/AnimalProfile';
 import { ArrowLeft } from '../../../main/assets/svgs';
 import { useNavigate } from 'react-router';
 
-const ChatRoomHeader = () => {
+interface ChatRoomHeaderProps {
+  animalFace: string;
+  companyName: string;
+  job: string;
+  nickname: string;
+}
+
+const ChatRoomHeader = ({
+  animalFace,
+  companyName,
+  job,
+  nickname,
+}: ChatRoomHeaderProps) => {
   const navigate = useNavigate();
   return (
     <header css={containerStyles}>
       <ArrowLeft onClick={() => navigate('/chat')} />
       <span css={senderInfoStyles}>
-        <AnimalProfile animalFace={'강아지상'} />
+        <AnimalProfile animalFace={animalFace} />
         <div css={senderProfileStyles}>
-          <StSenderName>숭멋사</StSenderName>
+          <StSenderName>{nickname}</StSenderName>
           <StSenderJob>
-            {'멋쟁이사자처럼'},{'개발자'}
+            {companyName},{job}
           </StSenderJob>
         </div>
       </span>

@@ -12,6 +12,13 @@ import ChatRoomFooter from './ChatRoomFooter';
 const ChatRoom = () => {
   const { chatRoomId } = useParams();
   const [chatData] = useState<ChatDataTypes[]>(CHATDATA.content);
+  const [chatSenderInfo] = useState({
+    animalFace: '',
+    companyName: '',
+    job: '',
+    nickname: '',
+  });
+  const [chat, setChat] = useState('');
 
   useEffect(() => {
     getChatData();
@@ -25,11 +32,25 @@ const ChatRoom = () => {
       console.log(err);
     }
   };
+
+  const handleSubmit = () => {
+    console.log(chat, '전송!');
+    setChat('');
+  };
   return (
     <section css={chatRoomStyles}>
-      <ChatRoomHeader />
+      <ChatRoomHeader
+        animalFace={chatSenderInfo.animalFace}
+        companyName={chatSenderInfo.companyName}
+        job={chatSenderInfo.job}
+        nickname={chatSenderInfo.nickname}
+      />
       <ChatRoomMain chatData={chatData} />
-      <ChatRoomFooter />
+      <ChatRoomFooter
+        chat={chat}
+        setChat={setChat}
+        handleSubmit={handleSubmit}
+      />
     </section>
   );
 };

@@ -1,11 +1,31 @@
 import styled from '@emotion/styled';
 import { ChatSubmit } from '../../assets/svgs/0_index';
+import { Dispatch, SetStateAction } from 'react';
 
-const ChatRoomFooter = () => {
+const ChatRoomFooter = ({
+  chat,
+  setChat,
+  handleSubmit,
+}: {
+  chat: string;
+  setChat: Dispatch<SetStateAction<string>>;
+  handleSubmit: () => void;
+}) => {
   return (
     <StContainer>
-      <StTextarea placeholder="메시지 보내기" />
-      <StChatSubmit>
+      <StTextarea
+        placeholder="메시지 보내기"
+        value={chat}
+        onChange={(e) => {
+          setChat(e.target.value);
+        }}
+      />
+      <StChatSubmit
+        onClick={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
         <ChatSubmit />
       </StChatSubmit>
     </StContainer>
