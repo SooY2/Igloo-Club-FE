@@ -135,7 +135,7 @@ const Container = css`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding-top: 3.6rem;
+  padding-top: 1.5rem;
   overflow: auto;
   background-color: ${theme.colors.white};
 `;
@@ -145,7 +145,7 @@ const Top = {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-left: 2.7rem;
+    padding: 0 2.7rem;
   `,
 
   Title: css`
@@ -179,7 +179,7 @@ const Top = {
   InfoBox: css`
     display: flex;
     flex-direction: column;
-    width: 34rem;
+    min-width: 30rem;
     padding: 2.2rem 3rem 2.3rem 2.3rem;
     background-color: ${theme.colors.gray0};
     border-radius: 10px;
@@ -207,7 +207,7 @@ const Middle = {
   Wrapper: css`
     display: flex;
     flex-direction: column;
-    padding-left: 2.7rem;
+    padding: 0 2.7rem;
     margin-bottom: 15rem;
   `,
 

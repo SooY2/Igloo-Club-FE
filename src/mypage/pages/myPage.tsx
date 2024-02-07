@@ -73,9 +73,10 @@ export default MyPage;
 const Container = css`
   display: flex;
   flex-direction: column;
+  justify-content: start;
   width: 100%;
   height: 100%;
-  padding-top: 3.6rem;
+  padding-top: 1.5rem;
   overflow: auto;
   white-space: pre-line;
   background-color: ${theme.colors.white};
@@ -84,6 +85,7 @@ const Container = css`
 const Title = css`
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: center;
   width: 100%;
   height: 5.6rem;
@@ -95,11 +97,9 @@ const ProfileCard = {
   Wrapper: css`
     display: flex;
     flex-direction: row;
-    width: 34.2rem;
-    padding-top: 2.4rem;
-    padding-bottom: 2.9rem;
-    padding-left: 2.3rem;
-    margin-left: 2.3rem;
+    min-width: 34.2rem;
+    padding: 2.4rem 2.3rem 2.9rem;
+    margin: 2rem 2.3rem 0;
     color: ${theme.colors.white};
     background: linear-gradient(116deg, #ff6264 0%, #ffa490 96.79%);
     ${theme.fonts.body2b};
