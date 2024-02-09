@@ -6,7 +6,7 @@ import Watch from './watch.svg?react';
 import Notify from './notify.svg?react';
 import Marker from './marker.svg?react';
 import Chat from './chat.svg?react';
-import Lock from './lock.svg?react';
+import Lock from './Lock.svg?react';
 import Check from './check.svg?react';
 import CheckPink from './checkpink.svg?react';
 
