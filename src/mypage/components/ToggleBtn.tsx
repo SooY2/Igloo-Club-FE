@@ -32,7 +32,7 @@ const StToggleContainer = styled.div`
   cursor: pointer;
 `;
 
-const StToggleWrapper = styled.div`
+const StToggleWrapper = styled.div<{ isOn: boolean }>`
   width: 5rem;
   height: 2.4rem;
   background-color: ${({ isOn }) => (isOn ? '#808482' : '#d3d2d2')};
@@ -40,7 +40,7 @@ const StToggleWrapper = styled.div`
   transition: background-color 0.5s ease-in-out;
 `;
 
-const StToggleCircle = styled.div`
+const StToggleCircle = styled.div<{ isOn: boolean }>`
   position: absolute;
   top: 0.1rem;
   left: ${({ isOn }) => (isOn ? '2.7rem' : '0.1rem')};
