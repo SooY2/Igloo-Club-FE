@@ -47,7 +47,7 @@ const MainPage = () => {
     navigate(`/detailpage/${nungilId}`, { state: { nungilId, nickname } });
   };
 
-  const handleMatchingTime = (newTime) => {
+  const handleMatchingTime = (newTime: boolean) => {
     setMatchingTime(newTime);
   };
 
