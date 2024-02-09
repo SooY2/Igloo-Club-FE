@@ -114,7 +114,7 @@ const DetailProfile = () => {
 
 export default DetailProfile;
 
-const highlightKeywords = (line) => {
+const highlightKeywords = (line: string) => {
   return (
     <div>
       {line.split(/(#[^\s]+)/).map((part, index) =>

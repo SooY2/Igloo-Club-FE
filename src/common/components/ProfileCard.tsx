@@ -12,24 +12,25 @@ const ProfileCard = ({
 }) => {
   return (
     <div css={Container}>
-      {profileData.map((profile) => (
-        <div
-          key={profile.nungilId}
-          css={Profile.Wrapper}
-          onClick={() => ClickProfileCard(profile.nungilId, profile.nickname)}
-        >
-          <div css={Profile.Top}>
-            <AnimalProfile animalFace={profile.animalFace} />
-            <div css={Profile.Detail}>
-              <span>{profile.companyName}</span>
-              <span>{profile.job}</span>
+      {profileData &&
+        profileData.map((profile) => (
+          <div
+            key={profile.nungilId}
+            css={Profile.Wrapper}
+            onClick={() => ClickProfileCard(profile.nungilId, profile.nickname)}
+          >
+            <div css={Profile.Top}>
+              <AnimalProfile animalFace={profile.animalFace} />
+              <div css={Profile.Detail}>
+                <span>{profile.companyName}</span>
+                <span>{profile.job}</span>
+              </div>
+            </div>
+            <div>
+              <span>{profile.description}</span>
             </div>
           </div>
-          <div>
-            <span>{profile.description}</span>
-          </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 };
