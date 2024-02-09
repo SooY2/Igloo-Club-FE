@@ -7,13 +7,13 @@ const calculateTimeLeft = () => {
 
   targetTime.setHours(15, 0, 0, 0);
 
-  if (now.getHours() < 15) {
+  if (now.getHours() >= 15) {
     targetTime.setDate(targetTime.getDate() + 1);
   }
 
   targetTime.setHours(11, 0, 0, 0);
 
-  const matchingTime = now.getHours() >= 15 && now.getHours() < 11;
+  const matchingTime = now.getHours() >= 15 || now.getHours() < 11;
 
   const timeDifference = targetTime.getTime() - now.getTime();
   const minutesLeft = Math.floor(timeDifference / (1000 * 60));

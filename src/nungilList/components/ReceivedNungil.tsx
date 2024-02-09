@@ -80,6 +80,6 @@ const NotifyBold = css`
 
 const ProfileData = css`
   display: flex;
-  padding-left: 2.6rem;
+  padding: 0 2.6rem;
   margin-top: 1.8rem;
 `;

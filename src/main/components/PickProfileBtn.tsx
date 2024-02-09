@@ -8,7 +8,7 @@ const PickProfileBtn = ({ ProfileData }: any) => {
   const handleClickBtn = async () => {
     try {
       const res = await instance.post('/api/nungil/recommend', {
-        isPayed: false,
+        isPayed: true,
       });
       const { companyName, job, description } = res.data;
       console.log(companyName);

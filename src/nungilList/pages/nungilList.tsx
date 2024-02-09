@@ -65,9 +65,10 @@ export default NungilList;
 const Container = css`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
-  padding-top: 3.6rem;
+  padding-top: 1.5rem;
   overflow: auto;
   background: ${theme.colors.white};
 `;
@@ -100,6 +101,7 @@ const Top = {
 };
 
 const SelectedNavButton = css`
+  color: ${theme.colors.black};
   border-bottom: 2px solid black;
 `;
 
@@ -117,5 +119,5 @@ const Middle = {
 const Navigation = css`
   position: fixed;
   bottom: 0;
-  width: 100%;
+  z-index: 999;
 `;
