@@ -9,23 +9,24 @@ import CheckBoxItem from './CheckBoxItem';
 interface PersonalityDepictionProps {
   values: string[];
   handleValues: (value: string | string[], name?: string) => void;
-  setShowFaceDepiction: Dispatch<SetStateAction<boolean>>;
+  setShowPersonalityDepiction: Dispatch<SetStateAction<boolean>>;
 }
 
 const PersonalityDepiction = ({
   values,
   handleValues,
-  setShowFaceDepiction,
+  setShowPersonalityDepiction,
 }: PersonalityDepictionProps) => {
   const [thisValues, setThisValues] = useState<string[]>(values);
 
   const handleSubmit = () => {
     handleValues(thisValues, 'personalityDepictionList');
-    setShowFaceDepiction(false);
+    setShowPersonalityDepiction(false);
   };
+
   return (
     <StBackgroud>
-      <ArrowLeft />
+      <ArrowLeft onClick={() => setShowPersonalityDepiction(false)} />
       <StArticleStyles>
         <section css={St.sectionStyles}>
           <St.TitleBox>

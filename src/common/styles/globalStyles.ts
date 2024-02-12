@@ -82,6 +82,7 @@ const globalStyles = css`
       sans-serif;
     background-color: transparent;
     border: 0;
+    border-radius: 0;
     outline: 0;
   }
 

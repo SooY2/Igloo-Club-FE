@@ -9,23 +9,19 @@ import CheckBoxItem from './CheckBoxItem';
 interface HobbyListProps {
   values: string[];
   handleValues: (value: string | string[], name?: string) => void;
-  setShowFaceDepiction: Dispatch<SetStateAction<boolean>>;
+  setShowHobby: Dispatch<SetStateAction<boolean>>;
 }
 
-const HobbyList = ({
-  values,
-  handleValues,
-  setShowFaceDepiction,
-}: HobbyListProps) => {
+const HobbyList = ({ values, handleValues, setShowHobby }: HobbyListProps) => {
   const [thisValues, setThisValues] = useState<string[]>(values);
 
   const handleSubmit = () => {
     handleValues(thisValues, 'hobbyList');
-    setShowFaceDepiction(false);
+    setShowHobby(false);
   };
   return (
     <StBackgroud>
-      <ArrowLeft />
+      <ArrowLeft onClick={() => setShowHobby(false)} />
       <StArticleStyles>
         <section css={St.sectionStyles}>
           <St.TitleBox>

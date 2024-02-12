@@ -13,7 +13,7 @@ const AuthKakao = () => {
       const res = await signInInstance.post('/api/auth/kakao', {
         code: AUTHORIZE_CODE,
       });
-
+      console.log(res);
       const { accessToken, isProfileRegistered } = res.data;
       if (accessToken) {
         localStorage.setItem('ACCESS_TOKEN', accessToken);

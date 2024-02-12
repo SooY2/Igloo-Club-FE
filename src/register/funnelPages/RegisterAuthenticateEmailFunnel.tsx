@@ -6,7 +6,7 @@ import * as St from '../styles/registerStyles';
 import styled from '@emotion/styled';
 import { NavTypesProps } from '../types/navTypes';
 import useRegisterTimer from '../hooks/useRegisterTimer';
-import AuthenticationSixNum from '../components/AuthenticationSixNum';
+// import AuthenticationSixNum from '../components/AuthenticationSixNum';
 import instance from '../../common/apis/axiosInstanse';
 
 interface EmailInfo {
@@ -62,7 +62,12 @@ const 회사이메일인증 = ({
               gap: '3.5rem',
             }}
           >
-            <AuthenticationSixNum setAuthentication={setAuthentication} />
+            <StInput
+              type="text"
+              value={authentication}
+              onChange={(e) => setAuthentication(e.target.value)}
+            />
+            {/* <AuthenticationSixNum setAuthentication={setAuthentication} /> */}
             <StTimer>{useRegisterTimer(300)}</StTimer>
           </div>
           <StExplain>
@@ -108,4 +113,12 @@ const StExplain = styled.div`
   color: ${({ theme }) => theme.colors.gray6};
 
   ${({ theme }) => theme.fonts.body3};
+`;
+
+const StInput = styled.input`
+  width: 21.6rem;
+  font-size: 2.8rem;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 2px solid ${({ theme }) => theme.colors.primary};
 `;
