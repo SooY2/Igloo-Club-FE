@@ -37,7 +37,7 @@ const ChatRoom = () => {
   useEffect(() => {
     if ('WebSocket' in window) {
       const stompClient = new Client({
-        brokerURL: 'wss://www.seunghan.shop/stomp/websocket',
+        brokerURL: `${import.meta.env.VITE_WSS_URL}/stomp/websocket`,
         connectHeaders: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -66,7 +66,7 @@ const ChatRoom = () => {
   }, [chatSenderInfo]);
 
   const setupSubscription = (stompClient: Client) => {
-    stompClient.subscribe('/topic/2', (message) => {
+    stompClient.subscribe(`/topic/${chatRoomId}`, (message) => {
       const newChatMSG = JSON.parse(message.body);
       const newChat = {
         animalFace: chatSenderInfo.animalFace,
@@ -114,7 +114,7 @@ const ChatRoom = () => {
           Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
         },
         body: JSON.stringify({
-          chatRoomId: 2,
+          chatRoomId: chatRoomId,
           content: chat,
         }),
       });

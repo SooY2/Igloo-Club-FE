@@ -12,7 +12,7 @@ const ChatComponent = () => {
     if ('WebSocket' in window) {
       const stompClient = new Client({
         // 서버의 웹소켓 엔드포인트 URL을 지정합니다.
-        brokerURL: 'wss://www.seunghan.shop/stomp/websocket',
+        brokerURL: `${import.meta.env.VITE_WSS_URL}/stomp/websocket`,
         connectHeaders: {
           Authorization: `Bearer ${accessToken}`, // 토큰을 헤더에 추가
         },
