@@ -9,7 +9,6 @@ const ChatRoomMain = ({
 }: {
   chatData: ChatDataTypes[];
   fetchData: () => void;
-  loadingMore: boolean;
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLElement>(null);
@@ -36,7 +35,7 @@ const ChatRoomMain = ({
         mainRef.current.removeEventListener('scroll', handleScroll);
       }
     };
-  }, []);
+  }, [chatData]);
 
   return (
     <main

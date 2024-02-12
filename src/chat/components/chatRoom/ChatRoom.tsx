@@ -24,7 +24,6 @@ const ChatRoom = () => {
   });
   const [pageNumber, setPageNumber] = useState(1); // 현재 페이지 번호
   const [chat, setChat] = useState('');
-  const [loadingMore, setLoadingMore] = useState(false);
   const accessToken = localStorage.getItem('ACCESS_TOKEN');
 
   useEffect(() => {
@@ -99,18 +98,12 @@ const ChatRoom = () => {
 
   // 스크롤 시 데이터 더 불러오기
   const fetchData = async () => {
-    setLoadingMore(true);
-    try {
-      const { data } = await instance(
-        `/api/chat/room/${chatRoomId}/?pageNumber=${pageNumber}&pageSize=${PAGESIZE}`,
-      );
-      console.log(data.messageSlice.content, pageNumber);
-      setChatData((prev) => [...data.messageSlice.content, ...prev]);
-      setPageNumber((prevPageNumber) => prevPageNumber + 1); // 페이지 번호 증가
-      setLoadingMore(false);
-    } catch (err) {
-      console.log(err);
-    }
+    const { data } = await instance(
+      `/api/chat/room/${chatRoomId}/?pageNumber=${pageNumber}&pageSize=${PAGESIZE}`,
+    );
+    console.log(data.messageSlice.content, pageNumber);
+    setChatData((prev) => [...data.messageSlice.content, ...prev]);
+    setPageNumber((prevPageNumber) => prevPageNumber + 1); // 페이지 번호 증가
   };
 
   const sendMessage = () => {
@@ -140,11 +133,7 @@ const ChatRoom = () => {
         job={chatSenderInfo.job}
         nickname={chatSenderInfo.nickname}
       />
-      <ChatRoomMain
-        chatData={chatData}
-        fetchData={fetchData}
-        loadingMore={loadingMore}
-      />
+      <ChatRoomMain chatData={chatData} fetchData={fetchData} />
       <ChatRoomFooter
         chat={chat}
         setChat={setChat}
