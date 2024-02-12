@@ -9,39 +9,38 @@ const ChatRoomMain = ({
 }: {
   chatData: ChatDataTypes[];
   fetchData: () => void;
+  loadingMore: boolean;
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const mainRef = useRef<HTMLElement>(null);
 
-  // 스크롤을 맨 아래로 내리는 함수
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  // 메시지 목록이 변경될 때마다 스크롤을 맨 아래로 내림
+  // 새 메시지가 추가되었을 때만 스크롤을 최하단으로 이동
   useEffect(() => {
-    scrollToBottom();
-    const options = {
-      root: null, // 뷰포트를 root로 사용
-      rootMargin: '0px',
-      threshold: 1.0, // 타겟이 완전히 보일 때 콜백 실행
-    };
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatData]);
 
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
+  useEffect(() => {
+    const handleScroll = () => {
+      if (mainRef.current?.scrollTop === 0) {
         fetchData();
       }
-    }, options);
+    };
 
-    // if (loader.current) {
-    //   observer.observe(loader.current);
-    // }
+    // mainRef.current가 null이 아닐 때만 이벤트 리스너를 추가합니다.
+    if (mainRef.current) {
+      mainRef.current.addEventListener('scroll', handleScroll);
+    }
 
-    // 클린업 함수
-    return () => observer.disconnect();
-  }, [chatData]);
+    return () => {
+      if (mainRef.current) {
+        mainRef.current.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
 
   return (
     <main
+      ref={mainRef}
       css={{
         overflow: 'scroll',
         height: 'calc(100vh - 16rem)',
