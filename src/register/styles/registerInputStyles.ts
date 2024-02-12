@@ -20,6 +20,17 @@ export const StBasicInput = styled.input`
   }
 `;
 
+export const StBasicBox = styled.div`
+  width: 100%;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray1};
+  ${({ theme }) => theme.fonts.body2r};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.gray3};
+  }
+`;
+
 export const StBasicInputExplain = styled.p`
   color: ${({ theme }) => theme.colors.gray6};
   ${({ theme }) => theme.fonts.body3};
