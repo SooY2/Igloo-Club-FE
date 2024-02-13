@@ -17,7 +17,7 @@ const Landing = () => {
         navigate('/login');
       }
       if (STEP !== '가입완료') {
-        navigate('/login');
+        navigate('/register');
       } else {
         navigate(location.pathname);
       }

@@ -16,14 +16,22 @@ import {
   시간선택,
 } from './funnelPages/0_index';
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Registertypes } from './types/registerTypes';
 import { ScheduleTypes } from './types/scheduleTypes';
 import instance from '../common/apis/axiosInstanse';
 
 const Register = () => {
   const navigate = useNavigate();
-  const { state } = useLocation();
+  // localStorage에서 상태를 불러오는 함수
+  const loadStateFromLocalStorage = () => {
+    const savedState = localStorage.getItem('STEP');
+    return savedState ? savedState : navigate('/login');
+  };
+
+  // useFunnel 사용 전에 state를 localStorage에서 불러옵니다.
+  const initialState = loadStateFromLocalStorage();
+
   const [Funnel, setStep] = useFunnel(
     [
       '약관동의',
@@ -39,7 +47,7 @@ const Register = () => {
       '장소선택',
       '시간선택',
     ] as const,
-    state,
+    initialState,
   );
 
   const [emailInfo, setEmailInfo] = useState({
@@ -116,7 +124,10 @@ const Register = () => {
         <Funnel.Step name="전화번호인증">
           <전화번호인증
             onPrev={() => setStep('전화번호입력')}
-            onNext={() => setStep('회사이메일입력')}
+            onNext={() => {
+              setStep('회사이메일입력');
+              localStorage.setItem('STEP', '회사이메일입력');
+            }}
             phoneNum={phoneNum}
           />
         </Funnel.Step>
@@ -130,7 +141,10 @@ const Register = () => {
         <Funnel.Step name="회사이메일인증">
           <회사이메일인증
             onPrev={() => setStep('회사이메일입력')}
-            onNext={() => setStep('닉네임입력')}
+            onNext={() => {
+              setStep('닉네임입력');
+              localStorage.setItem('STEP', '닉네임입력');
+            }}
             emailInfo={emailInfo}
           />
         </Funnel.Step>
@@ -169,7 +183,9 @@ const Register = () => {
         <Funnel.Step name="기본프로필입력2">
           <기본프로필입력2
             onPrev={() => setStep('기본프로필입력1')}
-            onNext={() => setStep('장소선택')}
+            onNext={() => {
+              setStep('장소선택'), localStorage.setItem('STEP', '장소선택');
+            }}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
           />
