@@ -9,7 +9,7 @@ const ChatRoomMain = ({ chatData }: { chatData: ChatDataTypes[] }) => {
 
   // 새 메시지가 추가되었을 때만 스크롤을 최하단으로 이동
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView();
   }, [chatData]);
 
   return (

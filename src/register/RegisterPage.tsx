@@ -12,10 +12,14 @@ import {
   // SNS계정,
   기본프로필입력1,
   기본프로필입력2,
+  장소선택,
+  시간선택,
 } from './funnelPages/0_index';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Registertypes } from './types/registerTypes';
+import { ScheduleTypes } from './types/scheduleTypes';
+import instance from '../common/apis/axiosInstanse';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -31,8 +35,10 @@ const Register = () => {
       'SNS계정',
       '기본프로필입력1',
       '기본프로필입력2',
+      '장소선택',
+      '시간선택',
     ] as const,
-    '약관동의',
+    '시간선택',
   );
 
   const [emailInfo, setEmailInfo] = useState({
@@ -68,6 +74,29 @@ const Register = () => {
       ...prevValues,
       ...data,
     }));
+  };
+
+  //장소시간선택 데이터
+  const [registerScheduleValues, setRegisterScheduleValues] =
+    useState<ScheduleTypes>({
+      location: '',
+      yoilList: [],
+      availableTimeList: [],
+      markerList: ['PANGYO_STATION_SQUARE'],
+    });
+  const handleScheduleValue = (data: Registertypes) => {
+    setRegisterScheduleValues((prevValues) => ({
+      ...prevValues,
+      ...data,
+    }));
+  };
+  const submitScheduleValue = async () => {
+    try {
+      await instance.patch('api/member/schedule', registerScheduleValues);
+      navigate('/main-page');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -139,11 +168,27 @@ const Register = () => {
         <Funnel.Step name="기본프로필입력2">
           <기본프로필입력2
             onPrev={() => setStep('기본프로필입력1')}
-            onNext={() => {
-              navigate('/main-page');
-            }}
+            onNext={() => setStep('장소선택')}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
+          />
+        </Funnel.Step>
+        <Funnel.Step name="장소선택">
+          <장소선택
+            onPrev={() => setStep('기본프로필입력2')}
+            onNext={() => setStep('시간선택')}
+            handleScheduleValue={handleScheduleValue}
+            registerScheduleValues={registerScheduleValues}
+          />
+        </Funnel.Step>
+        <Funnel.Step name="시간선택">
+          <시간선택
+            onPrev={() => setStep('장소선택')}
+            onNext={() => {
+              submitScheduleValue();
+            }}
+            handleScheduleValue={handleScheduleValue}
+            registerScheduleValues={registerScheduleValues}
           />
         </Funnel.Step>
       </Funnel>
