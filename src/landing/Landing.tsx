@@ -17,8 +17,10 @@ const Landing = () => {
         navigate('/login');
       } else if (STEP !== '가입완료') {
         navigate('/register');
-      } else {
+      } else if (location.pathname !== '/') {
         navigate(location.pathname);
+      } else {
+        navigate('/main-page');
       }
     }, 2000);
 
