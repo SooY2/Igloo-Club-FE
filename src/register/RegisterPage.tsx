@@ -16,13 +16,14 @@ import {
   시간선택,
 } from './funnelPages/0_index';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Registertypes } from './types/registerTypes';
 import { ScheduleTypes } from './types/scheduleTypes';
 import instance from '../common/apis/axiosInstanse';
 
 const Register = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
   const [Funnel, setStep] = useFunnel(
     [
       '약관동의',
@@ -38,7 +39,7 @@ const Register = () => {
       '장소선택',
       '시간선택',
     ] as const,
-    '시간선택',
+    state,
   );
 
   const [emailInfo, setEmailInfo] = useState({

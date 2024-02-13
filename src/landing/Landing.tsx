@@ -11,11 +11,13 @@ const Landing = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
+      const STEP = localStorage.getItem('STEP');
 
       if (!ACCESS_TOKEN) {
         navigate('/login');
-      } else if (location.pathname === '/') {
-        navigate('/main-page');
+      }
+      if (STEP !== '가입완료') {
+        navigate('/login');
       } else {
         navigate(location.pathname);
       }

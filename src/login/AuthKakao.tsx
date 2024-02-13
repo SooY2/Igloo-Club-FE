@@ -14,11 +14,12 @@ const AuthKakao = () => {
         code: AUTHORIZE_CODE,
       });
       console.log(res);
-      const { accessToken, isProfileRegistered } = res.data;
+      const { accessToken, isProfileRegistered, nextProgress } = res.data;
       if (accessToken) {
         localStorage.setItem('ACCESS_TOKEN', accessToken);
+        localStorage.setItem('STEP', nextProgress);
         if (isProfileRegistered) navigate('/main-page');
-        else navigate('/register');
+        else navigate('/register', { state: nextProgress });
       }
     } catch (error) {
       console.log(error);
