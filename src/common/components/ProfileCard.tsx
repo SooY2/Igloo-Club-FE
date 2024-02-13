@@ -8,31 +8,29 @@ const ProfileCard = ({
   ClickProfileCard,
 }: {
   profileData: ProfileDataTypesProps[] | null;
-  ClickProfileCard: (nungilId: number, memberId: number) => void;
+  ClickProfileCard: (nungilId: number, nickname: string) => void;
 }) => {
-  // const [text, setText] = useState('');
-  // const textarea = useRef(null);
-
   return (
     <div css={Container}>
-      {profileData.map((profile) => (
-        <div
-          key={profile.nungilId}
-          css={Profile.Wrapper}
-          onClick={() => ClickProfileCard(profile.nungilId, profile.memberId)}
-        >
-          <div css={Profile.Top}>
-            <AnimalProfile animalFace={profile.animalFace} />
-            <div css={Profile.Detail}>
-              <span>{profile.companyName}</span>
-              <span>{profile.job}</span>
+      {profileData &&
+        profileData.map((profile) => (
+          <div
+            key={profile.nungilId}
+            css={Profile.Wrapper}
+            onClick={() => ClickProfileCard(profile.nungilId, profile.nickname)}
+          >
+            <div css={Profile.Top}>
+              <AnimalProfile animalFace={profile.animalFace} />
+              <div css={Profile.Detail}>
+                <span>{profile.companyName}</span>
+                <span>{profile.job}</span>
+              </div>
+            </div>
+            <div>
+              <span>{profile.description}</span>
             </div>
           </div>
-          <div>
-            <span>{profile.description}</span>
-          </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 };

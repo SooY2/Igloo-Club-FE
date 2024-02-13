@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import instance from '../../common/apis/axiosInstanse';
+import { Xicon } from '../assets/svgs';
 import { Check } from '../assets/svgs';
 import { CheckPink } from '../assets/svgs';
 
 const SendNungilModal = ({
   nungilId,
   nickname,
+  successApi,
   closeModal,
 }: {
   nungilId: number;
   nickname: string;
+  successApi: () => void;
   closeModal: () => void;
 }) => {
   const [isApiSuccess, setIsApiSuccess] = useState<boolean>(false);
@@ -20,20 +23,23 @@ const SendNungilModal = ({
     '눈길 보내기를 완료했어요!\n 당신의 인연과 빠르게 매칭해드릴게요 ⚡️';
 
   const ClickSendBtn = async () => {
+    console.log(nungilId);
     try {
       await instance.post('/api/nungil/send?', null, {
         params: {
           nungilId: nungilId,
         },
       });
-      console.log('눈길 보내기 완료');
       setIsApiSuccess(true);
+      successApi();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleOutsideClick = (event) => {
+  const handleOutsideClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
     if (event.target === event.currentTarget) {
       closeModal();
     }
@@ -42,6 +48,9 @@ const SendNungilModal = ({
   return (
     <StModalContainer onClick={handleOutsideClick}>
       <StModalWrapper>
+        <StXBtn type="button" onClick={closeModal}>
+          <Xicon />
+        </StXBtn>
         <StModalTitle>{title}</StModalTitle>
         <StModalSubTitle>보낸 눈길은 상대방의 수락 후 매칭돼요</StModalSubTitle>
         {isApiSuccess ? (
@@ -82,7 +91,6 @@ const StModalContainer = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  padding: 0;
   background: rgb(0 0 0 / 50%);
 `;
 
@@ -92,13 +100,20 @@ const StModalWrapper = styled.div`
   align-items: center;
   justify-content: center;
   min-width: 34rem;
-  height: 23.7rem;
   background: ${({ theme }) => theme.colors.white};
   border-radius: 10px;
 `;
 
+const StXBtn = styled.button`
+  display: flex;
+  flex-direction: row;
+  padding-top: 2rem;
+  padding-left: 28rem;
+`;
+
 const StModalTitle = styled.span`
   display: flex;
+  padding-top: 1.5rem;
   font-size: 1.8rem;
   font-style: normal;
   font-weight: 700;
@@ -143,6 +158,7 @@ const StNoBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 4rem;
   margin-top: 1.9rem;
   background: ${({ theme }) => theme.colors.white};
 `;
@@ -180,6 +196,7 @@ const StFinishMent = styled.span`
 
 const StCompleteMent = styled.span`
   padding-top: 1.5rem;
+  padding-bottom: 3rem;
   font-size: 1.3rem;
   font-style: normal;
   font-weight: 700;

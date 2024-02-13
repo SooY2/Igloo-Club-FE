@@ -29,6 +29,7 @@ const MainPage = () => {
       });
 
       setProfileData(res.data.content);
+      console.log(res.data.content);
     } catch (error) {
       console.log(error);
     }
@@ -39,23 +40,27 @@ const MainPage = () => {
   }, []);
 
   const ClickPickProfile = () => {
-    setProfileData([]);
     handleGetAllProfile();
+    setProfileData([]);
   };
 
   const ClickProfileBtn = (nungilId: number, nickname: string) => {
     navigate(`/detailpage/${nungilId}`, { state: { nungilId, nickname } });
   };
 
-  const handleMatchingTime = (newTime) => {
+  const handleMatchingTime = (newTime: boolean) => {
     setMatchingTime(newTime);
+  };
+
+  const handleSelectedChange = () => {
+    handleGetAllProfile();
   };
 
   return (
     <div css={Container}>
       <div css={Top.Wrapper}>
         <div css={Top.TitleTop}>
-          <CustomSelect />
+          <CustomSelect onSelectedChange={handleSelectedChange} />
           <span>에 위치한</span>
         </div>
         <div css={Top.TitleBottom}>
