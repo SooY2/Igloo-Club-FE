@@ -8,7 +8,7 @@ import ChatRoomFooter from './ChatRoomFooter';
 import { Client } from '@stomp/stompjs';
 import { ChatDataTypes } from '../../types/chatDataTypes';
 
-const PAGESIZE = 12;
+// const PAGESIZE = 12;
 
 /** 채팅방 컴포넌트입니다 */
 const ChatRoom = () => {
@@ -22,7 +22,7 @@ const ChatRoom = () => {
     nickname: '',
     ownMemberId: undefined,
   });
-  const [pageNumber, setPageNumber] = useState(1); // 현재 페이지 번호
+  // const [pageNumber, setPageNumber] = useState(1); // 현재 페이지 번호
   const [chat, setChat] = useState('');
   const accessToken = localStorage.getItem('ACCESS_TOKEN');
 
@@ -81,7 +81,9 @@ const ChatRoom = () => {
 
   const getChatData = async () => {
     try {
-      const { data } = await instance.get(`api/chat/room/${chatRoomId}`);
+      const { data } = await instance.get(
+        `api/chat/room/${chatRoomId}?pageNumber=0&pageSize=100`,
+      );
       setChatData(data.messageSlice.content);
       console.log(data);
       setChatSenderInfo({
@@ -98,12 +100,12 @@ const ChatRoom = () => {
 
   // 스크롤 시 데이터 더 불러오기
   const fetchData = async () => {
-    const { data } = await instance(
-      `/api/chat/room/${chatRoomId}/?pageNumber=${pageNumber}&pageSize=${PAGESIZE}`,
-    );
-    console.log(data.messageSlice.content, pageNumber);
-    setChatData((prev) => [...data.messageSlice.content, ...prev]);
-    setPageNumber((prevPageNumber) => prevPageNumber + 1); // 페이지 번호 증가
+    // const { data } = await instance.get(
+    //   `/api/chat/room/${chatRoomId}?pageNumber=${pageNumber}&pageSize=${PAGESIZE}`,
+    // );
+    // console.log(data.messageSlice.content, pageNumber);
+    // setChatData((prev) => [...data.messageSlice.content, ...prev]);
+    // setPageNumber((prevPageNumber) => prevPageNumber + 1); // 페이지 번호 증가
   };
 
   const sendMessage = () => {
