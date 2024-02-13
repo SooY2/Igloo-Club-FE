@@ -7,7 +7,7 @@ import PlaceCrad from '../components/PlaceCrad';
 import { ScheduleTypes } from '../types/scheduleTypes';
 import { PlaceCardConstants } from '../constants/schedule';
 
-interface ExtendedNavTypesProps {
+interface ScedultPropsTypes {
   onPrev: () => void;
   onNext: () => void;
   handleScheduleValue: (data: ScheduleTypes) => void;
@@ -19,7 +19,7 @@ const 장소선택 = ({
   onNext,
   handleScheduleValue,
   registerScheduleValues,
-}: ExtendedNavTypesProps) => {
+}: ScedultPropsTypes) => {
   const [isActive, setIsActive] = useState(false);
   const [selectPlace, setSelectPlace] = useState('');
 

@@ -21,12 +21,30 @@ import { Registertypes } from './types/registerTypes';
 import { ScheduleTypes } from './types/scheduleTypes';
 import instance from '../common/apis/axiosInstanse';
 
+type StepType =
+  | '약관동의'
+  | '전화번호입력'
+  | '전화번호인증'
+  | '회사이메일입력'
+  | '회사이메일인증'
+  | '닉네임입력'
+  | '성별생년월일'
+  | 'SNS계정'
+  | '기본프로필입력1'
+  | '기본프로필입력2'
+  | '장소선택'
+  | '시간선택';
+
 const Register = () => {
   const navigate = useNavigate();
   // localStorage에서 상태를 불러오는 함수
   const loadStateFromLocalStorage = () => {
     const savedState = localStorage.getItem('STEP');
-    return savedState ? savedState : navigate('/login');
+    if (!savedState) {
+      navigate('/login');
+      return '약관동의';
+    }
+    return savedState;
   };
 
   // useFunnel 사용 전에 state를 localStorage에서 불러옵니다.
@@ -47,7 +65,7 @@ const Register = () => {
       '장소선택',
       '시간선택',
     ] as const,
-    initialState,
+    initialState as StepType,
   );
 
   const [emailInfo, setEmailInfo] = useState({
@@ -93,7 +111,7 @@ const Register = () => {
       availableTimeList: [],
       markerList: ['PANGYO_STATION_SQUARE'],
     });
-  const handleScheduleValue = (data: Registertypes) => {
+  const handleScheduleValue = (data: ScheduleTypes) => {
     setRegisterScheduleValues((prevValues) => ({
       ...prevValues,
       ...data,

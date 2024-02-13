@@ -9,7 +9,7 @@ import { RegisterBasicInput } from '../components/RegisterInputs';
 import { AVAILABLETIME, YOILLIST } from '../constants/schedule';
 import CheckBoxItem from '../components/CheckBoxItem';
 
-interface ExtendedNavTypesProps {
+interface ScedultPropsTypes {
   onPrev: () => void;
   onNext: () => void;
   handleScheduleValue: (data: ScheduleTypes) => void;
@@ -21,7 +21,7 @@ const 장소선택 = ({
   onNext,
   handleScheduleValue,
   registerScheduleValues,
-}: ExtendedNavTypesProps) => {
+}: ScedultPropsTypes) => {
   const [isActive, setIsActive] = useState(false);
   const [thisValues, setThisValues] = useState<string[]>(
     registerScheduleValues.yoilList,
