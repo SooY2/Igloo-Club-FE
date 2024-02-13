@@ -8,7 +8,7 @@ interface RadioProps {
   value2: string;
   label1?: string;
   label2?: string;
-  onRadioChange: (value: string, name?: string) => void;
+  onRadioChange?: (value: string, name?: string) => void;
   column?: boolean;
   checkedValue: string;
 }
@@ -24,7 +24,7 @@ const Radio = ({
   checkedValue,
 }: RadioProps) => {
   const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onRadioChange(event.target.value, name);
+    onRadioChange?.(event.target.value, name);
   };
   return (
     <div css={column ? checkRadioColumnStyles : checkRadioContainerStyles}>

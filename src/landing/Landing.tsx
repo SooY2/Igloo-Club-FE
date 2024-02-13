@@ -15,8 +15,7 @@ const Landing = () => {
 
       if (!ACCESS_TOKEN) {
         navigate('/login');
-      }
-      if (STEP !== '가입완료') {
+      } else if (STEP !== '가입완료') {
         navigate('/register');
       } else {
         navigate(location.pathname);

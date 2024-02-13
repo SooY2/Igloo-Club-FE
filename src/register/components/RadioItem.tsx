@@ -5,7 +5,7 @@ interface RadioItemProps {
   name: string;
   value: string;
   children?: React.ReactNode;
-  onRadioChange: (value: string, name?: string) => void;
+  onRadioChange: (value: string | string[], name?: string) => void;
   profile?: boolean;
   label?: string;
   checkedValue?: string;
