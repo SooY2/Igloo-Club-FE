@@ -24,7 +24,6 @@ const CustomSelect = ({
 
     try {
       await instance.patch('/api/member/location', { location: place });
-      console.log('장소 변경 완료 1 :', place);
     } catch (error) {
       console.log(error);
     }
