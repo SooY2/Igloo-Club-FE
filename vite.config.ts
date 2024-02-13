@@ -12,17 +12,4 @@ export default defineConfig({
     }),
     svgr(),
   ],
-  define: {
-    global: {}, // 이 부분을 추가
-  },
-  server: {
-    proxy: {
-      '/stomp': {
-        target: 'https://seunghan.shop/stomp',
-        changeOrigin: true,
-        ws: true, // WebSocket 프로토콜 지원
-        secure: false, // HTTPS를 사용하는 경우 true로 설정
-      },
-    },
-  },
 });

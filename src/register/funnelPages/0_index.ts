@@ -8,6 +8,8 @@ import 성별생년월일 from './RegisterEnterGenderBirthFunnel';
 import SNS계정 from './RegisterSNSFunnel';
 import 기본프로필입력1 from './RegisterProfileFunnel1';
 import 기본프로필입력2 from './RegisterProfileFunnel2';
+import 장소선택 from './RegisterSelectPlace';
+import 시간선택 from './RegisterSelectTime';
 
 export {
   약관동의,
@@ -20,4 +22,6 @@ export {
   SNS계정,
   기본프로필입력1,
   기본프로필입력2,
+  장소선택,
+  시간선택,
 };

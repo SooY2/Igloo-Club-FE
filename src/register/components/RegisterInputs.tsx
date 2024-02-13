@@ -37,9 +37,9 @@ export const RegisterArrowInput = ({
   onClick,
 }: RegisterArrowInputProps) => {
   return (
-    <St.StLabel>
+    <St.StLabel onClick={onClick}>
       {label}
-      <div css={companyNameStyles} onClick={onClick}>
+      <div css={companyNameStyles}>
         {children}
         <StArrowRight />
       </div>

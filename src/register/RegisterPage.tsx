@@ -12,13 +12,44 @@ import {
   // SNS계정,
   기본프로필입력1,
   기본프로필입력2,
+  장소선택,
+  시간선택,
 } from './funnelPages/0_index';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Registertypes } from './types/registerTypes';
+import { ScheduleTypes } from './types/scheduleTypes';
+import instance from '../common/apis/axiosInstanse';
+
+type StepType =
+  | '약관동의'
+  | '전화번호입력'
+  | '전화번호인증'
+  | '회사이메일입력'
+  | '회사이메일인증'
+  | '닉네임입력'
+  | '성별생년월일'
+  | 'SNS계정'
+  | '기본프로필입력1'
+  | '기본프로필입력2'
+  | '장소선택'
+  | '시간선택';
 
 const Register = () => {
   const navigate = useNavigate();
+  // localStorage에서 상태를 불러오는 함수
+  const loadStateFromLocalStorage = () => {
+    const savedState = localStorage.getItem('STEP');
+    if (!savedState) {
+      navigate('/login');
+      return '약관동의';
+    }
+    return savedState;
+  };
+
+  // useFunnel 사용 전에 state를 localStorage에서 불러옵니다.
+  const initialState = loadStateFromLocalStorage();
+
   const [Funnel, setStep] = useFunnel(
     [
       '약관동의',
@@ -31,8 +62,10 @@ const Register = () => {
       'SNS계정',
       '기본프로필입력1',
       '기본프로필입력2',
+      '장소선택',
+      '시간선택',
     ] as const,
-    '약관동의',
+    initialState as StepType,
   );
 
   const [emailInfo, setEmailInfo] = useState({
@@ -70,6 +103,29 @@ const Register = () => {
     }));
   };
 
+  //장소시간선택 데이터
+  const [registerScheduleValues, setRegisterScheduleValues] =
+    useState<ScheduleTypes>({
+      location: '',
+      yoilList: [],
+      availableTimeList: [],
+      markerList: ['PANGYO_STATION_SQUARE'],
+    });
+  const handleScheduleValue = (data: ScheduleTypes) => {
+    setRegisterScheduleValues((prevValues) => ({
+      ...prevValues,
+      ...data,
+    }));
+  };
+  const submitScheduleValue = async () => {
+    try {
+      await instance.patch('api/member/schedule', registerScheduleValues);
+      navigate('/main-page');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <RagisterLayout>
       <Funnel>
@@ -86,7 +142,10 @@ const Register = () => {
         <Funnel.Step name="전화번호인증">
           <전화번호인증
             onPrev={() => setStep('전화번호입력')}
-            onNext={() => setStep('회사이메일입력')}
+            onNext={() => {
+              setStep('회사이메일입력');
+              localStorage.setItem('STEP', '회사이메일입력');
+            }}
             phoneNum={phoneNum}
           />
         </Funnel.Step>
@@ -100,7 +159,10 @@ const Register = () => {
         <Funnel.Step name="회사이메일인증">
           <회사이메일인증
             onPrev={() => setStep('회사이메일입력')}
-            onNext={() => setStep('닉네임입력')}
+            onNext={() => {
+              setStep('닉네임입력');
+              localStorage.setItem('STEP', '닉네임입력');
+            }}
             emailInfo={emailInfo}
           />
         </Funnel.Step>
@@ -140,10 +202,28 @@ const Register = () => {
           <기본프로필입력2
             onPrev={() => setStep('기본프로필입력1')}
             onNext={() => {
-              navigate('/main-page');
+              setStep('장소선택'), localStorage.setItem('STEP', '장소선택');
             }}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
+          />
+        </Funnel.Step>
+        <Funnel.Step name="장소선택">
+          <장소선택
+            onPrev={() => setStep('기본프로필입력2')}
+            onNext={() => setStep('시간선택')}
+            handleScheduleValue={handleScheduleValue}
+            registerScheduleValues={registerScheduleValues}
+          />
+        </Funnel.Step>
+        <Funnel.Step name="시간선택">
+          <시간선택
+            onPrev={() => setStep('장소선택')}
+            onNext={() => {
+              submitScheduleValue();
+            }}
+            handleScheduleValue={handleScheduleValue}
+            registerScheduleValues={registerScheduleValues}
           />
         </Funnel.Step>
       </Funnel>
