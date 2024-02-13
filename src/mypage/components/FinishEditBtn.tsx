@@ -29,9 +29,12 @@ const FinishEditBtn = () => {
 export default FinishEditBtn;
 
 const Container = css`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
   height: 9rem;
-  padding: 1.7rem 2.3rem;
+  padding: 0 2.2rem;
   background: ${theme.colors.white};
   border-top: 1px solid #e3e3e3;
 `;
@@ -42,8 +45,9 @@ const FinishBtn = css`
   gap: 0.9rem;
   align-items: center;
   justify-content: center;
-  width: 38rem;
+  width: 100%;
   height: 5.5rem;
+  padding: 1.5rem 10rem;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -51,5 +55,9 @@ const FinishBtn = css`
   color: ${theme.colors.white};
   text-align: center;
   background-color: ${theme.colors.primary};
-  border-radius: 10px;
+  border-radius: 15px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

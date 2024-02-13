@@ -1,64 +1,66 @@
-import { useState } from 'react';
 import { css } from '@emotion/react';
-import { useNavigate } from 'react-router-dom';
-import HomeBtn000 from '../assets/svgs/home-black.svg';
-import ChatBtn000 from '../assets/svgs/chat-black.svg';
-import HeartBtn000 from '../assets/svgs/heart-black.svg';
-import PeopleBtn000 from '../assets/svgs/people-black.svg';
-import HomeBtnGRAY from '../assets/svgs/home-white.svg';
-import ChatBtnGRAY from '../assets/svgs/chat-white.svg';
-import HeartBtnGRAY from '../assets/svgs/heart-white.svg';
-import PeopleBtnGRAY from '../assets/svgs/people-white.svg';
+import { theme } from '../styles/theme';
+import { useNavigate, useLocation } from 'react-router-dom';
+import {
+  HomeBtn000,
+  ChatBtn000,
+  HeartBtn000,
+  PeopleBtn000,
+  HomeBtnGRAY,
+  ChatBtnGRAY,
+  HeartBtnGRAY,
+  PeopleBtnGRAY,
+} from '../assets/svgs/index';
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const [activeBtn, setActiveBtn] = useState('home');
+  const location = useLocation();
 
-  const handleClickHomeBtn = () => {
-    setActiveBtn('home');
-    navigate('/main-page');
-  };
-
-  const handleClickChatBtn = () => {
-    setActiveBtn('chat');
-    navigate('/');
-  };
-
-  const handleClickHeartBtn = () => {
-    setActiveBtn('heart');
-    navigate('/nungillist');
-  };
-
-  const handleClickPeopleBtn = () => {
-    setActiveBtn('people');
-    navigate('/');
+  const handleActiveBtn = (path: string) => {
+    if (location.pathname === path) {
+      return 'active';
+    } else {
+      return 'inactive';
+    }
   };
 
   return (
     <div css={Container}>
-      <button type="button" onClick={handleClickHomeBtn} css={NavButton}>
-        <img
-          src={activeBtn === 'home' ? HomeBtn000 : HomeBtnGRAY}
-          alt="home"
-        ></img>
+      <button
+        type="button"
+        onClick={() => navigate('/main-page')}
+        css={NavButton}
+      >
+        {handleActiveBtn('/main-page') === 'active' ? (
+          <HomeBtn000 />
+        ) : (
+          <HomeBtnGRAY />
+        )}
       </button>
-      <button type="button" onClick={handleClickChatBtn} css={NavButton}>
-        <img
-          src={activeBtn === 'chat' ? ChatBtn000 : ChatBtnGRAY}
-          alt="chat"
-        ></img>
+      <button type="button" onClick={() => navigate('/chat')} css={NavButton}>
+        {handleActiveBtn('/chat') === 'active' ? (
+          <ChatBtn000 />
+        ) : (
+          <ChatBtnGRAY />
+        )}
       </button>
-      <button type="button" onClick={handleClickHeartBtn} css={NavButton}>
-        <img
-          src={activeBtn === 'heart' ? HeartBtn000 : HeartBtnGRAY}
-          alt="heart"
-        ></img>
+      <button
+        type="button"
+        onClick={() => navigate('/nungillist')}
+        css={NavButton}
+      >
+        {handleActiveBtn('/nungillist') === 'active' ? (
+          <HeartBtn000 />
+        ) : (
+          <HeartBtnGRAY />
+        )}
       </button>
-      <button type="button" onClick={handleClickPeopleBtn} css={NavButton}>
-        <img
-          src={activeBtn === 'people' ? PeopleBtn000 : PeopleBtnGRAY}
-          alt="people"
-        ></img>
+      <button type="button" onClick={() => navigate('/mypage')} css={NavButton}>
+        {handleActiveBtn('/mypage') === 'active' ? (
+          <PeopleBtn000 />
+        ) : (
+          <PeopleBtnGRAY />
+        )}
       </button>
     </div>
   );
@@ -73,8 +75,8 @@ const Container = css`
   align-items: center;
   width: 100%;
   height: 6.2rem;
-  padding-right: 5rem;
-  padding-left: 5rem;
+  padding: 0 4rem;
+  background-color: ${theme.colors.white};
 `;
 
 const NavButton = css`

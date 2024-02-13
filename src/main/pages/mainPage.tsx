@@ -6,16 +6,18 @@ import { theme } from '../../common/styles/theme';
 import instance from '../../common/apis/axiosInstanse';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../common/components/NavBar';
+import NowMatching from '../components/NowMatching';
 import ProfileCard from '../../common/components/ProfileCard';
 import PickProfileBtn from '../components/PickProfileBtn';
 import CustomSelect from '../components/CustomSelect';
 import { ProfileDataTypesProps } from '../../common/type/ProfileDataTypesProps';
+import CountDown from '../components/CountDown';
 import { Watch } from '../assets/svgs/index';
 
 const MainPage = () => {
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState<ProfileDataTypesProps[]>([]);
-  // const [count, setCount] = useState(5);
+  const [matchingTime, setMatchingTime] = useState<boolean>(true);
 
   const handleGetAllProfile = async () => {
     try {
@@ -25,8 +27,6 @@ const MainPage = () => {
           size: 10,
         },
       });
-
-      console.log(res.data.content);
 
       setProfileData(res.data.content);
     } catch (error) {
@@ -39,12 +39,16 @@ const MainPage = () => {
   }, []);
 
   const ClickPickProfile = () => {
-    setProfileData([]);
     handleGetAllProfile();
+    setProfileData([]);
   };
 
-  const ClickProfileBtn = (nungilId: number) => {
-    navigate('/detailpage', { state: { nungilId } });
+  const ClickProfileBtn = (nungilId: number, nickname: string) => {
+    navigate(`/detailpage/${nungilId}`, { state: { nungilId, nickname } });
+  };
+
+  const handleMatchingTime = (newTime: boolean) => {
+    setMatchingTime(newTime);
   };
 
   return (
@@ -57,26 +61,41 @@ const MainPage = () => {
         <div css={Top.TitleBottom}>
           <span>오늘의 인연을 소개해 드릴게요</span>
         </div>
-        <div css={Top.Subtitle}>
-          <span>마음이 가는 당신만의 인연에게 눈길을 보내세요.</span>
-        </div>
       </div>
       <div css={Middle.Wrapper}>
-        <Watch />
-        <span>오늘 눈길 매칭 마감까지</span>
-        <span css={Middle.PrimaryText}>분</span>
-        <span>남았어요!</span>
+        {matchingTime ? (
+          <div css={Middle.TimeBox}>
+            <Watch />
+            <span>오늘 눈길 매칭 마감까지</span>
+            <span css={Middle.PrimaryText}>
+              <CountDown onMatchingTime={handleMatchingTime} />
+            </span>
+            <span>남았어요!</span>
+          </div>
+        ) : (
+          <div css={Middle.TimeBox}>
+            <Watch />
+            <span>내가 뽑은 프로필은 매일</span>
+            <span css={Middle.PrimaryText}>오전 11시</span>
+            <span>에 일괄 삭제돼요</span>
+          </div>
+        )}
       </div>
       <div css={Bottom.Wrapper}>
-        <span>내가 받은 인연 프로필</span>
-        <ProfileCard
-          profileData={profileData}
-          ClickProfileCard={ClickProfileBtn}
-          css={Bottom.ProfileData}
-        />
+        {matchingTime ? (
+          <ProfileCard
+            profileData={profileData}
+            ClickProfileCard={ClickProfileBtn}
+            css={Bottom.ProfileData}
+          />
+        ) : (
+          <NowMatching />
+        )}
       </div>
       <div css={PickBtn}>
-        <PickProfileBtn ProfileData={ClickPickProfile} />
+        {matchingTime ? (
+          <PickProfileBtn ProfileData={ClickPickProfile} />
+        ) : null}
       </div>
       <div css={Navigation}>
         <NavBar />
@@ -93,7 +112,7 @@ const Container = css`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding-top: 3.6rem;
+  padding-top: 1.5rem;
   overflow: auto;
   background: ${theme.colors.white};
 `;
@@ -103,6 +122,7 @@ const Top = {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    justify-content: center;
     height: 9.2rem;
     padding-left: 2.6rem;
     margin-bottom: 1.5rem;
@@ -111,7 +131,7 @@ const Top = {
   TitleTop: css`
     display: flex;
     flex-direction: row;
-    gap: 0.5rem;
+    gap: 0.2rem;
     align-items: center;
     ${theme.fonts.title};
   `,
@@ -119,25 +139,19 @@ const Top = {
   TitleBottom: css`
     ${theme.fonts.title};
   `,
-
-  Subtitle: css`
-    display: flex;
-    color: ${theme.colors.gray6};
-    ${theme.fonts.body2m};
-  `,
 };
 
 const Middle = {
   Wrapper: css`
     display: flex;
     flex-direction: row;
-    gap: 0.6rem;
+    gap: 0.4rem;
     align-items: center;
-    width: 34.2rem;
+    justify-content: center;
+    min-width: 33rem;
     height: 4rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 4.5rem;
+    padding: 1.2rem 2.2rem;
+    margin-right: 2rem;
     margin-bottom: 3.9rem;
     margin-left: 2rem;
     font-size: 13px;
@@ -149,12 +163,19 @@ const Middle = {
     border-radius: 10px;
   `,
 
+  TimeBox: css`
+    display: flex;
+    flex-direction: row;
+    gap: 0.4rem;
+    align-items: center;
+    justify-content: center;
+  `,
+
   PrimaryText: css`
     font-size: 13px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 700;
     color: ${theme.colors.primary};
-    text-align: center;
   `,
 };
 
@@ -164,7 +185,7 @@ const Bottom = {
     flex-direction: column;
     gap: 1.5rem;
     width: 100%;
-    padding-left: 2.6rem;
+    padding: 0 2.6rem;
     margin-bottom: 8.2rem;
     font-size: 18px;
     font-style: normal;
@@ -190,5 +211,5 @@ const PickBtn = css`
 const Navigation = css`
   position: fixed;
   bottom: 0;
-  background-color: ${theme.colors.white};
+  width: 100%;
 `;

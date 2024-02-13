@@ -10,29 +10,36 @@ const FinishSendBtn = () => {
 };
 
 export default FinishSendBtn;
-
 const Container = css`
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
   height: 9rem;
-  padding: 1.7rem 2.3rem;
+  padding: 0 2.2rem;
   background: ${theme.colors.white};
   border-top: 1px solid #e3e3e3;
 `;
 
 const SendBtn = css`
   display: flex;
+  flex-direction: row;
+  gap: 0.9rem;
   align-items: center;
   justify-content: center;
-  width: 38rem;
+  width: 100%;
   height: 5.5rem;
-  font-size: 16px;
+  padding: 1.5rem 7rem;
+  font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   color: #b7bcc5;
   text-align: center;
   background-color: #e8e9ef;
-  border-radius: 10px;
+  border-radius: 15px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

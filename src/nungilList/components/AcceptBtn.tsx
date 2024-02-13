@@ -20,8 +20,9 @@ const AcceptNungilBtn = () => {
 
   const ClickAcceptBtn = () => {
     handleAcceptNungil();
-    navigate('/finishmatch', { state: { nungilId: state.nungilId } });
-    console.log(state.nungilId);
+    navigate(`/finishmatch/${state.nungilId}`, {
+      state: { nungilId: state.nungilId },
+    });
   };
 
   return (
@@ -37,23 +38,34 @@ export default AcceptNungilBtn;
 
 const Container = css`
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
   height: 9rem;
-  padding: 1.7rem 2.3rem;
+  padding: 0 2.2rem;
   background: ${theme.colors.white};
   border-top: 1px solid #e3e3e3;
 `;
 
 const SendBtn = css`
-  width: 38rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.9rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   height: 5.5rem;
-  font-size: 16px;
+  padding: 1.5rem 10rem;
+  font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   color: ${theme.colors.white};
   text-align: center;
   background-color: ${theme.colors.primary};
-  border-radius: 10px;
+  border-radius: 15px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

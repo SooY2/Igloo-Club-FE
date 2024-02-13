@@ -32,7 +32,7 @@ const MatchingList = () => {
   }, []);
 
   const ClickProfileBtn = (nungilId: number) => {
-    navigate('/finishmatch', { state: { nungilId } });
+    navigate(`/finishmatch/${nungilId}`, { state: { nungilId } });
   };
 
   return (
@@ -56,6 +56,6 @@ const Container = css`
 
 const ProfileData = css`
   display: flex;
-  padding-left: 2.6rem;
+  padding: 0 2.6rem;
   margin-top: 1.8rem;
 `;

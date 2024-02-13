@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import RegisterBtn from '../components/RegisterBtn';
 import RegisterHeader from '../components/RegisterHeader';
 import * as St from '../styles/registerStyles';
-import { StBasicInput } from '../styles/registerInputStyles';
+import { StBasicBox } from '../styles/registerInputStyles';
 import {
   RegisterArrowInput,
   RegisterBasicInput,
@@ -144,15 +144,15 @@ const 기본프로필입력2 = ({
               label="나의 외모 묘사"
               onClick={() => setShowFaceDepction(true)}
             >
-              <StBasicInput
-                type="text"
-                placeholder="자신의 외모를 설명할 수 있는 키워드를 선택해 주세요."
-                value={findLabelByValue(
-                  FACEDEPICTION,
-                  values.faceDepictionList,
+              <StBasicBox>
+                {values.faceDepictionList.length === 0 ? (
+                  <StPlaceHolder>
+                    자신의 외모를 설명할 수 있는 키워드를 선택해 주세요.
+                  </StPlaceHolder>
+                ) : (
+                  findLabelByValue(FACEDEPICTION, values.faceDepictionList)
                 )}
-                disabled={true}
-              />
+              </StBasicBox>
             </RegisterArrowInput>
             <RegisterArrowInput
               label="나의 성격 묘사"
@@ -160,15 +160,18 @@ const 기본프로필입력2 = ({
                 setShowPersonalityDepiction(true);
               }}
             >
-              <StBasicInput
-                type="text"
-                placeholder="자신의 성격을 설명할 수 있는 키워드를 선택해 주세요."
-                value={findLabelByValue(
-                  PERSONALITYDEPICTION,
-                  values.personalityDepictionList,
+              <StBasicBox>
+                {values.personalityDepictionList.length === 0 ? (
+                  <StPlaceHolder>
+                    자신의 성격을 설명할 수 있는 키워드를 선택해 주세요.
+                  </StPlaceHolder>
+                ) : (
+                  findLabelByValue(
+                    PERSONALITYDEPICTION,
+                    values.personalityDepictionList,
+                  )
                 )}
-                disabled={true}
-              />
+              </StBasicBox>
             </RegisterArrowInput>
             <RegisterArrowInput
               label="나의 취미"
@@ -176,12 +179,13 @@ const 기본프로필입력2 = ({
                 setShowHobby(true);
               }}
             >
-              <StBasicInput
-                type="text"
-                placeholder="평소 나의 취미를 선책해 주세요."
-                value={findLabelByValue(HOBBY, values.hobbyList)}
-                disabled={true}
-              />
+              <StBasicBox>
+                {values.hobbyList.length === 0 ? (
+                  <StPlaceHolder>평소 나의 취미를 선택해 주세요.</StPlaceHolder>
+                ) : (
+                  findLabelByValue(HOBBY, values.hobbyList)
+                )}
+              </StBasicBox>
             </RegisterArrowInput>
             <RegisterBasicInput label="소개글">
               <div
@@ -232,14 +236,14 @@ const 기본프로필입력2 = ({
         <PersonalityDepiction
           values={values.personalityDepictionList}
           handleValues={handleValues}
-          setShowFaceDepiction={setShowPersonalityDepiction}
+          setShowPersonalityDepiction={setShowPersonalityDepiction}
         />
       )}
       {showHobby && (
         <HobbyList
           values={values.hobbyList}
           handleValues={handleValues}
-          setShowFaceDepiction={setShowHobby}
+          setShowHobby={setShowHobby}
         />
       )}
     </>
@@ -257,4 +261,8 @@ const subTitleBoxStyles = css`
   flex-direction: column;
   gap: 0.6rem;
   margin-bottom: 5.3rem;
+`;
+
+const StPlaceHolder = styled.p`
+  color: ${({ theme }) => theme.colors.gray3};
 `;

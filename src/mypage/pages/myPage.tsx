@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 import { theme } from '../../common/styles/theme';
 import NavBar from '../../common/components/NavBar';
+import ToggleBtn from '../components/ToggleBtn';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -11,10 +12,6 @@ const MyPage = () => {
   };
 
   const ClickPreferBtn = () => {
-    navigate('/');
-  };
-
-  const ClickBlockBtn = () => {
     navigate('/');
   };
 
@@ -33,7 +30,6 @@ const MyPage = () => {
         </div>
         <div css={ProfileCard.Bottom}></div>
       </div>
-      {/*오른쪽에 둘 버튼들 너가 피그마에 토글로 바꿔달라 남겨놨길래 일단 안 넣어놨어*/}
       <div css={Top.Wrapper}>
         <button type="button" onClick={ClickEditBtn} css={Top.TopStyle}>
           <span>프로필 수정</span>
@@ -43,10 +39,10 @@ const MyPage = () => {
           <span>선호하는 이성</span>
           <button type="button" onClick={ClickPreferBtn}></button>
         </button>
-        <button type="button" onClick={ClickBlockBtn} css={Top.TopStyleBottom}>
+        <div css={Top.TopStyleBottom}>
           <span>아는 사람 만나지 않기</span>
-          <button type="button" onClick={ClickBlockBtn}></button>
-        </button>
+          <ToggleBtn />
+        </div>
       </div>
       <div css={Middle.Wrapper}>
         <button type="button" onClick={ClickEditBtn} css={Middle.MiddleStyle}>
@@ -73,9 +69,10 @@ export default MyPage;
 const Container = css`
   display: flex;
   flex-direction: column;
+  justify-content: start;
   width: 100%;
   height: 100%;
-  padding-top: 3.6rem;
+  padding-top: 1.5rem;
   overflow: auto;
   white-space: pre-line;
   background-color: ${theme.colors.white};
@@ -84,6 +81,7 @@ const Container = css`
 const Title = css`
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: center;
   width: 100%;
   height: 5.6rem;
@@ -95,11 +93,9 @@ const ProfileCard = {
   Wrapper: css`
     display: flex;
     flex-direction: row;
-    width: 34.2rem;
-    padding-top: 2.4rem;
-    padding-bottom: 2.9rem;
-    padding-left: 2.3rem;
-    margin-left: 2.7rem;
+    min-width: 34.2rem;
+    padding: 2.4rem 2.3rem 2.9rem;
+    margin: 2rem 2.3rem 0;
     color: ${theme.colors.white};
     background: linear-gradient(116deg, #ff6264 0%, #ffa490 96.79%);
     ${theme.fonts.body2b};
@@ -143,6 +139,7 @@ const Top = {
   TopStyleBottom: css`
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     padding-bottom: 2.2rem;
     color: ${theme.colors.gray9};
     ${theme.fonts.body1m};
@@ -192,5 +189,5 @@ const Bottom = {
 const Navigation = css`
   position: fixed;
   bottom: 0;
-  background-color: ${theme.colors.white};
+  width: 100%;
 `;

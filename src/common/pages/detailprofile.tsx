@@ -13,8 +13,10 @@ const DetailProfile = () => {
 
   const title = `안녕하세요!\n 저는 ${profileData.nickname}이라고 합니다.`;
 
+  const genderText = profileData.sex === 'MALE' ? '남성' : '여성';
+
   const context = `#${profileData.companyName}에 재직 중인\n 
-  #${profileData.age}세 남성이고 #${profileData.job}\n 
+  #${profileData.age}세 ${genderText}이고 #${profileData.job}\n 
   얼굴은 #${profileData.animalFace} 
   키는 #${profileData.height}cm\n 성격 유형은 #${profileData.mbti}`;
 
@@ -54,7 +56,7 @@ const DetailProfile = () => {
           <div css={Top.InfoTitle}>
             <span>저는요, 👋🏻</span>
           </div>
-          <div css={Top.InfoSubtitle}>
+          <div css={Top.InfoContent}>
             <span>{profileData.description}</span>
           </div>
         </div>
@@ -64,19 +66,46 @@ const DetailProfile = () => {
           <div css={Middle.ExAttrTitle}>
             <span>나의 외적인 매력은</span>
           </div>
-          <div css={Middle.ExAttrList}></div>
+          <div css={Middle.ExAttrList}>
+            {profileData?.faceDepictionAllocationList &&
+              profileData.faceDepictionAllocationList
+                .split(',')
+                .map((attr: string, index: number) => (
+                  <div key={index} css={Middle.AllocationList}>
+                    {attr.trim()}
+                  </div>
+                ))}
+          </div>
         </div>
         <div css={Middle.InAttr}>
           <div css={Middle.InAttrTitle}>
             <span>나의 내적인 매력은</span>
           </div>
-          <div css={Middle.InAttrList}></div>
+          <div css={Middle.InAttrList}>
+            {profileData?.personalityDepictionAllocationList &&
+              profileData.personalityDepictionAllocationList
+                .split(',')
+                .map((attr: string, index: number) => (
+                  <div key={index} css={Middle.AllocationList}>
+                    {attr.trim()}
+                  </div>
+                ))}
+          </div>
         </div>
         <div css={Middle.Notice}>
           <div css={Middle.NoticeTitle}>
             <span>이건 알아두세요!</span>
           </div>
-          <div css={Middle.NoticeList}></div>
+          <div css={Middle.NoticeList}>
+            {profileData?.hobbyAllocationList &&
+              profileData.hobbyAllocationList
+                .split(',')
+                .map((attr: string, index: number) => (
+                  <div key={index} css={Middle.AllocationList}>
+                    {attr.trim()}
+                  </div>
+                ))}
+          </div>
         </div>
       </div>
     </div>
@@ -85,10 +114,10 @@ const DetailProfile = () => {
 
 export default DetailProfile;
 
-const highlightKeywords = (line) => {
+const highlightKeywords = (line: string) => {
   return (
     <div>
-      {line.split(/(#\w+)/).map((part, index) =>
+      {line.split(/(#[^\s]+)/).map((part, index) =>
         part.startsWith('#') ? (
           <span key={index} css={Top.HashtagText}>
             {part}
@@ -106,7 +135,7 @@ const Container = css`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding-top: 3.6rem;
+  padding-top: 1.5rem;
   overflow: auto;
   background-color: ${theme.colors.white};
 `;
@@ -116,7 +145,7 @@ const Top = {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-left: 2.7rem;
+    padding: 0 2.7rem;
   `,
 
   Title: css`
@@ -150,10 +179,8 @@ const Top = {
   InfoBox: css`
     display: flex;
     flex-direction: column;
-    width: 34rem;
-    height: 13rem;
-    padding-top: 2.2rem;
-    padding-left: 2rem;
+    min-width: 30rem;
+    padding: 2.2rem 3rem 2.3rem 2.3rem;
     background-color: ${theme.colors.gray0};
     border-radius: 10px;
   `,
@@ -164,12 +191,14 @@ const Top = {
     ${theme.fonts.body1b};
   `,
 
-  InfoSubtitle: css`
+  InfoContent: css`
     display: flex;
+    padding-top: 1.1rem;
     font-size: 1.3rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    line-height: 2rem;
     color: ${theme.colors.gray7};
   `,
 };
@@ -178,12 +207,13 @@ const Middle = {
   Wrapper: css`
     display: flex;
     flex-direction: column;
-    padding-left: 2.7rem;
+    padding: 0 2.7rem;
     margin-bottom: 15rem;
   `,
 
   ExAttr: css`
     display: flex;
+    flex-direction: column;
     margin-top: 3.8rem;
   `,
 
@@ -195,15 +225,15 @@ const Middle = {
 
   ExAttrList: css`
     display: flex;
-    height: 3.7rem;
-    color: ${theme.colors.black};
-    ${theme.fonts.body2r};
-
-    border-radius: 30px;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    white-space: nowrap;
   `,
 
   InAttr: css`
     display: flex;
+    flex-direction: column;
     margin-top: 3.8rem;
   `,
 
@@ -215,15 +245,15 @@ const Middle = {
 
   InAttrList: css`
     display: flex;
-    height: 3.7rem;
-    color: ${theme.colors.black};
-    ${theme.fonts.body2r};
-
-    border-radius: 30px;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    white-space: nowrap;
   `,
 
   Notice: css`
     display: flex;
+    flex-direction: column;
     margin-top: 3.8rem;
   `,
 
@@ -235,10 +265,22 @@ const Middle = {
 
   NoticeList: css`
     display: flex;
-    height: 3.7rem;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    white-space: nowrap;
+  `,
+
+  AllocationList: css`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.5rem 0.9rem;
     color: ${theme.colors.black};
     ${theme.fonts.body2r};
 
+    background-color: ${theme.colors.white};
+    border: 1px solid ${theme.colors.gray3};
     border-radius: 30px;
   `,
 };

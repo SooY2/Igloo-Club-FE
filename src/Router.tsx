@@ -11,6 +11,9 @@ import ReceivedDetailPage from './nungilList/pages/receivedDetailPage';
 import SendDetailPage from './nungilList/pages/sendDetailPage';
 import MyPage from './mypage/pages/myPage';
 import EditProfilePage from './mypage/pages/editProfilePage';
+import Chat from './chat/Chat';
+import ChatRoom from './chat/components/chatRoom/ChatRoom';
+import InfoModal from './chat/components/InfoModal';
 
 const router = createBrowserRouter([
   {
@@ -34,15 +37,18 @@ const router = createBrowserRouter([
     element: <MainPage />,
   },
   {
-    path: 'detailpage',
+    path: 'detailpage/:nungilId',
     element: <DetailPage />,
   },
-  { path: 'finishmatch', element: <FinishMatch /> },
+  { path: 'finishmatch/:nungilId', element: <FinishMatch /> },
   { path: 'nungillist', element: <NungilList /> },
-  { path: 'receiveddetailpage', element: <ReceivedDetailPage /> },
-  { path: 'senddetailpage', element: <SendDetailPage /> },
+  { path: 'receiveddetailpage/:nungilId', element: <ReceivedDetailPage /> },
+  { path: 'senddetailpage/:nungilId', element: <SendDetailPage /> },
   { path: 'mypage', element: <MyPage /> },
   { path: 'editprofilepage', element: <EditProfilePage /> },
+  { path: 'chat', element: <Chat /> },
+  { path: 'chat/:chatRoomId', element: <ChatRoom /> },
+  { path: 'infomodal', element: <InfoModal /> },
 ]);
 
 export default router;

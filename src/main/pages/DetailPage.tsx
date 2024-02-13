@@ -1,11 +1,13 @@
 import { css } from '@emotion/react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ArrowLeftNav from '../../common/components/ArrowLeftNav';
 import DetailProfile from '../../common/pages/detailprofile';
 import SendNungilBtn from '../components/SendBtn';
-import { useNavigate } from 'react-router-dom';
 
 const DetailPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { nungilId, nickname } = location?.state || {};
 
   const ClickArrowLeft = () => {
     navigate('/main-page');
@@ -13,12 +15,14 @@ const DetailPage = () => {
 
   return (
     <div css={Container}>
-      <button onClick={ClickArrowLeft}>
-        <ArrowLeftNav />
-      </button>
+      <div>
+        <button onClick={ClickArrowLeft}>
+          <ArrowLeftNav />
+        </button>
+      </div>
       <DetailProfile />
       <div css={SendBtn}>
-        <SendNungilBtn />
+        <SendNungilBtn nungilId={nungilId} nickname={nickname} />
       </div>
     </div>
   );
@@ -29,11 +33,13 @@ export default DetailPage;
 const Container = css`
   display: flex;
   flex-direction: column;
-  align-items: start;
+  justify-content: space-between;
   width: 100%;
+  padding-top: 1.5rem;
 `;
 
 const SendBtn = css`
-  position: fixed;
+  position: sticky;
   bottom: 0;
+  z-index: 999;
 `;
