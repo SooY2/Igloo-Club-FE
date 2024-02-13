@@ -1,17 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
+import instance from '../../common/apis/axiosInstanse';
 import { theme } from '../../common/styles/theme';
-import { Arrow } from '../assets/svgs';
+import { Arrow } from '../assets/svgs/index';
 
-const CustomSelect = () => {
+const CustomSelect = ({
+  onSelectedChange,
+}: {
+  onSelectedChange: () => void;
+}) => {
   const [selected, setSelected] = useState('광화문');
   const selectList = ['광화문', '판교'];
   const [showToggle, setShowToggle] = useState(false);
+
+  const handleChangePlace = async () => {
+    let place = '';
+
+    if (selected === '광화문') {
+      place = 'GWANGHWAMUN';
+    } else if (selected === '판교') {
+      place = 'PANGYO';
+    }
+
+    try {
+      await instance.patch('/api/member/location', { location: place });
+      console.log('장소 변경 완료 1 :', place);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSelect = (value: string) => {
     setSelected(value);
     setShowToggle(false);
   };
+
+  const fetchData = async () => {
+    await handleChangePlace();
+    onSelectedChange();
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [selected]);
 
   const handleToggle = () => {
     setShowToggle((prev) => !prev);

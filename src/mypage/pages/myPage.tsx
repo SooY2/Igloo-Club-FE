@@ -40,7 +40,7 @@ const MyPage = () => {
           <button type="button" onClick={ClickPreferBtn}></button>
         </button>
         <div css={Top.TopStyleBottom}>
-          <span>아는 사람 만나지 않기</span>
+          <span>회사 사람 만나지 않기</span>
           <ToggleBtn />
         </div>
       </div>
@@ -93,7 +93,7 @@ const ProfileCard = {
   Wrapper: css`
     display: flex;
     flex-direction: row;
-    min-width: 34.2rem;
+    min-width: 30rem;
     padding: 2.4rem 2.3rem 2.9rem;
     margin: 2rem 2.3rem 0;
     color: ${theme.colors.white};
