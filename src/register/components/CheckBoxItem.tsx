@@ -36,7 +36,11 @@ const CheckBoxItem = ({
         onChange={handleCheckboxChange}
         checked={values.includes(value)}
       />
-      <StRadioSpan>{children ? children : label}</StRadioSpan>
+      {children ? (
+        <StRadioChild>{children}</StRadioChild>
+      ) : (
+        <StRadioSpan>{label}</StRadioSpan>
+      )}
     </StCompanyLabel>
   );
 };
@@ -68,6 +72,22 @@ const StRadioSpan = styled.span`
   ${StRadioInput}:checked + & {
     color: ${({ theme }) => theme.colors.white};
     background-color: ${({ theme }) => theme.colors.primary};
+    border-color: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+const StRadioChild = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 8.2rem;
+  padding: 2rem;
+  background-color: ${({ theme }) => theme.colors.gray0};
+  border: 1px solid ${({ theme }) => theme.colors.gray0};
+  border-radius: 15px;
+
+  ${StRadioInput}:checked + & {
+    background-color: ${({ theme }) => theme.colors.alpha10_primary};
     border-color: ${({ theme }) => theme.colors.primary};
   }
 `;

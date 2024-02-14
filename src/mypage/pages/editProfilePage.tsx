@@ -79,6 +79,7 @@ const EditProfilePage = () => {
   const patchData = async () => {
     try {
       await instance.patch('api/member', values);
+      alert('수정이 완료되었습니다.');
     } catch (err) {
       console.log(err);
     }
@@ -109,7 +110,7 @@ const EditProfilePage = () => {
   };
 
   return (
-    <div css={Container}>
+    <div css={container}>
       <header css={headerStyles}>
         <StArrow onClick={() => navigate('/mypage')} />
         <StHeaderTitle>기본 프로필 수정</StHeaderTitle>
@@ -355,7 +356,7 @@ const EditProfilePage = () => {
 
 export default EditProfilePage;
 
-const Container = css`
+const container = css`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

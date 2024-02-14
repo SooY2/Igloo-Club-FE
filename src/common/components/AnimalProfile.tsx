@@ -41,6 +41,33 @@ const AnimalProfile = ({ animalFace }: { animalFace: string }) => {
     case '곰상':
       AnimalFace = Bear;
       break;
+    case 'FOX':
+      AnimalFace = Fox;
+      break;
+    case 'DOG':
+      AnimalFace = Dog;
+      break;
+    case 'RABBIT':
+      AnimalFace = Rabbit;
+      break;
+    case 'DINO':
+      AnimalFace = Dino;
+      break;
+    case 'DEER':
+      AnimalFace = Deer;
+      break;
+    case 'WOLF':
+      AnimalFace = Wolf;
+      break;
+    case 'HORSE':
+      AnimalFace = Horse;
+      break;
+    case 'CAT':
+      AnimalFace = Cat;
+      break;
+    case 'BEAR':
+      AnimalFace = Bear;
+      break;
     default:
       break;
   }
