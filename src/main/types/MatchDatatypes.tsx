@@ -7,5 +7,5 @@ export interface MatchDatatypes {
     longitude: number;
   }>;
   location: string;
-  chatRoomId: number;
+  chatRoomId?: number | null;
 }

@@ -70,7 +70,7 @@ const FinishMatch = () => {
         </div>
         <div css={Recommend.RecoBox}>
           <span css={Recommend.RecoTitle}>🗓️ 가능한 요일</span>
-          {matchData ? (
+          {matchData?.yoil ? (
             <span css={Recommend.RecoContent}>{matchData.yoil}</span>
           ) : (
             <span css={Recommend.RecoContent}>없음</span>
@@ -78,7 +78,7 @@ const FinishMatch = () => {
         </div>
         <div css={Recommend.RecoBox}>
           <span css={Recommend.RecoTitle}>⏰ 가능 시간대</span>
-          {matchData ? (
+          {matchData?.time ? (
             <span css={Recommend.RecoContent}>{matchData.time}</span>
           ) : (
             <span css={Recommend.RecoContent}>없음</span>
@@ -90,9 +90,7 @@ const FinishMatch = () => {
           <span>첫만남 장소, 이런 곳은 어떠세요?</span>
         </div>
         <div css={Place.SubTitle}>
-          <span>
-            두 분의 의견을 반영하여 최적의 첫만남 장소를 골라봤어요 📝
-          </span>
+          <span>두분의 의견을 반영하여 최적의 첫만남 장소를 골라봤어요 📝</span>
         </div>
         <div css={Place.Map}>
           <Map matchData={matchData} />
@@ -100,7 +98,11 @@ const FinishMatch = () => {
         <div css={Place.InfoBox}>
           <ul css={Place.InfoPlaceName}>
             <li css={Place.InfoTitle}>장소명</li>
-            <li css={Place.InfoContent}></li>
+            {matchData ? (
+              <li css={Place.InfoContent}>{matchData.marker[0].title}</li>
+            ) : (
+              <span css={Recommend.RecoContent}>없음</span>
+            )}
           </ul>
           <ul css={Place.InfoAddress}>
             <li css={Place.InfoTitle}>주소</li>

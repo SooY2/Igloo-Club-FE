@@ -131,6 +131,7 @@ const ChatRoom = () => {
         chat={chat}
         setChat={setChat}
         handleSubmit={handleSubmit}
+        css={FooterBox}
       />
     </section>
   );
@@ -149,5 +150,9 @@ const HeaderBox = css`
 `;
 
 const MainBox = css`
+  z-index: 1;
+`;
+
+const FooterBox = css`
   z-index: 1;
 `;

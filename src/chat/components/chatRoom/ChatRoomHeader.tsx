@@ -29,7 +29,7 @@ const ChatRoomHeader = ({
   };
   return (
     <StHeaderContainer>
-      <header>
+      <header css={HeaderWrapper}>
         <ArrowLeft onClick={() => navigate('/chat')} />
         <span css={senderInfoStyles}>
           <AnimalProfile animalFace={animalFace} />
@@ -64,11 +64,19 @@ const StHeaderContainer = styled.header`
   top: 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: start;
   justify-content: center;
   width: 100%;
   padding: 3rem 2rem;
+`;
+
+const HeaderWrapper = css`
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: start;
 `;
 
 const senderInfoStyles = css`
@@ -96,13 +104,13 @@ const StSenderJob = styled.p`
 const StChatModalWrapper = styled.button`
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 0.8rem;
   align-items: center;
   justify-content: start;
-  min-width: 35rem;
+  width: 100%;
   height: 5rem;
-  padding: 0 1.7rem;
-  font-size: 13px;
+  padding: 0 1rem;
+  font-size: 1.3rem;
   font-style: normal;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.gray8};
@@ -112,5 +120,10 @@ const StChatModalWrapper = styled.button`
 `;
 
 const ModalBox = css`
+  position: fixed;
+  top: 0;
   z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

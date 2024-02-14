@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { css } from '@emotion/react';
 import { MatchDatatypes } from '../../main/types/MatchDatatypes';
+import pin from '../assets/images/pin.png';
 
 declare global {
   interface Window {
@@ -21,21 +22,26 @@ const Map = ({ matchData }: MapProps) => {
       import.meta.env.VITE_KAKAO_MAP_KEY
     }&autoload=false&libraries=services`;
 
-    mapScript.addEventListener('load', () => {
-      onLoadKakaoMap();
-    });
+    if (window.kakao && window.kakao.maps) {
+      mapScript.onload = () => {
+        setTimeout(onLoadKakaoMap, 1000);
+      };
+    }
 
     document.head.appendChild(mapScript);
 
     const onLoadKakaoMap = () => {
-      if (window.kakao && window.kakao.maps) {
+      window.kakao.maps.load(() => {
         const mapContainer = document.getElementById('map');
 
         let center;
 
         if (matchData) {
           if (matchData.location === '광화문') {
-            center = new window.kakao.maps.LatLng(37.572776, 126.97689);
+            center = new window.kakao.maps.LatLng(
+              37.5709578373114,
+              126.977928770123,
+            );
           } else if (matchData.location === '판교') {
             center = new window.kakao.maps.LatLng(
               37.39525750009229,
@@ -43,27 +49,39 @@ const Map = ({ matchData }: MapProps) => {
             );
           }
         }
+
         const mapOption = {
           center: center,
-          level: 3,
+          level: 5,
         };
 
         const map = new window.kakao.maps.Map(mapContainer, mapOption);
 
-        if (matchData && matchData.marker) {
+        if (matchData) {
           matchData.marker.forEach((marker) => {
             const position = new window.kakao.maps.LatLng(
               marker.latitude,
               marker.longitude,
             );
-            const kakaoMarker = new window.kakao.maps.Marker({
-              position,
+
+            const imageSrc = pin;
+            const imageSize = new window.kakao.maps.Size(22, 30);
+            const imageOption = { offset: new window.kakao.maps.Point(20, 30) };
+
+            const markerImage = new window.kakao.maps.MarkerImage(
+              imageSrc,
+              imageSize,
+              imageOption,
+            );
+            const Markers = new window.kakao.maps.Marker({
+              position: position,
+              image: markerImage,
               title: marker.title,
             });
-            kakaoMarker.setMap(map);
+            Markers.setMap(map);
           });
         }
-      }
+      });
     };
   }, [matchData]);
 
@@ -73,6 +91,7 @@ const Map = ({ matchData }: MapProps) => {
 export default Map;
 
 const MapContainer = css`
+  display: flex;
   width: 34rem;
   height: 20rem;
 `;

@@ -72,7 +72,7 @@ const Container = css`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 2.2rem 1.6rem 0;
+  padding: 2.2rem 1.6rem;
   overflow: auto;
 `;
 

@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import instance from '../../common/apis/axiosInstanse';
+import { MatchDatatypes } from '../../main/types/MatchDatatypes';
 import Map from '../../common/components/Map';
 import { Xicon } from '../../main/assets/svgs';
 
@@ -13,6 +14,7 @@ const InfoModal = ({
   chatRoomId: number;
   closeModal: () => void;
 }) => {
+  const [matchData, setMatchData] = useState<MatchDatatypes | undefined>();
   const title = `${nickname} 님이 알려주신\n 만남이 가능한 시간대와 장소에요`;
 
   const ClickXBtn = () => {
@@ -22,6 +24,7 @@ const InfoModal = ({
   const handlePossibleInfo = async () => {
     try {
       const res = await instance.get(`/api/chat/room/${chatRoomId}/info`);
+      setMatchData(res.data);
       console.log(res.data);
     } catch (error) {
       console.log(error);
@@ -49,16 +52,27 @@ const InfoModal = ({
         <StPossibleWrapper>
           <StPossibleBox>
             <StPossibleTitle>🗓️ 가능한 요일</StPossibleTitle>
-            <StPossibleContent></StPossibleContent>
+            {matchData?.yoil
+              ? matchData.yoil.map((day: string, index: number) => (
+                  <>
+                    {' '}
+                    <StPossibleContent key={index}>{day}</StPossibleContent>
+                  </>
+                ))
+              : null}
           </StPossibleBox>
           <StPossibleBox>
             <StPossibleTitle>⏰ 가능 시간대</StPossibleTitle>
-            <StPossibleContent></StPossibleContent>
+            {matchData?.time
+              ? matchData.time.map((timeSlot: string, index: number) => (
+                  <StPossibleContent key={index}>{timeSlot}</StPossibleContent>
+                ))
+              : null}
           </StPossibleBox>
         </StPossibleWrapper>
         <StPlaceWrapper>
           <StPlaceMap>
-            <Map />
+            <Map matchData={matchData} />
           </StPlaceMap>
           <StPlaceBox>
             <StPlaceInfo></StPlaceInfo>
@@ -80,6 +94,7 @@ const StInfoModalContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 42.5rem;
   height: 100vh;
   background: rgb(0 0 0 / 50%);
 `;
@@ -105,7 +120,7 @@ const StXButton = styled.button`
 
 const StInfoTitle = styled.span`
   display: flex;
-  padding: 1.8rem 2.5rem 0;
+  padding: 1.5rem 2.5rem;
   line-height: 2.5rem;
   color: ${({ theme }) => theme.colors.gray9};
   ${({ theme }) => theme.fonts.subtitle2b};
@@ -116,17 +131,16 @@ const StPossibleWrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
   align-items: center;
-  padding: 2rem 2rem 0;
+  padding: 0%.5rem 2rem;
 `;
 
 const StPossibleBox = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 7rem;
   align-items: center;
   min-width: 28rem;
   height: 5.9rem;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   margin-top: 0.9rem;
   background: ${({ theme }) => theme.colors.gray0};
   border-radius: 17px;
@@ -136,6 +150,7 @@ const StPossibleTitle = styled.span`
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-right: 2rem;
   font-size: 1.3rem;
   font-style: normal;
   font-weight: 700;
@@ -143,6 +158,7 @@ const StPossibleTitle = styled.span`
 `;
 
 const StPossibleContent = styled.span`
+  padding: 0 1rem;
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 600;
@@ -154,7 +170,7 @@ const StPlaceWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 2.1rem 2.5rem 1rem;
+  padding: 0.5rem 2.5rem;
 `;
 
 const StPlaceMap = styled.div`
@@ -167,6 +183,7 @@ const StPlaceBox = styled.div`
   align-items: center;
   justify-content: center;
   height: 5.1rem;
+  margin-top: 1rem;
   background: #fafafa;
   border-radius: 5px;
 `;
