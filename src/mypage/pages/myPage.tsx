@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
+import instance from '../../common/apis/axiosInstanse';
 import { theme } from '../../common/styles/theme';
 import NavBar from '../../common/components/NavBar';
 import ToggleBtn from '../components/ToggleBtn';
@@ -7,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { Registertypes } from '../../register/types/registerTypes';
 import instance from '../../common/apis/axiosInstanse';
 import MyProfileCard from '../components/MyProfileCard';
+
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -48,6 +50,10 @@ const MyPage = () => {
   const ClickEditBtn = () => {
     navigate('/editprofilepage');
   };
+
+  useEffect(() => {
+    handleProfileData();
+  }, []);
 
   return (
     <div css={Container}>

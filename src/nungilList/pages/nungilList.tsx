@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import { theme } from '../../common/styles/theme';
+import { useLocation } from 'react-router-dom';
 import NavBar from '../../common/components/NavBar';
 import ReceivedNungil from '../components/ReceivedNungil';
 import MatchingList from '../components/MatchingList';
 import SendNungil from '../components/SendNungil';
 
 const NungilList = () => {
+  const { state } = useLocation();
   const [selectedBtn, setSelectedBtn] = useState('received');
 
   let middleContent;
@@ -22,6 +24,12 @@ const NungilList = () => {
       middleContent = <SendNungil />;
       break;
   }
+
+  useEffect(() => {
+    if (state && state.selectedBtn) {
+      setSelectedBtn(state.selectedBtn);
+    }
+  }, [state]);
 
   const handleClickBtn = (selectedBtn: 'received' | 'matching' | 'sent') => {
     setSelectedBtn(selectedBtn);
