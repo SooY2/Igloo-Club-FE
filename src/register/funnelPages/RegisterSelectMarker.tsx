@@ -14,6 +14,7 @@ interface ScedultPropsTypes {
   onNext: () => void;
   handleScheduleValue: (data: ScheduleTypes) => void;
   registerScheduleValues: ScheduleTypes;
+  percent: number;
 }
 
 const 장소선택 = ({

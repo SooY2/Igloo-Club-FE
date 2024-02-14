@@ -396,7 +396,7 @@ const mainStyles = css`
   flex-direction: column;
   gap: 3.6rem;
   padding: 2.7rem;
-  margin-top: 6.7rem;
+  margin: 6.7rem 2rem;
   overflow-y: scroll;
 `;
 
