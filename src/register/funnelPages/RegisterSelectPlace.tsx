@@ -14,7 +14,7 @@ interface ScedultPropsTypes {
   registerScheduleValues: ScheduleTypes;
 }
 
-const 장소선택 = ({
+const 지역선택 = ({
   onPrev,
   onNext,
   handleScheduleValue,
@@ -85,7 +85,7 @@ const 장소선택 = ({
   );
 };
 
-export default 장소선택;
+export default 지역선택;
 
 const TitleBox = styled(St.TitleBox)`
   margin-bottom: 5.4rem;

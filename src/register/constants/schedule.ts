@@ -1,13 +1,13 @@
 export const PlaceCardConstants = [
   {
-    name: 'PANGYO',
+    name: 'GWANGHWAMUN',
     emoji: '💼',
     text1: '대한민국의 중심,',
     text2: '서울 3대 업무지구',
     btn: '광화문',
   },
   {
-    name: 'GWANGHWAMUN',
+    name: 'PANGYO',
     emoji: '👩🏻‍💻',
     text1: '한국의 실리콘밸리,',
     text2: 'IT기업 밀집 지구',

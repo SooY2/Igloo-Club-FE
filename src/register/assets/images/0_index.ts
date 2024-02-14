@@ -7,6 +7,7 @@ import horseImg from './animalImages/horseImg.png';
 import rabbitImg from './animalImages/rabbitImg.png';
 import tRexImg from './animalImages/tRexImg.png';
 import wolfImg from './animalImages/wolfImg.png';
+import markerImg from './marker.png';
 
 export {
   bearImg,
@@ -18,4 +19,5 @@ export {
   rabbitImg,
   tRexImg,
   wolfImg,
+  markerImg,
 };
