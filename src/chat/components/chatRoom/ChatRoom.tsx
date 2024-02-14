@@ -44,8 +44,10 @@ const ChatRoom = () => {
         companyName={chatSenderInfo.companyName}
         job={chatSenderInfo.job}
         nickname={chatSenderInfo.nickname}
+        chatRoomId={chatRoomId}
+        css={HeaderBox}
       />
-      <ChatRoomMain chatData={chatData} />
+      <ChatRoomMain chatData={chatData} css={MainBox} />
       <ChatRoomFooter
         chat={chat}
         setChat={setChat}
@@ -61,4 +63,12 @@ const chatRoomStyles = css`
   display: flex;
   flex-direction: column;
   width: 100%;
+`;
+
+const HeaderBox = css`
+  z-index: 999;
+`;
+
+const MainBox = css`
+  z-index: 1;
 `;

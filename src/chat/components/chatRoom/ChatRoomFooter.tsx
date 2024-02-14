@@ -47,6 +47,7 @@ const StContainer = styled.footer`
 
 const StTextarea = styled.textarea`
   width: 100%;
+  max-width: 42.5rem;
   height: 4rem;
   padding: 1rem 1.7rem;
   text-justify: center;

@@ -1,42 +1,48 @@
-// import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import styled from '@emotion/styled';
-// import instance from '../../common/apis/axiosInstanse';
+import instance from '../../common/apis/axiosInstanse';
 import Map from '../../common/components/Map';
 import { Xicon } from '../../main/assets/svgs';
 
-const InfoModal = () => {
-  // const [possibleData, setPossibleData] = useState<any>('');
-  const title = ' 님이 알려주신\n 만남이 가능한 시간대와 장소에요';
+const InfoModal = ({
+  nickname,
+  chatRoomId,
+  closeModal,
+}: {
+  nickname: string;
+  chatRoomId: number;
+  closeModal: () => void;
+}) => {
+  const title = `${nickname} 님이 알려주신\n 만남이 가능한 시간대와 장소에요`;
 
-  // const ClickXBtn = () => {
+  const ClickXBtn = () => {
+    closeModal();
+  };
 
-  // }
+  const handlePossibleInfo = async () => {
+    try {
+      const res = await instance.get(`/api/chat/room/${chatRoomId}/info`);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // const handlePossibleInfo = async () => {
-  //   try {
-  //     const res = await instance.get(`/api/chat/room/${chatRoomId}/info`);
-  //     console.log(res.data);
-  //     setPossibleData(res.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  useEffect(() => {
+    handlePossibleInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // useEffect(() => {
-  //   handlePossibleInfo();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
-  // const handleOutsideClick = (event) => {
-  //   if (event.target === event.currentTarget) {
-  //     closeModal();
-  //   }
-  // };
+  const handleOutsideClick = (event) => {
+    if (event.target === event.currentTarget) {
+      closeModal();
+    }
+  };
 
   return (
-    <StInfoModalContainer>
+    <StInfoModalContainer onClick={handleOutsideClick}>
       <StInfoModalWrapper>
-        <StXButton>
+        <StXButton type="button" onClick={ClickXBtn}>
           <Xicon />
         </StXButton>
         <StInfoTitle>{title}</StInfoTitle>
@@ -66,12 +72,15 @@ const InfoModal = () => {
 export default InfoModal;
 
 const StInfoModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: rgb(0 0 0 / 50%);
 `;
 

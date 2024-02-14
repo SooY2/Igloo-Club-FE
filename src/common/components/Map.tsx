@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { css } from '@emotion/react';
+import { MatchDatatypes } from '../../main/types/MatchDatatypes';
 
 declare global {
   interface Window {
@@ -7,11 +8,11 @@ declare global {
     kakao: any;
   }
 }
+interface MapProps {
+  matchData: MatchDatatypes | undefined;
+}
 
-const Map = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [, setMap] = useState<any>();
-
+const Map = ({ matchData }: MapProps) => {
   useEffect(() => {
     const mapScript = document.createElement('script');
 
@@ -20,21 +21,51 @@ const Map = () => {
       import.meta.env.VITE_KAKAO_MAP_KEY
     }&autoload=false&libraries=services`;
 
+    mapScript.addEventListener('load', () => {
+      onLoadKakaoMap();
+    });
+
     document.head.appendChild(mapScript);
 
     const onLoadKakaoMap = () => {
-      window.kakao.maps.load(() => {
+      if (window.kakao && window.kakao.maps) {
         const mapContainer = document.getElementById('map');
+
+        let center;
+
+        if (matchData) {
+          if (matchData.location === '광화문') {
+            center = new window.kakao.maps.LatLng(37.572776, 126.97689);
+          } else if (matchData.location === '판교') {
+            center = new window.kakao.maps.LatLng(
+              37.39525750009229,
+              127.11148651523494,
+            );
+          }
+        }
         const mapOption = {
-          center: new window.kakao.maps.LatLng(37.4964, 126.9546),
+          center: center,
           level: 3,
         };
 
-        setMap(new window.kakao.maps.Map(mapContainer, mapOption));
-      });
+        const map = new window.kakao.maps.Map(mapContainer, mapOption);
+
+        if (matchData && matchData.marker) {
+          matchData.marker.forEach((marker) => {
+            const position = new window.kakao.maps.LatLng(
+              marker.latitude,
+              marker.longitude,
+            );
+            const kakaoMarker = new window.kakao.maps.Marker({
+              position,
+              title: marker.title,
+            });
+            kakaoMarker.setMap(map);
+          });
+        }
+      }
     };
-    mapScript.addEventListener('load', onLoadKakaoMap);
-  }, []);
+  }, [matchData]);
 
   return <div id="map" css={MapContainer}></div>;
 };

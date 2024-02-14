@@ -73,7 +73,8 @@ const Container = css`
   flex-direction: row;
   gap: 7rem;
   align-items: center;
-  width: 100%;
+  justify-content: space-around;
+  max-width: 42.5rem;
   height: 6.2rem;
   padding: 0 4rem;
   background-color: ${theme.colors.white};

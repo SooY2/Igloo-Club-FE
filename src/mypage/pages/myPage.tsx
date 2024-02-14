@@ -1,8 +1,10 @@
 import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
+import instance from '../../common/apis/axiosInstanse';
 import { theme } from '../../common/styles/theme';
 import NavBar from '../../common/components/NavBar';
 import ToggleBtn from '../components/ToggleBtn';
+import { useEffect } from 'react';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -11,9 +13,19 @@ const MyPage = () => {
     navigate('/editprofilepage');
   };
 
-  const ClickPreferBtn = () => {
-    navigate('/');
+  const handleProfileData = async () => {
+    try {
+      const res = await instance.get('/api/member');
+
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  useEffect(() => {
+    handleProfileData();
+  }, []);
 
   return (
     <div css={Container}>
@@ -34,10 +46,6 @@ const MyPage = () => {
         <button type="button" onClick={ClickEditBtn} css={Top.TopStyle}>
           <span>프로필 수정</span>
           <button type="button" onClick={ClickEditBtn}></button>
-        </button>
-        <button type="button" onClick={ClickPreferBtn} css={Top.TopStyle}>
-          <span>선호하는 이성</span>
-          <button type="button" onClick={ClickPreferBtn}></button>
         </button>
         <div css={Top.TopStyleBottom}>
           <span>회사 사람 만나지 않기</span>

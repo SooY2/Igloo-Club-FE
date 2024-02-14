@@ -1,15 +1,17 @@
 import { css } from '@emotion/react';
 import { theme } from '../../common/styles/theme';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import FinishEditBtn from '../components/FinishEditBtn';
 import { ArrowLeft } from '../assets/svgs/index';
 
 const EditProfilePage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const ClickArrowLeft = () => {
-    navigate('/mypage');
+    navigate(location.state?.from || '/mypage');
   };
+
   return (
     <div css={Container}>
       <div css={Top.Wrapper}>
