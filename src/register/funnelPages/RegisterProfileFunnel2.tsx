@@ -84,10 +84,8 @@ const 기본프로필입력2 = ({
   const handleSubmit = async () => {
     try {
       await instance.post('/api/member', values);
-      console.log(values);
       onNext();
     } catch (err) {
-      console.log(values);
       console.log(err);
     }
   };

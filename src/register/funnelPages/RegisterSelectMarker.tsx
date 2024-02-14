@@ -43,14 +43,12 @@ const 장소선택 = ({
         `/api/markers?location=${registerScheduleValues.location}`,
       );
       setMarkerList(data);
-      console.log(data);
     } catch (err) {
       console.log(err);
     }
   };
 
   const handleSubmit = () => {
-    console.log(thisValues);
     if (handleScheduleValue) {
       handleScheduleValue({
         ...registerScheduleValues,

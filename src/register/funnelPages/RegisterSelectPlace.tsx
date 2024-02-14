@@ -29,7 +29,6 @@ const 지역선택 = ({
   }, [selectPlace]);
 
   const handleSubmit = () => {
-    console.log(selectPlace);
     if (handleScheduleValue) {
       handleScheduleValue({ ...registerScheduleValues, location: selectPlace });
       onNext();
