@@ -17,8 +17,8 @@ const ChatRoomMain = ({ chatData }: { chatData: ChatDataTypes[] }) => {
       ref={mainRef}
       css={{
         overflow: 'scroll',
-        height: 'calc(100vh - 16rem)',
-        marginTop: '6.8rem',
+        margin: '6.8rem 0 9rem',
+        backgroundColor: '#fff',
       }}
     >
       {chatData ? (

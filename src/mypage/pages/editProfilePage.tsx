@@ -79,6 +79,7 @@ const EditProfilePage = () => {
   const patchData = async () => {
     try {
       await instance.patch('api/member', values);
+      alert('수정이 완료되었습니다.');
     } catch (err) {
       console.log(err);
     }
@@ -109,7 +110,7 @@ const EditProfilePage = () => {
   };
 
   return (
-    <div css={Container}>
+    <div css={container}>
       <header css={headerStyles}>
         <StArrow onClick={() => navigate('/mypage')} />
         <StHeaderTitle>기본 프로필 수정</StHeaderTitle>
@@ -126,7 +127,7 @@ const EditProfilePage = () => {
           />
         </RegisterBasicInput>
         {/* 성별 */}
-        <RegisterBasicInput label="성별">
+        <RegisterBasicInput label="성별" explain="성별은 변경할 수 없어요">
           <Radio
             name="gender"
             value1="FEMALE"
@@ -355,7 +356,7 @@ const EditProfilePage = () => {
 
 export default EditProfilePage;
 
-const Container = css`
+const container = css`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -374,6 +375,7 @@ const headerStyles = css`
   justify-content: center;
   width: 100%;
   height: 6.7rem;
+  background-color: white;
 `;
 
 const StArrow = styled(ArrowLeft)`
@@ -395,7 +397,7 @@ const mainStyles = css`
   flex-direction: column;
   gap: 3.6rem;
   padding: 2.7rem;
-  margin-top: 6.7rem;
+  margin: 7rem 0;
   overflow-y: scroll;
 `;
 
@@ -420,6 +422,8 @@ const StAnimalRaceImg = styled.img`
 `;
 
 const finishContainer = css`
+  position: fixed;
+  bottom: 0;
   display: flex;
   flex-direction: row;
   align-items: center;

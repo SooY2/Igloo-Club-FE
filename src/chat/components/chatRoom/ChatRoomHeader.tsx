@@ -62,6 +62,7 @@ export default ChatRoomHeader;
 const StHeaderContainer = styled.header`
   position: fixed;
   top: 0;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;

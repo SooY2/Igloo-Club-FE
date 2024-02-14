@@ -4,23 +4,51 @@ import instance from '../../common/apis/axiosInstanse';
 import { theme } from '../../common/styles/theme';
 import NavBar from '../../common/components/NavBar';
 import ToggleBtn from '../components/ToggleBtn';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Registertypes } from '../../register/types/registerTypes';
+import instance from '../../common/apis/axiosInstanse';
+import MyProfileCard from '../components/MyProfileCard';
+
 
 const MyPage = () => {
   const navigate = useNavigate();
 
-  const ClickEditBtn = () => {
-    navigate('/editprofilepage');
+  const [values, setValues] = useState<Registertypes>({
+    nickname: '',
+    sex: '',
+    birthdate: '',
+    contactKakao: null,
+    contactInstagram: null,
+    animalFace: '',
+    job: '',
+    height: '',
+    mbti: '',
+    marriageState: '',
+    religion: '',
+    alcohol: '',
+    smoke: '',
+    faceDepictionList: [],
+    personalityDepictionList: [],
+    description: '',
+    markerList: [],
+    hobbyList: [],
+  });
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  const getUserInfo = async () => {
+    try {
+      const { data } = await instance.get('api/member');
+      console.log(data);
+      setValues(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const handleProfileData = async () => {
-    try {
-      const res = await instance.get('/api/member');
-
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
-    }
+  const ClickEditBtn = () => {
+    navigate('/editprofilepage');
   };
 
   useEffect(() => {
@@ -32,16 +60,12 @@ const MyPage = () => {
       <div css={Title}>
         <span>마이페이지</span>
       </div>
-      <div css={ProfileCard.Wrapper}>
-        <div css={ProfileCard.Top}>
-          <img />
-          <div css={ProfileCard.Title}>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-        <div css={ProfileCard.Bottom}></div>
-      </div>
+      <MyProfileCard
+        nickname={values.nickname}
+        animalFace={values.animalFace}
+        job={values.job}
+        description={values.description}
+      />
       <div css={Top.Wrapper}>
         <button type="button" onClick={ClickEditBtn} css={Top.TopStyle}>
           <span>프로필 수정</span>
@@ -96,36 +120,6 @@ const Title = css`
   color: ${theme.colors.gray9};
   ${theme.fonts.body2b};
 `;
-
-const ProfileCard = {
-  Wrapper: css`
-    display: flex;
-    flex-direction: row;
-    min-width: 30rem;
-    padding: 2.4rem 2.3rem 2.9rem;
-    margin: 2rem 2.3rem 0;
-    color: ${theme.colors.white};
-    background: linear-gradient(116deg, #ff6264 0%, #ffa490 96.79%);
-    ${theme.fonts.body2b};
-
-    border-radius: 15px;
-  `,
-
-  Top: css`
-    display: flex;
-    flex-direction: row;
-  `,
-
-  Title: css`
-    display: flex;
-    flex-direction: column;
-  `,
-
-  Bottom: css`
-    display: flex;
-    flex-direction: column;
-  `,
-};
 
 const Top = {
   Wrapper: css`

@@ -15,7 +15,6 @@ const PickProfileBtn = ({ ProfileData }: any) => {
         isPayed: true,
       });
       const { companyName, job, description } = res.data;
-      console.log(companyName);
 
       ProfileData({ companyName, job, description });
     } catch (error) {
