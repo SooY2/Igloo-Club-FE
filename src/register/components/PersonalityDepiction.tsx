@@ -30,7 +30,7 @@ const PersonalityDepiction = ({
       <StArticleStyles>
         <section css={St.sectionStyles}>
           <St.TitleBox>
-            <St.Title>회회원님의 성격을 가장 잘 나타내는</St.Title>
+            <St.Title>회원님의 성격을 가장 잘 나타내는</St.Title>
             <St.Title>키워드를 여러 개 선택해 주세요</St.Title>
           </St.TitleBox>
           <div css={St.checkBoxContainerStyles}>
