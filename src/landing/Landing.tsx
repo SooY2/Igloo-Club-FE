@@ -13,7 +13,7 @@ const Landing = () => {
       const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
       const STEP = localStorage.getItem('STEP');
 
-      if (!ACCESS_TOKEN) {
+      if (!ACCESS_TOKEN || !STEP) {
         navigate('/login');
       } else if (STEP !== '가입완료') {
         navigate('/register');
