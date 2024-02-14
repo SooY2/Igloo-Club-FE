@@ -29,6 +29,7 @@ const MainPage = () => {
       });
 
       setProfileData(res.data.content);
+      console.log(res.data.content);
     } catch (error) {
       console.log(error);
     }
@@ -51,11 +52,15 @@ const MainPage = () => {
     setMatchingTime(newTime);
   };
 
+  const handleSelectedChange = () => {
+    handleGetAllProfile();
+  };
+
   return (
     <div css={Container}>
       <div css={Top.Wrapper}>
         <div css={Top.TitleTop}>
-          <CustomSelect />
+          <CustomSelect onSelectedChange={handleSelectedChange} />
           <span>에 위치한</span>
         </div>
         <div css={Top.TitleBottom}>
@@ -107,7 +112,6 @@ const MainPage = () => {
 export default MainPage;
 
 const Container = css`
-  z-index: 1;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -204,7 +208,7 @@ const PickBtn = css`
   bottom: 0;
   left: 50%;
   z-index: 999;
-  margin-bottom: 8.2rem;
+  margin-bottom: 7rem;
   transform: translateX(-50%);
 `;
 

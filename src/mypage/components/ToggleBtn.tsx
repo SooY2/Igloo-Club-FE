@@ -9,7 +9,6 @@ const ToggleBtn = () => {
     setIsOn((prevIsOn) => !prevIsOn);
     try {
       await instance.patch('/api/member/company/toggle');
-      console.log('회사 사람 만나지 않기');
     } catch (error) {
       console.log(error);
     }
@@ -35,7 +34,7 @@ const StToggleContainer = styled.div`
 const StToggleWrapper = styled.div<{ isOn: boolean }>`
   width: 5rem;
   height: 2.4rem;
-  background-color: ${({ isOn }) => (isOn ? '#808482' : '#d3d2d2')};
+  background-color: ${({ isOn }) => (isOn ? '#d3d2d2' : '#808482')};
   border-radius: 30px;
   transition: background-color 0.5s ease-in-out;
 `;
@@ -43,7 +42,7 @@ const StToggleWrapper = styled.div<{ isOn: boolean }>`
 const StToggleCircle = styled.div<{ isOn: boolean }>`
   position: absolute;
   top: 0.1rem;
-  left: ${({ isOn }) => (isOn ? '2.7rem' : '0.1rem')};
+  left: ${({ isOn }) => (isOn ? '0.1rem' : '2.7rem')};
   width: 2.2rem;
   height: 2.2rem;
   background-color: #fff;

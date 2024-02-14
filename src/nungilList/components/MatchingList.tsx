@@ -51,6 +51,7 @@ export default MatchingList;
 
 const Container = css`
   width: 100%;
+  padding-bottom: 15rem;
   background: ${theme.colors.white};
 `;
 

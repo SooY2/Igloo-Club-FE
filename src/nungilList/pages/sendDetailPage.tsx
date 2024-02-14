@@ -8,7 +8,7 @@ const SendDetailPage = () => {
   const navigate = useNavigate();
 
   const ClickArrowLeft = () => {
-    navigate('/nungillist');
+    navigate('/nungillist', { state: { selectedBtn: 'sent' } });
   };
 
   return (

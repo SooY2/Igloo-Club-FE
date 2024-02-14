@@ -3,38 +3,13 @@ import { ChatDataTypes } from '../../types/chatDataTypes';
 import ChatSpeechBubble from './ChatSpeechBubble';
 import { useEffect, useRef } from 'react';
 
-const ChatRoomMain = ({
-  chatData,
-  fetchData,
-}: {
-  chatData: ChatDataTypes[];
-  fetchData: () => void;
-}) => {
+const ChatRoomMain = ({ chatData }: { chatData: ChatDataTypes[] }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLElement>(null);
 
   // 새 메시지가 추가되었을 때만 스크롤을 최하단으로 이동
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [chatData]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (mainRef.current?.scrollTop === 0) {
-        fetchData();
-      }
-    };
-
-    // mainRef.current가 null이 아닐 때만 이벤트 리스너를 추가합니다.
-    if (mainRef.current) {
-      mainRef.current.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (mainRef.current) {
-        mainRef.current.removeEventListener('scroll', handleScroll);
-      }
-    };
+    messagesEndRef.current?.scrollIntoView();
   }, [chatData]);
 
   return (

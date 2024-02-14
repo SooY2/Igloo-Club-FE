@@ -8,6 +8,7 @@ import styled from '@emotion/styled';
 import onlyAbleNumber from '../../common/utils/onlyAbleNumber';
 import { NavTypesProps } from '../types/navTypes';
 import instance from '../../common/apis/axiosInstanse';
+import axios from 'axios';
 
 interface PhoneNumProps extends NavTypesProps {
   setPhoneNum: Dispatch<SetStateAction<string>>;
@@ -31,8 +32,18 @@ const 전화번호입력 = ({ onPrev, onNext, setPhoneNum }: PhoneNumProps) => {
       });
       setPhoneNum(thisPhoneNum);
       onNext();
-    } catch (error) {
-      console.error(error);
+    } catch (error: unknown) {
+      console.log(error);
+      if (axios.isAxiosError(error)) {
+        if (error.response?.data?.code === 'DUPLICATED_PHONENUMBER')
+          alert('이미 등록된 전화번호입니다.');
+        if (error.response?.data?.code === 'REDIS_NOT_FOUND')
+          alert('인증번호가 만료되었습니다.');
+        if (error.response?.data?.code === 'WRONG_AUTH_CODE')
+          alert('인증번호가 틀렸습니다.');
+      } else {
+        console.log('An unexpected error occurred:', error);
+      }
     } finally {
       setIsLoading(false);
     }
