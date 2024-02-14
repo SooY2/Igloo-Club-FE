@@ -127,7 +127,7 @@ const EditProfilePage = () => {
           />
         </RegisterBasicInput>
         {/* 성별 */}
-        <RegisterBasicInput label="성별">
+        <RegisterBasicInput label="성별" explain="성별은 변경할 수 없어요">
           <Radio
             name="gender"
             value1="FEMALE"
@@ -421,6 +421,8 @@ const StAnimalRaceImg = styled.img`
 `;
 
 const finishContainer = css`
+  position: fixed;
+  bottom: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
