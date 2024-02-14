@@ -16,7 +16,7 @@ interface ScedultPropsTypes {
   registerScheduleValues: ScheduleTypes;
 }
 
-const 장소선택 = ({
+const 지역선택 = ({
   onPrev,
   onNext,
   handleScheduleValue,
@@ -100,29 +100,17 @@ const 장소선택 = ({
             </RegisterBasicInput>
           </div>
         </section>
-        <div
-          css={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1.7rem',
-          }}
-        >
-          <St.StBtnExplain>
-            현재는 광화문과 판교, 두 곳만 지원해요
-          </St.StBtnExplain>
-          <RegisterBtn
-            isActive={isActive}
-            content="다음으로"
-            onClick={handleSubmit}
-          />
-        </div>
+        <RegisterBtn
+          isActive={isActive}
+          content="다음으로"
+          onClick={handleSubmit}
+        />
       </article>
     </>
   );
 };
 
-export default 장소선택;
+export default 지역선택;
 
 const TitleBox = styled(St.TitleBox)`
   margin-bottom: 1.6rem;

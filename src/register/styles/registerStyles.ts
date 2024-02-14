@@ -28,7 +28,6 @@ export const articleStyles = css`
 export const sectionStyles = css`
   display: flex;
   flex-direction: column;
-  margin-bottom: 7.3rem;
 `;
 
 export const StBtnExplain = styled.p`

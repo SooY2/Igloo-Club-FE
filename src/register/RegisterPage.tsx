@@ -12,8 +12,9 @@ import {
   // SNS계정,
   기본프로필입력1,
   기본프로필입력2,
-  장소선택,
+  지역선택,
   시간선택,
+  장소선택,
 } from './funnelPages/0_index';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -32,8 +33,9 @@ type StepType =
   | 'SNS계정'
   | '기본프로필입력1'
   | '기본프로필입력2'
-  | '장소선택'
-  | '시간선택';
+  | '지역선택'
+  | '시간선택'
+  | '장소선택';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -62,8 +64,9 @@ const Register = () => {
       'SNS계정',
       '기본프로필입력1',
       '기본프로필입력2',
-      '장소선택',
+      '지역선택',
       '시간선택',
+      '장소선택',
     ] as const,
     initialState as StepType,
   );
@@ -109,7 +112,7 @@ const Register = () => {
       location: '',
       yoilList: [],
       availableTimeList: [],
-      markerList: ['PANGYO_STATION_SQUARE'],
+      markerList: [],
     });
   const handleScheduleValue = (data: ScheduleTypes) => {
     setRegisterScheduleValues((prevValues) => ({
@@ -202,14 +205,14 @@ const Register = () => {
           <기본프로필입력2
             onPrev={() => setStep('기본프로필입력1')}
             onNext={() => {
-              setStep('장소선택'), localStorage.setItem('STEP', '장소선택');
+              setStep('지역선택'), localStorage.setItem('STEP', '지역선택');
             }}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
           />
         </Funnel.Step>
-        <Funnel.Step name="장소선택">
-          <장소선택
+        <Funnel.Step name="지역선택">
+          <지역선택
             onPrev={() => setStep('기본프로필입력2')}
             onNext={() => setStep('시간선택')}
             handleScheduleValue={handleScheduleValue}
@@ -218,7 +221,15 @@ const Register = () => {
         </Funnel.Step>
         <Funnel.Step name="시간선택">
           <시간선택
-            onPrev={() => setStep('장소선택')}
+            onPrev={() => setStep('지역선택')}
+            onNext={() => setStep('장소선택')}
+            handleScheduleValue={handleScheduleValue}
+            registerScheduleValues={registerScheduleValues}
+          />
+        </Funnel.Step>
+        <Funnel.Step name="장소선택">
+          <장소선택
+            onPrev={() => setStep('시간선택')}
             onNext={() => {
               submitScheduleValue();
             }}
