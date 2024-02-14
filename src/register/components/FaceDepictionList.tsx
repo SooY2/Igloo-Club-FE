@@ -25,7 +25,7 @@ const FaceDepictionList = ({
   };
   return (
     <StBackgroud>
-      <ArrowLeft />
+      <ArrowLeft onClick={() => setShowFaceDepiction(false)} />
       <StArticleStyles>
         <section css={St.sectionStyles}>
           <St.TitleBox>
