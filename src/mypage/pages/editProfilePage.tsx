@@ -375,6 +375,7 @@ const headerStyles = css`
   justify-content: center;
   width: 100%;
   height: 6.7rem;
+  background-color: white;
 `;
 
 const StArrow = styled(ArrowLeft)`
@@ -396,7 +397,7 @@ const mainStyles = css`
   flex-direction: column;
   gap: 3.6rem;
   padding: 2.7rem;
-  margin: 6.7rem 0 2rem;
+  margin: 7rem 0 2rem;
   overflow-y: scroll;
 `;
 

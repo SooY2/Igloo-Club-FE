@@ -39,11 +39,13 @@ export default ChatRoomHeader;
 const containerStyles = css`
   position: fixed;
   top: 0;
+  z-index: 1;
   display: flex;
   gap: 2.6rem;
   align-items: center;
   width: 100%;
   padding: 1rem 2rem;
+  background-color: white;
 `;
 
 const senderInfoStyles = css`
