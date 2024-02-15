@@ -8,7 +8,7 @@ interface RadioItemProps {
   onRadioChange: (value: string | string[], name?: string) => void;
   profile?: boolean;
   label?: string;
-  checkedValue?: string;
+  checkedValue?: string | string[] | number;
 }
 
 const RadioItem = ({

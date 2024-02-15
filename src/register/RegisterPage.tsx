@@ -71,7 +71,10 @@ const Register = () => {
     initialState as StepType,
   );
 
-  const [emailInfo, setEmailInfo] = useState({
+  const [emailInfo, setEmailInfo] = useState<{
+    email: string;
+    companyName: string | string[] | number;
+  }>({
     email: '',
     companyName: '',
   });
