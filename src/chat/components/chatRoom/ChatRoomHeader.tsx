@@ -65,11 +65,10 @@ const StHeaderContainer = styled.header`
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
   align-items: start;
   justify-content: center;
   width: 100%;
-  padding: 3rem 2rem;
+  padding: 0 2rem 3rem;
 `;
 
 const HeaderWrapper = css`
@@ -78,6 +77,9 @@ const HeaderWrapper = css`
   gap: 1.5rem;
   align-items: center;
   justify-content: start;
+  width: 100%;
+  padding: 3rem 0 1rem;
+  background-color: white;
 `;
 
 const senderInfoStyles = css`
