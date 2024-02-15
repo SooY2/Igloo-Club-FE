@@ -1,28 +1,23 @@
 import { css } from '@emotion/react';
-// import instance from '../../common/apis/axiosInstanse';
+import { useNavigate } from 'react-router-dom';
+import { MatchDatatypes } from '../types/MatchDatatypes';
 import { theme } from '../../common/styles/theme';
 import { Chat } from '../assets/svgs/index';
 
-const StartChatBtn = () => {
-  //   const location = useLocation();
-  //   const { state } = location;
+interface StartChatBtnProps {
+  matchData: MatchDatatypes | undefined;
+}
 
-  //   const handleClickBtn = async () => {
-  //     try {
-  //       await instance.post('/api/nungil/send?', null, {
-  //         params: {
-  //           nungilId: state.nungilId,
-  //         },
-  //       });
-  //       console.log('눈길 보내기 완료');
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+const StartChatBtn = ({ matchData }: StartChatBtnProps) => {
+  const navigate = useNavigate();
+
+  const handleClickBtn = () => {
+    navigate(`/chat/${matchData?.chatRoomId}`);
+  };
 
   return (
     <div css={Container}>
-      <button type="button" css={StartBtn}>
+      <button type="button" onClick={handleClickBtn} css={StartBtn}>
         <Chat />
         지금 대화를 시작해보세요
       </button>

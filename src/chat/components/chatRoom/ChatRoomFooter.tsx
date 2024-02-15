@@ -35,18 +35,20 @@ const ChatRoomFooter = ({
 export default ChatRoomFooter;
 
 const StContainer = styled.footer`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   display: flex;
   gap: 1rem;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 2rem 2rem 2.3rem;
+  padding: 1rem 2rem 2.3rem;
+  background-color: #fff;
 `;
 
 const StTextarea = styled.textarea`
   width: 100%;
+  max-width: 42.5rem;
   height: 4rem;
   padding: 1rem 1.7rem;
   text-justify: center;

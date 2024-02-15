@@ -21,13 +21,13 @@ const SendNungilBtn = ({
   return (
     <div css={Container}>
       {isSent ? (
+        <button type="button" css={FinishBtn}>
+          이미 상대방에게 눈길을 보냈어요
+        </button>
+      ) : (
         <button type="button" onClick={handleClick} css={SendBtn}>
           <Lightning />
           눈길 보내기
-        </button>
-      ) : (
-        <button type="button" css={FinishBtn}>
-          이미 상대방에게 눈길을 보냈어요
         </button>
       )}
       {isModalOpen && (

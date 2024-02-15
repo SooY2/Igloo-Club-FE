@@ -5,6 +5,7 @@ import { css } from '@emotion/react';
 import { theme } from '../../common/styles/theme';
 import { useLocation, useNavigate } from 'react-router-dom';
 import instance from '../../common/apis/axiosInstanse';
+import { MatchDatatypes } from '../types/MatchDatatypes';
 import StartChatBtn from '../components/StartChatBtn';
 import Map from '../../common/components/Map';
 import { Xicon } from '../assets/svgs/index';
@@ -13,14 +14,13 @@ import { Notify } from '../assets/svgs/index';
 const FinishMatch = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [matchData, setMatchData] = useState<any>('');
+  const [matchData, setMatchData] = useState<MatchDatatypes | undefined>();
   const title = `축하해요 🎉\n 서로의 눈길이 매칭되었어요`;
   const subtitle = `서로의 눈길이 닿아 매칭이 성사되었어요.\n 채팅방을 통해 두 분의 첫만남 약속을 잡아보세요!`;
   const noticontent = `첫만남 장소와 시간 조차 정하기 어려워하는 당신을 위해\n 저희가 직접 만남 장소와 시간대도 추천해 드려요.`;
 
   const ClickXIcon = () => {
-    navigate('/nungillist');
+    navigate('/nungillist', { state: { selectedBtn: 'matching' } });
   };
 
   const handleRecoInfo = async () => {
@@ -30,8 +30,8 @@ const FinishMatch = () => {
           nungilId: state.nungilId,
         },
       });
-      console.log(res.data);
       setMatchData(res.data);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -70,11 +70,19 @@ const FinishMatch = () => {
         </div>
         <div css={Recommend.RecoBox}>
           <span css={Recommend.RecoTitle}>🗓️ 가능한 요일</span>
-          <span css={Recommend.RecoContent}>{matchData.yoil}</span>
+          {matchData?.yoil ? (
+            <span css={Recommend.RecoContent}>{matchData.yoil}</span>
+          ) : (
+            <span css={Recommend.RecoContent}>없음</span>
+          )}
         </div>
         <div css={Recommend.RecoBox}>
           <span css={Recommend.RecoTitle}>⏰ 가능 시간대</span>
-          <span css={Recommend.RecoContent}></span>
+          {matchData?.time ? (
+            <span css={Recommend.RecoContent}>{matchData.time}</span>
+          ) : (
+            <span css={Recommend.RecoContent}>없음</span>
+          )}
         </div>
       </div>
       <div css={Place.Wrapper}>
@@ -82,17 +90,19 @@ const FinishMatch = () => {
           <span>첫만남 장소, 이런 곳은 어떠세요?</span>
         </div>
         <div css={Place.SubTitle}>
-          <span>
-            두 분의 의견을 반영하여 최적의 첫만남 장소를 골라봤어요 📝
-          </span>
+          <span>두분의 의견을 반영하여 최적의 첫만남 장소를 골라봤어요 📝</span>
         </div>
         <div css={Place.Map}>
-          <Map />
+          <Map matchData={matchData} />
         </div>
         <div css={Place.InfoBox}>
           <ul css={Place.InfoPlaceName}>
             <li css={Place.InfoTitle}>장소명</li>
-            <li css={Place.InfoContent}></li>
+            {matchData ? (
+              <li css={Place.InfoContent}>{matchData.marker[0].title}</li>
+            ) : (
+              <span css={Recommend.RecoContent}>없음</span>
+            )}
           </ul>
           <ul css={Place.InfoAddress}>
             <li css={Place.InfoTitle}>주소</li>
@@ -101,7 +111,7 @@ const FinishMatch = () => {
         </div>
       </div>
       <div css={StartBtn}>
-        <StartChatBtn />
+        <StartChatBtn matchData={matchData} />
       </div>
     </div>
   );

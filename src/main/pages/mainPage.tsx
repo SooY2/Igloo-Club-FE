@@ -52,6 +52,10 @@ const MainPage = () => {
     setMatchingTime(newTime);
   };
 
+  useEffect(() => {
+    handleMatchingTime(matchingTime);
+  }, [matchingTime]);
+
   const handleSelectedChange = () => {
     handleGetAllProfile();
   };
@@ -112,7 +116,6 @@ const MainPage = () => {
 export default MainPage;
 
 const Container = css`
-  z-index: 1;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -209,7 +212,7 @@ const PickBtn = css`
   bottom: 0;
   left: 50%;
   z-index: 999;
-  margin-bottom: 8.2rem;
+  margin-bottom: 7rem;
   transform: translateX(-50%);
 `;
 

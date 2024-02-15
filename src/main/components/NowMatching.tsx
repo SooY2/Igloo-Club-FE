@@ -9,7 +9,7 @@ const NowMatching = () => {
     '지금은 오늘의 매칭 인연들이 데이트를 하는 시간이에요.\n 오후 3시부터 내일 만날 수 있는 인연을 소개해 드려요.';
 
   const ClickEditBtn = () => {
-    navigate('/editprofilepage');
+    navigate('/editprofilepage', { state: { from: '/main-page' } });
   };
 
   return (

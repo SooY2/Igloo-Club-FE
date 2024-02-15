@@ -3,13 +3,12 @@ import instance from '../../common/apis/axiosInstanse';
 import styled from '@emotion/styled';
 
 const ToggleBtn = () => {
-  const [isOn, setIsOn] = useState<boolean>(false);
+  const [isOn, setIsOn] = useState<boolean>(true);
 
   const handleToggle = async () => {
     setIsOn((prevIsOn) => !prevIsOn);
     try {
       await instance.patch('/api/member/company/toggle');
-      console.log('회사 사람 만나지 않기');
     } catch (error) {
       console.log(error);
     }
@@ -35,7 +34,8 @@ const StToggleContainer = styled.div`
 const StToggleWrapper = styled.div<{ isOn: boolean }>`
   width: 5rem;
   height: 2.4rem;
-  background-color: ${({ isOn }) => (isOn ? '#808482' : '#d3d2d2')};
+  background-color: ${({ isOn, theme }) =>
+    isOn ? `${theme.colors.primary}` : '#d3d2d2'};
   border-radius: 30px;
   transition: background-color 0.5s ease-in-out;
 `;

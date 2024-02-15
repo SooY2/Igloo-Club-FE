@@ -28,7 +28,13 @@ const Check = ({
 };
 
 /** ✔️ 약관동의 뷰 컴포넌트 입니다 */
-const 약관동의 = ({ onNext }: { onNext: () => void }) => {
+const 약관동의 = ({
+  onNext,
+  percent,
+}: {
+  onNext: () => void;
+  percent: number;
+}) => {
   const [allAgree, setAllAgree] = useState(false);
   const [agree, setAgree] = useState<boolean[]>([false, false, false]);
   const [isActive, setIsActive] = useState(false);
@@ -63,7 +69,7 @@ const 약관동의 = ({ onNext }: { onNext: () => void }) => {
 
   return (
     <>
-      <RegisterHeader isFirst={true} percent={15} />
+      <RegisterHeader isFirst={true} percent={percent} />
       <article css={St.articleStyles}>
         <section>
           <St.TitleBox>

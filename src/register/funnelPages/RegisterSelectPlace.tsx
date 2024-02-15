@@ -12,9 +12,10 @@ interface ScedultPropsTypes {
   onNext: () => void;
   handleScheduleValue: (data: ScheduleTypes) => void;
   registerScheduleValues: ScheduleTypes;
+  percent: number;
 }
 
-const 장소선택 = ({
+const 지역선택 = ({
   onPrev,
   onNext,
   handleScheduleValue,
@@ -29,7 +30,6 @@ const 장소선택 = ({
   }, [selectPlace]);
 
   const handleSubmit = () => {
-    console.log(selectPlace);
     if (handleScheduleValue) {
       handleScheduleValue({ ...registerScheduleValues, location: selectPlace });
       onNext();
@@ -85,7 +85,7 @@ const 장소선택 = ({
   );
 };
 
-export default 장소선택;
+export default 지역선택;
 
 const TitleBox = styled(St.TitleBox)`
   margin-bottom: 5.4rem;
