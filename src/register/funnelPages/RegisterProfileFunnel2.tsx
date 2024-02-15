@@ -26,7 +26,7 @@ import { findLabelByValue } from '../../common/utils/findLabelByValue';
 import PersonalityDepiction from '../components/PersonalityDepiction';
 import HobbyList from '../components/HobbyList';
 
-const MAXLEN = 100;
+const MAXLEN = 1000;
 
 const 기본프로필입력2 = ({
   onPrev,
