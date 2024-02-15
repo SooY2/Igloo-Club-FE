@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 /*매칭 마감까지 남은 시간 계산하는 함수*/
-const calculateTimeLeft = () => {
+export const calculateTimeLeft = () => {
   const now = new Date();
   const targetTime = new Date();
 
