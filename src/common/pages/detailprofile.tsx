@@ -11,16 +11,12 @@ const DetailProfile = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [profileData, setProfileData] = useState<any>('');
 
-  const title = `안녕하세요!\n 저는 ${profileData.nickname}이라고 합니다.`;
-
   const genderText = profileData.sex === 'MALE' ? '남성' : '여성';
 
   const context = `#${profileData.companyName}에 재직 중인\n 
   #${profileData.age}세 ${genderText}이고 #${profileData.job}\n 
   얼굴은 #${profileData.animalFace} 
   키는 #${profileData.height}cm\n 성격 유형은 #${profileData.mbti}`;
-
-  console.log(state);
 
   useEffect(() => {
     const handleGetDetailProfile = async () => {
@@ -40,6 +36,17 @@ const DetailProfile = () => {
 
     handleGetDetailProfile();
   }, [state.nungilId]);
+
+  const handleLastWord = (lastChar: string) => {
+    const lastWordRegex = /[가-힣]$/;
+    return lastWordRegex.test(lastChar);
+  };
+
+  const title = `안녕하세요!\n 저는 ${
+    handleLastWord(profileData.nickname.slice(-1))
+      ? `${profileData.nickname}`
+      : `${profileData.nickname}이`
+  }라고 합니다.`;
 
   return (
     <div css={Container}>
