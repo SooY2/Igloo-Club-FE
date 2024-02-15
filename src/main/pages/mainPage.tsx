@@ -11,13 +11,14 @@ import ProfileCard from '../../common/components/ProfileCard';
 import PickProfileBtn from '../components/PickProfileBtn';
 import CustomSelect from '../components/CustomSelect';
 import { ProfileDataTypesProps } from '../../common/type/ProfileDataTypesProps';
+import { calculateTimeLeft } from '../components/CountDown';
 import CountDown from '../components/CountDown';
 import { Watch } from '../assets/svgs/index';
 
 const MainPage = () => {
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState<ProfileDataTypesProps[]>([]);
-  const [matchingTime, setMatchingTime] = useState<boolean>(true);
+  const [matchingTime, setMatchingTime] = useState<boolean>();
 
   const handleGetAllProfile = async () => {
     try {
@@ -48,13 +49,14 @@ const MainPage = () => {
     navigate(`/detailpage/${nungilId}`, { state: { nungilId, nickname } });
   };
 
-  const handleMatchingTime = (newTime: boolean) => {
+  const handleMatchingTime = async () => {
+    const newTime = calculateTimeLeft().matchingTime;
     setMatchingTime(newTime);
   };
 
   useEffect(() => {
-    handleMatchingTime(matchingTime);
-  }, [matchingTime]);
+    handleMatchingTime();
+  }, []);
 
   const handleSelectedChange = () => {
     handleGetAllProfile();

@@ -25,7 +25,6 @@ const InfoModal = ({
     try {
       const res = await instance.get(`/api/chat/room/${chatRoomId}/info`);
       setMatchData(res.data);
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
