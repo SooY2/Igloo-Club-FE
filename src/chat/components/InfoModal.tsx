@@ -11,7 +11,7 @@ const InfoModal = ({
   closeModal,
 }: {
   nickname: string;
-  chatRoomId: number;
+  chatRoomId: number | undefined;
   closeModal: () => void;
 }) => {
   const [matchData, setMatchData] = useState<MatchDatatypes | undefined>();
@@ -36,8 +36,9 @@ const InfoModal = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleOutsideClick = (event) => {
-    if (event.target === event.currentTarget) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleOutsideClick = (e: any) => {
+    if (e.target === e.currentTarget) {
       closeModal();
     }
   };

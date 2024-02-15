@@ -52,6 +52,10 @@ const MainPage = () => {
     setMatchingTime(newTime);
   };
 
+  useEffect(() => {
+    handleMatchingTime(matchingTime);
+  }, [matchingTime]);
+
   const handleSelectedChange = () => {
     handleGetAllProfile();
   };

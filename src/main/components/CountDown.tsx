@@ -33,14 +33,11 @@ const CountDown = ({ onMatchingTime }: any) => {
     const timer = setInterval(() => {
       const newTime = calculateTimeLeft().matchingTime;
       setTimeLeft(calculateTimeLeft());
-
-      if (newTime !== timeLeft.matchingTime) {
-        onMatchingTime(newTime);
-      }
+      onMatchingTime(newTime);
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [onMatchingTime, timeLeft]);
+  }, [onMatchingTime, timeLeft.matchingTime]);
 
   return (
     <div>

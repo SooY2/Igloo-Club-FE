@@ -374,6 +374,7 @@ const headerStyles = css`
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 42.5rem;
   height: 6.7rem;
   background-color: white;
 `;
@@ -428,6 +429,7 @@ const finishContainer = css`
   flex-direction: row;
   align-items: center;
   width: 100%;
+  max-width: 42.5rem;
   height: 9rem;
   padding: 2.2rem;
   background: ${theme.colors.white};

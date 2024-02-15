@@ -1,6 +1,6 @@
 export interface MatchDatatypes {
-  yoil: string;
-  time: string;
+  yoil: string[];
+  time: string[];
   marker: Array<{
     title: string;
     latitude: number;
