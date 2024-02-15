@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { ChangeEvent } from 'react';
 import instance from '../../common/apis/axiosInstanse';
 import { MatchDatatypes } from '../../main/types/MatchDatatypes';
 import Map from '../../common/components/Map';
@@ -12,7 +11,7 @@ const InfoModal = ({
   closeModal,
 }: {
   nickname: string;
-  chatRoomId: number;
+  chatRoomId: number | undefined;
   closeModal: () => void;
 }) => {
   const [matchData, setMatchData] = useState<MatchDatatypes | undefined>();
@@ -37,7 +36,8 @@ const InfoModal = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleOutsideClick = (e: ChangeEvent<HTMLInputElement>) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleOutsideClick = (e: any) => {
     if (e.target === e.currentTarget) {
       closeModal();
     }

@@ -123,7 +123,7 @@ const ChatRoom = () => {
         companyName={chatSenderInfo.companyName}
         job={chatSenderInfo.job}
         nickname={chatSenderInfo.nickname}
-        chatRoomId={chatRoomId}
+        chatRoomId={Number(chatRoomId)}
         css={HeaderBox}
       />
       <ChatRoomMain chatData={chatData} css={MainBox} />

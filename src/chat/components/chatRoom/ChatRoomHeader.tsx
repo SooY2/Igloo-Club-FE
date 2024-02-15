@@ -12,7 +12,7 @@ interface ChatRoomHeaderProps {
   companyName: string;
   job: string;
   nickname: string;
-  chatRoomId: string | undefined;
+  chatRoomId: number | undefined;
 }
 
 const ChatRoomHeader = ({
