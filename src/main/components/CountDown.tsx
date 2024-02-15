@@ -32,12 +32,13 @@ const CountDown = ({ onMatchingTime }: any) => {
   useEffect(() => {
     const timer = setInterval(() => {
       const newTime = calculateTimeLeft().matchingTime;
+      console.log(calculateTimeLeft().matchingTime);
       setTimeLeft(calculateTimeLeft());
 
       if (newTime !== timeLeft.matchingTime) {
         onMatchingTime(newTime);
       }
-    }, 1000);
+    }, 30000);
 
     return () => clearInterval(timer);
   }, [onMatchingTime, timeLeft]);

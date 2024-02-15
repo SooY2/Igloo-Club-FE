@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
+import { ChangeEvent } from 'react';
 import instance from '../../common/apis/axiosInstanse';
 import { MatchDatatypes } from '../../main/types/MatchDatatypes';
 import Map from '../../common/components/Map';
@@ -36,8 +37,8 @@ const InfoModal = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleOutsideClick = (event) => {
-    if (event.target === event.currentTarget) {
+  const handleOutsideClick = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target === e.currentTarget) {
       closeModal();
     }
   };

@@ -17,7 +17,8 @@ const PickProfileBtn = ({ ProfileData }: any) => {
       const { companyName, job, description } = res.data;
 
       ProfileData({ companyName, job, description });
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       console.log(error);
       if (error.response && error.response.status === 403) {
         setIsModalOpen(true);

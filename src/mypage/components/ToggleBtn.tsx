@@ -3,7 +3,7 @@ import instance from '../../common/apis/axiosInstanse';
 import styled from '@emotion/styled';
 
 const ToggleBtn = () => {
-  const [isOn, setIsOn] = useState<boolean>(false);
+  const [isOn, setIsOn] = useState<boolean>(true);
 
   const handleToggle = async () => {
     setIsOn((prevIsOn) => !prevIsOn);
@@ -34,7 +34,8 @@ const StToggleContainer = styled.div`
 const StToggleWrapper = styled.div<{ isOn: boolean }>`
   width: 5rem;
   height: 2.4rem;
-  background-color: ${({ isOn }) => (isOn ? '#d3d2d2' : '#808482')};
+  background-color: ${({ isOn, theme }) =>
+    isOn ? `${theme.colors.primary}` : '#d3d2d2'};
   border-radius: 30px;
   transition: background-color 0.5s ease-in-out;
 `;
@@ -42,7 +43,7 @@ const StToggleWrapper = styled.div<{ isOn: boolean }>`
 const StToggleCircle = styled.div<{ isOn: boolean }>`
   position: absolute;
   top: 0.1rem;
-  left: ${({ isOn }) => (isOn ? '0.1rem' : '2.7rem')};
+  left: ${({ isOn }) => (isOn ? '2.7rem' : '0.1rem')};
   width: 2.2rem;
   height: 2.2rem;
   background-color: #fff;
