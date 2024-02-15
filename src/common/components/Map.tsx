@@ -93,6 +93,14 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
 
             markers.setMap(map);
 
+            window.kakao.maps.event.addListener(
+              markers,
+              'touchstart',
+              function () {
+                handleClickMarker(index);
+              },
+            );
+
             window.kakao.maps.event.addListener(markers, 'click', function () {
               handleClickMarker(index);
             });
