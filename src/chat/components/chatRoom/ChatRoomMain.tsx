@@ -52,5 +52,5 @@ const containerStyles = css`
   width: 100%;
 
   /* height: calc(100vh - 16rem); */
-  padding: 0 2.4rem;
+  padding: 9rem 2.4rem;
 `;

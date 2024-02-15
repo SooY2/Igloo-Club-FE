@@ -221,5 +221,7 @@ const PickBtn = css`
 const Navigation = css`
   position: fixed;
   bottom: 0;
+  z-index: 999;
   width: 100%;
+  max-width: 42.5rem;
 `;

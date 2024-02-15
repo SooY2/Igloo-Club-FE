@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { theme } from '../../common/styles/theme';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft } from '../assets/svgs/index';
 import styled from '@emotion/styled';
 import {
@@ -36,6 +36,7 @@ import instance from '../../common/apis/axiosInstanse';
 
 const EditProfilePage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [showFaceDepiction, setShowFaceDepction] = useState(false);
   const [showPersonalityDepiction, setShowPersonalityDepiction] =
     useState(false);
@@ -85,6 +86,14 @@ const EditProfilePage = () => {
     }
   };
 
+  const handleClickBtn = () => {
+    if (location.pathname.includes('/main')) {
+      navigate('/main-page');
+    } else if (location.pathname.includes('/mypage')) {
+      navigate('/mypage');
+    }
+  };
+
   const handleEditValue = (
     value: string | string[] | number,
     name?: string,
@@ -112,7 +121,7 @@ const EditProfilePage = () => {
   return (
     <div css={container}>
       <header css={headerStyles}>
-        <StArrow onClick={() => navigate('/mypage')} />
+        <StArrow onClick={handleClickBtn} />
         <StHeaderTitle>기본 프로필 수정</StHeaderTitle>
       </header>
       <main css={mainStyles}>
