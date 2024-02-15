@@ -107,6 +107,7 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
           });
         }
       });
+
       const handleClickMarker = (index: number) => {
         setClickedMarker((prevIndex) => (prevIndex === index ? null : index));
 
