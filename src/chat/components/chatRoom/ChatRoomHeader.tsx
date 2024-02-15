@@ -36,7 +36,7 @@ const ChatRoomHeader = ({
           <div css={senderProfileStyles}>
             <StSenderName>{nickname}</StSenderName>
             <StSenderJob>
-              {companyName},{job}
+              {companyName}, {job}
             </StSenderJob>
           </div>
         </span>
