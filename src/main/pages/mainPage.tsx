@@ -50,7 +50,7 @@ const MainPage = () => {
   };
 
   const handleMatchingTime = async () => {
-    const newTime = calculateTimeLeft().matchingTime; // 비동기 함수 호출
+    const newTime = calculateTimeLeft().matchingTime;
     setMatchingTime(newTime);
   };
 
