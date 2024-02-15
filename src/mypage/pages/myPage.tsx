@@ -186,4 +186,5 @@ const Navigation = css`
   position: fixed;
   bottom: 0;
   width: 100%;
+  max-width: 42.5rem;
 `;
