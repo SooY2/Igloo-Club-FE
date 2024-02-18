@@ -11,7 +11,7 @@ import instance from '../../common/apis/axiosInstanse';
 
 interface EmailInfo {
   email: string;
-  companyName: string;
+  companyName: string | string[] | number;
 }
 
 export interface ExtendedNavTypesProps extends NavTypesProps {
