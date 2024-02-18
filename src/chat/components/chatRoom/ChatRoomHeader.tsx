@@ -68,7 +68,7 @@ const StHeaderContainer = styled.header`
   align-items: start;
   justify-content: center;
   width: 100%;
-  padding: 0 2rem 3rem;
+  padding: 0 2rem;
 `;
 
 const HeaderWrapper = css`
@@ -78,8 +78,10 @@ const HeaderWrapper = css`
   align-items: center;
   justify-content: start;
   width: 100%;
-  padding: 3rem 0 1rem;
-  background-color: white;
+  max-width: 42.5rem;
+  padding: 2.5rem 0 1.5rem;
+  background: #fff;
+
 `;
 
 const senderInfoStyles = css`
@@ -111,6 +113,7 @@ const StChatModalWrapper = styled.button`
   align-items: center;
   justify-content: start;
   width: 100%;
+  max-width: 40rem;
   height: 5rem;
   padding: 0 1rem;
   font-size: 1.3rem;
