@@ -105,7 +105,9 @@ const FinishMatch = () => {
             {isClickedMarker ? (
               <li css={Place.InfoContent}>{isClickedMarker.title}</li>
             ) : (
-              <span css={Recommend.RecoContent}>없음</span>
+              <span css={Recommend.RecoContent}>
+                지도 내에 위치한 핀을 클릭해보세요!
+              </span>
             )}
           </ul>
           <ul css={Place.InfoAddress}>
@@ -113,7 +115,9 @@ const FinishMatch = () => {
             {isClickedMarker ? (
               <li css={Place.InfoContent}>{isClickedMarker.address}</li>
             ) : (
-              <span css={Recommend.RecoContent}>없음</span>
+              <span css={Recommend.RecoContent}>
+                지도 내에 위치한 핀을 클릭해보세요!
+              </span>
             )}
           </ul>
         </div>
