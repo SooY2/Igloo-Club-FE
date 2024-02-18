@@ -68,7 +68,6 @@ const StHeaderContainer = styled.header`
   align-items: start;
   justify-content: center;
   width: 100%;
-  padding: 0;
 `;
 
 const HeaderWrapper = css`
