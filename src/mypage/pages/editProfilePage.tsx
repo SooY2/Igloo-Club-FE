@@ -137,7 +137,7 @@ const EditProfilePage = () => {
             value2="MALE"
             label1="여성"
             label2="남성"
-            checkedValue="FEMALE"
+            checkedValue={values.sex}
           />
         </RegisterBasicInput>
         {/* 생년월일 */}
