@@ -42,6 +42,7 @@ const StContainer = styled.footer`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  max-width: 42.5rem;
   padding: 1rem 2rem 2.3rem;
   background-color: #fff;
 `;
