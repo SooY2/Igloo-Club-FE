@@ -109,7 +109,7 @@ const EditProfilePage = () => {
       handleEditValue('', 'description');
     } //value가 없을 때 0으로 글자 수 세지도록 처리
 
-    const lengthCount = limitMaxLength(e, 100);
+    const lengthCount = limitMaxLength(e, 1000);
 
     if (!lengthCount) return;
     handleEditValue(e.target.value, 'description');
