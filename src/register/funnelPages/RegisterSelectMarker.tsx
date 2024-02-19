@@ -82,7 +82,7 @@ const 장소선택 = ({
                     return (
                       <CheckBoxItem
                         key={item.title}
-                        value={item.title}
+                        value={item.value}
                         name="markerList"
                         setValues={setThisValues}
                         values={thisValues}
