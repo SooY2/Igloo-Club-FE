@@ -84,7 +84,6 @@ const HeaderWrapper = css`
   max-width: 42.5rem;
   padding: 2.5rem 0 1.5rem;
   background: #fff;
-
 `;
 
 const senderInfoStyles = css`
@@ -112,7 +111,7 @@ const StSenderJob = styled.p`
 const StChatModalWrapper = styled.button`
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -129,8 +128,6 @@ const StChatModalWrapper = styled.button`
 `;
 
 const ModalBox = css`
-  position: fixed;
-  top: 0;
   z-index: 999;
   display: flex;
   align-items: center;

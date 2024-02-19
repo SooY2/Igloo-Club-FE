@@ -9,7 +9,7 @@ import SendNungil from '../components/SendNungil';
 
 const NungilList = () => {
   const { state } = useLocation();
-  const [selectedBtn, setSelectedBtn] = useState('');
+  const [selectedBtn, setSelectedBtn] = useState('received');
 
   let middleContent;
 
