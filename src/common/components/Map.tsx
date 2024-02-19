@@ -30,7 +30,7 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
 
     if (window.kakao && window.kakao.maps) {
       mapScript.onload = () => {
-        setTimeout(onLoadKakaoMap, 1000);
+        setTimeout(onLoadKakaoMap, 100);
       };
     }
 
@@ -120,7 +120,7 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
         }
       };
     };
-  }, [matchData, clickedMarker, setIsClickedMarker]);
+  }, [matchData, clickedMarker, setClickedMarker, setIsClickedMarker]);
 
   return <div id="map" css={MapContainer}></div>;
 };
