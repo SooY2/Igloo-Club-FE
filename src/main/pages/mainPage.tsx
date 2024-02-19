@@ -7,6 +7,7 @@ import instance from '../../common/apis/axiosInstanse';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../common/components/NavBar';
 import NowMatching from '../components/NowMatching';
+import ComingSoon from '../components/ComingSoon';
 import ProfileCard from '../../common/components/ProfileCard';
 import PickProfileBtn from '../components/PickProfileBtn';
 import CustomSelect from '../components/CustomSelect';
@@ -19,6 +20,7 @@ const MainPage = () => {
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState<ProfileDataTypesProps[]>([]);
   const [matchingTime, setMatchingTime] = useState<boolean>();
+  const [selected, setSelected] = useState<string>('');
 
   const handleGetAllProfile = async () => {
     try {
@@ -30,7 +32,6 @@ const MainPage = () => {
       });
 
       setProfileData(res.data.content);
-      console.log(res.data.content);
     } catch (error) {
       console.log(error);
     }
@@ -55,7 +56,8 @@ const MainPage = () => {
     navigate(`/detailpage/${nungilId}`, { state: { nungilId, nickname } });
   };
 
-  const handleSelectedChange = () => {
+  const handleSelectedChange = (newSelected: string) => {
+    setSelected(newSelected);
     handleGetAllProfile();
   };
 
@@ -91,11 +93,15 @@ const MainPage = () => {
       </div>
       <div css={Bottom.Wrapper}>
         {matchingTime ? (
-          <ProfileCard
-            profileData={profileData}
-            ClickProfileCard={ClickProfileBtn}
-            css={Bottom.ProfileData}
-          />
+          selected === '판교' ? (
+            <ComingSoon />
+          ) : (
+            <ProfileCard
+              profileData={profileData}
+              ClickProfileCard={ClickProfileBtn}
+              css={Bottom.ProfileData}
+            />
+          )
         ) : (
           <NowMatching />
         )}
@@ -194,10 +200,23 @@ const Bottom = {
     width: 100%;
     padding: 0 2.6rem;
     margin-bottom: 8.2rem;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+  `,
+
+  ComingSoon: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 15rem;
+  `,
+
+  ComingSoonText: css`
+    font-size: 4rem;
+    color: #6b6b6b;
+    text-align: center;
   `,
 
   ProfileData: css`

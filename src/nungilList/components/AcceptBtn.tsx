@@ -7,12 +7,9 @@ const AcceptNungilBtn = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  console.log('send :', state.nungilId);
-
   const handleAcceptNungil = async () => {
     try {
       await instance.patch(`/api/nungil/match?nungilId=${state.nungilId}`);
-      console.log('눈길 수락하기 완료');
     } catch (error) {
       console.log(error);
     }
@@ -54,6 +51,8 @@ const SendBtn = css`
   gap: 0.9rem;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  max-width: 42.5rem;
   height: 5.5rem;
   padding: 1.5rem 8rem;
   font-size: 1.4rem;

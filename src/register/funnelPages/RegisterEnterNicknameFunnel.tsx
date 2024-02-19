@@ -48,7 +48,7 @@ const 닉네임입력 = ({
                 type="text"
                 placeholder="닉네임은 8자 이내로 입력할 수 있어요."
                 value={nickName}
-                onChange={(e) => setNickName(e.target.value)}
+                onChange={(e) => setNickName(e.target.value.slice(0, 8))}
               />
               {isValid && (
                 <StErrorExplain>

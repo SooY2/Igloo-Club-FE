@@ -25,8 +25,6 @@ const InfoModal = ({
     closeModal();
   };
 
-  console.log(matchData);
-
   const handlePossibleInfo = async () => {
     try {
       const res = await instance.get(`/api/chat/room/${chatRoomId}/info`);
@@ -40,6 +38,10 @@ const InfoModal = ({
     handlePossibleInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const sliceFirstDay = (day: string) => {
+    return day.slice(0, 1);
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleOutsideClick = (e: any) => {
@@ -58,26 +60,29 @@ const InfoModal = ({
         <StPossibleWrapper>
           <StPossibleBox>
             <StPossibleTitle>🗓️ 가능한 요일</StPossibleTitle>
-            {matchData?.yoil ? (
-              matchData.yoil.map((day: string, index: number) => (
-                <>
-                  {' '}
-                  <StPossibleContent key={index}>{day}</StPossibleContent>
-                </>
-              ))
-            ) : (
-              <StPossibleContent>없음</StPossibleContent>
-            )}
+            <StPossibleContent>
+              {matchData?.yoil ? (
+                matchData.yoil.map((day: string, index: number) => (
+                  <StPossibleValue key={index}>
+                    {sliceFirstDay(day)}
+                  </StPossibleValue>
+                ))
+              ) : (
+                <StPossibleValue>없음</StPossibleValue>
+              )}
+            </StPossibleContent>
           </StPossibleBox>
           <StPossibleBox>
             <StPossibleTitle>⏰ 가능 시간대</StPossibleTitle>
-            {matchData?.time ? (
-              matchData.time.map((timeSlot: string, index: number) => (
-                <StPossibleContent key={index}>{timeSlot}</StPossibleContent>
-              ))
-            ) : (
-              <StPossibleContent>없음</StPossibleContent>
-            )}
+            <StPossibleContent>
+              {matchData?.time ? (
+                matchData.time.map((timeSlot: string, index: number) => (
+                  <StPossibleValue key={index}>{timeSlot}</StPossibleValue>
+                ))
+              ) : (
+                <StPossibleValue>없음</StPossibleValue>
+              )}
+            </StPossibleContent>
           </StPossibleBox>
         </StPossibleWrapper>
         <StPlaceWrapper>
@@ -103,17 +108,18 @@ const InfoModal = ({
 export default InfoModal;
 
 const StInfoModalContainer = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
-  left: 0;
+  left: -50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 42.5rem;
-  height: 100%;
+  max-width: 45rem;
+  height: 100vh;
   background: rgb(0 0 0 / 50%);
+  transform: translateX(50%);
 `;
 
 const StInfoModalWrapper = styled.div`
@@ -147,14 +153,16 @@ const StPossibleWrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
   align-items: center;
-  padding: 0%.5rem 2rem;
+  padding: 0.5rem 2rem;
+  margin-bottom: 2rem;
 `;
 
 const StPossibleBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-width: 28rem;
+  min-width: 30rem;
+  max-width: 30rem;
   height: 5.9rem;
   padding: 0 1.5rem;
   margin-top: 0.5rem;
@@ -166,15 +174,23 @@ const StPossibleTitle = styled.span`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-right: 2rem;
+  width: 100%;
   font-size: 1.3rem;
   font-style: normal;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.gray8};
 `;
 
-const StPossibleContent = styled.span`
-  padding: 0 1rem;
+const StPossibleContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+  margin-right: 2rem;
+  overflow-x: scroll;
+`;
+
+const StPossibleValue = styled.span`
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 600;

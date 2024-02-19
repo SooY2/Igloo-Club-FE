@@ -19,8 +19,6 @@ const MatchingList = () => {
         },
       });
 
-      console.log('매칭 내역 : ', res.data.content);
-
       setProfileData(res.data.content);
     } catch (error) {
       console.log(error);

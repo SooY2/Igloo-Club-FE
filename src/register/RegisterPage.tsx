@@ -15,6 +15,7 @@ import {
   지역선택,
   시간선택,
   장소선택,
+  회원가입완료,
 } from './funnelPages/0_index';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -35,7 +36,8 @@ type StepType =
   | '기본프로필입력2'
   | '지역선택'
   | '시간선택'
-  | '장소선택';
+  | '장소선택'
+  | '회원가입완료';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -67,6 +69,7 @@ const Register = () => {
       '지역선택',
       '시간선택',
       '장소선택',
+      '회원가입완료',
     ] as const,
     initialState as StepType,
   );
@@ -126,7 +129,7 @@ const Register = () => {
   const submitScheduleValue = async () => {
     try {
       await instance.patch('api/member/schedule', registerScheduleValues);
-      navigate('/main-page');
+      setStep('회원가입완료');
     } catch (err) {
       console.log(err);
     }
@@ -243,12 +246,17 @@ const Register = () => {
         <Funnel.Step name="장소선택">
           <장소선택
             onPrev={() => setStep('시간선택')}
-            onNext={() => {
-              submitScheduleValue();
-            }}
+            onNext={() => submitScheduleValue()}
             handleScheduleValue={handleScheduleValue}
             registerScheduleValues={registerScheduleValues}
             percent={100}
+          />
+        </Funnel.Step>
+        <Funnel.Step name="회원가입완료">
+          <회원가입완료
+            onNext={() => {
+              navigate('/main-page');
+            }}
           />
         </Funnel.Step>
       </Funnel>
