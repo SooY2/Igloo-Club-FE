@@ -2,7 +2,6 @@ import { logo } from '../../common/assets/images/0_index';
 import styled from '@emotion/styled';
 import { NavTypesProps } from '../types/navTypes';
 import { ArrowLeft } from '../assets/svgs/0_index';
-import RegisterBtn from '../components/RegisterBtn';
 
 const 회원가입완료 = ({ onPrev, onNext }: NavTypesProps) => {
   return (
@@ -14,11 +13,9 @@ const 회원가입완료 = ({ onPrev, onNext }: NavTypesProps) => {
           <StText>회원가입이 완료되었어요!</StText>
         </StIMG>
       </StContainer>
-      <RegisterBtn
-        isActive={true}
-        onClick={onNext}
-        content="오늘의 인연 만나러가기"
-      />
+      <div css={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+        <Button onClick={onNext}>오늘의 인연 만나러가기</Button>
+      </div>
     </>
   );
 };
@@ -78,4 +75,13 @@ const StLogo = styled.img`
 const StText = styled.p`
   color: ${({ theme }) => theme.colors.gray8};
   ${({ theme }) => theme.fonts.title};
+`;
+
+const Button = styled.button`
+  width: 20rem;
+  min-height: 5.4rem;
+  color: ${({ theme }) => theme.colors.white};
+  background: linear-gradient(90deg, #ffaa81 0%, #ff7781 51.24%, #ff6b72 100%);
+  border-radius: 30px;
+  ${({ theme }) => theme.fonts.body1};
 `;
