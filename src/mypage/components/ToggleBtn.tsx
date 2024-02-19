@@ -15,7 +15,9 @@ const ToggleBtn = () => {
   const handleToggle = async () => {
     setIsOn((prevIsOn) => !prevIsOn);
     try {
-      await instance.patch('/api/member/company/toggle');
+      await instance.patch('/api/member/company/toggle', {
+        disableCompany: !isOn,
+      });
     } catch (error) {
       console.log(error);
     }
