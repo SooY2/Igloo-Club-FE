@@ -19,6 +19,7 @@ const MainPage = () => {
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState<ProfileDataTypesProps[]>([]);
   const [matchingTime, setMatchingTime] = useState<boolean>();
+  const selected = useState<string>('');
 
   const handleGetAllProfile = async () => {
     try {
@@ -30,7 +31,6 @@ const MainPage = () => {
       });
 
       setProfileData(res.data.content);
-      console.log(res.data.content);
     } catch (error) {
       console.log(error);
     }
@@ -91,11 +91,15 @@ const MainPage = () => {
       </div>
       <div css={Bottom.Wrapper}>
         {matchingTime ? (
-          <ProfileCard
-            profileData={profileData}
-            ClickProfileCard={ClickProfileBtn}
-            css={Bottom.ProfileData}
-          />
+          selected === '판교' ? (
+            <div>Coming Soon</div>
+          ) : (
+            <ProfileCard
+              profileData={profileData}
+              ClickProfileCard={ClickProfileBtn}
+              css={Bottom.ProfileData}
+            />
+          )
         ) : (
           <NowMatching />
         )}
