@@ -19,8 +19,6 @@ const ReceivedNungil = () => {
         },
       });
 
-      console.log(res.data.content);
-
       setProfileData(res.data.content);
     } catch (error) {
       console.log(error);

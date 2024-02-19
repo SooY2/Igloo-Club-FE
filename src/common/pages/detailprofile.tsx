@@ -28,7 +28,6 @@ const DetailProfile = () => {
           },
         });
 
-        console.log(res.data);
         setProfileData(res.data);
       } catch (error) {
         console.log(error);

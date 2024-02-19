@@ -15,7 +15,6 @@ const MyProfileCard = ({
   nickname,
   description,
 }: ChatRoomHeaderProps) => {
-  console.log(animalFace);
   return (
     <StHeader>
       <span css={senderInfoStyles}>
