@@ -15,7 +15,6 @@ const Chat = () => {
     try {
       const { data } = await instance.get('api/chat/room');
       setChatList(data.content);
-      console.log(data.content);
     } catch (err) {
       console.log(err);
     }

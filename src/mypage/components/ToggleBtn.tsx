@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import instance from '../../common/apis/axiosInstanse';
 import styled from '@emotion/styled';
 
 const ToggleBtn = () => {
-  const [isOn, setIsOn] = useState<boolean>(false);
+  const [isOn, setIsOn] = useState<boolean>(() => {
+    const storedValue = localStorage.getItem('toggleState');
+    return storedValue ? JSON.parse(storedValue) : true;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('toggleState', JSON.stringify(isOn));
+  }, [isOn]);
 
   const handleToggle = async () => {
     setIsOn((prevIsOn) => !prevIsOn);
@@ -18,7 +25,13 @@ const ToggleBtn = () => {
     <>
       <StToggleContainer onClick={handleToggle}>
         <StToggleWrapper isOn={isOn} />
-        <StToggleCircle isOn={isOn} />
+        <StToggleCircle isOn={isOn}>
+          {isOn ? (
+            <StToggleState>ON</StToggleState>
+          ) : (
+            <StToggleState>OFF</StToggleState>
+          )}
+        </StToggleCircle>
       </StToggleContainer>
     </>
   );
@@ -34,7 +47,8 @@ const StToggleContainer = styled.div`
 const StToggleWrapper = styled.div<{ isOn: boolean }>`
   width: 5rem;
   height: 2.4rem;
-  background-color: ${({ isOn }) => (isOn ? '#d3d2d2' : '#808482')};
+  background-color: ${({ isOn, theme }) =>
+    isOn ? `${theme.colors.primary}` : '#d3d2d2'};
   border-radius: 30px;
   transition: background-color 0.5s ease-in-out;
 `;
@@ -42,10 +56,19 @@ const StToggleWrapper = styled.div<{ isOn: boolean }>`
 const StToggleCircle = styled.div<{ isOn: boolean }>`
   position: absolute;
   top: 0.1rem;
-  left: ${({ isOn }) => (isOn ? '0.1rem' : '2.7rem')};
+  left: ${({ isOn }) => (isOn ? '2.7rem' : '0.1rem')};
   width: 2.2rem;
   height: 2.2rem;
   background-color: #fff;
   border-radius: 50px;
   transition: left 0.5s ease-in-out;
+`;
+
+const StToggleState = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 1rem;
+  font-weight: 700;
 `;

@@ -41,6 +41,7 @@ const EditProfilePage = () => {
     useState(false);
   const [showHobby, setShowHobby] = useState(false);
   const [descriptionCnt, setDescriptionCnt] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState<Registertypes>({
     nickname: '',
     sex: '',
@@ -68,11 +69,13 @@ const EditProfilePage = () => {
 
   const getUserInfo = async () => {
     try {
+      setIsLoading(true);
       const { data } = await instance.get('api/member');
-      console.log(data);
       setValues(data);
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -81,8 +84,12 @@ const EditProfilePage = () => {
       await instance.patch('api/member', values);
       alert('수정이 완료되었습니다.');
     } catch (err) {
-      console.log(err);
+      <div></div>;
     }
+  };
+
+  const handleClickBtn = () => {
+    navigate(-1);
   };
 
   const handleEditValue = (
@@ -109,10 +116,12 @@ const EditProfilePage = () => {
     setDescriptionCnt(lengthCount);
   };
 
-  return (
+  return isLoading ? (
+    <>Loading..</>
+  ) : (
     <div css={container}>
       <header css={headerStyles}>
-        <StArrow onClick={() => navigate('/mypage')} />
+        <StArrow onClick={handleClickBtn} />
         <StHeaderTitle>기본 프로필 수정</StHeaderTitle>
       </header>
       <main css={mainStyles}>
@@ -134,7 +143,7 @@ const EditProfilePage = () => {
             value2="MALE"
             label1="여성"
             label2="남성"
-            checkedValue="FEMALE"
+            checkedValue={values.sex}
           />
         </RegisterBasicInput>
         {/* 생년월일 */}
@@ -197,7 +206,7 @@ const EditProfilePage = () => {
           />
         </RegisterBasicInput>
         <RegisterBasicInput label="MBTI">
-          <p>istj</p>
+          <p>{values.mbti}</p>
         </RegisterBasicInput>
         {/* 결혼 상태 */}
         <RegisterBasicInput label="결혼 상태">
@@ -320,7 +329,7 @@ const EditProfilePage = () => {
               value={values.description}
               onChange={handleDescription}
             />
-            <St.StBasicTextCnt>{descriptionCnt}/100</St.StBasicTextCnt>
+            <St.StBasicTextCnt>{descriptionCnt}/1000</St.StBasicTextCnt>
           </div>
         </RegisterBasicInput>
       </main>
@@ -374,6 +383,7 @@ const headerStyles = css`
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 42.5rem;
   height: 6.7rem;
   background-color: white;
 `;
@@ -428,6 +438,7 @@ const finishContainer = css`
   flex-direction: row;
   align-items: center;
   width: 100%;
+  max-width: 42.5rem;
   height: 9rem;
   padding: 2.2rem;
   background: ${theme.colors.white};

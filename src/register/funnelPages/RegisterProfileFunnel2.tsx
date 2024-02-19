@@ -26,7 +26,7 @@ import { findLabelByValue } from '../../common/utils/findLabelByValue';
 import PersonalityDepiction from '../components/PersonalityDepiction';
 import HobbyList from '../components/HobbyList';
 
-const MAXLEN = 100;
+const MAXLEN = 1000;
 
 const 기본프로필입력2 = ({
   onPrev,
@@ -194,7 +194,7 @@ const 기본프로필입력2 = ({
                 }}
               >
                 <St.StBasicTextArea
-                  placeholder="회원님이 어떤 사람인지 자신만의 언어로 자유롭게 소개해주세요. 자세히 작성할 수록 매칭률이 높아져요! "
+                  placeholder="회원님이 어떤 사람인지 자신만의 언어로 자유롭게 소개해주세요. 자세히 작성할 수록 매칭률이 높아져요! &#13;&#10;&#13;&#10; ex) 안녕하세요! 광화문 IT계열에서 근무중인 30살 늑대상 남자입니다😄 "
                   value={values.description}
                   onChange={handleDescription}
                 />

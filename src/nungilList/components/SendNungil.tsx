@@ -19,8 +19,6 @@ const SendNungil = () => {
         },
       });
 
-      console.log('내가 보낸 눈길 : ', res.data.content);
-
       setProfileData(res.data.content);
     } catch (error) {
       console.log(error);

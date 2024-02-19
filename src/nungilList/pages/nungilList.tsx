@@ -9,7 +9,7 @@ import SendNungil from '../components/SendNungil';
 
 const NungilList = () => {
   const { state } = useLocation();
-  const [selectedBtn, setSelectedBtn] = useState('received');
+  const [selectedBtn, setSelectedBtn] = useState('');
 
   let middleContent;
 
@@ -128,4 +128,6 @@ const Navigation = css`
   position: fixed;
   bottom: 0;
   z-index: 999;
+  width: 100%;
+  max-width: 42.5rem;
 `;

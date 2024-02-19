@@ -9,7 +9,6 @@ const FinishEditBtn = () => {
   const handleClickBtn = async () => {
     try {
       await instance.patch('/api/member', {});
-      console.log('프로필 수정 완료');
 
       navigate('/mypage');
     } catch (error) {

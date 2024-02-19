@@ -1,14 +1,13 @@
 import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
-import instance from '../../common/apis/axiosInstanse';
 import { theme } from '../../common/styles/theme';
 import NavBar from '../../common/components/NavBar';
+import instance from '../../common/apis/axiosInstanse';
 import ToggleBtn from '../components/ToggleBtn';
 import { useEffect, useState } from 'react';
 import { Registertypes } from '../../register/types/registerTypes';
-import instance from '../../common/apis/axiosInstanse';
 import MyProfileCard from '../components/MyProfileCard';
-
+import { 약관동의리스트 } from '../../common/constants/memberAgreeConstants';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -40,7 +39,6 @@ const MyPage = () => {
   const getUserInfo = async () => {
     try {
       const { data } = await instance.get('api/member');
-      console.log(data);
       setValues(data);
     } catch (err) {
       console.log(err);
@@ -50,10 +48,6 @@ const MyPage = () => {
   const ClickEditBtn = () => {
     navigate('/editprofilepage');
   };
-
-  useEffect(() => {
-    handleProfileData();
-  }, []);
 
   return (
     <div css={Container}>
@@ -77,16 +71,18 @@ const MyPage = () => {
         </div>
       </div>
       <div css={Middle.Wrapper}>
-        <button type="button" onClick={ClickEditBtn} css={Middle.MiddleStyle}>
-          서비스 이용약관
-        </button>
-        <button
-          type="button"
-          onClick={ClickEditBtn}
-          css={Middle.MiddleStyleBottom}
-        >
-          개인정보 처리방침
-        </button>
+        {약관동의리스트.map((item) => {
+          return (
+            <button
+              key={item.title}
+              type="button"
+              onClick={() => window.open(item.url, '_blank')}
+              css={Middle.MiddleStyle}
+            >
+              {item.title}
+            </button>
+          );
+        })}
       </div>
       <div css={Bottom.Wrapper}></div>
       <div css={Navigation}>
@@ -192,4 +188,5 @@ const Navigation = css`
   position: fixed;
   bottom: 0;
   width: 100%;
+  max-width: 42.5rem;
 `;

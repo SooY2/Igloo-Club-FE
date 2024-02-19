@@ -16,11 +16,7 @@ const ChatComponent = () => {
         connectHeaders: {
           Authorization: `Bearer ${accessToken}`, // 토큰을 헤더에 추가
         },
-        debug: (str) => {
-          console.log(str); // 디버그 메시지 출력
-        },
         onConnect: () => {
-          console.log('Connected'); // 연결 성공 시 콘솔에 메시지 출력
           stompClient.subscribe('/topic/2', (message) => {
             setMessages((prev) => [...prev, message.body]); // 메시지 구독
           });
@@ -58,7 +54,6 @@ const ChatComponent = () => {
           content: newMessage,
         }),
       });
-      console.log(newMessage);
       setNewMessage('');
     }
   };

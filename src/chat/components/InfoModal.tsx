@@ -11,21 +11,26 @@ const InfoModal = ({
   closeModal,
 }: {
   nickname: string;
-  chatRoomId: number;
+  chatRoomId: number | undefined;
   closeModal: () => void;
 }) => {
   const [matchData, setMatchData] = useState<MatchDatatypes | undefined>();
+  const [isClickedMarker, setIsClickedMarker] = useState<{
+    title: string;
+    address: string;
+  } | null>(null);
   const title = `${nickname} 님이 알려주신\n 만남이 가능한 시간대와 장소에요`;
 
   const ClickXBtn = () => {
     closeModal();
   };
 
+  console.log(matchData);
+
   const handlePossibleInfo = async () => {
     try {
       const res = await instance.get(`/api/chat/room/${chatRoomId}/info`);
       setMatchData(res.data);
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -36,8 +41,9 @@ const InfoModal = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleOutsideClick = (event) => {
-    if (event.target === event.currentTarget) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleOutsideClick = (e: any) => {
+    if (e.target === e.currentTarget) {
       closeModal();
     }
   };
@@ -52,30 +58,41 @@ const InfoModal = ({
         <StPossibleWrapper>
           <StPossibleBox>
             <StPossibleTitle>🗓️ 가능한 요일</StPossibleTitle>
-            {matchData?.yoil
-              ? matchData.yoil.map((day: string, index: number) => (
-                  <>
-                    {' '}
-                    <StPossibleContent key={index}>{day}</StPossibleContent>
-                  </>
-                ))
-              : null}
+            {matchData?.yoil ? (
+              matchData.yoil.map((day: string, index: number) => (
+                <>
+                  {' '}
+                  <StPossibleContent key={index}>{day}</StPossibleContent>
+                </>
+              ))
+            ) : (
+              <StPossibleContent>없음</StPossibleContent>
+            )}
           </StPossibleBox>
           <StPossibleBox>
             <StPossibleTitle>⏰ 가능 시간대</StPossibleTitle>
-            {matchData?.time
-              ? matchData.time.map((timeSlot: string, index: number) => (
-                  <StPossibleContent key={index}>{timeSlot}</StPossibleContent>
-                ))
-              : null}
+            {matchData?.time ? (
+              matchData.time.map((timeSlot: string, index: number) => (
+                <StPossibleContent key={index}>{timeSlot}</StPossibleContent>
+              ))
+            ) : (
+              <StPossibleContent>없음</StPossibleContent>
+            )}
           </StPossibleBox>
         </StPossibleWrapper>
         <StPlaceWrapper>
           <StPlaceMap>
-            <Map matchData={matchData} />
+            <Map
+              matchData={matchData}
+              setIsClickedMarker={setIsClickedMarker}
+            />
           </StPlaceMap>
           <StPlaceBox>
-            <StPlaceInfo></StPlaceInfo>
+            {isClickedMarker ? (
+              <StPlaceInfo>{isClickedMarker.address}</StPlaceInfo>
+            ) : (
+              <StPlaceInfo>지도 내에 위치한 핀을 클릭해보세요!</StPlaceInfo>
+            )}
           </StPlaceBox>
         </StPlaceWrapper>
       </StInfoModalWrapper>
@@ -95,7 +112,7 @@ const StInfoModalContainer = styled.div`
   justify-content: center;
   width: 100%;
   max-width: 42.5rem;
-  height: 100vh;
+  height: 100%;
   background: rgb(0 0 0 / 50%);
 `;
 
@@ -104,8 +121,7 @@ const StInfoModalWrapper = styled.div`
   flex-direction: column;
   justify-content: start;
   max-width: 32rem;
-  height: 59rem;
-  padding-top: 2rem;
+  padding-top: 3rem;
   background: ${({ theme }) => theme.colors.white};
   border-radius: 10px;
 `;
@@ -120,7 +136,7 @@ const StXButton = styled.button`
 
 const StInfoTitle = styled.span`
   display: flex;
-  padding: 1.5rem 2.5rem;
+  padding: 2rem 2.5rem;
   line-height: 2.5rem;
   color: ${({ theme }) => theme.colors.gray9};
   ${({ theme }) => theme.fonts.subtitle2b};
@@ -141,7 +157,7 @@ const StPossibleBox = styled.div`
   min-width: 28rem;
   height: 5.9rem;
   padding: 0 1.5rem;
-  margin-top: 0.9rem;
+  margin-top: 0.5rem;
   background: ${({ theme }) => theme.colors.gray0};
   border-radius: 17px;
 `;
@@ -184,12 +200,16 @@ const StPlaceBox = styled.div`
   justify-content: center;
   height: 5.1rem;
   margin-top: 1rem;
-  background: #fafafa;
+  margin-bottom: 2rem;
+  background: ${({ theme }) => theme.colors.gray0};
   border-radius: 5px;
 `;
 
 const StPlaceInfo = styled.span`
-  color: ${({ theme }) => theme.colors.gray7};
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.gray6};
   ${({ theme }) => theme.fonts.body2b};
 
   text-align: center;

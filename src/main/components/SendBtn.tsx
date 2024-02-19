@@ -49,8 +49,9 @@ const Container = css`
   flex-direction: row;
   align-items: center;
   width: 100%;
+  max-width: 42.5rem;
   height: 9rem;
-  padding: 0 2.2rem;
+  padding: 0 2rem;
   background: ${theme.colors.white};
   border-top: 1px solid #e3e3e3;
 `;

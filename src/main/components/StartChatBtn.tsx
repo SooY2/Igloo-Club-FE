@@ -31,9 +31,11 @@ const Container = css`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   width: 100%;
+  max-width: 42.5rem;
   height: 9rem;
-  padding: 0 2.2rem;
+  padding: 0 2rem;
   background: ${theme.colors.white};
   border-top: 1px solid #e3e3e3;
 `;
@@ -44,7 +46,6 @@ const StartBtn = css`
   gap: 0.9rem;
   align-items: center;
   justify-content: center;
-  width: 100%;
   height: 5.5rem;
   padding: 1.5rem 8rem;
   font-size: 14px;

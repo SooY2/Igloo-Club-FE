@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
 
 /*매칭 마감까지 남은 시간 계산하는 함수*/
-const calculateTimeLeft = () => {
+export const calculateTimeLeft = () => {
   const now = new Date();
   const targetTime = new Date();
 
-  targetTime.setHours(15, 0, 0, 0);
+  targetTime.setHours(12, 0, 0, 0);
 
-  if (now.getHours() >= 15) {
+  if (now.getHours() >= 12) {
     targetTime.setDate(targetTime.getDate() + 1);
   }
 
   targetTime.setHours(11, 0, 0, 0);
 
-  const matchingTime = now.getHours() >= 15 || now.getHours() < 11;
+  const matchingTime = now.getHours() >= 12 || now.getHours() < 11;
 
   const timeDifference = targetTime.getTime() - now.getTime();
   const minutesLeft = Math.floor(timeDifference / (1000 * 60));
@@ -33,14 +33,11 @@ const CountDown = ({ onMatchingTime }: any) => {
     const timer = setInterval(() => {
       const newTime = calculateTimeLeft().matchingTime;
       setTimeLeft(calculateTimeLeft());
-
-      if (newTime !== timeLeft.matchingTime) {
-        onMatchingTime(newTime);
-      }
+      onMatchingTime(newTime);
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [onMatchingTime, timeLeft]);
+  }, [onMatchingTime, timeLeft.matchingTime]);
 
   return (
     <div>

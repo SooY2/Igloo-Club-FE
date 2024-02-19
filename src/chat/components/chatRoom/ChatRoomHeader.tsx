@@ -12,7 +12,7 @@ interface ChatRoomHeaderProps {
   companyName: string;
   job: string;
   nickname: string;
-  chatRoomId: number;
+  chatRoomId: number | undefined;
 }
 
 const ChatRoomHeader = ({
@@ -27,6 +27,8 @@ const ChatRoomHeader = ({
   const handleClickModal = () => {
     setIsModalOpen(true);
   };
+  const notitext = `${nickname} 님과 만남 가능한 시간과 장소를\n 알고 싶다면 이곳을 클릭해보세요!`;
+
   return (
     <StHeaderContainer>
       <header css={HeaderWrapper}>
@@ -36,14 +38,14 @@ const ChatRoomHeader = ({
           <div css={senderProfileStyles}>
             <StSenderName>{nickname}</StSenderName>
             <StSenderJob>
-              {companyName},{job}
+              {companyName}, {job}
             </StSenderJob>
           </div>
         </span>
       </header>
       <StChatModalWrapper onClick={handleClickModal}>
         <Noti />
-        {nickname} 님과 만날 수 있는 시간과 장소를 알려드려요
+        {notitext}
       </StChatModalWrapper>
       {isModalOpen && (
         <InfoModal
@@ -65,11 +67,11 @@ const StHeaderContainer = styled.header`
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
   align-items: start;
   justify-content: center;
   width: 100%;
-  padding: 3rem 2rem;
+  padding: 0 2rem;
+  white-space: pre-line;
 `;
 
 const HeaderWrapper = css`
@@ -78,6 +80,11 @@ const HeaderWrapper = css`
   gap: 1.5rem;
   align-items: center;
   justify-content: start;
+  width: 100%;
+  max-width: 42.5rem;
+  padding: 2.5rem 0 1.5rem;
+  background: #fff;
+
 `;
 
 const senderInfoStyles = css`
@@ -105,12 +112,13 @@ const StSenderJob = styled.p`
 const StChatModalWrapper = styled.button`
   display: flex;
   flex-direction: row;
-  gap: 0.8rem;
+  gap: 1rem;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   width: 100%;
+  max-width: 40rem;
   height: 5rem;
-  padding: 0 1rem;
+  padding-right: 1rem;
   font-size: 1.3rem;
   font-style: normal;
   font-weight: 600;

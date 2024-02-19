@@ -15,6 +15,7 @@ const Container = css`
   flex-direction: row;
   align-items: center;
   width: 100%;
+  max-width: 42.5rem;
   height: 9rem;
   padding: 0 2.2rem;
   background: ${theme.colors.white};
@@ -28,6 +29,7 @@ const SendBtn = css`
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 42.5rem;
   height: 5.5rem;
   padding: 1.5rem 7rem;
   font-size: 14px;

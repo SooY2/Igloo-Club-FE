@@ -13,7 +13,6 @@ import MyPage from './mypage/pages/myPage';
 import EditProfilePage from './mypage/pages/editProfilePage';
 import Chat from './chat/Chat';
 import ChatRoom from './chat/components/chatRoom/ChatRoom';
-import InfoModal from './chat/components/InfoModal';
 
 const router = createBrowserRouter([
   {
@@ -48,7 +47,6 @@ const router = createBrowserRouter([
   { path: 'editprofilepage', element: <EditProfilePage /> },
   { path: 'chat', element: <Chat /> },
   { path: 'chat/:chatRoomId', element: <ChatRoom /> },
-  { path: 'infomodal', element: <InfoModal /> },
 ]);
 
 export default router;

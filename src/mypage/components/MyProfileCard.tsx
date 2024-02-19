@@ -15,7 +15,6 @@ const MyProfileCard = ({
   nickname,
   description,
 }: ChatRoomHeaderProps) => {
-  console.log(animalFace);
   return (
     <StHeader>
       <span css={senderInfoStyles}>
@@ -52,6 +51,7 @@ const senderInfoStyles = css`
   display: flex;
   gap: 1rem;
   align-items: center;
+  padding-bottom: 1rem;
 `;
 
 const senderProfileStyles = css`
@@ -61,7 +61,7 @@ const senderProfileStyles = css`
 `;
 
 const StSenderName = styled.h1`
-  color: ${({ theme }) => theme.colors.gray1};
+  color: ${({ theme }) => theme.colors.gray0};
   ${({ theme }) => theme.fonts.body1m};
 `;
 
@@ -71,6 +71,6 @@ const StSenderJob = styled.p`
 `;
 
 const StDescription = styled.div`
-  color: ${({ theme }) => theme.colors.gray2};
+  color: ${({ theme }) => theme.colors.white};
   ${({ theme }) => theme.fonts.body1r};
 `;
