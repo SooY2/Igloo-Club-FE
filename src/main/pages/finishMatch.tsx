@@ -15,6 +15,10 @@ const FinishMatch = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [matchData, setMatchData] = useState<MatchDatatypes | undefined>();
+  const [isClickedMarker, setIsClickedMarker] = useState<{
+    title: string;
+    address: string;
+  } | null>(null);
   const title = `축하해요 🎉\n 서로의 눈길이 매칭되었어요`;
   const subtitle = `서로의 눈길이 닿아 매칭이 성사되었어요.\n 채팅방을 통해 두 분의 첫만남 약속을 잡아보세요!`;
   const noticontent = `첫만남 장소와 시간 조차 정하기 어려워하는 당신을 위해\n 저희가 직접 만남 장소와 시간대도 추천해 드려요.`;
@@ -93,20 +97,28 @@ const FinishMatch = () => {
           <span>두분의 의견을 반영하여 최적의 첫만남 장소를 골라봤어요 📝</span>
         </div>
         <div css={Place.Map}>
-          <Map matchData={matchData} />
+          <Map matchData={matchData} setIsClickedMarker={setIsClickedMarker} />
         </div>
         <div css={Place.InfoBox}>
           <ul css={Place.InfoPlaceName}>
             <li css={Place.InfoTitle}>장소명</li>
-            {matchData ? (
-              <li css={Place.InfoContent}>{matchData.marker[0].title}</li>
+            {isClickedMarker ? (
+              <li css={Place.InfoContent}>{isClickedMarker.title}</li>
             ) : (
-              <span css={Recommend.RecoContent}>없음</span>
+              <span css={Recommend.RecoContent}>
+                지도 내에 위치한 핀을 클릭해보세요!
+              </span>
             )}
           </ul>
           <ul css={Place.InfoAddress}>
             <li css={Place.InfoTitle}>주소</li>
-            <li css={Place.InfoContent}></li>
+            {isClickedMarker ? (
+              <li css={Place.InfoContent}>{isClickedMarker.address}</li>
+            ) : (
+              <span css={Recommend.RecoContent}>
+                지도 내에 위치한 핀을 클릭해보세요!
+              </span>
+            )}
           </ul>
         </div>
       </div>
@@ -286,7 +298,7 @@ const Place = {
     height: 8.7rem;
     padding-left: 2rem;
     margin-top: 1.4rem;
-    margin-bottom: 4rem;
+    margin-bottom: 14rem;
     background-color: #fafafa;
     border-radius: 5px;
   `,
@@ -321,7 +333,8 @@ const Place = {
 };
 
 const StartBtn = css`
-  position: sticky;
+  position: fixed;
   bottom: 0;
   z-index: 999;
+  width: 100%;
 `;

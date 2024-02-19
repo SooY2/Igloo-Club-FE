@@ -36,7 +36,7 @@ const ChatRoomHeader = ({
           <div css={senderProfileStyles}>
             <StSenderName>{nickname}</StSenderName>
             <StSenderJob>
-              {companyName},{job}
+              {companyName}, {job}
             </StSenderJob>
           </div>
         </span>
@@ -65,11 +65,10 @@ const StHeaderContainer = styled.header`
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
   align-items: start;
   justify-content: center;
   width: 100%;
-  padding: 3rem 2rem;
+  padding: 0 2rem;
 `;
 
 const HeaderWrapper = css`
@@ -78,6 +77,10 @@ const HeaderWrapper = css`
   gap: 1.5rem;
   align-items: center;
   justify-content: start;
+  width: 100%;
+  max-width: 42.5rem;
+  padding: 2.5rem 0 1.5rem;
+  background: #fff;
 `;
 
 const senderInfoStyles = css`
@@ -109,6 +112,7 @@ const StChatModalWrapper = styled.button`
   align-items: center;
   justify-content: start;
   width: 100%;
+  max-width: 40rem;
   height: 5rem;
   padding: 0 1rem;
   font-size: 1.3rem;

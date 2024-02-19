@@ -85,6 +85,10 @@ const EditProfilePage = () => {
     }
   };
 
+  const handleClickBtn = () => {
+    navigate(-1);
+  };
+
   const handleEditValue = (
     value: string | string[] | number,
     name?: string,
@@ -112,7 +116,7 @@ const EditProfilePage = () => {
   return (
     <div css={container}>
       <header css={headerStyles}>
-        <StArrow onClick={() => navigate('/mypage')} />
+        <StArrow onClick={handleClickBtn} />
         <StHeaderTitle>기본 프로필 수정</StHeaderTitle>
       </header>
       <main css={mainStyles}>
