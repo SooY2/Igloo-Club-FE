@@ -75,8 +75,12 @@ const DetailProfile = () => {
             <span>나의 외적인 매력은</span>
           </div>
           <div css={Middle.ExAttrList}>
-            {profileData?.faceDepictionAllocationList &&
-              profileData.faceDepictionAllocationList
+            {(profileData?.faceDepictionAllocationList ||
+              profileData?.animalFace) &&
+              (
+                profileData.faceDepictionAllocationList ||
+                profileData.animalFace
+              )
                 .split(',')
                 .map((attr: string, index: number) => (
                   <div key={index} css={Middle.AllocationList}>
@@ -90,8 +94,27 @@ const DetailProfile = () => {
             <span>나의 내적인 매력은</span>
           </div>
           <div css={Middle.InAttrList}>
-            {profileData?.personalityDepictionAllocationList &&
-              profileData.personalityDepictionAllocationList
+            {(profileData?.personalityDepictionAllocationList ||
+              profileData?.mbti) &&
+              (
+                profileData.personalityDepictionAllocationList ||
+                profileData.mbti
+              )
+                .split(',')
+                .map((attr: string, index: number) => (
+                  <div key={index} css={Middle.AllocationList}>
+                    {attr.trim()}
+                  </div>
+                ))}
+          </div>
+        </div>
+        <div css={Middle.Hobby}>
+          <div css={Middle.HobbyTitle}>
+            <span>나의 취미는</span>
+          </div>
+          <div css={Middle.HobbyList}>
+            {profileData?.hobbyAllocationList &&
+              profileData.hobbyAllocationList
                 .split(',')
                 .map((attr: string, index: number) => (
                   <div key={index} css={Middle.AllocationList}>
@@ -102,11 +125,19 @@ const DetailProfile = () => {
         </div>
         <div css={Middle.Notice}>
           <div css={Middle.NoticeTitle}>
-            <span>나의 취미는</span>
+            <span>이건 알아두세요!</span>
           </div>
           <div css={Middle.NoticeList}>
-            {profileData?.hobbyAllocationList &&
-              profileData.hobbyAllocationList
+            {(profileData?.marriageState ||
+              profileData?.religion ||
+              profileData?.smoke ||
+              profileData?.alcohol) &&
+              (
+                profileData.marriageState ||
+                profileData.religion ||
+                profileData.smoke ||
+                profileData.alcohol
+              )
                 .split(',')
                 .map((attr: string, index: number) => (
                   <div key={index} css={Middle.AllocationList}>
@@ -201,7 +232,7 @@ const Top = {
 
   InfoContent: css`
     display: flex;
-    padding-top: 1.1rem;
+    padding-top: 1.3rem;
     font-size: 1.3rem;
     font-style: normal;
     font-weight: 500;
@@ -252,6 +283,26 @@ const Middle = {
   `,
 
   InAttrList: css`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    white-space: nowrap;
+  `,
+
+  Hobby: css`
+    display: flex;
+    flex-direction: column;
+    margin-top: 3.8rem;
+  `,
+
+  HobbyTitle: css`
+    display: flex;
+    color: ${theme.colors.gray8};
+    ${theme.fonts.body1m};
+  `,
+
+  HobbyList: css`
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem;
