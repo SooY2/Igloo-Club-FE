@@ -53,7 +53,7 @@ const containerStyles = css`
 const contentStyles = css`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.6rem;
   justify-content: center;
   width: calc(100% - 10rem);
 `;
@@ -63,6 +63,7 @@ const timeStyles = css`
   flex-direction: column;
   justify-content: end;
   width: 20%;
+  padding-bottom: 0.2rem;
 `;
 
 const StUserName = styled.h2`

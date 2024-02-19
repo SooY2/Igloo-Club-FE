@@ -27,6 +27,8 @@ const ChatRoomHeader = ({
   const handleClickModal = () => {
     setIsModalOpen(true);
   };
+  const notitext = `${nickname} 님과 만남 가능한 시간과 장소를\n 알고 싶다면 이곳을 클릭해보세요!`;
+
   return (
     <StHeaderContainer>
       <header css={HeaderWrapper}>
@@ -43,7 +45,7 @@ const ChatRoomHeader = ({
       </header>
       <StChatModalWrapper onClick={handleClickModal}>
         <Noti />
-        {nickname} 님과 만날 수 있는 시간과 장소를 알려드려요
+        {notitext}
       </StChatModalWrapper>
       {isModalOpen && (
         <InfoModal
@@ -69,6 +71,7 @@ const StHeaderContainer = styled.header`
   justify-content: center;
   width: 100%;
   padding: 0 2rem;
+  white-space: pre-line;
 `;
 
 const HeaderWrapper = css`
@@ -109,13 +112,13 @@ const StSenderJob = styled.p`
 const StChatModalWrapper = styled.button`
   display: flex;
   flex-direction: row;
-  gap: 0.8rem;
+  gap: 1rem;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   width: 100%;
   max-width: 40rem;
   height: 5rem;
-  padding: 0 1rem;
+  padding-right: 1rem;
   font-size: 1.3rem;
   font-style: normal;
   font-weight: 600;
