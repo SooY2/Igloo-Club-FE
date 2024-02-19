@@ -11,7 +11,7 @@ export const PlaceCardConstants = [
     emoji: '👩🏻‍💻',
     text1: '한국의 실리콘밸리,',
     text2: 'IT기업 밀집 지구',
-    btn: 'COMMING SOON',
+    btn: 'COMING SOON',
   },
 ];
 
