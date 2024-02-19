@@ -72,6 +72,7 @@ const EditProfilePage = () => {
       setIsLoading(true);
       const { data } = await instance.get('api/member');
       setValues(data);
+      setDescriptionCnt(data.description.length);
     } catch (err) {
       console.log(err);
     } finally {
