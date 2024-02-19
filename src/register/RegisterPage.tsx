@@ -254,11 +254,9 @@ const Register = () => {
         </Funnel.Step>
         <Funnel.Step name="회원가입완료">
           <회원가입완료
-            onPrev={() => setStep('지역선택')}
             onNext={() => {
               navigate('/main-page');
             }}
-            percent={100}
           />
         </Funnel.Step>
       </Funnel>

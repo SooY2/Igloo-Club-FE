@@ -1,12 +1,9 @@
 import { logo } from '../../common/assets/images/0_index';
 import styled from '@emotion/styled';
-import { NavTypesProps } from '../types/navTypes';
-import { ArrowLeft } from '../assets/svgs/0_index';
 
-const 회원가입완료 = ({ onPrev, onNext }: NavTypesProps) => {
+const 회원가입완료 = ({ onNext }: { onNext: () => void }) => {
   return (
     <>
-      <CustomArrowLeft onClick={onPrev} />
       <StContainer>
         <StIMG>
           <StLogo src={logo} />
@@ -27,7 +24,7 @@ const StContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80%;
+  height: 90%;
   animation: fade-in-bottom 1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 
   @keyframes fade-in-bottom {
@@ -61,11 +58,6 @@ const StIMG = styled.div`
   gap: 2rem;
   align-items: center;
   justify-content: center;
-`;
-
-const CustomArrowLeft = styled(ArrowLeft)`
-  left: 0;
-  margin-bottom: 2.5rem;
 `;
 
 const StLogo = styled.img`
