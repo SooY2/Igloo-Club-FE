@@ -19,11 +19,11 @@ const CompanyNameModal = ({
   email,
 }: {
   onCancel: () => void;
-  onSelect: Dispatch<SetStateAction<string>>;
+  onSelect: Dispatch<SetStateAction<string | string[] | number>>;
   email: string;
 }) => {
   const [isActive, setIsActive] = useState(false);
-  const [select, setSelect] = useState('');
+  const [select, setSelect] = useState<string | string[] | number>('');
   const [newCompany, setNewCompany] = useState('');
   const [isAdd, setIsAdd] = useState(false);
   const [companyNameList, setCompanyNameList] = useState<string[]>([]);
@@ -45,7 +45,7 @@ const CompanyNameModal = ({
     setIsActive(true);
   }, [select, newCompany]);
 
-  const handleSelect = (value: string): void => {
+  const handleSelect = (value: string | string[]): void => {
     if (value === '추가하기') {
       setIsAdd(true);
       setIsActive(false);
