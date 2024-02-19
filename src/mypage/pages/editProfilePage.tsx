@@ -85,7 +85,7 @@ const EditProfilePage = () => {
   };
 
   const handleClickBtn = () => {
-    navigate('/mypage');
+    navigate(-1);
   };
 
   const handleEditValue = (

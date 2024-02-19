@@ -36,7 +36,13 @@ const MainPage = () => {
     }
   };
 
+  const handleMatchingTime = async () => {
+    const newTime = calculateTimeLeft().matchingTime;
+    setMatchingTime(newTime);
+  };
+
   useEffect(() => {
+    handleMatchingTime();
     handleGetAllProfile();
   }, []);
 
@@ -48,15 +54,6 @@ const MainPage = () => {
   const ClickProfileBtn = (nungilId: number, nickname: string) => {
     navigate(`/detailpage/${nungilId}`, { state: { nungilId, nickname } });
   };
-
-  const handleMatchingTime = async () => {
-    const newTime = calculateTimeLeft().matchingTime;
-    setMatchingTime(newTime);
-  };
-
-  useEffect(() => {
-    handleMatchingTime();
-  }, []);
 
   const handleSelectedChange = () => {
     handleGetAllProfile();

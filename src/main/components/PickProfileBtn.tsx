@@ -4,24 +4,29 @@ import { theme } from '../../common/styles/theme';
 import instance from '../../common/apis/axiosInstanse';
 import { Lightning } from '../assets/svgs';
 import LimitModal from './LimitModal';
+import ExistModal from './ExistModal';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PickProfileBtn = ({ ProfileData }: any) => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isLimitModalOpen, setIsLimitModalOpen] = useState<boolean>(false);
+  const [isExistModalOpen, setIsExistModalOpen] = useState<boolean>(false);
 
   const handleClickBtn = async () => {
     try {
       const res = await instance.post('/api/nungil/recommend', {
         isPayed: true,
       });
-      const { companyName, job, description } = res.data;
-
-      ProfileData({ companyName, job, description });
+      if (res.data) {
+        const { companyName, job, description } = res.data;
+        ProfileData({ companyName, job, description });
+      } else {
+        setIsExistModalOpen(true);
+      }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.log(error);
       if (error.response && error.response.status === 403) {
-        setIsModalOpen(true);
+        setIsLimitModalOpen(true);
       }
     }
   };
@@ -32,7 +37,12 @@ const PickProfileBtn = ({ ProfileData }: any) => {
         <Lightning />
         오늘의 인연 프로필 뽑기
       </button>
-      {isModalOpen && <LimitModal closeModal={() => setIsModalOpen(false)} />}
+      {isLimitModalOpen && (
+        <LimitModal closeModal={() => setIsLimitModalOpen(false)} />
+      )}
+      {isExistModalOpen && (
+        <ExistModal closeModal={() => setIsExistModalOpen(false)} />
+      )}
     </div>
   );
 };
