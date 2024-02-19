@@ -38,12 +38,15 @@ const DetailProfile = () => {
   }, [state.nungilId]);
 
   const handleLastWord = (lastChar: string) => {
-    const lastWordRegex = /[가-힣]$/;
-    return lastWordRegex.test(lastChar);
+    const uni = lastChar.charCodeAt(0);
+
+    if (uni < 44032 || uni > 55203) return null;
+
+    return (uni - 44032) % 28 != 0;
   };
 
   const title = `안녕하세요!\n 저는 ${
-    handleLastWord(nickname.slice(-1)) ? `${nickname}` : `${nickname}이`
+    handleLastWord(nickname.slice(-1)) ? `${nickname}이` : `${nickname}`
   }라고 합니다.`;
 
   return (
@@ -99,7 +102,7 @@ const DetailProfile = () => {
         </div>
         <div css={Middle.Notice}>
           <div css={Middle.NoticeTitle}>
-            <span>이건 알아두세요!</span>
+            <span>나의 취미는</span>
           </div>
           <div css={Middle.NoticeList}>
             {profileData?.hobbyAllocationList &&
