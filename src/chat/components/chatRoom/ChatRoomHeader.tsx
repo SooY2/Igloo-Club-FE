@@ -84,6 +84,7 @@ const HeaderWrapper = css`
   max-width: 42.5rem;
   padding: 2.5rem 0 1.5rem;
   background: #fff;
+
 `;
 
 const senderInfoStyles = css`

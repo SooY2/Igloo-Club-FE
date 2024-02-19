@@ -39,7 +39,7 @@ const 기본프로필입력1 = ({
     handleValues(mbtiString, 'mbti');
   }, [mbti]);
 
-  const handleValues = (value: string | number, name?: string) => {
+  const handleValues = (value: string | string[] | number, name?: string) => {
     if (!name) return;
     setValues((prevValues) => ({
       ...prevValues,

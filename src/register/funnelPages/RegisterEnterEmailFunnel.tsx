@@ -16,7 +16,7 @@ import axios from 'axios';
 type SetEmailInfoType = Dispatch<
   SetStateAction<{
     email: string;
-    companyName: string;
+    companyName: string | string[] | number;
   }>
 >;
 
@@ -32,7 +32,9 @@ const 회사이메일입력 = ({
   const [isActive, setIsActive] = useState(false);
   const [email, setEmail] = useState('');
   const [modal, setModal] = useState(false);
-  const [company, setCompany] = useState('재직 중이신 회사명을 선택해 주세요.');
+  const [company, setCompany] = useState<string | string[] | number>(
+    '재직 중이신 회사명을 선택해 주세요.',
+  );
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

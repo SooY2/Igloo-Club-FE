@@ -49,6 +49,7 @@ export const StBasicTextArea = styled.textarea`
   &::placeholder {
     line-height: 2rem;
     color: ${({ theme }) => theme.colors.gray5};
+    ${({ theme }) => theme.fonts.body2r};
   }
 `;
 

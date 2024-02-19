@@ -30,21 +30,13 @@ const ChatRoom = () => {
   }, [chatRoomId]);
 
   useEffect(() => {
-    console.log(chatData);
-  }, [chatData]);
-
-  useEffect(() => {
     if ('WebSocket' in window) {
       const stompClient = new Client({
         brokerURL: `${import.meta.env.VITE_WSS_URL}/stomp/websocket`,
         connectHeaders: {
           Authorization: `Bearer ${accessToken}`,
         },
-        debug: (str) => {
-          console.log(str, 'debug');
-        },
         onConnect: () => {
-          console.log('Connected');
           setupSubscription(stompClient);
         },
         onStompError: (frame) => {
@@ -84,7 +76,6 @@ const ChatRoom = () => {
         `api/chat/room/${chatRoomId}?pageNumber=0&pageSize=100`,
       );
       setChatData(data.messageSlice.content);
-      console.log(data);
       setChatSenderInfo({
         animalFace: data.animalFace,
         companyName: data.companyName,

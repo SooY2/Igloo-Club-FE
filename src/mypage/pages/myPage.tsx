@@ -7,6 +7,7 @@ import ToggleBtn from '../components/ToggleBtn';
 import { useEffect, useState } from 'react';
 import { Registertypes } from '../../register/types/registerTypes';
 import MyProfileCard from '../components/MyProfileCard';
+import { 약관동의리스트 } from '../../common/constants/memberAgreeConstants';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -70,16 +71,18 @@ const MyPage = () => {
         </div>
       </div>
       <div css={Middle.Wrapper}>
-        <button type="button" onClick={ClickEditBtn} css={Middle.MiddleStyle}>
-          서비스 이용약관
-        </button>
-        <button
-          type="button"
-          onClick={ClickEditBtn}
-          css={Middle.MiddleStyleBottom}
-        >
-          개인정보 처리방침
-        </button>
+        {약관동의리스트.map((item) => {
+          return (
+            <button
+              key={item.title}
+              type="button"
+              onClick={() => window.open(item.url, '_blank')}
+              css={Middle.MiddleStyle}
+            >
+              {item.title}
+            </button>
+          );
+        })}
       </div>
       <div css={Bottom.Wrapper}></div>
       <div css={Navigation}>

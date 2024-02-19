@@ -71,9 +71,7 @@ const 지역선택 = ({
             gap: '1.7rem',
           }}
         >
-          <St.StBtnExplain>
-            현재는 광화문과 판교, 두 곳만 지원해요
-          </St.StBtnExplain>
+          <St.StBtnExplain>현재는 광화문만 지원해요</St.StBtnExplain>
           <RegisterBtn
             isActive={isActive}
             content="다음으로"

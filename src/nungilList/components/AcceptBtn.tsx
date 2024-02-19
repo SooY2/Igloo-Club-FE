@@ -7,8 +7,6 @@ const AcceptNungilBtn = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  console.log('send :', state.nungilId);
-
   const handleAcceptNungil = async () => {
     try {
       await instance.patch(`/api/nungil/match?nungilId=${state.nungilId}`);
