@@ -8,6 +8,7 @@ interface CheckBoxItemProps {
   setValues: Dispatch<SetStateAction<string[]>>;
   label?: string;
   values: string[];
+  limit?: number;
 }
 
 const CheckBoxItem = ({
@@ -17,14 +18,15 @@ const CheckBoxItem = ({
   setValues,
   label,
   values,
+  limit,
 }: CheckBoxItemProps) => {
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setValues((prevValues) =>
-      values.includes(value)
-        ? prevValues.filter((val) => val !== value)
-        : [...prevValues, value],
-    );
+    values.includes(value)
+      ? setValues((prevValues) => prevValues.filter((val) => val !== value))
+      : limit &&
+        values.length < limit &&
+        setValues((prevValues) => [...prevValues, value]);
   };
 
   return (
