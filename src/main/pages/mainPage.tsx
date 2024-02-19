@@ -19,7 +19,7 @@ const MainPage = () => {
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState<ProfileDataTypesProps[]>([]);
   const [matchingTime, setMatchingTime] = useState<boolean>();
-  const selected = useState<string>('');
+  const [selected] = useState<string>('');
 
   const handleGetAllProfile = async () => {
     try {
