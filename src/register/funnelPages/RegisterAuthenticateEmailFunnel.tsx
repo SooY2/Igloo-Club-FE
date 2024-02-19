@@ -27,7 +27,6 @@ const 회사이메일인증 = ({
   const [authentication, setAuthentication] = useState<string>('');
 
   const handleSubmit = async () => {
-    console.log(authentication, emailInfo.email, emailInfo.companyName);
     try {
       await instance.post('/api/company/verification', {
         code: authentication.toUpperCase(),
