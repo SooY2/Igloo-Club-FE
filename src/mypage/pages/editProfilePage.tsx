@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { theme } from '../../common/styles/theme';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from '../assets/svgs/index';
 import styled from '@emotion/styled';
 import {
@@ -36,7 +36,6 @@ import instance from '../../common/apis/axiosInstanse';
 
 const EditProfilePage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [showFaceDepiction, setShowFaceDepction] = useState(false);
   const [showPersonalityDepiction, setShowPersonalityDepiction] =
     useState(false);
@@ -87,11 +86,7 @@ const EditProfilePage = () => {
   };
 
   const handleClickBtn = () => {
-    if (location.pathname.includes('/main')) {
-      navigate('/main-page');
-    } else if (location.pathname.includes('/mypage')) {
-      navigate('/mypage');
-    }
+    navigate(-1);
   };
 
   const handleEditValue = (

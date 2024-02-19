@@ -19,6 +19,7 @@ interface MapProps {
 
 const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
   const [clickedMarker, setClickedMarker] = useState<number | null>(null);
+
   useEffect(() => {
     const mapScript = document.createElement('script');
 
