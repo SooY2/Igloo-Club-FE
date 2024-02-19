@@ -12,7 +12,6 @@ const AcceptNungilBtn = () => {
   const handleAcceptNungil = async () => {
     try {
       await instance.patch(`/api/nungil/match?nungilId=${state.nungilId}`);
-      console.log('눈길 수락하기 완료');
     } catch (error) {
       console.log(error);
     }

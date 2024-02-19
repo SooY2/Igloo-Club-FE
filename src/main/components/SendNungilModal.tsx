@@ -23,7 +23,6 @@ const SendNungilModal = ({
     '눈길 보내기를 완료했어요!\n 당신의 인연과 빠르게 매칭해드릴게요 ⚡️';
 
   const ClickSendBtn = async () => {
-    console.log(nungilId);
     try {
       await instance.post('/api/nungil/send?', null, {
         params: {

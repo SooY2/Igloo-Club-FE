@@ -34,7 +34,6 @@ const ChatRoomBox = ({
         <StContent>{content}</StContent>
       </span>
       <span css={timeStyles}>
-        <div></div>
         <StTime>{calculateElapsedTime(createdAt)}</StTime>
       </span>
     </article>
@@ -63,6 +62,7 @@ const timeStyles = css`
   display: flex;
   flex-direction: column;
   justify-content: end;
+  width: 20%;
 `;
 
 const StUserName = styled.h2`
