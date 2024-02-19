@@ -7,7 +7,7 @@ import { Arrow } from '../assets/svgs/index';
 const CustomSelect = ({
   onSelectedChange,
 }: {
-  onSelectedChange: () => void;
+  onSelectedChange: (selected: string) => void;
 }) => {
   const [selected, setSelected] = useState<string>('광화문');
   const selectList = ['광화문', '판교'];
@@ -36,13 +36,13 @@ const CustomSelect = ({
     } else if (selected === '판교') {
       setSelected(value);
       setShowToggle(false);
-      onSelectedChange();
+      onSelectedChange(selected);
     }
   };
 
   const fetchData = async () => {
     await handleChangePlace();
-    onSelectedChange();
+    onSelectedChange(selected);
   };
 
   useEffect(() => {
