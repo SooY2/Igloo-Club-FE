@@ -20,6 +20,7 @@ const 지역선택 = ({
   onNext,
   handleScheduleValue,
   registerScheduleValues,
+  percent,
 }: ScedultPropsTypes) => {
   const [isActive, setIsActive] = useState(false);
   const [selectPlace, setSelectPlace] = useState('');
@@ -42,7 +43,7 @@ const 지역선택 = ({
 
   return (
     <>
-      <RegisterHeader percent={55} onPrev={onPrev} />
+      <RegisterHeader percent={percent} onPrev={onPrev} />
       <article css={St.articleStyles}>
         <section css={St.sectionStyles}>
           <TitleBox>

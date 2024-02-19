@@ -60,7 +60,7 @@ const 전화번호인증 = ({ onPrev, onNext, phoneNum }: PhoneNumProps) => {
       <article css={St.articleStyles}>
         <section css={St.sectionStyles}>
           <TitleBox>
-            <St.Title>카카오톡으로 인증번호를 발송했어요</St.Title>
+            <St.Title>휴대폰 번호로 인증번호를 발송했어요</St.Title>
             <St.Title>인증번호를 입력해 주세요</St.Title>
           </TitleBox>
           <div css={{ display: 'flex', flexDirection: 'column' }}>
