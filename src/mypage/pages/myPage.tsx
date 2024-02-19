@@ -38,7 +38,6 @@ const MyPage = () => {
   const getUserInfo = async () => {
     try {
       const { data } = await instance.get('api/member');
-      console.log(data);
       setValues(data);
     } catch (err) {
       console.log(err);
