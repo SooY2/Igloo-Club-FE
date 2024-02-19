@@ -200,7 +200,7 @@ const EditProfilePage = () => {
           />
         </RegisterBasicInput>
         <RegisterBasicInput label="MBTI">
-          <p>istj</p>
+          <p>{values.mbti}</p>
         </RegisterBasicInput>
         {/* 결혼 상태 */}
         <RegisterBasicInput label="결혼 상태">
