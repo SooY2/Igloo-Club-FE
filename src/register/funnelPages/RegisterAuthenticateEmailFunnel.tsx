@@ -39,6 +39,8 @@ const 회사이메일인증 = ({
       if (axios.isAxiosError(error)) {
         if (error.response?.data?.code === 'WRONG_AUTH_CODE')
           alert('인증번호를 다시 입력해주세요');
+        if (error.response?.data?.code === 'REDIS_NOT_FOUND')
+          alert('인증번호가 만료되었습니다');
       } else {
         console.log('An unexpected error occurred:', error);
       }

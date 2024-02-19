@@ -10,6 +10,7 @@ const DetailProfile = () => {
   const { state } = useLocation();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [profileData, setProfileData] = useState<any>('');
+  const nickname = profileData?.nickname || '';
 
   const genderText = profileData.sex === 'MALE' ? '남성' : '여성';
 
@@ -43,9 +44,7 @@ const DetailProfile = () => {
   };
 
   const title = `안녕하세요!\n 저는 ${
-    handleLastWord(profileData.nickname.slice(-1))
-      ? `${profileData.nickname}`
-      : `${profileData.nickname}이`
+    handleLastWord(nickname.slice(-1)) ? `${nickname}` : `${nickname}이`
   }라고 합니다.`;
 
   return (

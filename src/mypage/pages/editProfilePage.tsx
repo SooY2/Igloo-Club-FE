@@ -137,7 +137,7 @@ const EditProfilePage = () => {
             value2="MALE"
             label1="여성"
             label2="남성"
-            checkedValue="FEMALE"
+            checkedValue={values.sex}
           />
         </RegisterBasicInput>
         {/* 생년월일 */}
@@ -200,7 +200,7 @@ const EditProfilePage = () => {
           />
         </RegisterBasicInput>
         <RegisterBasicInput label="MBTI">
-          <p>istj</p>
+          <p>{values.mbti}</p>
         </RegisterBasicInput>
         {/* 결혼 상태 */}
         <RegisterBasicInput label="결혼 상태">

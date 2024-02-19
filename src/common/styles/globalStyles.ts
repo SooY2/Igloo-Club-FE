@@ -64,11 +64,16 @@ const globalStyles = css`
   input,
   button,
   textarea {
-    font-size: 1.6rem !important;
     background-color: transparent;
     border: 0;
     border-radius: 0;
     outline: 0;
+  }
+
+  input[type='text'],
+  input[type='number'],
+  textarea {
+    font-size: 1.6rem !important;
   }
 
   span {
