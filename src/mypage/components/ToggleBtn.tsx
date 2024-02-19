@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import instance from '../../common/apis/axiosInstanse';
 import styled from '@emotion/styled';
 
 const ToggleBtn = () => {
-  const [isOn, setIsOn] = useState<boolean>(true);
+  const [isOn, setIsOn] = useState<boolean>(() => {
+    const storedValue = localStorage.getItem('toggleState');
+    return storedValue ? JSON.parse(storedValue) : true;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('toggleState', JSON.stringify(isOn));
+  }, [isOn]);
 
   const handleToggle = async () => {
     setIsOn((prevIsOn) => !prevIsOn);
@@ -18,7 +25,13 @@ const ToggleBtn = () => {
     <>
       <StToggleContainer onClick={handleToggle}>
         <StToggleWrapper isOn={isOn} />
-        <StToggleCircle isOn={isOn} />
+        <StToggleCircle isOn={isOn}>
+          {isOn ? (
+            <StToggleState>ON</StToggleState>
+          ) : (
+            <StToggleState>OFF</StToggleState>
+          )}
+        </StToggleCircle>
       </StToggleContainer>
     </>
   );
@@ -49,4 +62,13 @@ const StToggleCircle = styled.div<{ isOn: boolean }>`
   background-color: #fff;
   border-radius: 50px;
   transition: left 0.5s ease-in-out;
+`;
+
+const StToggleState = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 1rem;
+  font-weight: 700;
 `;

@@ -15,6 +15,10 @@ const InfoModal = ({
   closeModal: () => void;
 }) => {
   const [matchData, setMatchData] = useState<MatchDatatypes | undefined>();
+  const [isClickedMarker, setIsClickedMarker] = useState<{
+    title: string;
+    address: string;
+  } | null>(null);
   const title = `${nickname} 님이 알려주신\n 만남이 가능한 시간대와 장소에요`;
 
   const ClickXBtn = () => {
@@ -78,10 +82,17 @@ const InfoModal = ({
         </StPossibleWrapper>
         <StPlaceWrapper>
           <StPlaceMap>
-            <Map matchData={matchData} />
+            <Map
+              matchData={matchData}
+              setIsClickedMarker={setIsClickedMarker}
+            />
           </StPlaceMap>
           <StPlaceBox>
-            <StPlaceInfo>랄랄랄</StPlaceInfo>
+            {isClickedMarker ? (
+              <StPlaceInfo>{isClickedMarker.address}</StPlaceInfo>
+            ) : (
+              <StPlaceInfo>지도 내에 위치한 핀을 클릭해보세요!</StPlaceInfo>
+            )}
           </StPlaceBox>
         </StPlaceWrapper>
       </StInfoModalWrapper>
@@ -146,7 +157,7 @@ const StPossibleBox = styled.div`
   min-width: 28rem;
   height: 5.9rem;
   padding: 0 1.5rem;
-  margin-top: 0.9rem;
+  margin-top: 0.5rem;
   background: ${({ theme }) => theme.colors.gray0};
   border-radius: 17px;
 `;
@@ -190,7 +201,7 @@ const StPlaceBox = styled.div`
   height: 5.1rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
-  background: ${({ theme }) => theme.colors.gray1};
+  background: ${({ theme }) => theme.colors.gray0};
   border-radius: 5px;
 `;
 
@@ -198,7 +209,7 @@ const StPlaceInfo = styled.span`
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: ${({ theme }) => theme.colors.gray7};
+  color: ${({ theme }) => theme.colors.gray6};
   ${({ theme }) => theme.fonts.body2b};
 
   text-align: center;
