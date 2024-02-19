@@ -51,6 +51,8 @@ const SendBtn = css`
   gap: 0.9rem;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  max-width: 42.5rem;
   height: 5.5rem;
   padding: 1.5rem 8rem;
   font-size: 1.4rem;
