@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ChatSubmit } from '../../assets/svgs/0_index';
+import { ChatSubmit, ChatSubmitActive } from '../../assets/svgs/0_index';
 import { Dispatch, SetStateAction } from 'react';
 
 const ChatRoomFooter = ({
@@ -26,7 +26,7 @@ const ChatRoomFooter = ({
           handleSubmit();
         }}
       >
-        <ChatSubmit />
+        {chat ? <ChatSubmitActive /> : <ChatSubmit />}
       </StChatSubmit>
     </StContainer>
   );
