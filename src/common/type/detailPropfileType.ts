@@ -1,6 +1,6 @@
 export interface DETAILPROFILETYPE {
   id: number;
-  location: string[];
+  location: string;
   sex: string;
   age: number;
   nickname: string;
@@ -13,8 +13,8 @@ export interface DETAILPROFILETYPE {
   job: string;
   height: number;
   marriageState: string;
-  faceDepictionAllocationList: string[];
-  personalityDepictionAllocationList: string[];
-  description: string[];
-  hobbyAllocationList: string[];
+  faceDepictionAllocationList: string;
+  personalityDepictionAllocationList: string;
+  description: string;
+  hobbyAllocationList: string;
 }
