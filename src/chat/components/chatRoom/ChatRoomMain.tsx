@@ -16,8 +16,6 @@ const ChatRoomMain = ({ chatData }: { chatData: ChatDataTypes[] }) => {
     const handleResize = () => setWindowHeight(window.innerHeight);
 
     window.addEventListener('resize', handleResize);
-    messagesEndRef.current?.scrollIntoView();
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };
