@@ -44,6 +44,7 @@ const ReceivedNungil = () => {
         <ProfileCard
           profileData={profileData}
           ClickProfileCard={ClickProfileBtn}
+          nungilState="received"
         />
       </div>
     </div>
