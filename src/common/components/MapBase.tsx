@@ -12,9 +12,9 @@ declare global {
 interface MapContainerProps {
   matchData: MatchDatatypes | undefined;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setMap: any;
+  setMap: (map: any) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onMapLoad: any;
+  onMapLoad: (map: any) => void;
 }
 
 // if (window.kakao && window.kakao.maps) {
@@ -32,42 +32,42 @@ const MapBase = ({ matchData, setMap, onMapLoad }: MapContainerProps) => {
       import.meta.env.VITE_KAKAO_MAP_KEY
     }&autoload=false&libraries=services`;
 
-    document.head.appendChild(mapScript);
+    mapScript.onload = () => {
+      if (window.kakao && window.kakao.maps) {
+        window.kakao.maps.load(() => {
+          const mapContainer = document.getElementById('map');
 
-    const onLoadKakaoMap = () => {
-      window.kakao.maps.load(() => {
-        const mapContainer = document.getElementById('map');
+          let center;
 
-        let center;
-
-        if (matchData) {
-          if (matchData.location === '광화문') {
-            center = new window.kakao.maps.LatLng(
-              37.5709578373114,
-              126.977928770123,
-            );
-          } else if (matchData.location === '판교') {
-            center = new window.kakao.maps.LatLng(
-              37.39525750009229,
-              127.11148651523494,
-            );
+          if (matchData) {
+            if (matchData.location === '광화문') {
+              center = new window.kakao.maps.LatLng(
+                37.5709578373114,
+                126.977928770123,
+              );
+            } else if (matchData.location === '판교') {
+              center = new window.kakao.maps.LatLng(
+                37.39525750009229,
+                127.11148651523494,
+              );
+            }
           }
-        }
 
-        const mapOption = {
-          center: center,
-          level: 6,
-        };
+          const mapOption = {
+            center: center || new window.kakao.maps.LatLng(37.5665, 126.978),
+            level: 6,
+          };
 
-        const map = new window.kakao.maps.Map(mapContainer, mapOption);
-        setMap(map);
+          const map = new window.kakao.maps.Map(mapContainer, mapOption);
+          setMap(map);
 
-        if (onMapLoad) {
-          onMapLoad(map);
-        }
-      });
+          if (onMapLoad) {
+            onMapLoad(map);
+          }
+        });
+      }
     };
-    mapScript.addEventListener('load', onLoadKakaoMap);
+    document.head.appendChild(mapScript);
   }, [matchData, onMapLoad, setMap]);
 
   return <div id="map" css={MapContainer}></div>;
