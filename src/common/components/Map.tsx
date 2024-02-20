@@ -30,51 +30,45 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
   }, []);
 
   useEffect(() => {
-    if (map) {
-      if (matchData) {
-        matchData.marker.forEach((marker, index) => {
-          const position = new window.kakao.maps.LatLng(
-            marker.latitude,
-            marker.longitude,
-          );
+    if (map && matchData) {
+      matchData.marker.forEach((marker, index) => {
+        const position = new window.kakao.maps.LatLng(
+          marker.latitude,
+          marker.longitude,
+        );
 
-          const imageSrc = index === clickedMarker ? clickedpin : pin;
-          const imageSize =
-            index === clickedMarker
-              ? new window.kakao.maps.Size(35, 48)
-              : new window.kakao.maps.Size(22, 30);
-          const imageOption =
-            index === clickedMarker
-              ? { offset: new window.kakao.maps.Point(30, 40) }
-              : { offset: new window.kakao.maps.Point(20, 30) };
+        const imageSrc = index === clickedMarker ? clickedpin : pin;
+        const imageSize =
+          index === clickedMarker
+            ? new window.kakao.maps.Size(35, 48)
+            : new window.kakao.maps.Size(22, 30);
+        const imageOption =
+          index === clickedMarker
+            ? { offset: new window.kakao.maps.Point(30, 40) }
+            : { offset: new window.kakao.maps.Point(20, 30) };
 
-          const markerImage = new window.kakao.maps.MarkerImage(
-            imageSrc,
-            imageSize,
-            imageOption,
-          );
+        const markerImage = new window.kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption,
+        );
 
-          const markers = new window.kakao.maps.Marker({
-            position: position,
-            image: markerImage,
-            title: marker.title,
-          });
-
-          markers.setMap(map);
-
-          window.kakao.maps.event.addListener(
-            markers,
-            'touchstart',
-            function () {
-              handleClickMarker(index);
-            },
-          );
-
-          window.kakao.maps.event.addListener(markers, 'click', function () {
-            handleClickMarker(index);
-          });
+        const markers = new window.kakao.maps.Marker({
+          position: position,
+          image: markerImage,
+          title: marker.title,
         });
-      }
+
+        markers.setMap(map);
+
+        window.kakao.maps.event.addListener(markers, 'touchstart', function () {
+          handleClickMarker(index);
+        });
+
+        window.kakao.maps.event.addListener(markers, 'click', function () {
+          handleClickMarker(index);
+        });
+      });
     }
 
     const handleClickMarker = (index: number) => {
@@ -87,7 +81,7 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
         });
       }
     };
-  }, [map, matchData, clickedMarker, setClickedMarker, setIsClickedMarker]);
+  }, [map, matchData, clickedMarker, setIsClickedMarker]);
 
   return (
     <div css={MapContainer}>
@@ -104,6 +98,7 @@ export default Map;
 
 const MapContainer = css`
   display: flex;
-  width: 34rem;
-  height: 20rem;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
 `;
