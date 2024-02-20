@@ -28,7 +28,7 @@ const HobbyList = ({ values, handleValues, setShowHobby }: HobbyListProps) => {
           <St.TitleBox>
             <St.Title>회원님의 취미는 무엇인가요?</St.Title>
             <St.Title>평소 즐겨하시는 취미를 선택해 주세요</St.Title>
-            <St.SubTitle>필수 1개부터 최대 5개까지 선택가능해요</St.SubTitle>
+            <St.SubTitle>필수 3개부터 최대 5개까지 선택가능해요</St.SubTitle>
           </St.TitleBox>
           <div css={St.checkBoxContainerStyles}>
             {HOBBY.map((item) => {
@@ -49,7 +49,7 @@ const HobbyList = ({ values, handleValues, setShowHobby }: HobbyListProps) => {
         </section>
 
         <RegisterBtn
-          isActive={thisValues.length > 0}
+          isActive={thisValues.length > 2}
           content="선택완료"
           onClick={handleSubmit}
         />
