@@ -20,7 +20,9 @@ const DetailPage = () => {
           <ArrowLeftNav />
         </button>
       </div>
-      <DetailProfile />
+      <div>
+        <DetailProfile />
+      </div>
       <div css={SendBtn}>
         <SendNungilBtn nungilId={nungilId} nickname={nickname} />
       </div>
