@@ -10,6 +10,7 @@ const DetailProfile = () => {
   const { state } = useLocation();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [profileData, setProfileData] = useState<any>('');
+  const [isLoading, setIsLoading] = useState(false);
   const nickname = profileData?.nickname || '';
 
   const genderText = profileData.sex === 'MALE' ? '남성' : '여성';
@@ -22,6 +23,7 @@ const DetailProfile = () => {
   useEffect(() => {
     const handleGetDetailProfile = async () => {
       try {
+        setIsLoading(true);
         const res = await instance.get('/api/nungil/detail', {
           params: {
             nungilId: state.nungilId,
@@ -33,6 +35,8 @@ const DetailProfile = () => {
         console.log(profileData);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -51,7 +55,9 @@ const DetailProfile = () => {
     handleLastWord(nickname.slice(-1)) ? `${nickname}이` : `${nickname}`
   }라고 합니다.`;
 
-  return (
+  return isLoading ? (
+    <>Loading,,</>
+  ) : (
     <div css={Container}>
       <div css={Top.Wrapper}>
         <div css={Top.Title}>{title}</div>
@@ -138,7 +144,7 @@ const DetailProfile = () => {
               {profileData?.smoke && profileData.smoke}
             </div>
             <div css={Middle.AllocationList}>
-              {profileData?.alcohol && profileData.alcohol}
+              음주 {profileData?.alcohol && profileData.alcohol}
             </div>
           </div>
         </div>
