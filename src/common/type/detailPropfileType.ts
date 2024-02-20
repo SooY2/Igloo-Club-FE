@@ -1,6 +1,6 @@
 export interface DETAILPROFILETYPE {
   id: number;
-  location: string[];
+  location: string;
   sex: string;
   age: number;
   nickname: string;
