@@ -25,6 +25,7 @@ const DetailProfile = () => {
     const handleGetDetailProfile = async () => {
       try {
         setIsLoading(true);
+        setIsLoading(true);
         const res = await instance.get('/api/nungil/detail', {
           params: {
             nungilId: state.nungilId,
@@ -145,6 +146,7 @@ const DetailProfile = () => {
               {profileData?.smoke && profileData.smoke}
             </div>
             <div css={Middle.AllocationList}>
+              음주 {profileData?.alcohol && profileData.alcohol}
               음주 {profileData?.alcohol && profileData.alcohol}
             </div>
           </div>
