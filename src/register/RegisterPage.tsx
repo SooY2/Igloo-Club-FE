@@ -238,7 +238,9 @@ const Register = () => {
         <Funnel.Step name="장소선택">
           <장소선택
             onPrev={() => setStep('시간선택')}
-            onNext={() => setStep('회원가입완료')}
+            onNext={() => {
+              setStep('회원가입완료'), localStorage.setItem('STEP', '가입완료');
+            }}
             registerScheduleValues={registerScheduleValues}
             percent={100}
           />
