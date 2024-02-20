@@ -16,7 +16,7 @@ const ChatRoomMain = ({ chatData }: { chatData: ChatDataTypes[] }) => {
     const handleResize = () => setWindowHeight(window.innerHeight);
 
     window.addEventListener('resize', handleResize);
-
+    console.log(windowHeight);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -27,7 +27,8 @@ const ChatRoomMain = ({ chatData }: { chatData: ChatDataTypes[] }) => {
         overflow: 'scroll',
         margin: '14rem 0 0',
         backgroundColor: '#fff',
-        height: `calc(${windowHeight} - 22.5rem)`,
+        height: `${windowHeight}`,
+        marginBottom: '9rem',
       }}
     >
       {chatData ? (
