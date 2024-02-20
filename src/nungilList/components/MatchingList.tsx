@@ -39,6 +39,7 @@ const MatchingList = () => {
         <ProfileCard
           profileData={profileData}
           ClickProfileCard={ClickProfileBtn}
+          nungilState="matching"
         />
       </div>
     </div>

@@ -44,6 +44,7 @@ export default ChatRoomBox;
 
 const containerStyles = css`
   display: flex;
+  flex-direction: row;
   gap: 1.2rem;
   justify-content: space-between;
   width: 100%;
@@ -54,15 +55,16 @@ const contentStyles = css`
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  align-items: start;
   justify-content: center;
-  width: calc(100% - 10rem);
+  width: 60%;
 `;
 
 const timeStyles = css`
   display: flex;
   flex-direction: column;
   justify-content: end;
-  width: 20%;
+  width: 15%;
   padding-bottom: 0.2rem;
 `;
 
