@@ -10,6 +10,9 @@ const AcceptNungilBtn = () => {
   const handleAcceptNungil = async () => {
     try {
       await instance.patch(`/api/nungil/match?nungilId=${state.nungilId}`);
+      navigate(`/finishmatch/${state.nungilId}`, {
+        state: { nungilId: state.nungilId },
+      });
     } catch (error) {
       console.log(error);
     }
@@ -17,9 +20,6 @@ const AcceptNungilBtn = () => {
 
   const ClickAcceptBtn = () => {
     handleAcceptNungil();
-    navigate(`/finishmatch/${state.nungilId}`, {
-      state: { nungilId: state.nungilId },
-    });
   };
 
   return (
