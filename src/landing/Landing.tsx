@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 const Landing = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(location);
 
   useEffect(() => {
     const timer = setTimeout(() => {
