@@ -2,20 +2,23 @@ import { useState, useEffect } from 'react';
 import instance from '../../common/apis/axiosInstanse';
 import styled from '@emotion/styled';
 
-const ToggleBtn = () => {
-  const [isOn, setIsOn] = useState<boolean>(() => {
-    const storedValue = localStorage.getItem('toggleState');
-    return storedValue ? JSON.parse(storedValue) : true;
-  });
+interface ToggleBtnProps {
+  disableCompany: boolean;
+}
+
+const ToggleBtn = ({ disableCompany }: ToggleBtnProps) => {
+  const [isOn, setIsOn] = useState<boolean>(disableCompany);
 
   useEffect(() => {
-    localStorage.setItem('toggleState', JSON.stringify(isOn));
-  }, [isOn]);
+    setIsOn(disableCompany);
+  }, [disableCompany]);
 
   const handleToggle = async () => {
     setIsOn((prevIsOn) => !prevIsOn);
     try {
-      await instance.patch('/api/member/company/toggle');
+      await instance.patch('/api/member/company/toggle', {
+        disableCompany: !isOn,
+      });
     } catch (error) {
       console.log(error);
     }

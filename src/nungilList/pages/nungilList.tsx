@@ -9,7 +9,7 @@ import SendNungil from '../components/SendNungil';
 
 const NungilList = () => {
   const { state } = useLocation();
-  const [selectedBtn, setSelectedBtn] = useState('received');
+  const [selectedBtn, setSelectedBtn] = useState('');
 
   let middleContent;
 
@@ -26,7 +26,7 @@ const NungilList = () => {
   }
 
   useEffect(() => {
-    if (state && state.selectedBtn) {
+    if (state.selectedBtn) {
       setSelectedBtn(state.selectedBtn);
     }
   }, [state]);

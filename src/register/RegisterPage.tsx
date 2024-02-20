@@ -21,7 +21,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Registertypes } from './types/registerTypes';
 import { ScheduleTypes } from './types/scheduleTypes';
-import instance from '../common/apis/axiosInstanse';
 
 type StepType =
   | '약관동의'
@@ -103,6 +102,7 @@ const Register = () => {
     description: '',
     markerList: [],
     hobbyList: [],
+    disableCompany: false,
   });
 
   const handleRegisterValue = (data: Registertypes) => {
@@ -125,14 +125,6 @@ const Register = () => {
       ...prevValues,
       ...data,
     }));
-  };
-  const submitScheduleValue = async () => {
-    try {
-      await instance.patch('api/member/schedule', registerScheduleValues);
-      setStep('회원가입완료');
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   return (
@@ -246,8 +238,7 @@ const Register = () => {
         <Funnel.Step name="장소선택">
           <장소선택
             onPrev={() => setStep('시간선택')}
-            onNext={() => submitScheduleValue()}
-            handleScheduleValue={handleScheduleValue}
+            onNext={() => setStep('회원가입완료')}
             registerScheduleValues={registerScheduleValues}
             percent={100}
           />
