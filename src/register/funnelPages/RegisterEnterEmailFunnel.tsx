@@ -72,7 +72,7 @@ const 회사이메일입력 = ({
     <>
       <RegisterHeader percent={25} onPrev={onPrev} />
       {isLoading ? (
-        <>Loading,,</>
+        <>인증번호 가는중,,</>
       ) : (
         <article css={St.articleStyles}>
           <section css={St.sectionStyles}>
@@ -88,7 +88,7 @@ const 회사이메일입력 = ({
                 explain="재직 중인 회사를 확인하는 절차이며, 다른 용도로 사용되지 않아요. "
               >
                 <StBasicInput
-                  type="text"
+                  type="email"
                   placeholder="회사 이메일 주소를 입력하세요."
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
