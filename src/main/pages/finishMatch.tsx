@@ -35,6 +35,7 @@ const FinishMatch = () => {
         },
       });
       setMatchData(res.data);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -103,20 +104,24 @@ const FinishMatch = () => {
             <li css={Place.InfoTitle}>장소명</li>
             {isClickedMarker ? (
               <li css={Place.InfoContent}>{isClickedMarker.title}</li>
-            ) : (
-              <span css={Recommend.RecoContent}>
+            ) : matchData?.marker && matchData?.marker.length > 0 ? (
+              <li css={Place.InfoContent}>
                 지도 내에 위치한 핀을 클릭해보세요!
-              </span>
+              </li>
+            ) : (
+              <li css={Place.InfoContent}>매칭된 장소가 존재하지 않아요</li>
             )}
           </ul>
           <ul css={Place.InfoAddress}>
             <li css={Place.InfoTitle}>주소</li>
             {isClickedMarker ? (
               <li css={Place.InfoContent}>{isClickedMarker.address}</li>
-            ) : (
-              <span css={Recommend.RecoContent}>
+            ) : matchData?.marker && matchData?.marker.length > 0 ? (
+              <li css={Place.InfoContent}>
                 지도 내에 위치한 핀을 클릭해보세요!
-              </span>
+              </li>
+            ) : (
+              <li css={Place.InfoContent}>매칭된 장소가 존재하지 않아요 😭</li>
             )}
           </ul>
         </div>

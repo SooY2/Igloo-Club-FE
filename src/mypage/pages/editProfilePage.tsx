@@ -59,8 +59,8 @@ const EditProfilePage = () => {
     faceDepictionList: [],
     personalityDepictionList: [],
     description: '',
-    markerList: [],
     hobbyList: [],
+    disableCompany: false,
   });
 
   useEffect(() => {
@@ -85,7 +85,7 @@ const EditProfilePage = () => {
       await instance.patch('api/member', values);
       alert('수정이 완료되었습니다.');
     } catch (err) {
-      <div></div>;
+      console.log(err);
     }
   };
 

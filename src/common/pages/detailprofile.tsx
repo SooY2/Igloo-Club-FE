@@ -14,7 +14,7 @@ const DetailProfile = () => {
 
   const genderText = profileData.sex === 'MALE' ? '남성' : '여성';
 
-  const context = `#${profileData.companyName}에 재직 중인\n 
+  const context = `#${profileData.companyName} 에 재직 중인\n 
   #${profileData.age}세 ${genderText}이고 #${profileData.job}\n 
   얼굴은 #${profileData.animalFace} 
   키는 #${profileData.height}cm\n 성격 유형은 #${profileData.mbti}`;
@@ -29,6 +29,8 @@ const DetailProfile = () => {
         });
 
         setProfileData(res.data);
+
+        console.log(profileData);
       } catch (error) {
         console.log(error);
       }
@@ -75,12 +77,11 @@ const DetailProfile = () => {
             <span>나의 외적인 매력은</span>
           </div>
           <div css={Middle.ExAttrList}>
-            {(profileData?.faceDepictionAllocationList ||
-              profileData?.animalFace) &&
-              (
-                profileData.faceDepictionAllocationList ||
-                profileData.animalFace
-              )
+            <div css={Middle.AllocationList}>
+              {profileData?.animalFace && profileData.animalFace}
+            </div>
+            {profileData?.faceDepictionAllocationList &&
+              profileData.faceDepictionAllocationList
                 .split(',')
                 .map((attr: string, index: number) => (
                   <div key={index} css={Middle.AllocationList}>
@@ -94,12 +95,11 @@ const DetailProfile = () => {
             <span>나의 내적인 매력은</span>
           </div>
           <div css={Middle.InAttrList}>
-            {(profileData?.personalityDepictionAllocationList ||
-              profileData?.mbti) &&
-              (
-                profileData.personalityDepictionAllocationList ||
-                profileData.mbti
-              )
+            <div css={Middle.AllocationList}>
+              {profileData?.mbti && profileData.mbti}
+            </div>
+            {profileData?.personalityDepictionAllocationList &&
+              profileData.personalityDepictionAllocationList
                 .split(',')
                 .map((attr: string, index: number) => (
                   <div key={index} css={Middle.AllocationList}>
@@ -128,22 +128,18 @@ const DetailProfile = () => {
             <span>이건 알아두세요!</span>
           </div>
           <div css={Middle.NoticeList}>
-            {(profileData?.marriageState ||
-              profileData?.religion ||
-              profileData?.smoke ||
-              profileData?.alcohol) &&
-              (
-                profileData.marriageState ||
-                profileData.religion ||
-                profileData.smoke ||
-                profileData.alcohol
-              )
-                .split(',')
-                .map((attr: string, index: number) => (
-                  <div key={index} css={Middle.AllocationList}>
-                    {attr.trim()}
-                  </div>
-                ))}
+            <div css={Middle.AllocationList}>
+              {profileData?.marriageState && profileData.marriageState}
+            </div>
+            <div css={Middle.AllocationList}>
+              {profileData?.religion && profileData.religion}
+            </div>
+            <div css={Middle.AllocationList}>
+              {profileData?.smoke && profileData.smoke}
+            </div>
+            <div css={Middle.AllocationList}>
+              {profileData?.alcohol && profileData.alcohol}
+            </div>
           </div>
         </div>
       </div>
@@ -266,7 +262,7 @@ const Middle = {
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem;
-    margin-top: 1rem;
+    margin-top: 1.2rem;
     white-space: nowrap;
   `,
 
@@ -286,7 +282,7 @@ const Middle = {
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem;
-    margin-top: 1rem;
+    margin-top: 1.2rem;
     white-space: nowrap;
   `,
 
@@ -306,7 +302,7 @@ const Middle = {
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem;
-    margin-top: 1rem;
+    margin-top: 1.2rem;
     white-space: nowrap;
   `,
 
@@ -326,7 +322,7 @@ const Middle = {
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem;
-    margin-top: 1rem;
+    margin-top: 1.2rem;
     white-space: nowrap;
   `,
 
