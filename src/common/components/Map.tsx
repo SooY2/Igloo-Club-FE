@@ -12,6 +12,15 @@ declare global {
   }
 }
 
+interface MarkerTypes {
+  marker: Array<{
+    title: string;
+    address: string;
+    latitude: number;
+    longitude: number;
+  }>;
+}
+
 interface MapProps {
   matchData: MatchDatatypes | undefined;
   setIsClickedMarker?: React.Dispatch<
@@ -21,8 +30,9 @@ interface MapProps {
 
 const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
   const [clickedMarker, setClickedMarker] = useState<number | null>(null);
+  const [map, setMap] = useState<MarkerTypes>();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [map, setMap] = useState<any>(null);
+  const [markers, setMarkers] = useState<any[]>([]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleMapLoad = useCallback((mapInstance: any) => {
@@ -31,6 +41,12 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
 
   useEffect(() => {
     if (map && matchData) {
+      markers.forEach((existingMarker) => {
+        existingMarker.setMap(null);
+      });
+
+      const newMarkers: MarkerTypes[] = [];
+
       matchData.marker.forEach((marker, index) => {
         const position = new window.kakao.maps.LatLng(
           marker.latitude,
@@ -53,35 +69,44 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
           imageOption,
         );
 
-        const markers = new window.kakao.maps.Marker({
+        const newMarker = new window.kakao.maps.Marker({
           position: position,
           image: markerImage,
           title: marker.title,
         });
 
-        markers.setMap(map);
+        newMarker.setMap(map);
 
-        window.kakao.maps.event.addListener(markers, 'touchstart', function () {
+        window.kakao.maps.event.addListener(
+          newMarker,
+          'touchstart',
+          function () {
+            handleClickMarker(index);
+          },
+        );
+
+        window.kakao.maps.event.addListener(newMarker, 'click', function () {
           handleClickMarker(index);
         });
 
-        window.kakao.maps.event.addListener(markers, 'click', function () {
-          handleClickMarker(index);
-        });
+        newMarkers.push(newMarker);
+      });
+
+      // Set the new markers array
+      setMarkers(newMarkers);
+    }
+  }, [map, matchData, clickedMarker]);
+
+  const handleClickMarker = (index: number) => {
+    setClickedMarker((prevIndex) => (prevIndex === index ? null : index));
+
+    if (setIsClickedMarker) {
+      setIsClickedMarker({
+        title: matchData?.marker[index].title || '',
+        address: matchData?.marker[index].address || '',
       });
     }
-
-    const handleClickMarker = (index: number) => {
-      setClickedMarker((prevIndex) => (prevIndex === index ? null : index));
-
-      if (setIsClickedMarker) {
-        setIsClickedMarker({
-          title: matchData?.marker[index].title || '',
-          address: matchData?.marker[index].address || '',
-        });
-      }
-    };
-  }, [map, matchData, clickedMarker, setIsClickedMarker]);
+  };
 
   return (
     <div css={MapContainer}>

@@ -39,6 +39,7 @@ const SendNungil = () => {
         <ProfileCard
           profileData={profileData}
           ClickProfileCard={ClickProfileBtn}
+          nungilState="sent"
         />
       </div>
     </div>
