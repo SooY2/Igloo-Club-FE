@@ -46,7 +46,9 @@ const NavBar = () => {
       </button>
       <button
         type="button"
-        onClick={() => navigate('/nungillist')}
+        onClick={() =>
+          navigate('/nungillist', { state: { selectedBtn: 'received' } })
+        }
         css={NavButton}
       >
         {handleActiveBtn('/nungillist') === 'active' ? (

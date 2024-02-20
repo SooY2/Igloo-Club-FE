@@ -18,4 +18,5 @@ export interface Registertypes {
   // 선택 사항
   markerList?: string[];
   hobbyList: string[];
+  disableCompany: boolean;
 }

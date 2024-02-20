@@ -26,8 +26,8 @@ const ProfileCard = ({
                 <span>{profile.job}</span>
               </div>
             </div>
-            <div>
-              <span>{profile.description}</span>
+            <div css={Profile.DescriptionBox}>
+              <span css={Profile.Description}>{profile.description}</span>
             </div>
           </div>
         ))}
@@ -50,9 +50,9 @@ const Profile = {
   Wrapper: css`
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 1.2rem;
     width: 34rem;
-    padding: 2.4rem 2.6rem 2.9rem;
+    padding: 2.4rem 2.5rem 2.9rem;
     line-height: 2rem;
     color: ${theme.colors.white};
     ${theme.fonts.body2b}
@@ -71,5 +71,18 @@ const Profile = {
     display: flex;
     flex-direction: column;
     gap: 2px;
+  `,
+
+  DescriptionBox: css`
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  `,
+
+  Description: css`
+    width: 29rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   `,
 };
