@@ -1,16 +1,24 @@
 import { css } from '@emotion/react';
 import { ChatDataTypes } from '../../types/chatDataTypes';
 import ChatSpeechBubble from './ChatSpeechBubble';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const ChatRoomMain = ({ chatData }: { chatData: ChatDataTypes[] }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLElement>(null);
 
-  // 새 메시지가 추가되었을 때만 스크롤을 최하단으로 이동
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView();
   }, [chatData]);
+
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  useEffect(() => {
+    const handleResize = () => setWindowHeight(window.innerHeight);
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <main
@@ -19,7 +27,7 @@ const ChatRoomMain = ({ chatData }: { chatData: ChatDataTypes[] }) => {
         overflow: 'scroll',
         margin: '14rem 0 0',
         backgroundColor: '#fff',
-        height: 'calc(100vh - 22.5rem)',
+        height: `calc(${windowHeight} - 22.5rem)`,
       }}
     >
       {chatData ? (
