@@ -17,9 +17,7 @@ const 성별생년월일 = ({
 }: ExtendedNavTypesProps) => {
   const [isActive, setIsActive] = useState(false);
   const [gender, setGender] = useState(registerValues.sex);
-  const [birth, setBirth] = useState(
-    registerValues.birthdate.replace(/[-]/g, ''),
-  );
+  const [birth, setBirth] = useState(registerValues.birthdate);
 
   useEffect(() => {
     if (gender && birth) setIsActive(true);
@@ -27,12 +25,11 @@ const 성별생년월일 = ({
   }, [gender, birth]);
 
   const handleSubmit = () => {
-    const formattedDate: string = `${birth.substring(0, 4)}-${birth.substring(4, 6)}-${birth.substring(6)}`;
     if (handleRegisterValue) {
       handleRegisterValue({
         ...registerValues,
         sex: gender,
-        birthdate: formattedDate,
+        birthdate: birth,
       });
     }
 
