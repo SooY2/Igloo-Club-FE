@@ -91,7 +91,11 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
 
   return (
     <div css={MapContainer}>
-      <MapBase onMapLoad={handleMapLoad} setMap={setMap} />
+      <MapBase
+        matchData={matchData}
+        onMapLoad={handleMapLoad}
+        setMap={setMap}
+      />
     </div>
   );
 };

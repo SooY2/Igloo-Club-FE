@@ -102,6 +102,7 @@ const Register = () => {
     description: '',
     markerList: [],
     hobbyList: [],
+    disableCompany: false,
   });
 
   const handleRegisterValue = (data: Registertypes) => {

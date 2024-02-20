@@ -60,6 +60,7 @@ const EditProfilePage = () => {
     personalityDepictionList: [],
     description: '',
     hobbyList: [],
+    disableCompany: false,
   });
 
   useEffect(() => {

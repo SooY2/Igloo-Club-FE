@@ -15,8 +15,8 @@ export interface Registertypes {
   faceDepictionList: string[];
   personalityDepictionList: string[];
   description: string;
+  disableCompany: boolean;
   // 선택 사항
   markerList?: string[];
   hobbyList: string[];
-  disableCompany: boolean;
 }
