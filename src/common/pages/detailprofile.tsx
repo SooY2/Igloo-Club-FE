@@ -89,13 +89,13 @@ const DetailProfile = () => {
               {profileData?.animalFace && profileData.animalFace}
             </div>
             {profileData?.faceDepictionAllocationList &&
-              profileData.faceDepictionAllocationList
-                .split(',')
-                .map((attr: string, index: number) => (
+              profileData.faceDepictionAllocationList.map(
+                (attr: string, index: number) => (
                   <div key={index} css={Middle.AllocationList}>
                     {attr.trim()}
                   </div>
-                ))}
+                ),
+              )}
           </div>
         </div>
         <div css={Middle.InAttr}>
@@ -107,13 +107,13 @@ const DetailProfile = () => {
               {profileData?.mbti && profileData.mbti}
             </div>
             {profileData?.personalityDepictionAllocationList &&
-              profileData.personalityDepictionAllocationList
-                .split(',')
-                .map((attr: string, index: number) => (
+              profileData.personalityDepictionAllocationList.map(
+                (attr: string, index: number) => (
                   <div key={index} css={Middle.AllocationList}>
                     {attr.trim()}
                   </div>
-                ))}
+                ),
+              )}
           </div>
         </div>
         <div css={Middle.Hobby}>
@@ -122,13 +122,13 @@ const DetailProfile = () => {
           </div>
           <div css={Middle.HobbyList}>
             {profileData?.hobbyAllocationList &&
-              profileData.hobbyAllocationList
-                .split(',')
-                .map((attr: string, index: number) => (
+              profileData.hobbyAllocationList.map(
+                (attr: string, index: number) => (
                   <div key={index} css={Middle.AllocationList}>
                     {attr.trim()}
                   </div>
-                ))}
+                ),
+              )}
           </div>
         </div>
         <div css={Middle.Notice}>
