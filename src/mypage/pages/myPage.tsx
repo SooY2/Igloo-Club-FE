@@ -31,6 +31,7 @@ const MyPage = () => {
     description: '',
     markerList: [],
     hobbyList: [],
+    disableCompany: true,
   });
   useEffect(() => {
     getUserInfo();
@@ -67,7 +68,7 @@ const MyPage = () => {
         </button>
         <div css={Top.TopStyleBottom}>
           <span>회사 사람 만나지 않기</span>
-          <ToggleBtn />
+          <ToggleBtn disableCompany={values.disableCompany} />
         </div>
       </div>
       <div css={Middle.Wrapper}>

@@ -8,7 +8,7 @@ const ReceivedDetailPage = () => {
   const navigate = useNavigate();
 
   const ClickArrowLeft = () => {
-    navigate('/nungillist');
+    navigate('/nungillist', { state: { selectedBtn: 'received' } });
   };
 
   return (
