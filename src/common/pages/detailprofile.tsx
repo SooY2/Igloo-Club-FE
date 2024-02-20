@@ -5,20 +5,21 @@ import { css } from '@emotion/react';
 import { theme } from '../styles/theme';
 import instance from '../apis/axiosInstanse';
 import { useLocation } from 'react-router-dom';
+import { DETAILPROFILETYPE } from '../type/detailPropfileType';
 
 const DetailProfile = () => {
   const { state } = useLocation();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [profileData, setProfileData] = useState<any>('');
+  const [profileData, setProfileData] = useState<DETAILPROFILETYPE>();
   const [isLoading, setIsLoading] = useState(false);
   const nickname = profileData?.nickname || '';
 
-  const genderText = profileData.sex === 'MALE' ? '남성' : '여성';
+  const genderText = profileData?.sex === 'MALE' ? '남성' : '여성';
 
-  const context = `#${profileData.companyName} 에 재직 중인\n 
-  #${profileData.age}세 ${genderText}이고 #${profileData.job}\n 
-  얼굴은 #${profileData.animalFace} 
-  키는 #${profileData.height}cm\n 성격 유형은 #${profileData.mbti}`;
+  const context = `#${profileData?.companyName.replace(/\s+/g, '_')} 에 재직 중인\n 
+  #${profileData?.age}세 ${genderText}이고 #${profileData?.job.replace(/\s+/g, '_')}\n 
+  얼굴은 #${profileData?.animalFace} 
+  키는 #${profileData?.height}cm\n 성격 유형은 #${profileData?.mbti}`;
 
   useEffect(() => {
     const handleGetDetailProfile = async () => {
@@ -32,7 +33,7 @@ const DetailProfile = () => {
 
         setProfileData(res.data);
 
-        console.log(profileData);
+        console.log(res.data);
       } catch (error) {
         console.log(error);
       } finally {
@@ -73,7 +74,7 @@ const DetailProfile = () => {
             <span>저는요, 👋🏻</span>
           </div>
           <div css={Top.InfoContent}>
-            <span>{profileData.description}</span>
+            <span>{profileData?.description}</span>
           </div>
         </div>
       </div>
@@ -87,13 +88,13 @@ const DetailProfile = () => {
               {profileData?.animalFace && profileData.animalFace}
             </div>
             {profileData?.faceDepictionAllocationList &&
-              profileData.faceDepictionAllocationList
-                .split(',')
-                .map((attr: string, index: number) => (
+              profileData.faceDepictionAllocationList.map(
+                (attr: string, index: number) => (
                   <div key={index} css={Middle.AllocationList}>
                     {attr.trim()}
                   </div>
-                ))}
+                ),
+              )}
           </div>
         </div>
         <div css={Middle.InAttr}>
@@ -105,13 +106,13 @@ const DetailProfile = () => {
               {profileData?.mbti && profileData.mbti}
             </div>
             {profileData?.personalityDepictionAllocationList &&
-              profileData.personalityDepictionAllocationList
-                .split(',')
-                .map((attr: string, index: number) => (
+              profileData.personalityDepictionAllocationList.map(
+                (attr: string, index: number) => (
                   <div key={index} css={Middle.AllocationList}>
                     {attr.trim()}
                   </div>
-                ))}
+                ),
+              )}
           </div>
         </div>
         <div css={Middle.Hobby}>
@@ -120,13 +121,13 @@ const DetailProfile = () => {
           </div>
           <div css={Middle.HobbyList}>
             {profileData?.hobbyAllocationList &&
-              profileData.hobbyAllocationList
-                .split(',')
-                .map((attr: string, index: number) => (
+              profileData.hobbyAllocationList.map(
+                (attr: string, index: number) => (
                   <div key={index} css={Middle.AllocationList}>
                     {attr.trim()}
                   </div>
-                ))}
+                ),
+              )}
           </div>
         </div>
         <div css={Middle.Notice}>
