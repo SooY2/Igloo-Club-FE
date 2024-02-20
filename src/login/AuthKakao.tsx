@@ -17,8 +17,9 @@ const AuthKakao = () => {
       if (accessToken) {
         localStorage.setItem('ACCESS_TOKEN', accessToken);
         localStorage.setItem('STEP', nextProgress);
-        if (isProfileRegistered) navigate('/main-page');
-        else navigate('/register');
+        if (isProfileRegistered) {
+          navigate('/main-page');
+        } else navigate('/register');
       }
     } catch (error) {
       console.log(error);

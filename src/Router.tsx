@@ -16,7 +16,7 @@ import ChatRoom from './chat/components/chatRoom/ChatRoom';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '*',
     element: <Landing />,
   },
   {

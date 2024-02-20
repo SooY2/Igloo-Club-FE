@@ -37,7 +37,7 @@ export const StBtnExplain = styled.p`
 
 export const StBasicTextArea = styled.textarea`
   width: 100%;
-  height: 16.9rem;
+  height: 26.9rem;
   padding: 1.9rem 1.8rem;
   word-break: break-all;
   resize: none;
