@@ -17,8 +17,9 @@ const ChatRoomMain = ({ chatData }: { chatData: ChatDataTypes[] }) => {
       ref={mainRef}
       css={{
         overflow: 'scroll',
-        margin: '5rem 0 9rem',
+        margin: '14rem 0 0',
         backgroundColor: '#fff',
+        height: 'calc(100vh - 22.5rem)',
       }}
     >
       {chatData ? (
@@ -50,7 +51,5 @@ const containerStyles = css`
   gap: 1.5rem;
   justify-content: end;
   width: 100%;
-
-  /* height: calc(100vh - 16rem); */
-  padding: 9rem 2.4rem 0;
+  padding: 0 2.4rem;
 `;

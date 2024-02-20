@@ -152,9 +152,7 @@ const Middle = {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
-    padding-top: 3rem;
-    padding-right: 2.7rem;
-    padding-left: 2.7rem;
+    padding: 3rem 2.7rem;
   `,
 
   MiddleStyle: css`
