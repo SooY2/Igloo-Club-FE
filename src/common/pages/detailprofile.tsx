@@ -146,7 +146,7 @@ const DetailProfile = () => {
               {profileData?.smoke && profileData.smoke}
             </div>
             <div css={Middle.AllocationList}>
-              음주 {profileData?.alcohol && profileData.alcohol}
+              음주 : {profileData?.alcohol && profileData.alcohol}
             </div>
           </div>
         </div>
