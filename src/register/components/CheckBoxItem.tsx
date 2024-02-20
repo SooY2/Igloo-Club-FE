@@ -24,9 +24,10 @@ const CheckBoxItem = ({
     const value = event.target.value;
     values.includes(value)
       ? setValues((prevValues) => prevValues.filter((val) => val !== value))
-      : limit &&
-        values.length < limit &&
-        setValues((prevValues) => [...prevValues, value]);
+      : limit
+        ? values.length < limit &&
+          setValues((prevValues) => [...prevValues, value])
+        : setValues((prevValues) => [...prevValues, value]);
   };
 
   return (
