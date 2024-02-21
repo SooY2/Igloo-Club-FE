@@ -35,7 +35,8 @@ const Container = css`
   width: 100%;
   height: 100%;
   padding-top: 1.5rem;
-  overflow-y: scroll;
+
+  /* overflow-y: scroll; */
 `;
 
 const SendBtn = css`
