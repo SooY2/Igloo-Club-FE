@@ -33,7 +33,7 @@ const Container = css`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  height: calc(100vh - 8rem);
+  height: 100%;
   padding-top: 1.5rem;
 `;
 
