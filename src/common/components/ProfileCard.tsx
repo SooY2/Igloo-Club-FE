@@ -83,7 +83,7 @@ const Profile = {
     flex-direction: column;
     gap: 1.5rem;
     width: 34rem;
-    padding: 2.5rem 2.7rem;
+    padding: 2.5rem 2.7rem 4.5rem;
     line-height: 2rem;
     color: ${theme.colors.white};
     ${theme.fonts.body2b}
@@ -133,5 +133,9 @@ const StDdaySection = styled.div`
   flex-direction: row;
   gap: 0.7rem;
   align-items: center;
-  ${({ theme }) => theme.fonts.body3}
+  width: 100%;
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+  border-top: 1px solid ${({ theme }) => theme.colors.white};
+  ${({ theme }) => theme.fonts.body3};
 `;
