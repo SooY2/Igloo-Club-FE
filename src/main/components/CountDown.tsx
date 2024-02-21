@@ -5,15 +5,15 @@ export const calculateTimeLeft = () => {
   const now = new Date();
   const targetTime = new Date();
 
-  targetTime.setHours(12, 0, 0, 0);
+  targetTime.setHours(11, 0, 0, 0);
 
-  if (now.getHours() >= 12) {
+  if (now.getHours() >= 11) {
     targetTime.setDate(targetTime.getDate() + 1);
   }
 
-  targetTime.setHours(11, 0, 0, 0);
+  targetTime.setHours(10, 0, 0, 0);
 
-  const matchingTime = now.getHours() >= 12 || now.getHours() < 11;
+  const matchingTime = now.getHours() >= 11 || now.getHours() < 10;
 
   const timeDifference = targetTime.getTime() - now.getTime();
   const minutesLeft = Math.floor(timeDifference / (1000 * 60));
