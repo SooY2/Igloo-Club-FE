@@ -166,7 +166,7 @@ const Middle = {
     height: 4rem;
     padding: 1.2rem 2.2rem;
     margin-right: 2rem;
-    margin-bottom: 3.9rem;
+    margin-bottom: 2.9rem;
     margin-left: 2rem;
     font-size: 13px;
     font-style: normal;
@@ -199,8 +199,9 @@ const Bottom = {
     flex-direction: column;
     gap: 1.5rem;
     width: 100%;
-    padding: 0 2.6rem;
-    margin-bottom: 8.2rem;
+    padding: 0 2.6rem 7rem;
+    margin-bottom: 6.5rem;
+    overflow-y: scroll;
     font-size: 1.8rem;
     font-style: normal;
     font-weight: 700;

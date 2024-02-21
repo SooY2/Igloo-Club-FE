@@ -374,6 +374,7 @@ const container = css`
   height: 100%;
   padding-top: 1.5rem;
   overflow: auto;
+  overflow: hidden;
   background: ${theme.colors.white};
 `;
 

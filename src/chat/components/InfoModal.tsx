@@ -94,7 +94,7 @@ const InfoModal = ({
           </StPlaceMap>
           <StPlaceBox>
             {isClickedMarker ? (
-              <StPlaceInfo>{isClickedMarker.address}</StPlaceInfo>
+              <StPlaceInfo>{isClickedMarker.title}</StPlaceInfo>
             ) : (
               <StPlaceInfo>지도 내에 위치한 핀을 클릭해보세요!</StPlaceInfo>
             )}

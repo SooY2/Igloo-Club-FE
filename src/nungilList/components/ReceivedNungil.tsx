@@ -54,12 +54,18 @@ const ReceivedNungil = () => {
 export default ReceivedNungil;
 
 const Container = css`
+  position: absolute;
+  top: 6.7rem;
   width: 100%;
+  height: 100%;
   padding-bottom: 15rem;
+  overflow-y: scroll;
   background: ${theme.colors.white};
 `;
 
 const NotifyDate = css`
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -81,5 +87,5 @@ const NotifyBold = css`
 const ProfileData = css`
   display: flex;
   padding: 0 2.6rem;
-  margin-top: 1.8rem;
+  margin: 1rem 0;
 `;

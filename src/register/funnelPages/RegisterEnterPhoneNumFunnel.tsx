@@ -53,7 +53,7 @@ const 전화번호입력 = ({ onPrev, onNext, setPhoneNum }: PhoneNumProps) => {
     <>
       <RegisterHeader percent={20} onPrev={onPrev} />
       {isLoading ? (
-        <>Loading,,</>
+        <>인증번호 가는중,,</>
       ) : (
         <article css={St.articleStyles}>
           <section css={St.sectionStyles}>
