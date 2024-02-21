@@ -16,37 +16,39 @@ import ChatRoom from './chat/components/chatRoom/ChatRoom';
 
 const router = createBrowserRouter([
   {
-    path: '*',
+    path: '',
     element: <Landing />,
+    children: [
+      {
+        path: 'register',
+        element: <Register />,
+      },
+      {
+        path: '/oauth/kakao/callback',
+        element: <AuthKakao />,
+      },
+      {
+        path: '/main-page',
+        element: <MainPage />,
+      },
+      {
+        path: 'detailpage/:nungilId',
+        element: <DetailPage />,
+      },
+      { path: 'finishmatch/:nungilId', element: <FinishMatch /> },
+      { path: 'nungillist', element: <NungilList /> },
+      { path: 'receiveddetailpage/:nungilId', element: <ReceivedDetailPage /> },
+      { path: 'senddetailpage/:nungilId', element: <SendDetailPage /> },
+      { path: 'mypage', element: <MyPage /> },
+      { path: 'editprofilepage', element: <EditProfilePage /> },
+      { path: 'chat', element: <Chat /> },
+      { path: 'chat/:chatRoomId', element: <ChatRoom /> },
+    ],
   },
   {
     path: 'login',
     element: <Login />,
   },
-  {
-    path: 'register',
-    element: <Register />,
-  },
-  {
-    path: '/oauth/kakao/callback',
-    element: <AuthKakao />,
-  },
-  {
-    path: 'main-page',
-    element: <MainPage />,
-  },
-  {
-    path: 'detailpage/:nungilId',
-    element: <DetailPage />,
-  },
-  { path: 'finishmatch/:nungilId', element: <FinishMatch /> },
-  { path: 'nungillist', element: <NungilList /> },
-  { path: 'receiveddetailpage/:nungilId', element: <ReceivedDetailPage /> },
-  { path: 'senddetailpage/:nungilId', element: <SendDetailPage /> },
-  { path: 'mypage', element: <MyPage /> },
-  { path: 'editprofilepage', element: <EditProfilePage /> },
-  { path: 'chat', element: <Chat /> },
-  { path: 'chat/:chatRoomId', element: <ChatRoom /> },
 ]);
 
 export default router;

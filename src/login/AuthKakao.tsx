@@ -2,11 +2,15 @@
 
 import { useEffect } from 'react';
 import { signInInstance } from '../common/apis/axiosInstanse';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const AuthKakao = () => {
   const AUTHORIZE_CODE = new URL(window.location.href).searchParams.get('code');
+  const PATH = localStorage.getItem('path');
+  console.log(PATH);
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
 
   const handleKakaoSignIn = async () => {
     try {
@@ -18,7 +22,7 @@ const AuthKakao = () => {
         localStorage.setItem('ACCESS_TOKEN', accessToken);
         localStorage.setItem('STEP', nextProgress);
         if (isProfileRegistered) {
-          navigate('/main-page');
+          PATH ? navigate(PATH) : navigate('/main-page');
         } else navigate('/register');
       }
     } catch (error) {
