@@ -98,7 +98,7 @@ export const PERSONALITYDEPICTION = [
   { value: 'FRIENDLY', label: '다정해요' },
   { value: 'JOKER', label: '장난기가 많아요' },
   { value: 'LAUGHER', label: '웃음이 많아요' },
-  { value: 'GOOD_LIFE', label: '생활력이 좋아요' },
+  { value: 'GOOD_AT_LIVING', label: '생활력이 좋아요' },
 ];
 
 export const HOBBY = [
