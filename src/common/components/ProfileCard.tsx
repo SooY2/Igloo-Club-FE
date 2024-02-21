@@ -5,12 +5,12 @@ import AnimalProfile from './AnimalProfile';
 import { Watch } from '../assets/svgs';
 import { ProfileDataTypesProps } from '../type/ProfileDataTypesProps';
 
-export const shortenWords = (str: string, length = 300) => {
+export const shortenWords = (description: string, length = 300) => {
   let result = '';
-  if (str.length > length) {
-    result = str.substring(0, length - 2) + '...';
+  if (description.length > length) {
+    result = description.substring(0, length - 2) + '...';
   } else {
-    result = str;
+    result = description;
   }
   return result;
 };
