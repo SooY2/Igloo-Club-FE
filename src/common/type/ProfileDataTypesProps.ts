@@ -6,4 +6,6 @@ export interface ProfileDataTypesProps {
   nungilId: number;
   memberId: number;
   nickname: string;
+  createdAt: string;
+  expiredAt: string;
 }

@@ -32,7 +32,7 @@ const PersonalityDepiction = ({
           <St.TitleBox>
             <St.Title>회원님의 성격을 가장 잘 나타내는</St.Title>
             <St.Title>키워드를 여러 개 선택해 주세요</St.Title>
-            <St.SubTitle>필수 1개부터 최대 5개까지 선택가능해요</St.SubTitle>
+            <St.SubTitle>필수 3개부터 최대 5개까지 선택가능해요</St.SubTitle>
           </St.TitleBox>
           <div css={St.checkBoxContainerStyles}>
             {PERSONALITYDEPICTION.map((item) => {
@@ -53,7 +53,7 @@ const PersonalityDepiction = ({
         </section>
 
         <RegisterBtn
-          isActive={thisValues.length > 0}
+          isActive={thisValues.length > 2}
           content="선택완료"
           onClick={handleSubmit}
         />

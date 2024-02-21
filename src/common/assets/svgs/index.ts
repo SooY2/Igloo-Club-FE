@@ -15,6 +15,7 @@ import Wolf from './Wolf.svg?react';
 import Horse from './Horse.svg?react';
 import Cat from './Cat.svg?react';
 import Bear from './Bear.svg?react';
+import Watch from './watch.svg?react';
 
 export {
   HomeBtn000,
@@ -34,4 +35,5 @@ export {
   Horse,
   Cat,
   Bear,
+  Watch,
 };

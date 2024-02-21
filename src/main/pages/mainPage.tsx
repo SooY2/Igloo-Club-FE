@@ -99,6 +99,7 @@ const MainPage = () => {
             <ProfileCard
               profileData={profileData}
               ClickProfileCard={ClickProfileBtn}
+              nungilState="main"
               css={Bottom.ProfileData}
             />
           )
