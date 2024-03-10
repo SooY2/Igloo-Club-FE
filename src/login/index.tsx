@@ -24,7 +24,14 @@ const Login = () => {
   };
 
   return (
-    <div css={{ overflowY: 'scroll', width: '100%', padding: '2rem' }}>
+    <div
+      css={{
+        overflowY: 'scroll',
+        width: '100%',
+        height: 'calc(var(--vh, 1vh) * 100);',
+        padding: '2rem',
+      }}
+    >
       <div css={containerStyles}>
         <div css={logoBoxStyles}>
           <StLogo src={logo}></StLogo>
