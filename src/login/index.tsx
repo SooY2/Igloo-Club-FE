@@ -1,13 +1,14 @@
 /**로그인 페이지입니다 */
 
 import { css } from '@emotion/react';
-import { logo } from '../common/assets/images/0_index';
+import { HeroImage } from '../common/assets/images/0_index';
 import styled from '@emotion/styled';
 import { 약관동의리스트 } from '../common/constants/memberAgreeConstants';
 
 const Login = () => {
   const Rest_api_key = import.meta.env.VITE_KAKAO_REST_API_KEY;
   const redirect_uri = import.meta.env.VITE_REDIRECT_URI;
+  const guidement = '옆으로 넘겨 가이드 보기 >>>';
 
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`;
 
@@ -16,12 +17,10 @@ const Login = () => {
   };
 
   return (
-    <div css={{ overflowY: 'scroll', width: '100%', padding: '2rem' }}>
+    <div css={{ overflowY: 'scroll', width: '100%' }}>
+      <img src={HeroImage} css={backgroundImage} />
       <div css={containerStyles}>
-        <div css={logoBoxStyles}>
-          <StLogo src={logo}></StLogo>
-          <StExplain>지금 눈길로 인연을 찾아보세요!</StExplain>
-        </div>
+        <StGuide>{guidement}</StGuide>
         <StButton onClick={handleLogin}>카카오톡으로 로그인하기</StButton>
       </div>
       <Footer>
@@ -52,31 +51,46 @@ const Login = () => {
 
 export default Login;
 
-const containerStyles = css`
-  display: flex;
-  flex-direction: column;
-  gap: 15rem;
-  align-items: center;
-  justify-content: center;
+const backgroundImage = css`
+  position: absolute;
+  z-index: 1;
   width: 100%;
   height: 100vh;
-  padding: 10rem 4rem;
 `;
-const logoBoxStyles = css`
+
+const containerStyles = css`
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
+  width: 100%;
+  height: 100vh;
+  padding: 0 4rem 10rem;
 `;
 
-const StLogo = styled.img`
-  width: 10rem;
-`;
+// const logoBoxStyles = css`
+//   display: flex;
+//   flex-direction: column;
+//   gap: 2rem;
+//   align-items: center;
+//   justify-content: center;
+// `;
 
-const StExplain = styled.p`
-  color: ${({ theme }) => theme.colors.primary};
-  ${({ theme }) => theme.fonts.subtitle2b};
+// const StLogo = styled.img`
+//   width: 10rem;
+// `;
+
+// const StExplain = styled.p`
+//   color: ${({ theme }) => theme.colors.primary};
+//   ${({ theme }) => theme.fonts.subtitle2b};
+// `;
+
+const StGuide = styled.p`
+  color: ${({ theme }) => theme.colors.gray4};
+  color: ${({ theme }) => theme.fonts.body2b};
 `;
 
 const StButton = styled.button`
@@ -102,9 +116,13 @@ const StButton = styled.button`
 `;
 
 const Footer = styled.footer`
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  padding-left: 2rem;
+  margin-bottom: 3rem;
 
   ${({ theme }) => theme.fonts.body3m};
 `;

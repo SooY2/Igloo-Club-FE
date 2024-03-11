@@ -168,7 +168,7 @@ const Middle = {
     margin-right: 2rem;
     margin-bottom: 3.9rem;
     margin-left: 2rem;
-    font-size: 13px;
+    font-size: 1.3rem;
     font-style: normal;
     font-weight: 600;
     color: ${theme.colors.gray9};
@@ -186,7 +186,7 @@ const Middle = {
   `,
 
   PrimaryText: css`
-    font-size: 13px;
+    font-size: 1.3rem;
     font-style: normal;
     font-weight: 700;
     color: ${theme.colors.primary};

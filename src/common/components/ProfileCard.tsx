@@ -83,12 +83,12 @@ const Profile = {
     flex-direction: column;
     gap: 1.5rem;
     width: 34rem;
-    padding: 2.5rem 2.7rem 4.5rem;
+    padding: 2.5rem 2.7rem;
     line-height: 2rem;
     color: ${theme.colors.white};
     ${theme.fonts.body2b}
 
-    background: linear-gradient(116deg, #ff6264 0%, #ffa490 96.79%);
+    background: linear-gradient(116deg, #ff6264 0%, #ffa490 70.79%);
     border-radius: 15px;
   `,
 
