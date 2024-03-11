@@ -15,7 +15,8 @@ import {
   지역선택,
   시간선택,
   장소선택,
-  회원가입완료,
+  // 회원가입완료,
+  사전신청완료,
 } from './funnelPages/0_index';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +37,8 @@ type StepType =
   | '지역선택'
   | '시간선택'
   | '장소선택'
-  | '회원가입완료';
+  | '회원가입완료'
+  | '사전신청완료';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -69,6 +71,7 @@ const Register = () => {
       '시간선택',
       '장소선택',
       '회원가입완료',
+      '사전신청완료',
     ] as const,
     initialState as StepType,
   );
@@ -245,12 +248,15 @@ const Register = () => {
             percent={100}
           />
         </Funnel.Step>
-        <Funnel.Step name="회원가입완료">
+        {/* <Funnel.Step name="회원가입완료">
           <회원가입완료
             onNext={() => {
               navigate('/main-page');
             }}
           />
+        </Funnel.Step> */}
+        <Funnel.Step name="사전신청완료">
+          <사전신청완료 />
         </Funnel.Step>
       </Funnel>
     </RagisterLayout>
@@ -263,6 +269,9 @@ const RagisterLayout = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  /* height: calc(var(--vh, 1vh) * 100); */
   height: 100%;
-  padding: 2.5rem 2rem 3.3rem;
+  padding: 0 2rem;
+  overflow: hidden;
 `;

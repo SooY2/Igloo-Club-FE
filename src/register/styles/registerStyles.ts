@@ -22,7 +22,7 @@ export const articleStyles = css`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: hidden;
 `;
 
 export const sectionStyles = css`
