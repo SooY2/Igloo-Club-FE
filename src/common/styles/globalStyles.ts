@@ -67,11 +67,9 @@ const globalStyles = css`
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
     width: 100vw;
-    max-width: 425px;
-    overflow: hidden;
   }
 
   select,

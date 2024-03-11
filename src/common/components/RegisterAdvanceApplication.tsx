@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CheckApplication } from '../assets/svgs/0_index';
+import { CheckApplication } from '../../register/assets/svgs/0_index';
 import { Link } from 'react-router-dom';
 
 const 사전신청완료 = () => {

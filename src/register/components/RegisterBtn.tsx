@@ -17,6 +17,7 @@ const RegisterBtn = ({ isActive, onClick, content }: RegisterBtnProps) => {
 export default RegisterBtn;
 
 const Button = styled.button<{ isActive: boolean }>`
+  position: relative;
   width: 100%;
   min-height: 5.4rem;
   margin-top: 0.5rem;

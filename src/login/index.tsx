@@ -25,7 +25,7 @@ const Login = () => {
   };
 
   return (
-    <div css={{ overflowY: 'scroll', width: '100%' }}>
+    <div css={{ overflowY: 'scroll', width: '100%', maxWidth: '425px' }}>
       <img src={HeroImage} css={backgroundImage} />
       <div css={containerStyles}>
         <StGuide>{guidement}</StGuide>
@@ -63,6 +63,7 @@ const backgroundImage = css`
   position: absolute;
   z-index: 1;
   width: 100%;
+  max-width: 425px;
   height: 100vh;
 `;
 
