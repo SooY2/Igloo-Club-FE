@@ -9,7 +9,7 @@ import SendNungil from '../components/SendNungil';
 
 const NungilList = () => {
   const { state } = useLocation();
-  const [selectedBtn, setSelectedBtn] = useState('');
+  const [selectedBtn, setSelectedBtn] = useState('received');
 
   let middleContent;
 
@@ -26,7 +26,7 @@ const NungilList = () => {
   }
 
   useEffect(() => {
-    if (state.selectedBtn) {
+    if (state?.selectedBtn) {
       setSelectedBtn(state.selectedBtn);
     }
   }, [state]);
@@ -61,6 +61,7 @@ const NungilList = () => {
         </button>
       </div>
       <div css={Middle.Wrapper}>{middleContent}</div>
+
       <div css={Navigation}>
         <NavBar />
       </div>
@@ -77,7 +78,6 @@ const Container = css`
   width: 100%;
   height: 100%;
   padding-top: 1.5rem;
-  overflow: auto;
   background: ${theme.colors.white};
 `;
 
@@ -116,11 +116,13 @@ const SelectedNavButton = css`
 const Middle = {
   Wrapper: css`
     display: flex;
-    flex: 1;
+
+    /* flex: 1; */
     flex-direction: column;
     align-items: center;
     justify-content: start;
     width: 100%;
+    height: 100%;
   `,
 };
 

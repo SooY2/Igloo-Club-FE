@@ -71,9 +71,7 @@ const globalStyles = css`
     justify-content: flex-start;
     width: 100vw;
     max-width: 425px;
-    height: calc(var(--vh, 1vh) * 100);
-    min-height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   select,

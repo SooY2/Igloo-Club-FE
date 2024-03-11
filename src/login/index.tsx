@@ -4,8 +4,16 @@ import { css } from '@emotion/react';
 import { HeroImage } from '../common/assets/images/0_index';
 import styled from '@emotion/styled';
 import { 약관동의리스트 } from '../common/constants/memberAgreeConstants';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Login = () => {
+  const { state } = useLocation();
+  useEffect(() => {
+    if (state) localStorage.setItem('path', state);
+    else localStorage.setItem('path', '/main-page');
+  }, []);
+
   const Rest_api_key = import.meta.env.VITE_KAKAO_REST_API_KEY;
   const redirect_uri = import.meta.env.VITE_REDIRECT_URI;
   const guidement = '옆으로 넘겨 가이드 보기 >>>';

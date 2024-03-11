@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { ChatSubmit } from '../../assets/svgs/0_index';
-import { Dispatch, SetStateAction } from 'react';
+import { ChatSubmit, ChatSubmitActive } from '../../assets/svgs/0_index';
+import { Dispatch, SetStateAction, useRef } from 'react';
 
 const ChatRoomFooter = ({
   chat,
@@ -11,9 +11,11 @@ const ChatRoomFooter = ({
   setChat: Dispatch<SetStateAction<string>>;
   handleSubmit: () => void;
 }) => {
+  const ref = useRef<HTMLTextAreaElement>(null);
   return (
     <StContainer>
       <StTextarea
+        ref={ref}
         placeholder="메시지 보내기"
         value={chat}
         onChange={(e) => {
@@ -24,9 +26,10 @@ const ChatRoomFooter = ({
         onClick={(e) => {
           e.preventDefault();
           handleSubmit();
+          ref?.current?.focus();
         }}
       >
-        <ChatSubmit />
+        {chat ? <ChatSubmitActive /> : <ChatSubmit />}
       </StChatSubmit>
     </StContainer>
   );
