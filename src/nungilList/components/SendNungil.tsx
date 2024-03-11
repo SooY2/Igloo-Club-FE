@@ -49,8 +49,12 @@ const SendNungil = () => {
 export default SendNungil;
 
 const Container = css`
+  position: absolute;
+  top: 6.7rem;
   width: 100%;
+  height: 100%;
   padding-bottom: 15rem;
+  overflow-y: scroll;
   background: ${theme.colors.white};
 `;
 

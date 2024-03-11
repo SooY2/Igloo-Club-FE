@@ -12,6 +12,7 @@ function App() {
   };
 
   useEffect(() => {
+    window.addEventListener('resize', () => setScreenSize());
     setScreenSize();
   });
 

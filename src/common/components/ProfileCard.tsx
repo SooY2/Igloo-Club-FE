@@ -5,12 +5,12 @@ import AnimalProfile from './AnimalProfile';
 import { Watch } from '../assets/svgs';
 import { ProfileDataTypesProps } from '../type/ProfileDataTypesProps';
 
-export const shortenWords = (str: string, length = 300) => {
+export const shortenWords = (description: string, length = 300) => {
   let result = '';
-  if (str.length > length) {
-    result = str.substring(0, length - 2) + '...';
+  if (description.length > length) {
+    result = description.substring(0, length - 2) + '...';
   } else {
-    result = str;
+    result = description;
   }
   return result;
 };
@@ -88,7 +88,7 @@ const Profile = {
     color: ${theme.colors.white};
     ${theme.fonts.body2b}
 
-    background: linear-gradient(116deg, #ff6264 0%, #ffa490 96.79%);
+    background: linear-gradient(116deg, #ff6264 0%, #ffa490 70.79%);
     border-radius: 15px;
   `,
 
@@ -133,5 +133,9 @@ const StDdaySection = styled.div`
   flex-direction: row;
   gap: 0.7rem;
   align-items: center;
-  ${({ theme }) => theme.fonts.body3}
+  width: 100%;
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+  border-top: 1px solid ${({ theme }) => theme.colors.white};
+  ${({ theme }) => theme.fonts.body3};
 `;
