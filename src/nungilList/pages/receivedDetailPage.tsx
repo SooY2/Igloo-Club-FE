@@ -2,10 +2,12 @@ import { css } from '@emotion/react';
 import ArrowLeftNav from '../../common/components/ArrowLeftNav';
 import DetailProfile from '../../common/pages/detailprofile';
 import AcceptNungilBtn from '../components/AcceptBtn';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const ReceivedDetailPage = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  console.log(state.nungilId);
 
   const ClickArrowLeft = () => {
     navigate('/nungillist', { state: { selectedBtn: 'received' } });
