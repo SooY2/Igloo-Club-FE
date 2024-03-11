@@ -63,6 +63,7 @@ const backgroundImage = css`
   position: absolute;
   z-index: 1;
   width: 100%;
+  max-width: 425px;
   height: 100vh;
 `;
 
