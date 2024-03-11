@@ -88,7 +88,7 @@ const Profile = {
     color: ${theme.colors.white};
     ${theme.fonts.body2b}
 
-    background: linear-gradient(116deg, #ff6264 0%, #ffa490 96.79%);
+    background: linear-gradient(116deg, #ff6264 0%, #ffa490 70.79%);
     border-radius: 15px;
   `,
 
@@ -133,5 +133,9 @@ const StDdaySection = styled.div`
   flex-direction: row;
   gap: 0.7rem;
   align-items: center;
-  ${({ theme }) => theme.fonts.body3}
+  width: 100%;
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+  border-top: 1px solid ${({ theme }) => theme.colors.white};
+  ${({ theme }) => theme.fonts.body3};
 `;
