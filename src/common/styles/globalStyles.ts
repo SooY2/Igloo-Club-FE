@@ -70,6 +70,8 @@ const globalStyles = css`
     align-items: center;
     justify-content: flex-start;
     width: 100vw;
+    max-width: 425px;
+    overflow: hidden;
   }
 
   select,

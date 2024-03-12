@@ -23,7 +23,7 @@ export const articleStyles = css`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: hidden;
 `;
 
 export const sectionStyles = css`
