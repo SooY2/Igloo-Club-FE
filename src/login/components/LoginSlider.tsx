@@ -1,19 +1,16 @@
 /**로그인 페이지입니다 */
 
 import { css } from '@emotion/react';
-import { HeroImage } from '../common/assets/images/0_index';
-import { Carousel1 } from './assets/images/0_index';
+import { HeroImage } from '../../common/assets/images/0_index';
+import { Carousel1 } from '../assets/images/0_index';
 import styled from '@emotion/styled';
-import { 약관동의리스트 } from '../common/constants/memberAgreeConstants';
+import { 약관동의리스트 } from '../../common/constants/memberAgreeConstants';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-// import Slider from 'react-slick';
-import './styles/slick.css';
-import './styles/slick-theme.css';
-// import Info from './components/Info';
 
 const Login = () => {
   const { state } = useLocation();
+
   useEffect(() => {
     if (state) localStorage.setItem('path', state);
     else localStorage.setItem('path', '/main-page');
@@ -22,14 +19,6 @@ const Login = () => {
   const Rest_api_key = import.meta.env.VITE_KAKAO_REST_API_KEY;
   const redirect_uri = import.meta.env.VITE_REDIRECT_URI;
   const guidement = '옆으로 넘겨 가이드 보기 >>>';
-
-  // const settings = {
-  //   dots: false,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  // };
 
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`;
 
@@ -48,11 +37,9 @@ const Login = () => {
       >
         <img src={HeroImage} css={backgroundImage} />
         <div css={containerStyles}>
-          <StPrement>현재는 사전신청을 받고 있어요</StPrement>
-          <StButton onClick={handleLogin}>카카오톡으로 로그인하기</StButton>
           <StGuide>{guidement}</StGuide>
+          <StButton onClick={handleLogin}>카카오톡으로 로그인하기</StButton>
         </div>
-
         <Footer>
           <StFooterTitle>(주) 멋쟁이사자처럼</StFooterTitle>
           <div
@@ -112,7 +99,7 @@ const containerStyles = css`
   justify-content: end;
   width: 100%;
   height: 100vh;
-  padding: 0 4rem 4rem;
+  padding: 0 4rem 10rem;
 `;
 
 // const logoBoxStyles = css`
@@ -131,17 +118,6 @@ const containerStyles = css`
 //   color: ${({ theme }) => theme.colors.primary};
 //   ${({ theme }) => theme.fonts.subtitle2b};
 // `;
-
-const StPrement = styled.p`
-  padding: 1.1rem 2.2rem;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.gray1};
-  text-align: center;
-  letter-spacing: -0.3px;
-  border: 2px solid #fff;
-  border-radius: 30px;
-`;
 
 const StGuide = styled.p`
   color: ${({ theme }) => theme.colors.gray4};

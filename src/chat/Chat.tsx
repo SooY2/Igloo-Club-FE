@@ -30,31 +30,33 @@ const Chat = () => {
           </StHeaderExplain>
         </header>
         <main css={Middle.Wrapper}>
-          {chatList ? (
-            <>
-              {chatList.map((item, idx) => {
-                const {
-                  animalFace,
-                  senderNickName,
-                  content,
-                  createdAt,
-                  chatRoomId,
-                } = item;
-                return (
-                  <ChatRoomBox
-                    key={senderNickName + idx}
-                    animalFace={animalFace}
-                    senderNickName={senderNickName}
-                    content={content}
-                    createdAt={createdAt}
-                    chatRoomId={chatRoomId}
-                  />
-                );
-              })}
-            </>
-          ) : (
-            <p>채팅 내역이 없습니다</p>
-          )}
+          <div css={Middle.Box}>
+            {chatList.length > 0 ? (
+              <>
+                {chatList.map((item, idx) => {
+                  const {
+                    animalFace,
+                    senderNickName,
+                    content,
+                    createdAt,
+                    chatRoomId,
+                  } = item;
+                  return (
+                    <ChatRoomBox
+                      key={senderNickName + idx}
+                      animalFace={animalFace}
+                      senderNickName={senderNickName}
+                      content={content}
+                      createdAt={createdAt}
+                      chatRoomId={chatRoomId}
+                    />
+                  );
+                })}
+              </>
+            ) : (
+              <p>채팅 내역이 없습니다</p>
+            )}
+          </div>
         </main>
       </section>
       <footer css={Navigation}>
@@ -105,8 +107,11 @@ const StHeaderExplain = styled.div`
 
 const Middle = {
   Wrapper: css`
+    padding-bottom: 5rem;
+    overflow-y: scroll;
+  `,
+  Box: css`
     display: flex;
-    flex: 1;
     flex-direction: column;
     gap: 1rem;
     align-items: center;

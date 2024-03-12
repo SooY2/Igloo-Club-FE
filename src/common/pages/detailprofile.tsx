@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import { theme } from '../styles/theme';
 import instance from '../apis/axiosInstanse';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { DETAILPROFILETYPE } from '../type/detailPropfileType';
 
 const DetailProfile = () => {
-  const { state } = useLocation();
+  const { nungilId } = useParams();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [profileData, setProfileData] = useState<DETAILPROFILETYPE>();
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +28,7 @@ const DetailProfile = () => {
         setIsLoading(true);
         const res = await instance.get('/api/nungil/detail', {
           params: {
-            nungilId: state.nungilId,
+            nungilId: nungilId,
           },
         });
 
@@ -43,7 +43,7 @@ const DetailProfile = () => {
     };
 
     handleGetDetailProfile();
-  }, [state.nungilId]);
+  }, [nungilId]);
 
   const handleLastWord = (lastChar: string) => {
     const uni = lastChar.charCodeAt(0);
@@ -146,8 +146,7 @@ const DetailProfile = () => {
               {profileData?.smoke && profileData.smoke}
             </div>
             <div css={Middle.AllocationList}>
-              음주 {profileData?.alcohol && profileData.alcohol}
-              음주 {profileData?.alcohol && profileData.alcohol}
+              음주 : {profileData?.alcohol && profileData.alcohol}
             </div>
           </div>
         </div>
@@ -180,7 +179,7 @@ const Container = css`
   width: 100%;
   height: 100%;
   padding-top: 1.5rem;
-  overflow: auto;
+  overflow-y: scroll;
   background-color: ${theme.colors.white};
 `;
 
