@@ -12,6 +12,7 @@ import 지역선택 from './RegisterSelectPlace';
 import 시간선택 from './RegisterSelectTime';
 import 장소선택 from './RegisterSelectMarker';
 import 회원가입완료 from './RegisterFinish';
+import 사전신청완료 from '../../common/components/RegisterAdvanceApplication';
 
 export {
   약관동의,
@@ -28,4 +29,5 @@ export {
   시간선택,
   장소선택,
   회원가입완료,
+  사전신청완료,
 };

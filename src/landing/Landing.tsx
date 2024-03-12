@@ -32,7 +32,8 @@ const Landing = () => {
 export default Landing;
 
 const landingStyles = css`
-  width: 100%;
+  width: 100vw;
+  max-width: 425px;
   height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
 `;
