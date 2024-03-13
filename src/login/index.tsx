@@ -122,7 +122,7 @@ const StCarouselContainer = styled.div`
   display: flex;
   flex-direction: row;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 
   .slick-slider {
     z-index: 2;
@@ -237,7 +237,7 @@ const infoContainer = css`
   flex-direction: row;
   align-items: end;
   justify-content: center;
-  margin-top: 13rem;
+  margin-top: 14rem;
 `;
 
 const backgroundImage = css`
@@ -249,7 +249,6 @@ const backgroundImage = css`
 const carouselImage = css`
   width: 100%;
   max-width: 425px;
-  height: 100vh;
 `;
 
 const containerStyles = css`
