@@ -62,8 +62,10 @@ const Login = () => {
             <StTopMent>한 번의 눈길,</StTopMent>
             <StTopMent>한 잔의 커피,</StTopMent>
             <StLine src={line} />
-            <StBottomDot>• •</StBottomDot>
-            <StBottomMent>한 명의 인연</StBottomMent>
+            <StBottomMent>
+              •&nbsp;•&nbsp;
+              <br />한 명의 인연
+            </StBottomMent>
             <StLoginBox>
               <StPrement>현재는 사전신청을 받고 있어요</StPrement>
               <StButton onClick={handleLogin}>카카오톡으로 로그인하기</StButton>
@@ -100,15 +102,43 @@ const Login = () => {
           </Footer>
         </div>
         <div css={infoContainer}>
+          <StCarouselMent>
+            <StBlackMent>
+              <StPinkMent>회사 이메일 인증</StPinkMent>이 완료된
+              <br />
+              직장인만 사용할 수 있어요
+            </StBlackMent>
+          </StCarouselMent>
           <img src={Carousel1} css={carouselImage} />
         </div>
         <div css={infoContainer}>
+          <StCarouselMent>
+            <StBlackMent>
+              <StPinkMent>회사부터 매력포인트</StPinkMent>까지!
+              <br />
+              자세히 적힌 프로필을 볼 수 있어요
+            </StBlackMent>
+          </StCarouselMent>
           <img src={Carousel2} css={carouselImage} />
         </div>
         <div css={infoContainer}>
+          <StCarouselMent>
+            <StBlackMent>
+              <StPinkMent>마음에 드는 이성이 있다면</StPinkMent>
+              <br />
+              지금 바로 눈길을 보내보세요 👀💕
+            </StBlackMent>
+          </StCarouselMent>
           <img src={Carousel3} css={carouselImage} />
         </div>
         <div css={infoContainer}>
+          <StCarouselMent>
+            <StBlackMent>
+              <StPinkMent>설레는 첫 만남</StPinkMent>을 위해
+              <br />
+              최적의 시간과 장소도 추천드려요
+            </StBlackMent>
+          </StCarouselMent>
           <img src={Carousel4} css={carouselImage} />
         </div>
       </StSlider>
@@ -119,14 +149,13 @@ const Login = () => {
 export default Login;
 
 const StCarouselContainer = styled.div`
-  display: flex;
-  flex-direction: row;
   width: 100vw;
-  height: 100%;
+  height: 100vh;
 
   .slick-slider {
     z-index: 2;
     width: 100%;
+    height: 100vh;
   }
 `;
 
@@ -137,7 +166,7 @@ const StSlider = styled(Slider)<{ currentSlide: number }>`
     display: block;
     display: ${(props) => (props.currentSlide === 0 ? 'block' : 'none')};
     padding: 0;
-    margin-top: 11rem;
+    margin-top: 8rem;
     text-align: center;
     list-style: none;
     visibility: ${(props) => (props.currentSlide === 0 ? 'hidden' : 'visible')};
@@ -166,7 +195,7 @@ const StSlider = styled(Slider)<{ currentSlide: number }>`
     position: absolute;
     top: 0;
     left: 0;
-    font-size: 5vw;
+    font-size: 4vw;
     color: rgb(184 184 184);
     text-align: center;
     content: '•';
@@ -186,10 +215,9 @@ const StSlider = styled(Slider)<{ currentSlide: number }>`
   }
 
   .slick-dots li.slick-active button::before {
-    font-size: 6vw;
-    ${({ theme }) => theme.colors.primary};
-
-    opacity: 1;
+    font-size: 5vw;
+    color: black;
+    opacity: 0.75;
   }
 `;
 
@@ -203,52 +231,78 @@ const loginContainer = css`
 `;
 
 const StLogo = styled.img`
-  width: 5rem;
-  margin-bottom: 1.7rem;
+  width: 6rem;
+  margin-bottom: 0.7rem;
 `;
 
 const StTopMent = styled.p`
-  font-size: 3.6rem;
+  font-size: 2.5rem;
   font-weight: 500;
   color: #fff;
   letter-spacing: -0.3px;
 `;
 
 const StLine = styled.img`
-  height: 21rem;
-  margin-top: 2.1rem;
-`;
-
-const StBottomDot = styled.p`
-  margin-left: 12rem;
-  font-size: 3.6rem;
-  font-weight: 800;
-  color: #fff;
+  height: 10rem;
+  margin-top: 1rem;
 `;
 
 const StBottomMent = styled.p`
-  font-size: 3.6rem;
+  font-size: 2.5rem;
   font-weight: 800;
+  line-height: 3rem;
   color: #fff;
+  text-align: end;
+  letter-spacing: 0.3px;
 `;
 
 const infoContainer = css`
+  box-sizing: border-box;
   display: flex;
-  flex-direction: row;
-  align-items: end;
+  align-items: center;
   justify-content: center;
-  margin-top: 14rem;
+  height: 100vh;
+  padding: 0 3.5rem;
+  margin-top: 12rem;
 `;
 
 const backgroundImage = css`
   position: absolute;
   z-index: 1;
-  height: calc(var(--vh, 1vh) * 100);
+  width: 100vw;
+  max-width: 42.5rem;
+  height: 100vh;
+`;
+
+const StCarouselMent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0 3rem;
+`;
+
+const StBlackMent = styled.p`
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 3rem;
+  color: ${({ theme }) => theme.colors.gray9};
+  text-align: center;
+  letter-spacing: -0.3px;
+`;
+
+const StPinkMent = styled.span`
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: ${({ theme }) => theme.colors.primary};
+  text-align: center;
+  letter-spacing: -0.3px;
 `;
 
 const carouselImage = css`
   width: 100%;
   max-width: 42.5rem;
+  height: auto;
 `;
 
 const containerStyles = css`
@@ -261,25 +315,8 @@ const containerStyles = css`
   justify-content: start;
   width: 100%;
   height: 100vh;
-  padding: 6.5rem 3rem 4rem;
+  padding: 6rem 3rem 4rem;
 `;
-
-// const logoBoxStyles = css`
-//   display: flex;
-//   flex-direction: column;
-//   gap: 2rem;
-//   align-items: center;
-//   justify-content: center;
-// `;
-
-// const StLogo = styled.img`
-//   width: 10rem;
-// `;
-
-// const StExplain = styled.p`
-//   color: ${({ theme }) => theme.colors.primary};
-//   ${({ theme }) => theme.fonts.subtitle2b};
-// `;
 
 const StLoginBox = styled.div`
   display: flex;
@@ -291,7 +328,7 @@ const StLoginBox = styled.div`
 
 const StPrement = styled.p`
   padding: 1.1rem 2.2rem;
-  margin-top: 8.6rem;
+  margin-top: 4rem;
   font-size: 1.4rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.gray1};
@@ -337,6 +374,7 @@ const Footer = styled.footer`
   flex-direction: column;
   gap: 2rem;
   padding-left: 3rem;
+  margin-top: 5rem;
   margin-bottom: 3rem;
   color: #fff;
 
