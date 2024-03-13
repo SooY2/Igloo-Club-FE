@@ -248,7 +248,7 @@ const backgroundImage = css`
 
 const carouselImage = css`
   width: 100%;
-  max-width: 425px;
+  max-width: 42.5rem;
 `;
 
 const containerStyles = css`
