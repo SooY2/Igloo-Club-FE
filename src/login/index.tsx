@@ -169,9 +169,8 @@ const StSlider = styled(Slider)<{ currentSlide: number }>`
     margin-top: 8rem;
     text-align: center;
     list-style: none;
-    visibility: ${(props) =>
-      props.currentSlide === 0 ? 'visible' : 'visible'};
-    opacity: ${(props) => (props.currentSlide === 0 ? 1 : 1)};
+    visibility: ${(props) => (props.currentSlide === 0 ? 'hidden' : 'visible')};
+    opacity: ${(props) => (props.currentSlide === 0 ? 0 : 1)};
   }
 
   .slick-dots li {
@@ -375,7 +374,7 @@ const Footer = styled.footer`
   flex-direction: column;
   gap: 2rem;
   padding-left: 3rem;
-  margin-top: 10rem;
+  margin-top: 5rem;
   margin-bottom: 3rem;
   color: #fff;
 
