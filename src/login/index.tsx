@@ -338,7 +338,6 @@ const Footer = styled.footer`
   padding-left: 3rem;
   margin-bottom: 3rem;
   color: #fff;
-
   ${({ theme }) => theme.fonts.body3m};
 `;
 
