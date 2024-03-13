@@ -34,7 +34,7 @@ export default RegisterHeader;
 const headerStyles = css`
   display: flex;
   flex-direction: column;
-  margin-bottom: 5.3rem;
+  margin-bottom: 2.3rem;
 `;
 
 const navStyles = css`
