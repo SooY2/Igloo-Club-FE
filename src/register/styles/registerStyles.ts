@@ -21,8 +21,9 @@ export const articleStyles = css`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
   height: 100%;
-  overflow-y: hidden;
+  overflow-y: scroll;
 `;
 
 export const sectionStyles = css`
