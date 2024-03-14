@@ -1,9 +1,4 @@
 @charset 'UTF-8';
-/* Slider */
-.slick-loading .slick-list {
-  background: #fff url('./ajax-loader.gif') center center no-repeat;
-}
-
 /* Icons */
 @font-face {
   font-family: 'slick';
@@ -21,6 +16,7 @@
     url('../../../node_modules/slick-carousel/slick/fonts/slick.svg#slick')
       format('svg');
 }
+
 /* Arrows */
 .slick-prev,
 .slick-next {
@@ -31,9 +27,11 @@
   top: 50%;
 
   display: block;
+  z-index: 2;
 
   width: 20px;
   height: 20px;
+  margin-top: -10px;
   padding: 0;
   -webkit-transform: translate(0, -50%);
   -ms-transform: translate(0, -50%);
@@ -112,9 +110,6 @@
 }
 
 .slick-dots {
-  position: absolute;
-  bottom: -25px;
-
   display: block;
 
   width: 100%;
@@ -164,7 +159,7 @@
 }
 .slick-dots li button:before {
   font-family: 'slick';
-  font-size: 6px;
+  font-size: 2vw;
   line-height: 20px;
 
   position: absolute;

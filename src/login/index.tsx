@@ -37,11 +37,12 @@ const Login = () => {
 
   const settings = {
     dots: true,
+    arrows: true,
     infinite: true,
+    fade: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    draggable: true,
     beforeChange: (current: number, next: number) =>
       handleSlideChange(current, next),
   };
@@ -149,7 +150,10 @@ const Login = () => {
 export default Login;
 
 const StCarouselContainer = styled.div`
+  display: flex;
+  flex-direction: row;
   width: 100vw;
+  max-width: 42.5rem;
   height: 100vh;
 
   .slick-slider {
@@ -160,13 +164,26 @@ const StCarouselContainer = styled.div`
 `;
 
 const StSlider = styled(Slider)<{ currentSlide: number }>`
+  .slick-list {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  .slick-prev,
+  .slick-next {
+    position: absolute;
+  }
+
   .slick-dots {
     position: absolute;
     top: 1px;
     display: block;
     display: ${(props) => (props.currentSlide === 0 ? 'block' : 'none')};
+    width: 100%;
     padding: 0;
-    margin-top: 8rem;
+    margin-top: 7rem;
     text-align: center;
     list-style: none;
     visibility: ${(props) => (props.currentSlide === 0 ? 'hidden' : 'visible')};
@@ -177,7 +194,7 @@ const StSlider = styled(Slider)<{ currentSlide: number }>`
     position: relative;
     display: inline-block;
     padding: 0;
-    margin: 0% 0% 30% 2%;
+    margin: 0 0.5rem;
     cursor: pointer;
   }
 
@@ -195,7 +212,7 @@ const StSlider = styled(Slider)<{ currentSlide: number }>`
     position: absolute;
     top: 0;
     left: 0;
-    font-size: 4vw;
+    font-size: 3vw;
     color: rgb(184 184 184);
     text-align: center;
     content: '•';
@@ -215,7 +232,7 @@ const StSlider = styled(Slider)<{ currentSlide: number }>`
   }
 
   .slick-dots li.slick-active button::before {
-    font-size: 5vw;
+    font-size: 4vw;
     color: black;
     opacity: 0.75;
   }
@@ -261,7 +278,7 @@ const infoContainer = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
   padding: 0 3.5rem;
   margin-top: 12rem;
 `;
@@ -279,7 +296,7 @@ const StCarouselMent = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin: 1.5rem 0 3rem;
+  margin: 0 0 3rem;
 `;
 
 const StBlackMent = styled.p`
@@ -300,6 +317,7 @@ const StPinkMent = styled.span`
 `;
 
 const carouselImage = css`
+  z-index: 1;
   width: 100%;
   max-width: 42.5rem;
   height: auto;
