@@ -154,12 +154,12 @@ const StCarouselContainer = styled.div`
   flex-direction: row;
   width: 100vw;
   max-width: 42.5rem;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 
   .slick-slider {
     z-index: 2;
     width: 100%;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
   }
 `;
 
@@ -212,7 +212,7 @@ const StSlider = styled(Slider)<{ currentSlide: number }>`
     position: absolute;
     top: 0;
     left: 0;
-    font-size: 3vw;
+    font-size: 1rem;
     color: rgb(184 184 184);
     text-align: center;
     content: '•';
@@ -232,7 +232,7 @@ const StSlider = styled(Slider)<{ currentSlide: number }>`
   }
 
   .slick-dots li.slick-active button::before {
-    font-size: 4vw;
+    font-size: 2rem;
     color: black;
     opacity: 0.75;
   }
