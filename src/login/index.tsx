@@ -16,6 +16,7 @@ import {
   Carousel2,
   Carousel3,
   Carousel4,
+  Line,
 } from './assets/images/0_index';
 
 const Login = () => {
@@ -68,7 +69,11 @@ const Login = () => {
               <br />한 명의 인연
             </StBottomMent>
             <StLoginBox>
-              <StPrement>현재는 사전신청을 받고 있어요</StPrement>
+              <StPreBox>
+                <img src={Line} />
+                <StPrement>현재는 사전신청을 받고 있어요</StPrement>
+                <img src={Line} />
+              </StPreBox>
               <StButton onClick={handleLogin}>카카오톡으로 로그인하기</StButton>
               <StGuide>{guidement}</StGuide>
             </StLoginBox>
@@ -344,16 +349,25 @@ const StLoginBox = styled.div`
   height: 100vh;
 `;
 
+const StPreBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 4rem;
+
+  img {
+    width: 5.2rem;
+    height: 0.1rem;
+  }
+`;
+
 const StPrement = styled.p`
   padding: 1.1rem 2.2rem;
-  margin-top: 4rem;
   font-size: 1.4rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.gray1};
   text-align: center;
   letter-spacing: -0.3px;
-  border: 2px solid #fff;
-  border-radius: 30px;
 `;
 
 const StGuide = styled.p`
