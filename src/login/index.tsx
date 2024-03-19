@@ -248,7 +248,7 @@ const loginContainer = css`
   flex-direction: row;
   align-items: start;
   width: 100%;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   overflow-y: scroll;
 `;
 
@@ -293,7 +293,6 @@ const backgroundImage = css`
   z-index: 1;
   width: 100vw;
   max-width: 42.5rem;
-  height: 100vh;
 `;
 
 const StCarouselMent = styled.div`
@@ -406,7 +405,7 @@ const Footer = styled.footer`
   flex-direction: column;
   gap: 2rem;
   padding-left: 3rem;
-  margin-top: 5rem;
+  margin-top: 4rem;
   margin-bottom: 3rem;
   color: #fff;
 
