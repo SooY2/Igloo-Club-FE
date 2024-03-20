@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { css } from '@emotion/react';
 import { theme } from '../../common/styles/theme';
+import CountDown from './CountDown';
 import { Lightning } from '../assets/svgs/index';
 import SendNungilModal from './SendNungilModal';
 
@@ -27,7 +28,8 @@ const SendNungilBtn = ({
       ) : (
         <button type="button" onClick={handleClick} css={SendBtn}>
           <Lightning />
-          눈길 보내기
+          <CountDown />
+          안에 눈길 보내기
         </button>
       )}
       {isModalOpen && (

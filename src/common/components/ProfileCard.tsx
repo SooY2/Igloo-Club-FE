@@ -37,9 +37,9 @@ const ProfileCard = ({
     <div css={Container}>
       {profileData &&
         profileData.map((profile) => (
-          <div
+          <StProfileWrapper
             key={profile.nungilId}
-            css={Profile.Wrapper}
+            animalFace={profile.animalFace}
             onClick={() => ClickProfileCard(profile.nungilId, profile.nickname)}
           >
             <div css={Profile.Top}>
@@ -60,7 +60,7 @@ const ProfileCard = ({
                 </span>
               </StDdaySection>
             ) : null}
-          </div>
+          </StProfileWrapper>
         ))}
     </div>
   );
@@ -77,21 +77,40 @@ const Container = css`
   background: ${theme.colors.white};
 `;
 
+const StProfileWrapper = styled.div<{ animalFace: string }>`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 34rem;
+  padding: 2.5rem 2.7rem;
+  line-height: 2rem;
+  color: ${theme.colors.white};
+  ${theme.fonts.body2b}
+
+  background: ${(props) =>
+    props.animalFace === '여우상'
+      ? '#FF9052'
+      : props.animalFace === '강아지상'
+        ? '#E4A17E'
+        : props.animalFace === '토끼상'
+          ? '#F27D72'
+          : props.animalFace === '공룡상'
+            ? '#A6D9F2'
+            : props.animalFace === '사슴상'
+              ? '#F8D199'
+              : props.animalFace === '늑대상'
+                ? '#848FF2'
+                : props.animalFace === '말상'
+                  ? '#FFB19F'
+                  : props.animalFace === '고양이상'
+                    ? '#F0E0B6'
+                    : props.animalFace === '곰상'
+                      ? '#E4A397'
+                      : ''};
+  border-radius: 15px;
+`;
+
 const Profile = {
-  Wrapper: css`
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    width: 34rem;
-    padding: 2.5rem 2.7rem;
-    line-height: 2rem;
-    color: ${theme.colors.white};
-    ${theme.fonts.body2b}
-
-    background: linear-gradient(116deg, #ff6264 0%, #ffa490 70.79%);
-    border-radius: 15px;
-  `,
-
   Top: css`
     display: flex;
     flex-direction: row;

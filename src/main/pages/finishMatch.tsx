@@ -9,7 +9,7 @@ import { MatchDatatypes } from '../types/MatchDatatypes';
 import StartChatBtn from '../components/StartChatBtn';
 import Map from '../../common/components/Map';
 import { Xicon } from '../assets/svgs/index';
-import { Notify } from '../assets/svgs/index';
+// import { Notify } from '../assets/svgs/index';
 
 const FinishMatch = () => {
   const navigate = useNavigate();
@@ -21,7 +21,6 @@ const FinishMatch = () => {
   } | null>(null);
   const title = `축하해요 🎉\n 서로의 눈길이 매칭되었어요`;
   const subtitle = `서로의 눈길이 닿아 매칭이 성사되었어요.\n 채팅방을 통해 두 분의 첫만남 약속을 잡아보세요!`;
-  const noticontent = `첫만남 장소와 시간 조차 정하기 어려워하는 당신을 위해\n 저희가 직접 만남 장소와 시간대도 추천해 드려요.`;
 
   const ClickXIcon = () => {
     navigate('/nungillist', { state: { selectedBtn: 'matching' } });
@@ -55,19 +54,10 @@ const FinishMatch = () => {
         <div css={Top.Notify}>매칭 완료</div>
         <div css={Top.Title}>{title}</div>
         <div css={Top.SubTitle}>{subtitle}</div>
-        <div css={Top.NotiBox}>
-          <div css={Top.NotiTitle}>
-            <Notify />
-            <span>빠른 시일 내에 만나 친밀도를 쌓는 게 중요해요</span>
-          </div>
-          <div css={Top.NotiContent}>
-            <span>{noticontent}</span>
-          </div>
-        </div>
       </div>
       <div css={Recommend.Wrapper}>
         <div css={Recommend.Title}>
-          <span>최적의 첫만남 요일과 시간을 알려드려요</span>
+          <span>두 분에게 어울리는 커피챗 시간과 장소를 알려드려요</span>
         </div>
         <div css={Recommend.SubTitle}>
           두 분이 모두 만남이 가능하다고 응답하신 요일과 시간대에요.
@@ -77,7 +67,7 @@ const FinishMatch = () => {
           {matchData?.yoil ? (
             <span css={Recommend.RecoContent}>{matchData.yoil}</span>
           ) : (
-            <span css={Recommend.RecoContent}>없음</span>
+            <span css={Recommend.RecoContent}>매칭되는 시간이 없어요 😢</span>
           )}
         </div>
         <div css={Recommend.RecoBox}>
@@ -85,7 +75,9 @@ const FinishMatch = () => {
           {matchData?.time ? (
             <span css={Recommend.RecoContent}>{matchData.time}</span>
           ) : (
-            <span css={Recommend.RecoContent}>없음</span>
+            <span css={Recommend.RecoContent}>
+              채팅을 통해 시간과 장소를 잡아보세요!
+            </span>
           )}
         </div>
       </div>
@@ -337,8 +329,5 @@ const Place = {
 };
 
 const StartBtn = css`
-  position: fixed;
-  bottom: 0;
-  z-index: 999;
   width: 100%;
 `;

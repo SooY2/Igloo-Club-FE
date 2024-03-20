@@ -14,7 +14,7 @@ import CustomSelect from '../components/CustomSelect';
 import { ProfileDataTypesProps } from '../../common/type/ProfileDataTypesProps';
 import { calculateTimeLeft } from '../components/CountDown';
 import CountDown from '../components/CountDown';
-import { Watch } from '../assets/svgs/index';
+// import { Watch } from '../assets/svgs/index';
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -66,14 +66,16 @@ const MainPage = () => {
       <div css={Top.Wrapper}>
         <div css={Top.TitleTop}>
           <CustomSelect onSelectedChange={handleSelectedChange} />
-          <span>에 위치한</span>
+          <span>에서</span>
         </div>
         <div css={Top.TitleBottom}>
-          <span>오늘의 인연을 소개해 드릴게요</span>
+          <p>마음에 드는 상대와</p>
+          <br />
+          <p>오늘 커피 한 잔 어떠세요? ☕️</p>
         </div>
       </div>
       <div css={Middle.Wrapper}>
-        {matchingTime ? (
+        {/* {matchingTime ? (
           <div css={Middle.TimeBox}>
             <Watch />
             <span>오늘 눈길 매칭 마감까지</span>
@@ -89,7 +91,14 @@ const MainPage = () => {
             <span css={Middle.PrimaryText}>오전 11시</span>
             <span>에 일괄 삭제돼요</span>
           </div>
-        )}
+        )} */}
+        <div css={Middle.TimeBox}>
+          <span css={Middle.PrimaryText}>
+            <CountDown onMatchingTime={handleMatchingTime} />
+          </span>
+          <span css={Middle.PrimaryText}>인연 프로필 삭제</span>
+          <span>전에 어서 눈길을 보내보세요!</span>
+        </div>
       </div>
       <div css={Bottom.Wrapper}>
         {matchingTime ? (
