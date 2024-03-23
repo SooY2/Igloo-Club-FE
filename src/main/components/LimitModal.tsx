@@ -6,7 +6,7 @@ const LimitModal = ({ closeModal }: { closeModal: () => void }) => {
   const navigate = useNavigate();
 
   const subtitle = '오늘은 이미\n 프로필을 세 번 뽑았어요';
-  const completement = '새로운 인연은 다가오는 오후 3시에 소개해 드릴게요';
+  const completement = '새로운 인연은 다가오는 자정에 소개해 드릴게요';
 
   const handleClickBtn = () => {
     navigate('/main-page');

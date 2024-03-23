@@ -110,7 +110,6 @@ export default InfoModal;
 const StInfoModalContainer = styled.div`
   position: absolute;
   top: 0;
-  left: -50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -119,13 +118,10 @@ const StInfoModalContainer = styled.div`
   max-width: 45rem;
   height: 100vh;
   background: rgb(0 0 0 / 50%);
-  transform: translateX(50%);
+  transform: translateX(-5%);
 `;
 
 const StInfoModalWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
   max-width: 32rem;
   padding-top: 3rem;
   background: ${({ theme }) => theme.colors.white};
@@ -138,6 +134,10 @@ const StXButton = styled.button`
   align-items: center;
   justify-content: end;
   padding: 0 2.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const StInfoTitle = styled.span`
