@@ -33,6 +33,8 @@ const ProfileCard = ({
   ClickProfileCard: (nungilId: number, nickname: string) => void;
   nungilState: string;
 }) => {
+  const detailbtn = '상세 프로필 보기 >';
+
   return (
     <div css={Container}>
       {profileData &&
@@ -58,6 +60,7 @@ const ProfileCard = ({
                 <span>
                   프로필 삭제까지 D-{calculateDday(profile.expiredAt)}
                 </span>
+                <StDetailBtn>{detailbtn}</StDetailBtn>
               </StDdaySection>
             ) : null}
           </StProfileWrapper>
@@ -91,21 +94,21 @@ const StProfileWrapper = styled.div<{ animalFace: string }>`
     props.animalFace === '여우상'
       ? '#FF9052'
       : props.animalFace === '강아지상'
-        ? '#E4A17E'
+        ? '#E5A582'
         : props.animalFace === '토끼상'
           ? '#F27D72'
           : props.animalFace === '공룡상'
-            ? '#A6D9F2'
+            ? '#66CB9B'
             : props.animalFace === '사슴상'
-              ? '#F8D199'
+              ? '#F3AB72'
               : props.animalFace === '늑대상'
-                ? '#848FF2'
+                ? '#939DF9'
                 : props.animalFace === '말상'
-                  ? '#FFB19F'
+                  ? '#FF9E88'
                   : props.animalFace === '고양이상'
-                    ? '#F0E0B6'
+                    ? '#FFC159'
                     : props.animalFace === '곰상'
-                      ? '#E4A397'
+                      ? '#C48A86'
                       : ''};
   border-radius: 15px;
 `;
@@ -128,13 +131,13 @@ const Profile = {
   CompanyName: css`
     font-size: 1.4rem;
     font-weight: 600;
-    color: ${theme.colors.gray0};
+    color: ${theme.colors.white};
   `,
 
   Job: css`
     font-size: 1.2rem;
     font-weight: 500;
-    color: ${theme.colors.gray2};
+    color: ${theme.colors.white};
   `,
 
   DescriptionBox: css`
@@ -155,6 +158,14 @@ const StDdaySection = styled.div`
   width: 100%;
   padding-top: 1.5rem;
   margin-top: 2rem;
-  border-top: 1px solid ${({ theme }) => theme.colors.white};
   ${({ theme }) => theme.fonts.body3};
+`;
+
+const StDetailBtn = styled.p`
+  margin-left: 8.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.gray0};
+  text-align: center;
+  letter-spacing: -0.3px;
 `;

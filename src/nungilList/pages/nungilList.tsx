@@ -9,7 +9,17 @@ import SendNungil from '../components/SendNungil';
 
 const NungilList = () => {
   const { state } = useLocation();
-  const [selectedBtn, setSelectedBtn] = useState('received');
+  const [selectedBtn, setSelectedBtn] = useState(
+    localStorage.getItem('selectedBtn') || 'received',
+  );
+
+  useEffect(() => {
+    if (state?.selectedBtn) {
+      setSelectedBtn(state.selectedBtn);
+      localStorage.setItem('selectedBtn', state.selectedBtn);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   let middleContent;
 
@@ -33,6 +43,7 @@ const NungilList = () => {
 
   const handleClickBtn = (selectedBtn: 'received' | 'matching' | 'sent') => {
     setSelectedBtn(selectedBtn);
+    localStorage.setItem('selectedBtn', selectedBtn);
   };
 
   return (

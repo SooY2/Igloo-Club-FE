@@ -109,7 +109,7 @@ const StSenderJob = styled.p`
 `;
 
 const StChatModalWrapper = styled.button`
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   gap: 1.5rem;
   align-items: center;
@@ -125,11 +125,12 @@ const StChatModalWrapper = styled.button`
   text-align: center;
   background: #fcf3e2;
   border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const ModalBox = css`
   z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;

@@ -28,7 +28,9 @@ const SendNungilBtn = ({
       ) : (
         <button type="button" onClick={handleClick} css={SendBtn}>
           <Lightning />
-          <CountDown />
+          <span css={countdown}>
+            <CountDown />
+          </span>
           안에 눈길 보내기
         </button>
       )}
@@ -61,12 +63,11 @@ const Container = css`
 const SendBtn = css`
   display: flex;
   flex-direction: row;
-  gap: 0.9rem;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 5.5rem;
-  padding: 1.5rem 10rem;
+  padding: 1.5rem 5rem;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -79,6 +80,10 @@ const SendBtn = css`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const countdown = css`
+  padding: 0.8rem 0.6rem;
 `;
 
 const FinishBtn = css`

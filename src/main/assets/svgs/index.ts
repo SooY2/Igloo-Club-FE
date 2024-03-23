@@ -9,6 +9,7 @@ import Chat from './chat.svg?react';
 import Lock from './lock-icon.svg?react';
 import Check from './check.svg?react';
 import CheckPink from './checkpink.svg?react';
+import TimeLine from './timeline.svg?react';
 
 export {
   Arrow,
@@ -22,4 +23,5 @@ export {
   Lock,
   Check,
   CheckPink,
+  TimeLine,
 };

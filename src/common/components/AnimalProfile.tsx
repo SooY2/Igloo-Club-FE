@@ -71,6 +71,7 @@ const AnimalProfile = ({ animalFace }: { animalFace: string }) => {
     default:
       break;
   }
+
   return <div>{AnimalFace && <AnimalFace />}</div>;
 };
 

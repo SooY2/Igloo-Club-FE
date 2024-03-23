@@ -5,45 +5,41 @@ export const calculateTimeLeft = () => {
   const now = new Date();
   const targetTime = new Date();
 
-  targetTime.setHours(11, 0, 0, 0);
-
-  if (now.getHours() >= 11) {
-    targetTime.setDate(targetTime.getDate() + 1);
-  }
-
-  targetTime.setHours(10, 0, 0, 0);
-
-  const matchingTime = now.getHours() >= 11 || now.getHours() < 10;
+  targetTime.setHours(24, 0, 0, 0);
 
   const timeDifference = targetTime.getTime() - now.getTime();
-  const minutesLeft = Math.floor(timeDifference / (1000 * 60));
+  const totalSecondsLeft = Math.floor(timeDifference / 1000);
+
+  const hours = Math.floor(totalSecondsLeft / 3600);
+  const minutes = Math.floor((totalSecondsLeft % 3600) / 60);
+  const seconds = totalSecondsLeft % 60;
 
   return {
-    minutes: minutesLeft % 60,
-    hours: Math.floor(minutesLeft / 60),
-    matchingTime,
+    hours: formatTime(hours),
+    minutes: formatTime(minutes),
+    seconds: formatTime(seconds),
   };
 };
 
+const formatTime = (time: number) => {
+  return time < 10 ? `0${time}` : `${time}`;
+};
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const CountDown = ({ onMatchingTime }: any) => {
+const CountDown = () => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
     const timer = setInterval(() => {
-      const newTime = calculateTimeLeft().matchingTime;
       setTimeLeft(calculateTimeLeft());
-      onMatchingTime(newTime);
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [onMatchingTime, timeLeft.matchingTime]);
+  }, []);
 
   return (
     <div>
-      <p>
-        {timeLeft.hours}시간 {timeLeft.minutes}분
-      </p>
+      {timeLeft.hours}:{timeLeft.minutes}:{timeLeft.seconds}
     </div>
   );
 };

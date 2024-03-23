@@ -26,7 +26,9 @@ const AcceptNungilBtn = () => {
   return (
     <div css={Container}>
       <button type="button" onClick={ClickAcceptBtn} css={SendBtn}>
-        <CountDown />
+        <span css={countdown}>
+          <CountDown />
+        </span>
         안에 눈길 수락하기
       </button>
     </div>
@@ -45,6 +47,10 @@ const Container = css`
   padding: 0 2rem;
   background: ${theme.colors.white};
   border-top: 1px solid #e3e3e3;
+`;
+
+const countdown = css`
+  padding: 0.8rem 0.6rem;
 `;
 
 const SendBtn = css`

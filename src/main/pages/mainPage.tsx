@@ -6,20 +6,16 @@ import { theme } from '../../common/styles/theme';
 import instance from '../../common/apis/axiosInstanse';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../common/components/NavBar';
-import NowMatching from '../components/NowMatching';
 import ComingSoon from '../components/ComingSoon';
 import ProfileCard from '../../common/components/ProfileCard';
 import PickProfileBtn from '../components/PickProfileBtn';
 import CustomSelect from '../components/CustomSelect';
 import { ProfileDataTypesProps } from '../../common/type/ProfileDataTypesProps';
-import { calculateTimeLeft } from '../components/CountDown';
 import CountDown from '../components/CountDown';
-// import { Watch } from '../assets/svgs/index';
 
 const MainPage = () => {
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState<ProfileDataTypesProps[]>([]);
-  const [matchingTime, setMatchingTime] = useState<boolean>();
   const [selected, setSelected] = useState<string>('');
 
   const handleGetAllProfile = async () => {
@@ -37,13 +33,7 @@ const MainPage = () => {
     }
   };
 
-  const handleMatchingTime = async () => {
-    const newTime = calculateTimeLeft().matchingTime;
-    setMatchingTime(newTime);
-  };
-
   useEffect(() => {
-    handleMatchingTime();
     handleGetAllProfile();
   }, []);
 
@@ -70,56 +60,32 @@ const MainPage = () => {
         </div>
         <div css={Top.TitleBottom}>
           <p>마음에 드는 상대와</p>
-          <br />
           <p>오늘 커피 한 잔 어떠세요? ☕️</p>
         </div>
       </div>
       <div css={Middle.Wrapper}>
-        {/* {matchingTime ? (
-          <div css={Middle.TimeBox}>
-            <Watch />
-            <span>오늘 눈길 매칭 마감까지</span>
-            <span css={Middle.PrimaryText}>
-              <CountDown onMatchingTime={handleMatchingTime} />
-            </span>
-            <span>남았어요!</span>
-          </div>
-        ) : (
-          <div css={Middle.TimeBox}>
-            <Watch />
-            <span>내가 뽑은 프로필은 매일</span>
-            <span css={Middle.PrimaryText}>오전 11시</span>
-            <span>에 일괄 삭제돼요</span>
-          </div>
-        )} */}
         <div css={Middle.TimeBox}>
-          <span css={Middle.PrimaryText}>
-            <CountDown onMatchingTime={handleMatchingTime} />
+          <span css={countdown}>
+            <CountDown />
           </span>
           <span css={Middle.PrimaryText}>인연 프로필 삭제</span>
           <span>전에 어서 눈길을 보내보세요!</span>
         </div>
       </div>
       <div css={Bottom.Wrapper}>
-        {matchingTime ? (
-          selected === '판교' ? (
-            <ComingSoon />
-          ) : (
-            <ProfileCard
-              profileData={profileData}
-              ClickProfileCard={ClickProfileBtn}
-              nungilState="main"
-              css={Bottom.ProfileData}
-            />
-          )
+        {selected === '경기도 판교' ? (
+          <ComingSoon />
         ) : (
-          <NowMatching />
+          <ProfileCard
+            profileData={profileData}
+            ClickProfileCard={ClickProfileBtn}
+            nungilState="main"
+            css={Bottom.ProfileData}
+          />
         )}
       </div>
       <div css={PickBtn}>
-        {matchingTime ? (
-          <PickProfileBtn ProfileData={ClickPickProfile} />
-        ) : null}
+        <PickProfileBtn ProfileData={ClickPickProfile} />
       </div>
       <div css={Navigation}>
         <NavBar />
@@ -135,7 +101,7 @@ const Container = css`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding-top: 1.5rem;
+  padding-top: 3rem;
   overflow: auto;
   background: ${theme.colors.white};
 `;
@@ -156,7 +122,8 @@ const Top = {
     flex-direction: row;
     gap: 0.2rem;
     align-items: center;
-    ${theme.fonts.title};
+    ${theme.fonts.body1b};
+    ${theme.colors.gray7};
   `,
 
   TitleBottom: css`
@@ -173,7 +140,7 @@ const Middle = {
     justify-content: center;
     min-width: 33rem;
     height: 4rem;
-    padding: 1.2rem 2.2rem;
+    padding: 1.2rem;
     margin-right: 2rem;
     margin-bottom: 2.9rem;
     margin-left: 2rem;
@@ -201,6 +168,17 @@ const Middle = {
     color: ${theme.colors.primary};
   `,
 };
+
+const countdown = css`
+  padding: 0.8rem 1.2rem;
+  margin-right: 0.3rem;
+  font-size: 1.3rem;
+  font-style: normal;
+  font-weight: 700;
+  color: ${theme.colors.primary};
+  background: rgb(250 114 104 / 10%);
+  border-radius: 20px;
+`;
 
 const Bottom = {
   Wrapper: css`

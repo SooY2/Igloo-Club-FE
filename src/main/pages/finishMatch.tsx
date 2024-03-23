@@ -13,8 +13,10 @@ import { Xicon } from '../assets/svgs/index';
 
 const FinishMatch = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { state } = useLocation();
   const [matchData, setMatchData] = useState<MatchDatatypes | undefined>();
+  const [formattedDate, setFormattedDate] = useState<string>('');
   const [isClickedMarker, setIsClickedMarker] = useState<{
     title: string;
     address: string;
@@ -23,8 +25,14 @@ const FinishMatch = () => {
   const subtitle = `서로의 눈길이 닿아 매칭이 성사되었어요.\n 채팅방을 통해 두 분의 첫만남 약속을 잡아보세요!`;
 
   const ClickXIcon = () => {
-    navigate('/nungillist', { state: { selectedBtn: 'matching' } });
+    navigate('/nungillist', {
+      state: { ...location.state, selectedBtn: 'matching' },
+    });
   };
+
+  useEffect(() => {
+    localStorage.setItem('selectedBtn', 'matching');
+  }, []);
 
   const handleRecoInfo = async () => {
     try {
@@ -34,11 +42,25 @@ const FinishMatch = () => {
         },
       });
       setMatchData(res.data);
-      console.log(res.data);
+      console.log(res.data.matchDate);
+
+      if (res.data.matchDate) {
+        const date = res.data.matchDate;
+        let month = date.slice(4, 6);
+        if (month.startsWith('0')) {
+          month = month.slice(1);
+        }
+        const day = date.slice(6, 8);
+
+        const formatted = `${month}월 ${day}일`;
+        setFormattedDate(formatted);
+      }
     } catch (error) {
       console.log(error);
     }
   };
+
+  console.log(formattedDate);
 
   useEffect(() => {
     handleRecoInfo();
@@ -64,10 +86,12 @@ const FinishMatch = () => {
         </div>
         <div css={Recommend.RecoBox}>
           <span css={Recommend.RecoTitle}>🗓️ 가능한 요일</span>
-          {matchData?.yoil ? (
-            <span css={Recommend.RecoContent}>{matchData.yoil}</span>
+          {matchData?.matchYoil && matchData?.matchDate ? (
+            <span css={Recommend.RecoContent}>
+              {formattedDate} {matchData.matchYoil}
+            </span>
           ) : (
-            <span css={Recommend.RecoContent}>매칭되는 시간이 없어요 😢</span>
+            <span css={Recommend.RecoContent}>매칭되는 요일이 없어요 😢</span>
           )}
         </div>
         <div css={Recommend.RecoBox}>
@@ -230,7 +254,7 @@ const Recommend = {
   RecoBox: css`
     display: flex;
     flex-direction: row;
-    gap: 16rem;
+    gap: 0.3rem;
     align-items: center;
     min-width: 30rem;
     height: 5.9rem;
@@ -242,8 +266,9 @@ const Recommend = {
 
   RecoTitle: css`
     display: flex;
-    flex-direction: row;
     align-items: center;
+    justify-content: start;
+    width: 100%;
     font-size: 1.3rem;
     font-style: normal;
     font-weight: 700;
@@ -251,6 +276,9 @@ const Recommend = {
   `,
 
   RecoContent: css`
+    display: flex;
+    justify-content: end;
+    width: 100%;
     font-size: 1.3rem;
     font-style: normal;
     font-weight: 600;
