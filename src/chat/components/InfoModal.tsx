@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import instance from '../../common/apis/axiosInstanse';
-import { MatchDatatypes } from '../../main/types/MatchDatatypes';
+import { ChatModalTypes } from '../types/chatModalTypes';
 import Map from '../../common/components/Map';
 import { Xicon } from '../../main/assets/svgs';
 
@@ -14,7 +14,7 @@ const InfoModal = ({
   chatRoomId: number | undefined;
   closeModal: () => void;
 }) => {
-  const [matchData, setMatchData] = useState<MatchDatatypes | undefined>();
+  const [matchData, setMatchData] = useState<ChatModalTypes | undefined>();
   const [isClickedMarker, setIsClickedMarker] = useState<{
     title: string;
     address: string;
@@ -29,6 +29,7 @@ const InfoModal = ({
     try {
       const res = await instance.get(`/api/chat/room/${chatRoomId}/info`);
       setMatchData(res.data);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -174,6 +175,7 @@ const StPossibleTitle = styled.span`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: start;
   width: 100%;
   font-size: 1.3rem;
   font-style: normal;
@@ -185,6 +187,7 @@ const StPossibleContent = styled.div`
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  justify-content: end;
   width: 100%;
   margin-right: 2rem;
   overflow-x: scroll;

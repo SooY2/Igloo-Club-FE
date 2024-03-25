@@ -1,11 +1,23 @@
 /** 프로필 상세 페이지 **/
 
 import { useState, useEffect } from 'react';
+import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { theme } from '../styles/theme';
 import instance from '../apis/axiosInstanse';
 import { useParams } from 'react-router-dom';
 import { DETAILPROFILETYPE } from '../type/detailPropfileType';
+import {
+  Fox,
+  Dog,
+  Rabbit,
+  Dino,
+  Deer,
+  Wolf,
+  Horse,
+  Cat,
+  Bear,
+} from '../assets/svgs/index';
 
 const DetailProfile = () => {
   const { nungilId } = useParams();
@@ -20,6 +32,8 @@ const DetailProfile = () => {
   #${profileData?.age}세 ${genderText}이고 #${profileData?.job.replace(/\s+/g, '_')}\n 
   얼굴은 #${profileData?.animalFace} 
   키는 #${profileData?.height}cm\n 성격 유형은 #${profileData?.mbti}`;
+
+  let AnimalFace, AnimalFaceImg;
 
   useEffect(() => {
     const handleGetDetailProfile = async () => {
@@ -57,6 +71,74 @@ const DetailProfile = () => {
     handleLastWord(nickname.slice(-1)) ? `${nickname}이` : `${nickname}`
   }라고 합니다.`;
 
+  switch (profileData?.animalFace) {
+    case '여우상':
+      AnimalFaceImg = <Fox />;
+      AnimalFace = '여우상';
+      break;
+    case '강아지상':
+      AnimalFaceImg = <Dog />;
+      AnimalFace = '강아지상';
+      break;
+    case '토끼상':
+      AnimalFaceImg = <Rabbit />;
+      AnimalFace = '토끼상';
+      break;
+    case '공룡상':
+      AnimalFaceImg = <Dino />;
+      AnimalFace = '공룡상';
+      break;
+    case '사슴상':
+      AnimalFaceImg = <Deer />;
+      AnimalFace = '사슴상';
+      break;
+    case '늑대상':
+      AnimalFaceImg = <Wolf />;
+      AnimalFace = '늑대상';
+      break;
+    case '말상':
+      AnimalFaceImg = <Horse />;
+      AnimalFace = '말상';
+      break;
+    case '고양이상':
+      AnimalFaceImg = <Cat />;
+      AnimalFace = '고양이상';
+      break;
+    case '곰상':
+      AnimalFaceImg = <Bear />;
+      AnimalFace = '곰상';
+      break;
+    case 'FOX':
+      AnimalFace = <Fox />;
+      break;
+    case 'DOG':
+      AnimalFace = <Dog />;
+      break;
+    case 'RABBIT':
+      AnimalFace = <Rabbit />;
+      break;
+    case 'DINO':
+      AnimalFace = <Dino />;
+      break;
+    case 'DEER':
+      AnimalFace = <Deer />;
+      break;
+    case 'WOLF':
+      AnimalFace = <Wolf />;
+      break;
+    case 'HORSE':
+      AnimalFace = <Horse />;
+      break;
+    case 'CAT':
+      AnimalFace = <Cat />;
+      break;
+    case 'BEAR':
+      AnimalFace = <Bear />;
+      break;
+    default:
+      break;
+  }
+
   return isLoading ? (
     <>Loading,,</>
   ) : (
@@ -86,7 +168,7 @@ const DetailProfile = () => {
           </div>
           <div css={Middle.ExAttrList}>
             <div css={Middle.AllocationList}>
-              {profileData?.animalFace && profileData.animalFace}
+              <StAnimalFaceImg>{AnimalFaceImg}</StAnimalFaceImg> {AnimalFace}
             </div>
             {profileData?.faceDepictionAllocationList &&
               profileData.faceDepictionAllocationList
@@ -205,6 +287,7 @@ const Top = {
     flex-direction: column;
     padding-top: 10.9rem;
     margin-bottom: 3.2rem;
+    font-weight: 700;
     white-space: pre-line;
   `,
 
@@ -217,6 +300,7 @@ const Top = {
 
   HashtagText: css`
     color: ${theme.colors.primary};
+    ${theme.fonts.subtitle2b};
   `,
 
   InfoBox: css`
@@ -245,6 +329,15 @@ const Top = {
     color: ${theme.colors.gray7};
   `,
 };
+
+const StAnimalFaceImg = styled.div`
+  svg {
+    display: flex;
+    align-items: center;
+    width: 2rem;
+    height: 100%;
+  }
+`;
 
 const Middle = {
   Wrapper: css`
@@ -336,6 +429,7 @@ const Middle = {
 
   AllocationList: css`
     display: inline-flex;
+    gap: 0.7rem;
     align-items: center;
     justify-content: center;
     padding: 1rem 1.5rem 0.9rem;
