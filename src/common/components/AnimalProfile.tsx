@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import {
   Fox,
   Dog,
@@ -72,7 +73,13 @@ const AnimalProfile = ({ animalFace }: { animalFace: string }) => {
       break;
   }
 
-  return <div>{AnimalFace && <AnimalFace />}</div>;
+  return <StAnimalFace>{AnimalFace && <AnimalFace />}</StAnimalFace>;
 };
 
 export default AnimalProfile;
+
+const StAnimalFace = styled.div`
+  padding: 0.6rem 0.6rem 0.4rem;
+  background-color: #fff;
+  border-radius: 50px;
+`;

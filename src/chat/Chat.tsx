@@ -90,6 +90,7 @@ const Top = {
 const StHeaderTitle = styled.h1`
   ${({ theme }) => theme.fonts.subtitle2b};
 
+  margin-top: 1rem;
   margin-left: 1.3rem;
 `;
 
