@@ -9,7 +9,6 @@ import { MatchDatatypes } from '../types/MatchDatatypes';
 import StartChatBtn from '../components/StartChatBtn';
 import Map from '../../common/components/Map';
 import { Xicon } from '../assets/svgs/index';
-// import { Notify } from '../assets/svgs/index';
 
 const FinishMatch = () => {
   const navigate = useNavigate();
@@ -42,7 +41,8 @@ const FinishMatch = () => {
         },
       });
       setMatchData(res.data);
-      console.log(res.data.matchDate);
+
+      console.log(res.data);
 
       if (res.data.matchDate) {
         const date = res.data.matchDate;
@@ -59,8 +59,6 @@ const FinishMatch = () => {
       console.log(error);
     }
   };
-
-  console.log(formattedDate);
 
   useEffect(() => {
     handleRecoInfo();
@@ -172,7 +170,7 @@ const Top = {
   `,
 
   Notify: css`
-    padding-top: 5.3rem;
+    padding-top: 4rem;
     font-size: 1.3rem;
     font-style: normal;
     font-weight: 600;
@@ -322,7 +320,7 @@ const Place = {
     height: 8.7rem;
     padding-left: 2rem;
     margin-top: 1.4rem;
-    margin-bottom: 14rem;
+    margin-bottom: 5rem;
     background-color: #fafafa;
     border-radius: 5px;
   `,

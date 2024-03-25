@@ -107,6 +107,7 @@ const ChatRoom = () => {
   const handleSubmit = () => {
     sendMessage();
   };
+
   return (
     <section css={chatRoomStyles}>
       <ChatRoomHeader
