@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import instance from '../../common/apis/axiosInstanse';
-import { MatchDatatypes } from '../../main/types/MatchDatatypes';
+import { ChatModalTypes } from '../types/chatModalTypes';
 import Map from '../../common/components/Map';
 import { Xicon } from '../../main/assets/svgs';
 
@@ -14,7 +14,7 @@ const InfoModal = ({
   chatRoomId: number | undefined;
   closeModal: () => void;
 }) => {
-  const [matchData, setMatchData] = useState<MatchDatatypes | undefined>();
+  const [matchData, setMatchData] = useState<ChatModalTypes | undefined>();
   const [isClickedMarker, setIsClickedMarker] = useState<{
     title: string;
     address: string;
@@ -29,6 +29,7 @@ const InfoModal = ({
     try {
       const res = await instance.get(`/api/chat/room/${chatRoomId}/info`);
       setMatchData(res.data);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -110,7 +111,6 @@ export default InfoModal;
 const StInfoModalContainer = styled.div`
   position: absolute;
   top: 0;
-  left: -50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -119,13 +119,10 @@ const StInfoModalContainer = styled.div`
   max-width: 45rem;
   height: 100vh;
   background: rgb(0 0 0 / 50%);
-  transform: translateX(50%);
+  transform: translateX(-5%);
 `;
 
 const StInfoModalWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
   max-width: 32rem;
   padding-top: 3rem;
   background: ${({ theme }) => theme.colors.white};
@@ -138,6 +135,10 @@ const StXButton = styled.button`
   align-items: center;
   justify-content: end;
   padding: 0 2.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const StInfoTitle = styled.span`
@@ -174,6 +175,7 @@ const StPossibleTitle = styled.span`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: start;
   width: 100%;
   font-size: 1.3rem;
   font-style: normal;
@@ -185,6 +187,7 @@ const StPossibleContent = styled.div`
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  justify-content: end;
   width: 100%;
   margin-right: 2rem;
   overflow-x: scroll;

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import instance from '../../common/apis/axiosInstanse';
+import CountDown from '../../main/components/CountDown';
 import { theme } from '../../common/styles/theme';
 
 const AcceptNungilBtn = () => {
@@ -25,7 +26,10 @@ const AcceptNungilBtn = () => {
   return (
     <div css={Container}>
       <button type="button" onClick={ClickAcceptBtn} css={SendBtn}>
-        눈길 수락하기
+        <span css={countdown}>
+          <CountDown />
+        </span>
+        안에 눈길 수락하기
       </button>
     </div>
   );
@@ -43,6 +47,10 @@ const Container = css`
   padding: 0 2rem;
   background: ${theme.colors.white};
   border-top: 1px solid #e3e3e3;
+`;
+
+const countdown = css`
+  padding: 0.8rem 0.6rem;
 `;
 
 const SendBtn = css`

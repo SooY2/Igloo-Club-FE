@@ -9,23 +9,29 @@ import { MatchDatatypes } from '../types/MatchDatatypes';
 import StartChatBtn from '../components/StartChatBtn';
 import Map from '../../common/components/Map';
 import { Xicon } from '../assets/svgs/index';
-import { Notify } from '../assets/svgs/index';
 
 const FinishMatch = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { state } = useLocation();
   const [matchData, setMatchData] = useState<MatchDatatypes | undefined>();
+  const [formattedDate, setFormattedDate] = useState<string>('');
   const [isClickedMarker, setIsClickedMarker] = useState<{
     title: string;
     address: string;
   } | null>(null);
   const title = `축하해요 🎉\n 서로의 눈길이 매칭되었어요`;
   const subtitle = `서로의 눈길이 닿아 매칭이 성사되었어요.\n 채팅방을 통해 두 분의 첫만남 약속을 잡아보세요!`;
-  const noticontent = `첫만남 장소와 시간 조차 정하기 어려워하는 당신을 위해\n 저희가 직접 만남 장소와 시간대도 추천해 드려요.`;
 
   const ClickXIcon = () => {
-    navigate('/nungillist', { state: { selectedBtn: 'matching' } });
+    navigate('/nungillist', {
+      state: { ...location.state, selectedBtn: 'matching' },
+    });
   };
+
+  useEffect(() => {
+    localStorage.setItem('selectedBtn', 'matching');
+  }, []);
 
   const handleRecoInfo = async () => {
     try {
@@ -35,7 +41,20 @@ const FinishMatch = () => {
         },
       });
       setMatchData(res.data);
+
       console.log(res.data);
+
+      if (res.data.matchDate) {
+        const date = res.data.matchDate;
+        let month = date.slice(4, 6);
+        if (month.startsWith('0')) {
+          month = month.slice(1);
+        }
+        const day = date.slice(6, 8);
+
+        const formatted = `${month}월 ${day}일`;
+        setFormattedDate(formatted);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -55,29 +74,22 @@ const FinishMatch = () => {
         <div css={Top.Notify}>매칭 완료</div>
         <div css={Top.Title}>{title}</div>
         <div css={Top.SubTitle}>{subtitle}</div>
-        <div css={Top.NotiBox}>
-          <div css={Top.NotiTitle}>
-            <Notify />
-            <span>빠른 시일 내에 만나 친밀도를 쌓는 게 중요해요</span>
-          </div>
-          <div css={Top.NotiContent}>
-            <span>{noticontent}</span>
-          </div>
-        </div>
       </div>
       <div css={Recommend.Wrapper}>
         <div css={Recommend.Title}>
-          <span>최적의 첫만남 요일과 시간을 알려드려요</span>
+          <span>두 분에게 어울리는 커피챗 시간과 장소를 알려드려요</span>
         </div>
         <div css={Recommend.SubTitle}>
           두 분이 모두 만남이 가능하다고 응답하신 요일과 시간대에요.
         </div>
         <div css={Recommend.RecoBox}>
           <span css={Recommend.RecoTitle}>🗓️ 가능한 요일</span>
-          {matchData?.yoil ? (
-            <span css={Recommend.RecoContent}>{matchData.yoil}</span>
+          {matchData?.matchYoil && matchData?.matchDate ? (
+            <span css={Recommend.RecoContent}>
+              {formattedDate} {matchData.matchYoil}
+            </span>
           ) : (
-            <span css={Recommend.RecoContent}>없음</span>
+            <span css={Recommend.RecoContent}>매칭되는 요일이 없어요 😢</span>
           )}
         </div>
         <div css={Recommend.RecoBox}>
@@ -85,7 +97,9 @@ const FinishMatch = () => {
           {matchData?.time ? (
             <span css={Recommend.RecoContent}>{matchData.time}</span>
           ) : (
-            <span css={Recommend.RecoContent}>없음</span>
+            <span css={Recommend.RecoContent}>
+              채팅을 통해 시간과 장소를 잡아보세요!
+            </span>
           )}
         </div>
       </div>
@@ -156,7 +170,7 @@ const Top = {
   `,
 
   Notify: css`
-    padding-top: 5.3rem;
+    padding-top: 4rem;
     font-size: 1.3rem;
     font-style: normal;
     font-weight: 600;
@@ -238,7 +252,7 @@ const Recommend = {
   RecoBox: css`
     display: flex;
     flex-direction: row;
-    gap: 16rem;
+    gap: 0.3rem;
     align-items: center;
     min-width: 30rem;
     height: 5.9rem;
@@ -250,8 +264,9 @@ const Recommend = {
 
   RecoTitle: css`
     display: flex;
-    flex-direction: row;
     align-items: center;
+    justify-content: start;
+    width: 100%;
     font-size: 1.3rem;
     font-style: normal;
     font-weight: 700;
@@ -259,6 +274,9 @@ const Recommend = {
   `,
 
   RecoContent: css`
+    display: flex;
+    justify-content: end;
+    width: 100%;
     font-size: 1.3rem;
     font-style: normal;
     font-weight: 600;
@@ -302,7 +320,7 @@ const Place = {
     height: 8.7rem;
     padding-left: 2rem;
     margin-top: 1.4rem;
-    margin-bottom: 14rem;
+    margin-bottom: 5rem;
     background-color: #fafafa;
     border-radius: 5px;
   `,
@@ -337,8 +355,5 @@ const Place = {
 };
 
 const StartBtn = css`
-  position: fixed;
-  bottom: 0;
-  z-index: 999;
   width: 100%;
 `;

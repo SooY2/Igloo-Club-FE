@@ -38,7 +38,7 @@ const ChatRoomFooter = ({
 export default ChatRoomFooter;
 
 const StContainer = styled.footer`
-  position: fixed;
+  position: absolute;
   bottom: 0;
   display: flex;
   gap: 1rem;

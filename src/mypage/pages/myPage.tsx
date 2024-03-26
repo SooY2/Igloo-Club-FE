@@ -84,6 +84,15 @@ const MyPage = () => {
             </button>
           );
         })}
+        <button
+          type="button"
+          onClick={() =>
+            window.open('https://forms.gle/kc8d9co81TyUtCgM9', '_blank')
+          }
+          css={Middle.MiddleStyle}
+        >
+          오류 사항 제보하기
+        </button>
       </div>
       <div css={Bottom.Wrapper}></div>
       <div css={Navigation}>
