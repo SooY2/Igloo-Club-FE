@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { Registertypes } from '../../register/types/registerTypes';
 import MyProfileCard from '../components/MyProfileCard';
 import { 약관동의리스트 } from '../../common/constants/memberAgreeConstants';
+import AgreeToggleBtn from '../components/AgreeToggleBtn';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -66,9 +67,13 @@ const MyPage = () => {
           <span>프로필 수정</span>
           <button type="button" onClick={ClickEditBtn}></button>
         </button>
-        <div css={Top.TopStyleBottom}>
+        <div css={Top.TopStyle}>
           <span>회사 사람 만나지 않기</span>
           <ToggleBtn disableCompany={values.disableCompany} />
+        </div>
+        <div css={Top.TopStyleBottom}>
+          <span>마케팅 정보 수신 동의 켜기</span>
+          <AgreeToggleBtn />
         </div>
       </div>
       <div css={Middle.Wrapper}>
@@ -140,6 +145,7 @@ const Top = {
   `,
 
   TopStyle: css`
+    position: relative;
     display: flex;
     flex-direction: row;
     color: ${theme.colors.gray9};
@@ -147,6 +153,7 @@ const Top = {
   `,
 
   TopStyleBottom: css`
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -167,6 +174,7 @@ const Middle = {
   `,
 
   MiddleStyle: css`
+    position: relative;
     display: flex;
     flex-direction: row;
     color: ${theme.colors.gray9};
