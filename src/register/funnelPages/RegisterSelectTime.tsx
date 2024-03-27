@@ -14,6 +14,7 @@ interface ScedultPropsTypes {
   onNext: () => void;
   handleScheduleValue: (data: ScheduleTypes) => void;
   registerScheduleValues: ScheduleTypes;
+  percent: number;
 }
 
 const 지역선택 = ({
@@ -52,8 +53,8 @@ const 지역선택 = ({
       <article css={St.articleStyles}>
         <section css={St.sectionStyles}>
           <TitleBox>
-            <St.Title>회원님이 만남 가능한 지역을</St.Title>
-            <St.Title>둘 중 선택해주세요</St.Title>
+            <St.Title>평일 점심 시간대에 만남이 가능한</St.Title>
+            <St.Title>요일과 시간대를 알려주세요</St.Title>
           </TitleBox>
           <div css={subTitleBoxStyles}>
             <St.SubTitle>

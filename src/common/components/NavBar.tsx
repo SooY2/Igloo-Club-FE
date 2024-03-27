@@ -46,7 +46,9 @@ const NavBar = () => {
       </button>
       <button
         type="button"
-        onClick={() => navigate('/nungillist')}
+        onClick={() =>
+          navigate('/nungillist', { state: { selectedBtn: 'received' } })
+        }
         css={NavButton}
       >
         {handleActiveBtn('/nungillist') === 'active' ? (
@@ -71,11 +73,13 @@ export default NavBar;
 const Container = css`
   display: flex;
   flex-direction: row;
-  gap: 7rem;
+  gap: 5rem;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
+  max-width: 42.5rem;
   height: 6.2rem;
-  padding: 0 4rem;
+  padding: 0 3rem;
   background-color: ${theme.colors.white};
 `;
 

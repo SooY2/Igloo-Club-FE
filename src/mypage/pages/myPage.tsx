@@ -2,11 +2,13 @@ import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 import { theme } from '../../common/styles/theme';
 import NavBar from '../../common/components/NavBar';
+import instance from '../../common/apis/axiosInstanse';
 import ToggleBtn from '../components/ToggleBtn';
 import { useEffect, useState } from 'react';
 import { Registertypes } from '../../register/types/registerTypes';
-import instance from '../../common/apis/axiosInstanse';
 import MyProfileCard from '../components/MyProfileCard';
+import { 약관동의리스트 } from '../../common/constants/memberAgreeConstants';
+import AgreeToggleBtn from '../components/AgreeToggleBtn';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -30,6 +32,7 @@ const MyPage = () => {
     description: '',
     markerList: [],
     hobbyList: [],
+    disableCompany: true,
   });
   useEffect(() => {
     getUserInfo();
@@ -38,7 +41,6 @@ const MyPage = () => {
   const getUserInfo = async () => {
     try {
       const { data } = await instance.get('api/member');
-      console.log(data);
       setValues(data);
     } catch (err) {
       console.log(err);
@@ -65,21 +67,36 @@ const MyPage = () => {
           <span>프로필 수정</span>
           <button type="button" onClick={ClickEditBtn}></button>
         </button>
-        <div css={Top.TopStyleBottom}>
+        <div css={Top.TopStyle}>
           <span>회사 사람 만나지 않기</span>
-          <ToggleBtn />
+          <ToggleBtn disableCompany={values.disableCompany} />
+        </div>
+        <div css={Top.TopStyleBottom}>
+          <span>마케팅 정보 수신 동의 켜기</span>
+          <AgreeToggleBtn />
         </div>
       </div>
       <div css={Middle.Wrapper}>
-        <button type="button" onClick={ClickEditBtn} css={Middle.MiddleStyle}>
-          서비스 이용약관
-        </button>
+        {약관동의리스트.map((item) => {
+          return (
+            <button
+              key={item.title}
+              type="button"
+              onClick={() => window.open(item.url, '_blank')}
+              css={Middle.MiddleStyle}
+            >
+              {item.title}
+            </button>
+          );
+        })}
         <button
           type="button"
-          onClick={ClickEditBtn}
-          css={Middle.MiddleStyleBottom}
+          onClick={() =>
+            window.open('https://forms.gle/kc8d9co81TyUtCgM9', '_blank')
+          }
+          css={Middle.MiddleStyle}
         >
-          개인정보 처리방침
+          오류 사항 제보하기
         </button>
       </div>
       <div css={Bottom.Wrapper}></div>
@@ -97,9 +114,11 @@ const Container = css`
   flex-direction: column;
   justify-content: start;
   width: 100%;
-  height: 100%;
+
+  /* height: 100%; */
   padding-top: 1.5rem;
-  overflow: auto;
+
+  /* overflow: auto; */
   white-space: pre-line;
   background-color: ${theme.colors.white};
 `;
@@ -126,6 +145,7 @@ const Top = {
   `,
 
   TopStyle: css`
+    position: relative;
     display: flex;
     flex-direction: row;
     color: ${theme.colors.gray9};
@@ -133,6 +153,7 @@ const Top = {
   `,
 
   TopStyleBottom: css`
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -149,12 +170,11 @@ const Middle = {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
-    padding-top: 3rem;
-    padding-right: 2.7rem;
-    padding-left: 2.7rem;
+    padding: 3rem 2.7rem;
   `,
 
   MiddleStyle: css`
+    position: relative;
     display: flex;
     flex-direction: row;
     color: ${theme.colors.gray9};
@@ -186,4 +206,5 @@ const Navigation = css`
   position: fixed;
   bottom: 0;
   width: 100%;
+  max-width: 42.5rem;
 `;

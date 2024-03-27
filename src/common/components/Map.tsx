@@ -1,5 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { css } from '@emotion/react';
+import { MatchDatatypes } from '../../main/types/MatchDatatypes';
+import MapBase from './MapBase';
+import pin from '../assets/images/pin.png';
+import clickedpin from '../assets/images/clickedpin.png';
 
 declare global {
   interface Window {
@@ -8,40 +12,118 @@ declare global {
   }
 }
 
-const Map = () => {
+interface MarkerTypes {
+  marker: Array<{
+    title: string;
+    address: string;
+    latitude: number;
+    longitude: number;
+  }>;
+}
+
+interface MapProps {
+  matchData: MatchDatatypes | undefined;
+  setIsClickedMarker?: React.Dispatch<
+    React.SetStateAction<{ title: string; address: string } | null>
+  >;
+}
+
+const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
+  const [clickedMarker, setClickedMarker] = useState<number | null>(null);
+  const [map, setMap] = useState<MarkerTypes>();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [, setMap] = useState<any>();
+  const [markers, setMarkers] = useState<any[]>([]);
 
-  useEffect(() => {
-    const mapScript = document.createElement('script');
-
-    mapScript.async = true;
-    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${
-      import.meta.env.VITE_KAKAO_MAP_KEY
-    }&autoload=false&libraries=services`;
-
-    document.head.appendChild(mapScript);
-
-    const onLoadKakaoMap = () => {
-      window.kakao.maps.load(() => {
-        const mapContainer = document.getElementById('map');
-        const mapOption = {
-          center: new window.kakao.maps.LatLng(37.4964, 126.9546),
-          level: 3,
-        };
-
-        setMap(new window.kakao.maps.Map(mapContainer, mapOption));
-      });
-    };
-    mapScript.addEventListener('load', onLoadKakaoMap);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleMapLoad = useCallback((mapInstance: any) => {
+    setMap(mapInstance);
   }, []);
 
-  return <div id="map" css={MapContainer}></div>;
+  useEffect(() => {
+    if (map && matchData) {
+      markers.forEach((existingMarker) => {
+        existingMarker.setMap(null);
+      });
+
+      const newMarkers: MarkerTypes[] = [];
+
+      matchData.marker.forEach((marker, index) => {
+        const position = new window.kakao.maps.LatLng(
+          marker.latitude,
+          marker.longitude,
+        );
+
+        const imageSrc = index === clickedMarker ? clickedpin : pin;
+        const imageSize =
+          index === clickedMarker
+            ? new window.kakao.maps.Size(35, 48)
+            : new window.kakao.maps.Size(22, 30);
+        const imageOption =
+          index === clickedMarker
+            ? { offset: new window.kakao.maps.Point(30, 40) }
+            : { offset: new window.kakao.maps.Point(20, 30) };
+
+        const markerImage = new window.kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption,
+        );
+
+        const newMarker = new window.kakao.maps.Marker({
+          position: position,
+          image: markerImage,
+          title: marker.title,
+        });
+
+        newMarker.setMap(map);
+
+        window.kakao.maps.event.addListener(
+          newMarker,
+          'touchstart',
+          function () {
+            handleClickMarker(index);
+          },
+        );
+
+        window.kakao.maps.event.addListener(newMarker, 'click', function () {
+          handleClickMarker(index);
+        });
+
+        newMarkers.push(newMarker);
+      });
+
+      // Set the new markers array
+      setMarkers(newMarkers);
+    }
+  }, [map, matchData, clickedMarker]);
+
+  const handleClickMarker = (index: number) => {
+    setClickedMarker((prevIndex) => (prevIndex === index ? null : index));
+
+    if (setIsClickedMarker) {
+      setIsClickedMarker({
+        title: matchData?.marker[index].title || '',
+        address: matchData?.marker[index].address || '',
+      });
+    }
+  };
+
+  return (
+    <div css={MapContainer}>
+      <MapBase
+        matchData={matchData}
+        onMapLoad={handleMapLoad}
+        setMap={setMap}
+      />
+    </div>
+  );
 };
 
 export default Map;
 
 const MapContainer = css`
-  width: 34rem;
-  height: 20rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
 `;

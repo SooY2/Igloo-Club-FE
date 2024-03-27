@@ -41,6 +41,7 @@ const EditProfilePage = () => {
     useState(false);
   const [showHobby, setShowHobby] = useState(false);
   const [descriptionCnt, setDescriptionCnt] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState<Registertypes>({
     nickname: '',
     sex: '',
@@ -58,8 +59,8 @@ const EditProfilePage = () => {
     faceDepictionList: [],
     personalityDepictionList: [],
     description: '',
-    markerList: [],
     hobbyList: [],
+    disableCompany: false,
   });
 
   useEffect(() => {
@@ -68,11 +69,14 @@ const EditProfilePage = () => {
 
   const getUserInfo = async () => {
     try {
+      setIsLoading(true);
       const { data } = await instance.get('api/member');
-      console.log(data);
       setValues(data);
+      setDescriptionCnt(data.description.length);
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -83,6 +87,10 @@ const EditProfilePage = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleClickBtn = () => {
+    navigate(-1);
   };
 
   const handleEditValue = (
@@ -102,17 +110,19 @@ const EditProfilePage = () => {
       handleEditValue('', 'description');
     } //value가 없을 때 0으로 글자 수 세지도록 처리
 
-    const lengthCount = limitMaxLength(e, 100);
+    const lengthCount = limitMaxLength(e, 1000);
 
     if (!lengthCount) return;
     handleEditValue(e.target.value, 'description');
     setDescriptionCnt(lengthCount);
   };
 
-  return (
+  return isLoading ? (
+    <>Loading..</>
+  ) : (
     <div css={container}>
       <header css={headerStyles}>
-        <StArrow onClick={() => navigate('/mypage')} />
+        <StArrow onClick={handleClickBtn} />
         <StHeaderTitle>기본 프로필 수정</StHeaderTitle>
       </header>
       <main css={mainStyles}>
@@ -127,14 +137,14 @@ const EditProfilePage = () => {
           />
         </RegisterBasicInput>
         {/* 성별 */}
-        <RegisterBasicInput label="성별">
+        <RegisterBasicInput label="성별" explain="성별은 변경할 수 없어요">
           <Radio
             name="gender"
             value1="FEMALE"
             value2="MALE"
             label1="여성"
             label2="남성"
-            checkedValue="FEMALE"
+            checkedValue={values.sex}
           />
         </RegisterBasicInput>
         {/* 생년월일 */}
@@ -197,7 +207,7 @@ const EditProfilePage = () => {
           />
         </RegisterBasicInput>
         <RegisterBasicInput label="MBTI">
-          <p>istj</p>
+          <p>{values.mbti}</p>
         </RegisterBasicInput>
         {/* 결혼 상태 */}
         <RegisterBasicInput label="결혼 상태">
@@ -320,7 +330,7 @@ const EditProfilePage = () => {
               value={values.description}
               onChange={handleDescription}
             />
-            <St.StBasicTextCnt>{descriptionCnt}/100</St.StBasicTextCnt>
+            <St.StBasicTextCnt>{descriptionCnt}/1000</St.StBasicTextCnt>
           </div>
         </RegisterBasicInput>
       </main>
@@ -364,6 +374,7 @@ const container = css`
   height: 100%;
   padding-top: 1.5rem;
   overflow: auto;
+  overflow: hidden;
   background: ${theme.colors.white};
 `;
 
@@ -374,7 +385,9 @@ const headerStyles = css`
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 42.5rem;
   height: 6.7rem;
+  background-color: white;
 `;
 
 const StArrow = styled(ArrowLeft)`
@@ -396,7 +409,7 @@ const mainStyles = css`
   flex-direction: column;
   gap: 3.6rem;
   padding: 2.7rem;
-  margin-top: 6.7rem;
+  margin: 7rem 0;
   overflow-y: scroll;
 `;
 
@@ -421,10 +434,13 @@ const StAnimalRaceImg = styled.img`
 `;
 
 const finishContainer = css`
+  position: fixed;
+  bottom: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
+  max-width: 42.5rem;
   height: 9rem;
   padding: 2.2rem;
   background: ${theme.colors.white};

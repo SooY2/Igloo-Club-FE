@@ -30,21 +30,13 @@ const ChatRoom = () => {
   }, [chatRoomId]);
 
   useEffect(() => {
-    console.log(chatData);
-  }, [chatData]);
-
-  useEffect(() => {
     if ('WebSocket' in window) {
       const stompClient = new Client({
         brokerURL: `${import.meta.env.VITE_WSS_URL}/stomp/websocket`,
         connectHeaders: {
           Authorization: `Bearer ${accessToken}`,
         },
-        debug: (str) => {
-          console.log(str, 'debug');
-        },
         onConnect: () => {
-          console.log('Connected');
           setupSubscription(stompClient);
         },
         onStompError: (frame) => {
@@ -84,7 +76,6 @@ const ChatRoom = () => {
         `api/chat/room/${chatRoomId}?pageNumber=0&pageSize=100`,
       );
       setChatData(data.messageSlice.content);
-      console.log(data);
       setChatSenderInfo({
         animalFace: data.animalFace,
         companyName: data.companyName,
@@ -116,6 +107,7 @@ const ChatRoom = () => {
   const handleSubmit = () => {
     sendMessage();
   };
+
   return (
     <section css={chatRoomStyles}>
       <ChatRoomHeader
@@ -123,12 +115,15 @@ const ChatRoom = () => {
         companyName={chatSenderInfo.companyName}
         job={chatSenderInfo.job}
         nickname={chatSenderInfo.nickname}
+        chatRoomId={Number(chatRoomId)}
+        css={HeaderBox}
       />
-      <ChatRoomMain chatData={chatData} />
+      <ChatRoomMain chatData={chatData} css={MainBox} />
       <ChatRoomFooter
         chat={chat}
         setChat={setChat}
         handleSubmit={handleSubmit}
+        css={FooterBox}
       />
     </section>
   );
@@ -140,4 +135,17 @@ const chatRoomStyles = css`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
+`;
+
+const HeaderBox = css`
+  z-index: 999;
+`;
+
+const MainBox = css`
+  z-index: 1;
+`;
+
+const FooterBox = css`
+  z-index: 1;
 `;

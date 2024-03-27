@@ -1,13 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import { theme } from '../../common/styles/theme';
+import { useLocation } from 'react-router-dom';
 import NavBar from '../../common/components/NavBar';
 import ReceivedNungil from '../components/ReceivedNungil';
 import MatchingList from '../components/MatchingList';
 import SendNungil from '../components/SendNungil';
 
 const NungilList = () => {
-  const [selectedBtn, setSelectedBtn] = useState('received');
+  const { state } = useLocation();
+  const [selectedBtn, setSelectedBtn] = useState(
+    localStorage.getItem('selectedBtn') || 'received',
+  );
+
+  useEffect(() => {
+    if (state?.selectedBtn) {
+      setSelectedBtn(state.selectedBtn);
+      localStorage.setItem('selectedBtn', state.selectedBtn);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   let middleContent;
 
@@ -23,8 +35,15 @@ const NungilList = () => {
       break;
   }
 
+  useEffect(() => {
+    if (state?.selectedBtn) {
+      setSelectedBtn(state.selectedBtn);
+    }
+  }, [state]);
+
   const handleClickBtn = (selectedBtn: 'received' | 'matching' | 'sent') => {
     setSelectedBtn(selectedBtn);
+    localStorage.setItem('selectedBtn', selectedBtn);
   };
 
   return (
@@ -53,6 +72,7 @@ const NungilList = () => {
         </button>
       </div>
       <div css={Middle.Wrapper}>{middleContent}</div>
+
       <div css={Navigation}>
         <NavBar />
       </div>
@@ -69,7 +89,6 @@ const Container = css`
   width: 100%;
   height: 100%;
   padding-top: 1.5rem;
-  overflow: auto;
   background: ${theme.colors.white};
 `;
 
@@ -108,11 +127,13 @@ const SelectedNavButton = css`
 const Middle = {
   Wrapper: css`
     display: flex;
-    flex: 1;
+
+    /* flex: 1; */
     flex-direction: column;
     align-items: center;
     justify-content: start;
     width: 100%;
+    height: 100%;
   `,
 };
 
@@ -120,4 +141,6 @@ const Navigation = css`
   position: fixed;
   bottom: 0;
   z-index: 999;
+  width: 100%;
+  max-width: 42.5rem;
 `;

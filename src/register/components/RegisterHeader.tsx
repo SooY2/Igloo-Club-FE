@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArrowLeft } from '../assets/svgs/0_index';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterHeader = ({
   isFirst = false,
@@ -11,11 +12,14 @@ const RegisterHeader = ({
   percent: number;
   onPrev?: () => void;
 }) => {
+  const navigate = useNavigate();
   return (
     <header css={headerStyles}>
       <div css={navStyles}>
         {isFirst ? (
-          <ExitBtn type="button">그만두기</ExitBtn>
+          <ExitBtn type="button" onClick={() => navigate('/login')}>
+            그만두기
+          </ExitBtn>
         ) : (
           <CustomArrowLeft onClick={onPrev} />
         )}
@@ -30,7 +34,7 @@ export default RegisterHeader;
 const headerStyles = css`
   display: flex;
   flex-direction: column;
-  margin-bottom: 5.3rem;
+  margin-bottom: 2.3rem;
 `;
 
 const navStyles = css`

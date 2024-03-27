@@ -20,7 +20,9 @@ const DetailPage = () => {
           <ArrowLeftNav />
         </button>
       </div>
-      <DetailProfile />
+      <div>
+        <DetailProfile />
+      </div>
       <div css={SendBtn}>
         <SendNungilBtn nungilId={nungilId} nickname={nickname} />
       </div>
@@ -35,11 +37,15 @@ const Container = css`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  height: 100%;
   padding-top: 1.5rem;
+  overflow-y: scroll;
 `;
 
 const SendBtn = css`
-  position: sticky;
+  position: fixed;
   bottom: 0;
   z-index: 999;
+  width: 100%;
+  max-width: 42.5rem;
 `;

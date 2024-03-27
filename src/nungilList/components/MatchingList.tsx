@@ -19,8 +19,6 @@ const MatchingList = () => {
         },
       });
 
-      console.log('매칭 내역 : ', res.data.content);
-
       setProfileData(res.data.content);
     } catch (error) {
       console.log(error);
@@ -41,6 +39,7 @@ const MatchingList = () => {
         <ProfileCard
           profileData={profileData}
           ClickProfileCard={ClickProfileBtn}
+          nungilState="matching"
         />
       </div>
     </div>
@@ -50,7 +49,12 @@ const MatchingList = () => {
 export default MatchingList;
 
 const Container = css`
+  position: absolute;
+  top: 6.7rem;
   width: 100%;
+  height: 100%;
+  padding-bottom: 15rem;
+  overflow-y: scroll;
   background: ${theme.colors.white};
 `;
 

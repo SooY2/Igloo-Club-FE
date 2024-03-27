@@ -12,14 +12,13 @@ import { markerInfoType } from '../types/markerInfoTypes';
 interface ScedultPropsTypes {
   onPrev: () => void;
   onNext: () => void;
-  handleScheduleValue: (data: ScheduleTypes) => void;
   registerScheduleValues: ScheduleTypes;
+  percent: number;
 }
 
 const 장소선택 = ({
   onPrev,
   onNext,
-  handleScheduleValue,
   registerScheduleValues,
 }: ScedultPropsTypes) => {
   const [isActive, setIsActive] = useState(false);
@@ -48,13 +47,15 @@ const 장소선택 = ({
     }
   };
 
-  const handleSubmit = () => {
-    if (handleScheduleValue) {
-      handleScheduleValue({
+  const handleSubmit = async () => {
+    try {
+      await instance.patch('api/member/schedule', {
         ...registerScheduleValues,
         markerList: thisValues,
       });
       onNext();
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -81,7 +82,7 @@ const 장소선택 = ({
                     return (
                       <CheckBoxItem
                         key={item.title}
-                        value={item.title}
+                        value={item.value}
                         name="markerList"
                         setValues={setThisValues}
                         values={thisValues}

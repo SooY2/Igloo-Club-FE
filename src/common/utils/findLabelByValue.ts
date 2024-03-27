@@ -11,5 +11,6 @@ export const findLabelByValue = (array: Item[], values: string[]) => {
       const item = array.find((item) => item.value === value);
       return item ? item.label : '';
     })
-    .filter((label) => label !== '');
+    .filter((label) => label !== '')
+    .join(', ');
 };

@@ -1,15 +1,23 @@
+import { useEffect } from 'react';
 import { css } from '@emotion/react';
 import ArrowLeftNav from '../../common/components/ArrowLeftNav';
 import DetailProfile from '../../common/pages/detailprofile';
 import FinishSendNungilBtn from '../components/FinishSendBtn';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const SendDetailPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const ClickArrowLeft = () => {
-    navigate('/nungillist');
+    navigate('/nungillist', {
+      state: { ...location.state, selectedBtn: 'sent' },
+    });
   };
+
+  useEffect(() => {
+    localStorage.setItem('selectedBtn', 'sent');
+  }, []);
 
   return (
     <div css={Container}>
@@ -33,11 +41,14 @@ const Container = css`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  height: 100%;
   padding-top: 1.5rem;
 `;
 
 const SendBtn = css`
-  position: sticky;
+  position: fixed;
   bottom: 0;
   z-index: 999;
+  width: 100%;
+  max-width: 42.5rem;
 `;

@@ -26,7 +26,7 @@ import { findLabelByValue } from '../../common/utils/findLabelByValue';
 import PersonalityDepiction from '../components/PersonalityDepiction';
 import HobbyList from '../components/HobbyList';
 
-const MAXLEN = 100;
+const MAXLEN = 1000;
 
 const 기본프로필입력2 = ({
   onPrev,
@@ -193,6 +193,30 @@ const 기본프로필입력2 = ({
                   gap: '0.9rem',
                 }}
               >
+                <details>
+                  <summary>가이드라인을 보려면 클릭하세요!</summary>
+                  <St.SubTitle
+                    css={{
+                      border: '1px solid rgb(250 114 104)',
+                      borderRadius: '20px',
+                      padding: '1rem',
+                      marginTop: '1rem',
+                      lineHeight: '1.8rem',
+                    }}
+                  >
+                    안녕하세요! 서비스를 개발하는 30대 중반 남성입니다! 현재
+                    광화문에서 근무 중이며 현재 하고 있는 개발 일을 좋아하고
+                    커리어를 쌓기 위해 노력 중입니다. 겨울에는 방어 먹으러 강릉
+                    겨울 바다로 달리는 것을 좋아하고, 여름에는 해 진 뒤의
+                    테라스에서 마시는 시원한 칵테일을 함께 즐길 수 있는 사람이면
+                    좋을 것 같아요. 가을에는 석파정의 붉게 물든 단풍잎으로
+                    가득찬 풍경을 나누고 싶고 그 외에도 함께 새로운 경험을 많이
+                    나누며 추억을 쌓아가고 싶습니다.
+                    <br /> 그런 만남을 오늘 커피 한잔으로 시작해보고 싶네요. 곧
+                    벚꽃도 피는데 함께 벚꽃 보면서 커피한잔 하실 분 편히 연락
+                    주시길 바래요😀
+                  </St.SubTitle>
+                </details>
                 <St.StBasicTextArea
                   placeholder="회원님이 어떤 사람인지 자신만의 언어로 자유롭게 소개해주세요. 자세히 작성할 수록 매칭률이 높아져요! "
                   value={values.description}

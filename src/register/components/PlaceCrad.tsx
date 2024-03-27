@@ -28,6 +28,7 @@ const PlaceCrad = ({
         name="location"
         value={name}
         onChange={() => handleRadioChange(name)}
+        disabled={name === 'PANGYO'}
         checked={checkedValue === name}
       />
       <StContainer>
@@ -89,8 +90,9 @@ const StBtn = styled.div<{ isChecked: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 6.1rem;
+  width: fit-content;
   height: 2.6rem;
+  padding: 0 1rem;
   color: ${({ theme, isChecked }) =>
     isChecked ? theme.colors.primary : theme.colors.gray7};
   background-color: ${({ theme, isChecked }) =>

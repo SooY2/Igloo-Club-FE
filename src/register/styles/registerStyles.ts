@@ -21,6 +21,7 @@ export const articleStyles = css`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
   height: 100%;
   overflow-y: scroll;
 `;
@@ -37,7 +38,7 @@ export const StBtnExplain = styled.p`
 
 export const StBasicTextArea = styled.textarea`
   width: 100%;
-  height: 16.9rem;
+  height: 26.9rem;
   padding: 1.9rem 1.8rem;
   word-break: break-all;
   resize: none;
@@ -49,6 +50,7 @@ export const StBasicTextArea = styled.textarea`
   &::placeholder {
     line-height: 2rem;
     color: ${({ theme }) => theme.colors.gray5};
+    ${({ theme }) => theme.fonts.body2r};
   }
 `;
 

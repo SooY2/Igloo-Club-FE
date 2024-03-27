@@ -15,9 +15,8 @@ const MyProfileCard = ({
   nickname,
   description,
 }: ChatRoomHeaderProps) => {
-  console.log(animalFace);
   return (
-    <StHeader>
+    <StHeader animalFace={animalFace}>
       <span css={senderInfoStyles}>
         <AnimalProfile animalFace={animalFace} />
         <div css={senderProfileStyles}>
@@ -32,7 +31,7 @@ const MyProfileCard = ({
 
 export default MyProfileCard;
 
-const StHeader = styled.header`
+const StHeader = styled.header<{ animalFace: string }>`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -40,7 +39,26 @@ const StHeader = styled.header`
   padding: 2.4rem 2.3rem 2.9rem;
   margin: 2rem 2.3rem 0;
   color: ${({ theme }) => theme.colors.white};
-  background: linear-gradient(116deg, #ff6264 0%, #ffa490 96.79%);
+  background: ${(props) =>
+    props.animalFace === 'FOX'
+      ? '#FF9052'
+      : props.animalFace === 'DOG'
+        ? '#E5A582'
+        : props.animalFace === 'RABBIT'
+          ? '#F27D72'
+          : props.animalFace === 'DINO'
+            ? '#66CB9B'
+            : props.animalFace === 'DEER'
+              ? '#F3AB72'
+              : props.animalFace === 'WOLF'
+                ? '#939DF9'
+                : props.animalFace === 'HORSE'
+                  ? '#FF9E88'
+                  : props.animalFace === 'CAT'
+                    ? '#FFC159'
+                    : props.animalFace === 'BEAR'
+                      ? '#C48A86'
+                      : ''};
   border-radius: 15px;
   box-shadow:
     0 8px 16px 0 rgb(0 0 0 / 8%),
@@ -52,6 +70,7 @@ const senderInfoStyles = css`
   display: flex;
   gap: 1rem;
   align-items: center;
+  padding-bottom: 1rem;
 `;
 
 const senderProfileStyles = css`
@@ -61,16 +80,16 @@ const senderProfileStyles = css`
 `;
 
 const StSenderName = styled.h1`
-  color: ${({ theme }) => theme.colors.gray1};
+  color: ${({ theme }) => theme.colors.white};
   ${({ theme }) => theme.fonts.body1m};
 `;
 
 const StSenderJob = styled.p`
-  color: ${({ theme }) => theme.colors.gray3};
+  color: ${({ theme }) => theme.colors.white};
   ${({ theme }) => theme.fonts.body3m};
 `;
 
 const StDescription = styled.div`
-  color: ${({ theme }) => theme.colors.gray2};
+  color: ${({ theme }) => theme.colors.white};
   ${({ theme }) => theme.fonts.body1r};
 `;

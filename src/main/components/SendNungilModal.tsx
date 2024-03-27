@@ -23,7 +23,6 @@ const SendNungilModal = ({
     '눈길 보내기를 완료했어요!\n 당신의 인연과 빠르게 매칭해드릴게요 ⚡️';
 
   const ClickSendBtn = async () => {
-    console.log(nungilId);
     try {
       await instance.post('/api/nungil/send?', null, {
         params: {
@@ -52,7 +51,6 @@ const SendNungilModal = ({
           <Xicon />
         </StXBtn>
         <StModalTitle>{title}</StModalTitle>
-        <StModalSubTitle>보낸 눈길은 상대방의 수락 후 매칭돼요</StModalSubTitle>
         {isApiSuccess ? (
           <StFinishBtnBox>
             <StFinishBtn type="button" onClick={closeModal}>
@@ -63,6 +61,9 @@ const SendNungilModal = ({
           </StFinishBtnBox>
         ) : (
           <StAcceptBtnBox>
+            <StModalSubTitle>
+              보낸 눈길은 상대방의 수락 후 매칭돼요
+            </StModalSubTitle>
             <StAcceptBtn type="button">
               <Check />
               <StAcceptMent onClick={ClickSendBtn}>
@@ -123,6 +124,8 @@ const StModalTitle = styled.span`
 
 const StModalSubTitle = styled.span`
   display: flex;
+  flex-direction: row;
+  justify-content: center;
   padding-top: 1.5rem;
   color: ${({ theme }) => theme.colors.gray7};
   ${({ theme }) => theme.fonts.body1m};

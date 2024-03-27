@@ -12,6 +12,7 @@ interface ScedultPropsTypes {
   onNext: () => void;
   handleScheduleValue: (data: ScheduleTypes) => void;
   registerScheduleValues: ScheduleTypes;
+  percent: number;
 }
 
 const 지역선택 = ({
@@ -19,6 +20,7 @@ const 지역선택 = ({
   onNext,
   handleScheduleValue,
   registerScheduleValues,
+  percent,
 }: ScedultPropsTypes) => {
   const [isActive, setIsActive] = useState(false);
   const [selectPlace, setSelectPlace] = useState('');
@@ -41,7 +43,7 @@ const 지역선택 = ({
 
   return (
     <>
-      <RegisterHeader percent={55} onPrev={onPrev} />
+      <RegisterHeader percent={percent} onPrev={onPrev} />
       <article css={St.articleStyles}>
         <section css={St.sectionStyles}>
           <TitleBox>
@@ -70,9 +72,7 @@ const 지역선택 = ({
             gap: '1.7rem',
           }}
         >
-          <St.StBtnExplain>
-            현재는 광화문과 판교, 두 곳만 지원해요
-          </St.StBtnExplain>
+          <St.StBtnExplain>현재는 광화문만 지원해요</St.StBtnExplain>
           <RegisterBtn
             isActive={isActive}
             content="다음으로"

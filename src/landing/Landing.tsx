@@ -1,36 +1,30 @@
 import { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { logo } from '../common/assets/images/0_index';
+import { useLocation, Outlet, useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
-import styled from '@emotion/styled';
 
 const Landing = () => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
-      const STEP = localStorage.getItem('STEP');
+    const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
+    const STEP = localStorage.getItem('STEP');
+    console.log(pathname);
 
-      if (!ACCESS_TOKEN || !STEP) {
-        navigate('/login');
-      } else if (STEP !== '가입완료') {
-        navigate('/register');
-      } else if (location.pathname !== '/') {
-        navigate(location.pathname);
-      } else {
-        navigate('/main-page');
-      }
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, [navigate, location.pathname]);
+    if (!ACCESS_TOKEN || !STEP) {
+      navigate('/login', { state: pathname });
+    } else if (STEP !== '가입완료') {
+      navigate('/register');
+    } else if (pathname !== '/') {
+      navigate(pathname);
+    } else {
+      navigate('/main-page');
+    }
+  }, []);
 
   return (
     <div css={landingStyles}>
-      <StImg src={logo} alt="눈길" />
-      <StTitle>눈길, 인연을 만나보세요</StTitle>
+      <Outlet />
     </div>
   );
 };
@@ -38,18 +32,7 @@ const Landing = () => {
 export default Landing;
 
 const landingStyles = css`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  height: 100%;
-`;
-const StImg = styled.img`
-  width: 10rem;
-`;
-const StTitle = styled.h1`
-  color: ${({ theme }) => theme.colors.primary};
-  ${({ theme }) => theme.fonts.subtitle2b};
+  height: calc(var(--vh, 1vh) * 100);
+  overflow: hidden;
 `;

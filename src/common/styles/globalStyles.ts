@@ -10,6 +10,22 @@ const globalStyles = css`
     margin: 0;
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
+    font-family:
+      'Pretendard Variable',
+      Pretendard,
+      -apple-system,
+      BlinkMacSystemFont,
+      system-ui,
+      Roboto,
+      'Helvetica Neue',
+      'Segoe UI',
+      'Apple SD Gothic Neo',
+      'Noto Sans KR',
+      'Malgun Gothic',
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+      'Segoe UI Symbol',
+      sans-serif;
 
     &::-webkit-scrollbar {
       display: none;
@@ -51,39 +67,27 @@ const globalStyles = css`
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
     width: 100vw;
     max-width: 425px;
-    height: calc(var(--vh, 1vh) * 100);
-    min-height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   select,
   input,
   button,
   textarea {
-    font-family:
-      'Pretendard Variable',
-      Pretendard,
-      -apple-system,
-      BlinkMacSystemFont,
-      system-ui,
-      Roboto,
-      'Helvetica Neue',
-      'Segoe UI',
-      'Apple SD Gothic Neo',
-      'Noto Sans KR',
-      'Malgun Gothic',
-      'Apple Color Emoji',
-      'Segoe UI Emoji',
-      'Segoe UI Symbol',
-      sans-serif;
     background-color: transparent;
     border: 0;
     border-radius: 0;
     outline: 0;
+  }
+
+  input[type='text'],
+  input[type='number'],
+  textarea {
+    font-size: 1.6rem !important;
   }
 
   span {

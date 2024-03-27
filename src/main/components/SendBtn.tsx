@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { css } from '@emotion/react';
 import { theme } from '../../common/styles/theme';
+import CountDown from './CountDown';
 import { Lightning } from '../assets/svgs/index';
 import SendNungilModal from './SendNungilModal';
 
@@ -21,13 +22,16 @@ const SendNungilBtn = ({
   return (
     <div css={Container}>
       {isSent ? (
-        <button type="button" onClick={handleClick} css={SendBtn}>
-          <Lightning />
-          눈길 보내기
-        </button>
-      ) : (
         <button type="button" css={FinishBtn}>
           이미 상대방에게 눈길을 보냈어요
+        </button>
+      ) : (
+        <button type="button" onClick={handleClick} css={SendBtn}>
+          <Lightning />
+          <span css={countdown}>
+            <CountDown />
+          </span>
+          안에 눈길 보내기
         </button>
       )}
       {isModalOpen && (
@@ -49,8 +53,9 @@ const Container = css`
   flex-direction: row;
   align-items: center;
   width: 100%;
+  max-width: 42.5rem;
   height: 9rem;
-  padding: 0 2.2rem;
+  padding: 0 2rem;
   background: ${theme.colors.white};
   border-top: 1px solid #e3e3e3;
 `;
@@ -58,12 +63,11 @@ const Container = css`
 const SendBtn = css`
   display: flex;
   flex-direction: row;
-  gap: 0.9rem;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 5.5rem;
-  padding: 1.5rem 10rem;
+  padding: 1.5rem 5rem;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -76,6 +80,10 @@ const SendBtn = css`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const countdown = css`
+  padding: 0.8rem 0.6rem;
 `;
 
 const FinishBtn = css`

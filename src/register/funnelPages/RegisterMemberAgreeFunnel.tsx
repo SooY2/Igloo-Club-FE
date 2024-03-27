@@ -5,12 +5,8 @@ import * as St from '../styles/registerStyles';
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import RegisterBtn from '../components/RegisterBtn';
-
-const 약관동의리스트 = [
-  '서비스 이용 약관 (필수)',
-  '개인정보 수집 및 이용 동의 (필수)',
-  '마케팅 정보 수신 동의 (선택)',
-];
+import { 약관동의리스트 } from '../../common/constants/memberAgreeConstants';
+import instance from '../../common/apis/axiosInstanse';
 
 /** 체크박스 컴포넌트입니다 */
 const Check = ({
@@ -28,7 +24,13 @@ const Check = ({
 };
 
 /** ✔️ 약관동의 뷰 컴포넌트 입니다 */
-const 약관동의 = ({ onNext }: { onNext: () => void }) => {
+const 약관동의 = ({
+  onNext,
+  percent,
+}: {
+  onNext: () => void;
+  percent: number;
+}) => {
   const [allAgree, setAllAgree] = useState(false);
   const [agree, setAgree] = useState<boolean[]>([false, false, false]);
   const [isActive, setIsActive] = useState(false);
@@ -57,13 +59,14 @@ const 약관동의 = ({ onNext }: { onNext: () => void }) => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    await instance.patch(`api/member/consent`, { agreeMarketing: agree[2] });
     onNext();
   };
 
   return (
     <>
-      <RegisterHeader isFirst={true} percent={15} />
+      <RegisterHeader isFirst={true} percent={percent} />
       <article css={St.articleStyles}>
         <section>
           <St.TitleBox>
@@ -84,15 +87,17 @@ const 약관동의 = ({ onNext }: { onNext: () => void }) => {
             <StListBox>
               {약관동의리스트.map((item, idx) => {
                 return (
-                  <li key={item} css={listStyles}>
+                  <li key={item.title} css={listStyles}>
                     <StListTitle>
                       <Check
                         isAgree={agree[idx]}
                         onChange={() => setAgreeAtIndex(idx, !agree[idx])}
                       />
-                      <p>{item}</p>
+                      <p>{`${item.title} (${item.option})`}</p>
                     </StListTitle>
-                    <ArrowRight />
+                    <ArrowRight
+                      onClick={() => window.open(item.url, '_blank')}
+                    />
                   </li>
                 );
               })}

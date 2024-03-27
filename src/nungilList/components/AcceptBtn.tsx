@@ -1,18 +1,19 @@
 import { css } from '@emotion/react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import instance from '../../common/apis/axiosInstanse';
+import CountDown from '../../main/components/CountDown';
 import { theme } from '../../common/styles/theme';
 
 const AcceptNungilBtn = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  console.log('send :', state.nungilId);
-
   const handleAcceptNungil = async () => {
     try {
       await instance.patch(`/api/nungil/match?nungilId=${state.nungilId}`);
-      console.log('눈길 수락하기 완료');
+      navigate(`/finishmatch/${state.nungilId}`, {
+        state: { nungilId: state.nungilId },
+      });
     } catch (error) {
       console.log(error);
     }
@@ -20,15 +21,15 @@ const AcceptNungilBtn = () => {
 
   const ClickAcceptBtn = () => {
     handleAcceptNungil();
-    navigate(`/finishmatch/${state.nungilId}`, {
-      state: { nungilId: state.nungilId },
-    });
   };
 
   return (
     <div css={Container}>
       <button type="button" onClick={ClickAcceptBtn} css={SendBtn}>
-        눈길 수락하기
+        <span css={countdown}>
+          <CountDown />
+        </span>
+        안에 눈길 수락하기
       </button>
     </div>
   );
@@ -41,10 +42,15 @@ const Container = css`
   flex-direction: row;
   align-items: center;
   width: 100%;
+  max-width: 42.5rem;
   height: 9rem;
-  padding: 0 2.2rem;
+  padding: 0 2rem;
   background: ${theme.colors.white};
   border-top: 1px solid #e3e3e3;
+`;
+
+const countdown = css`
+  padding: 0.8rem 0.6rem;
 `;
 
 const SendBtn = css`
@@ -54,9 +60,10 @@ const SendBtn = css`
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 42.5rem;
   height: 5.5rem;
-  padding: 1.5rem 10rem;
-  font-size: 14px;
+  padding: 1.5rem 8rem;
+  font-size: 1.4rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;

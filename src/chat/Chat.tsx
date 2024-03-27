@@ -15,7 +15,6 @@ const Chat = () => {
     try {
       const { data } = await instance.get('api/chat/room');
       setChatList(data.content);
-      console.log(data.content);
     } catch (err) {
       console.log(err);
     }
@@ -31,31 +30,33 @@ const Chat = () => {
           </StHeaderExplain>
         </header>
         <main css={Middle.Wrapper}>
-          {chatList ? (
-            <>
-              {chatList.map((item, idx) => {
-                const {
-                  animalFace,
-                  senderNickName,
-                  content,
-                  createdAt,
-                  chatRoomId,
-                } = item;
-                return (
-                  <ChatRoomBox
-                    key={senderNickName + idx}
-                    animalFace={animalFace}
-                    senderNickName={senderNickName}
-                    content={content}
-                    createdAt={createdAt}
-                    chatRoomId={chatRoomId}
-                  />
-                );
-              })}
-            </>
-          ) : (
-            <p>채팅 내역이 없습니다</p>
-          )}
+          <div css={Middle.Box}>
+            {chatList.length > 0 ? (
+              <>
+                {chatList.map((item, idx) => {
+                  const {
+                    animalFace,
+                    senderNickName,
+                    content,
+                    createdAt,
+                    chatRoomId,
+                  } = item;
+                  return (
+                    <ChatRoomBox
+                      key={senderNickName + idx}
+                      animalFace={animalFace}
+                      senderNickName={senderNickName}
+                      content={content}
+                      createdAt={createdAt}
+                      chatRoomId={chatRoomId}
+                    />
+                  );
+                })}
+              </>
+            ) : (
+              <p>채팅 내역이 없습니다</p>
+            )}
+          </div>
         </main>
       </section>
       <footer css={Navigation}>
@@ -72,7 +73,7 @@ const Container = css`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 2.2rem 1.6rem 0;
+  padding: 2.2rem 1.6rem;
   overflow: auto;
 `;
 
@@ -89,6 +90,7 @@ const Top = {
 const StHeaderTitle = styled.h1`
   ${({ theme }) => theme.fonts.subtitle2b};
 
+  margin-top: 1rem;
   margin-left: 1.3rem;
 `;
 
@@ -106,8 +108,11 @@ const StHeaderExplain = styled.div`
 
 const Middle = {
   Wrapper: css`
+    padding-bottom: 5rem;
+    overflow-y: scroll;
+  `,
+  Box: css`
     display: flex;
-    flex: 1;
     flex-direction: column;
     gap: 1rem;
     align-items: center;
