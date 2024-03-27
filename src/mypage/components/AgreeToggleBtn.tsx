@@ -2,22 +2,24 @@ import { useState, useEffect } from 'react';
 import instance from '../../common/apis/axiosInstanse';
 import styled from '@emotion/styled';
 
-interface ToggleBtnProps {
-  disableCompany: boolean;
-}
-
-const ToggleBtn = ({ disableCompany }: ToggleBtnProps) => {
-  const [isOn, setIsOn] = useState<boolean>(disableCompany);
+const AgreeToggleBtn = () => {
+  const [isOn, setIsOn] = useState<boolean | undefined>();
 
   useEffect(() => {
-    setIsOn(disableCompany);
-  }, [disableCompany]);
+    getInfo();
+  }, []);
 
-  const handleToggle = async () => {
+  const getInfo = async () => {
+    const { data } = await instance.get(`api/member/consent`);
+    setIsOn(data.agreeMarketing);
+  };
+
+  const handleToggle = async (event: React.MouseEvent) => {
+    event.stopPropagation();
     setIsOn((prevIsOn) => !prevIsOn);
     try {
-      await instance.patch('/api/member/company/toggle', {
-        disableCompany: !isOn,
+      await instance.patch('api/member/consent', {
+        agreeMarketing: !isOn,
       });
     } catch (error) {
       console.log(error);
@@ -26,21 +28,25 @@ const ToggleBtn = ({ disableCompany }: ToggleBtnProps) => {
 
   return (
     <>
-      <StToggleContainer onClick={handleToggle}>
-        <StToggleWrapper isOn={isOn} />
-        <StToggleCircle isOn={isOn}>
-          {isOn ? (
-            <StToggleState>ON</StToggleState>
-          ) : (
-            <StToggleState>OFF</StToggleState>
-          )}
-        </StToggleCircle>
-      </StToggleContainer>
+      {isOn !== undefined ? (
+        <StToggleContainer onClick={handleToggle}>
+          <StToggleWrapper isOn={isOn} />
+          <StToggleCircle isOn={isOn}>
+            {isOn ? (
+              <StToggleState>ON</StToggleState>
+            ) : (
+              <StToggleState>OFF</StToggleState>
+            )}
+          </StToggleCircle>
+        </StToggleContainer>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
 
-export default ToggleBtn;
+export default AgreeToggleBtn;
 
 const StToggleContainer = styled.div`
   position: absolute;
