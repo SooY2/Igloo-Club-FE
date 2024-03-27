@@ -6,6 +6,7 @@ import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import RegisterBtn from '../components/RegisterBtn';
 import { 약관동의리스트 } from '../../common/constants/memberAgreeConstants';
+import instance from '../../common/apis/axiosInstanse';
 
 /** 체크박스 컴포넌트입니다 */
 const Check = ({
@@ -58,7 +59,8 @@ const 약관동의 = ({
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    await instance.patch(`api/member/consent`, { agreeMarketing: agree[2] });
     onNext();
   };
 
