@@ -3,29 +3,30 @@ import { ArrowLeft } from '../assets/svgs/0_index';
 import * as St from '../styles/registerStyles';
 import RegisterBtn from './RegisterBtn';
 import { FACEDEPICTION } from '../constants/profileConstants';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import CheckBoxItem from './CheckBoxItem';
+import { ExtendedNavTypesProps } from '../types/navTypes';
 
-interface FaceDepictionListProps {
+interface FaceDepictionListProps extends ExtendedNavTypesProps {
   values: string[];
   handleValues: (value: string | string[], name?: string) => void;
-  setShowFaceDepiction: Dispatch<SetStateAction<boolean>>;
 }
 
 const FaceDepictionList = ({
+  onNext,
+  onPrev,
   values,
   handleValues,
-  setShowFaceDepiction,
 }: FaceDepictionListProps) => {
   const [thisValues, setThisValues] = useState<string[]>(values);
 
   const handleSubmit = () => {
     handleValues(thisValues, 'faceDepictionList');
-    setShowFaceDepiction(false);
+    onNext();
   };
   return (
     <StBackgroud>
-      <ArrowLeft onClick={() => setShowFaceDepiction(false)} />
+      <ArrowLeft onClick={() => onPrev()} />
       <StArticleStyles>
         <section css={St.sectionStyles}>
           <St.TitleBox>

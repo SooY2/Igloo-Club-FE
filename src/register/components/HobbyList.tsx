@@ -3,26 +3,31 @@ import { ArrowLeft } from '../assets/svgs/0_index';
 import * as St from '../styles/registerStyles';
 import RegisterBtn from './RegisterBtn';
 import { HOBBY } from '../constants/profileConstants';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import CheckBoxItem from './CheckBoxItem';
+import { ExtendedNavTypesProps } from '../types/navTypes';
 
-interface HobbyListProps {
+interface HobbyListProps extends ExtendedNavTypesProps {
   values: string[];
   handleValues: (value: string | string[], name?: string) => void;
-  setShowHobby: Dispatch<SetStateAction<boolean>>;
 }
 
-const HobbyList = ({ values, handleValues, setShowHobby }: HobbyListProps) => {
+const HobbyList = ({
+  values,
+  handleValues,
+  onNext,
+  onPrev,
+}: HobbyListProps) => {
   const [thisValues, setThisValues] = useState<string[]>(values);
 
   const handleSubmit = () => {
     handleValues(thisValues, 'hobbyList');
-    setShowHobby(false);
+    onNext();
   };
 
   return (
     <StBackgroud>
-      <ArrowLeft onClick={() => setShowHobby(false)} />
+      <ArrowLeft onClick={() => onPrev()} />
       <StArticleStyles>
         <section css={St.sectionStyles}>
           <St.TitleBox>

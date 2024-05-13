@@ -91,6 +91,7 @@ const 전화번호인증 = ({ onPrev, onNext, phoneNum }: PhoneNumProps) => {
           isActive={isActive}
           content="다음으로"
           onClick={handleSubmit}
+          subContent="매칭이 성사되면 문자메시지로 알려드려요. 꼭 확인해 주세요."
         />
       </article>
     </>

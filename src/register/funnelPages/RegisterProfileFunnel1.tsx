@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import RegisterBtn from '../components/RegisterBtn';
 import RegisterHeader from '../components/RegisterHeader';
 import * as St from '../styles/registerStyles';
@@ -8,10 +8,11 @@ import styled from '@emotion/styled';
 import { ExtendedNavTypesProps } from '../types/navTypes';
 import { css } from '@emotion/react';
 import RadioItem from '../components/RadioItem';
-import { ANIMALIMAGES, MBTI, RELIGION } from '../constants/profileConstants';
+import { ANIMALIMAGES, MBTI } from '../constants/profileConstants';
 import Radio from '../components/Radio';
 import { Registertypes } from '../types/registerTypes';
-
+import { limitMaxLength } from '../../common/utils/limitMaxLength';
+const MAXLEN = 50;
 const 기본프로필입력1 = ({
   onPrev,
   onNext,
@@ -26,6 +27,7 @@ const 기본프로필입력1 = ({
     mbti4: registerValues.mbti[3],
   });
   const [values, setValues] = useState<Registertypes>(registerValues);
+  const [descriptionCnt, setDescriptionCnt] = useState(0);
 
   useEffect(() => {
     const { animalFace, job, height, mbti, marriageState, religion } = values;
@@ -55,6 +57,19 @@ const 기본프로필입력1 = ({
       [name]: value,
     }));
   };
+  //소개글 핸들러
+  const handleDescription = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    if (e.target.value === '') {
+      setDescriptionCnt(0);
+      handleValues('', 'description');
+    } //value가 없을 때 0으로 글자 수 세지도록 처리
+
+    const lengthCount = limitMaxLength(e, MAXLEN);
+
+    if (!lengthCount) return;
+    handleValues(e.target.value, 'description');
+    setDescriptionCnt(lengthCount);
+  };
 
   //다음으로
   const handleSubmit = () => {
@@ -70,7 +85,7 @@ const 기본프로필입력1 = ({
         <section css={St.sectionStyles}>
           <StTitleBox>
             <St.Title>당신은 어떤 사람인가요?</St.Title>
-            <St.Title>회원님의 기본 프로필을 채워주세요</St.Title>
+            <St.Title>기본 프로필을 채워주세요</St.Title>
           </StTitleBox>
           <div css={subTitleBoxStyles}>
             <St.SubTitle>
@@ -103,23 +118,13 @@ const 기본프로필입력1 = ({
                 })}
               </div>
             </RegisterBasicInput>
-            <RegisterBasicInput label="직무">
+            <RegisterBasicInput label="학과">
               <StBasicInput
                 type="text"
-                placeholder="직장 내에서의 직무를 입력해 주세요."
+                placeholder="현재 속해있는 학과명을 입력해주세요"
                 value={values.job}
                 onChange={(e) => {
                   handleValues(e.target.value, 'job');
-                }}
-              />
-            </RegisterBasicInput>
-            <RegisterBasicInput label="키">
-              <StBasicInput
-                type="number"
-                placeholder="자신의 대략적인 키(cm)를 입력해 주세요."
-                value={values.height}
-                onChange={(e) => {
-                  handleValues(Number(e.target.value), 'height');
                 }}
               />
             </RegisterBasicInput>
@@ -141,54 +146,46 @@ const 기본프로필입력1 = ({
                 })}
               </div>
             </RegisterBasicInput>
-            <RegisterBasicInput label="결혼 상태">
-              <Radio
-                name="marriageState"
-                value1="SINGLE"
-                value2="AGAIN_SINGLE"
-                label1="미혼(돌싱 아님)"
-                label2="돌싱"
-                onRadioChange={handleValues}
-                checkedValue={values.marriageState}
-              />
-            </RegisterBasicInput>
-            <RegisterBasicInput label="종교">
-              <div css={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem' }}>
-                {RELIGION.map((item) => {
-                  const { label, value } = item;
-                  return (
-                    <RadioItem
-                      key={value}
-                      value={value}
-                      label={label}
-                      name="religion"
-                      onRadioChange={handleValues}
-                      profile={true}
-                      checkedValue={values.religion}
-                    />
-                  );
-                })}
+            <RegisterBasicInput label="소개글">
+              <div
+                css={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.9rem',
+                }}
+              >
+                <details>
+                  <summary>가이드라인을 보려면 클릭하세요!</summary>
+                  <St.SubTitle
+                    css={{
+                      border: '1px solid rgb(250 114 104)',
+                      borderRadius: '20px',
+                      padding: '1rem',
+                      marginTop: '1rem',
+                      lineHeight: '1.8rem',
+                    }}
+                  >
+                    마음만은 새내기인 21학번입니다! 공강 때 같이 축제 부스
+                    구경하실 분!!~
+                  </St.SubTitle>
+                </details>
+                <St.StBasicTextArea
+                  placeholder="회원님이 어떤 사람인지 간결하고 임팩트있게 작성해주세요 "
+                  value={values.description}
+                  onChange={handleDescription}
+                />
+                <St.StBasicTextCnt>
+                  {descriptionCnt}/{MAXLEN}
+                </St.StBasicTextCnt>
               </div>
             </RegisterBasicInput>
           </div>
         </section>
-        <div
-          css={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1.7rem',
-          }}
-        >
-          <St.StBtnExplain>
-            프로필 응답 내역은 언제든지 마이페이지에서 변경 가능해요
-          </St.StBtnExplain>
-          <RegisterBtn
-            isActive={isActive}
-            content="다음으로"
-            onClick={handleSubmit}
-          />
-        </div>
+        <RegisterBtn
+          isActive={isActive}
+          content="다음으로"
+          onClick={handleSubmit}
+        />
       </article>
     </>
   );

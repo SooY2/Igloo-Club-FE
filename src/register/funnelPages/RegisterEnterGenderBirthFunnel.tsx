@@ -42,7 +42,7 @@ const 성별생년월일 = ({
       <article css={St.articleStyles}>
         <section css={St.sectionStyles}>
           <TitleBox>
-            <St.Title>소개팅 서비스의 필수 정보!</St.Title>
+            <St.Title>네트워킹의 필수 정보!</St.Title>
             <St.Title>성별과 생년월일을 입력해 주세요</St.Title>
           </TitleBox>
           <div
@@ -62,7 +62,10 @@ const 성별생년월일 = ({
                 checkedValue={gender}
               />
             </RegisterBasicInput>
-            <RegisterBasicInput label="생년월일">
+            <RegisterBasicInput
+              label="생년월일"
+              explain="생년월일을 정확히 입력하지 않으면 추후 서비스 이용에 문제가 생길 수 있어요. 정확하게 입력해주세요"
+            >
               <StBasicInput
                 type="text"
                 placeholder="생년월일을 숫자만 차례대로 입력하세요  예) 20020506"
