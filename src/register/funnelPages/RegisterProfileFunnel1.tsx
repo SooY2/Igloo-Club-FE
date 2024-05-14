@@ -30,9 +30,8 @@ const 기본프로필입력1 = ({
   const [descriptionCnt, setDescriptionCnt] = useState(0);
 
   useEffect(() => {
-    const { animalFace, job, height, mbti, marriageState, religion } = values;
-    if (animalFace && job && height && mbti && marriageState && religion)
-      setIsActive(true);
+    const { animalFace, job, mbti, description } = values;
+    if (animalFace && job && mbti && description) setIsActive(true);
     else setIsActive(false);
   }, [values]);
 
@@ -73,7 +72,7 @@ const 기본프로필입력1 = ({
 
   //다음으로
   const handleSubmit = () => {
-    if (!handleRegisterValue || !values.height) return;
+    if (!handleRegisterValue) return;
     handleRegisterValue(values);
     onNext();
   };

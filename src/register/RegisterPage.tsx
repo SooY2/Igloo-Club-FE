@@ -125,7 +125,7 @@ const Register = () => {
           <전화번호입력
             onNext={() => setStep('전화번호인증')}
             setPhoneNum={setPhoneNum}
-            percent={10}
+            percent={20}
           />
         </Funnel.Step>
         <Funnel.Step name="전화번호인증">
@@ -136,7 +136,7 @@ const Register = () => {
               localStorage.setItem('STEP', '회사이메일입력');
             }}
             phoneNum={phoneNum}
-            percent={20}
+            percent={30}
           />
         </Funnel.Step>
         <Funnel.Step name="닉네임입력">
@@ -145,7 +145,7 @@ const Register = () => {
             onNext={() => setStep('성별생년월일')}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
-            percent={43}
+            percent={40}
           />
         </Funnel.Step>
         <Funnel.Step name="성별생년월일">
@@ -174,7 +174,7 @@ const Register = () => {
             onNext={() => setStep('PersonalityDepiction')}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
-            percent={60}
+            percent={70}
           />
         </Funnel.Step>
         <Funnel.Step name="PersonalityDepiction">
@@ -185,7 +185,7 @@ const Register = () => {
             onNext={() => setStep('HobbyList')}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
-            percent={60}
+            percent={80}
           />
         </Funnel.Step>
         <Funnel.Step name="HobbyList">
@@ -196,7 +196,7 @@ const Register = () => {
             onNext={() => setStep('시간선택')}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
-            percent={60}
+            percent={90}
           />
         </Funnel.Step>
         <Funnel.Step name="시간선택">
