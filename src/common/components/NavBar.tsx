@@ -33,13 +33,15 @@ const NavBar = ({
   };
 
   const handleNavButtonClick = (path: string, state?: StateType) => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('ACCESS_TOKEN');
     if (!accessToken) {
       setIsLoginModalOpen(true);
     } else {
       navigate(path, { state });
     }
   };
+
+  //
 
   return (
     <div css={Container}>
@@ -104,7 +106,7 @@ const Container = css`
   width: 100%;
   max-width: 42.5rem;
   height: 6.2rem;
-  padding: 0 3rem;
+  padding: 3rem;
   background-color: ${theme.colors.white};
 `;
 
