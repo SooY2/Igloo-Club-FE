@@ -6,6 +6,8 @@ import { HOBBY } from '../constants/profileConstants';
 import { useState } from 'react';
 import CheckBoxItem from './CheckBoxItem';
 import { ExtendedNavTypesProps } from '../types/navTypes';
+import { Registertypes } from '../types/registerTypes';
+import instance from '../../common/apis/axiosInstanse';
 
 interface HobbyListProps extends ExtendedNavTypesProps {
   values: string[];
@@ -14,15 +16,33 @@ interface HobbyListProps extends ExtendedNavTypesProps {
 
 const HobbyList = ({
   values,
-  handleValues,
   onNext,
   onPrev,
+  registerValues,
 }: HobbyListProps) => {
   const [thisValues, setThisValues] = useState<string[]>(values);
+  const [thisRegisterValues] = useState<Registertypes>(registerValues);
 
   const handleSubmit = () => {
-    handleValues(thisValues, 'hobbyList');
+    const updatedRegisterValues = {
+      ...thisRegisterValues,
+      hobbyList: thisValues,
+    };
+    // 상태를 업데이트합니다.
+    console.log(updatedRegisterValues);
+    postSubmit(updatedRegisterValues);
+
     onNext();
+  };
+
+  //데이터 보내기
+  const postSubmit = async (value: Registertypes) => {
+    console.log(value);
+    try {
+      await instance.patch('/api/member', value);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

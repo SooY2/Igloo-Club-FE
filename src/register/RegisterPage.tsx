@@ -83,7 +83,6 @@ const Register = () => {
     faceDepictionList: [],
     personalityDepictionList: [],
     description: '',
-    markerList: [],
     hobbyList: [],
     disableCompany: false,
   });
@@ -193,7 +192,9 @@ const Register = () => {
             values={registerValues.hobbyList}
             handleValues={handleValues}
             onPrev={() => setStep('PersonalityDepiction')}
-            onNext={() => setStep('시간선택')}
+            onNext={() => {
+              setStep('시간선택');
+            }}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
             percent={90}
