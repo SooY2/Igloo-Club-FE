@@ -47,7 +47,7 @@ const MainPage = () => {
 
   const ClickProfileBtn = (nungilId: number, nickname: string) => {
     const accessToken = localStorage.getItem('ACCESS_TOKEN');
-    if (accessToken) {
+    if (!accessToken) {
       setIsLoginModalOpen(true);
     } else {
       navigate(`/detailpage/${nungilId}`, { state: { nungilId, nickname } });
