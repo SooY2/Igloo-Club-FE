@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { theme } from '../../common/styles/theme';
 import NavBar from '../../common/components/NavBar';
 import instance from '../../common/apis/axiosInstanse';
-import ToggleBtn from '../components/ToggleBtn';
+// import ToggleBtn from '../components/ToggleBtn';
 import { useEffect, useState } from 'react';
 import { Registertypes } from '../../register/types/registerTypes';
 import MyProfileCard from '../components/MyProfileCard';
 import { 약관동의리스트 } from '../../common/constants/memberAgreeConstants';
-import AgreeToggleBtn from '../components/AgreeToggleBtn';
+// import AgreeToggleBtn from '../components/AgreeToggleBtn';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -67,14 +67,14 @@ const MyPage = () => {
           <span>프로필 수정</span>
           <button type="button" onClick={ClickEditBtn}></button>
         </button>
-        <div css={Top.TopStyle}>
+        {/* <div css={Top.TopStyle}>
           <span>회사 사람 만나지 않기</span>
           <ToggleBtn disableCompany={values.disableCompany} />
         </div>
         <div css={Top.TopStyleBottom}>
           <span>마케팅 정보 수신 동의 켜기</span>
           <AgreeToggleBtn />
-        </div>
+        </div> */}
       </div>
       <div css={Middle.Wrapper}>
         {약관동의리스트.map((item) => {
@@ -89,7 +89,7 @@ const MyPage = () => {
             </button>
           );
         })}
-        <button
+        {/* <button
           type="button"
           onClick={() =>
             window.open('https://forms.gle/kc8d9co81TyUtCgM9', '_blank')
@@ -97,7 +97,7 @@ const MyPage = () => {
           css={Middle.MiddleStyle}
         >
           오류 사항 제보하기
-        </button>
+        </button> */}
       </div>
       <div css={Bottom.Wrapper}></div>
       <div css={Navigation}>
@@ -139,9 +139,9 @@ const Top = {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
-    padding-top: 3rem;
-    padding-right: 2.7rem;
-    padding-left: 2.7rem;
+    padding: 3rem 0;
+    margin: 0 2.7rem;
+    border-bottom: 1px solid #efefef;
   `,
 
   TopStyle: css`
