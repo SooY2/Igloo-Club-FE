@@ -39,13 +39,16 @@ const MainPage = () => {
 
     try {
       console.log({ ...config });
-      const res = await axios.get('/api/nungil/nungils?status=RECOMMENDED', {
-        ...config,
-        params: {
-          page: 0,
-          size: 10,
+      const res = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/api/nungil/nungils?status=RECOMMENDED`,
+        {
+          ...config,
+          params: {
+            page: 0,
+            size: 10,
+          },
         },
-      });
+      );
       console.log(res);
       setProfileData(res.data.content);
     } catch (error) {
