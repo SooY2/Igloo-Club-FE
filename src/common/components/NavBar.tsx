@@ -12,7 +12,15 @@ import {
   PeopleBtnGRAY,
 } from '../assets/svgs/index';
 
-const NavBar = () => {
+interface StateType {
+  selectedBtn: string;
+}
+
+const NavBar = ({
+  setIsLoginModalOpen,
+}: {
+  setIsLoginModalOpen: (value: boolean) => void;
+}) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,11 +32,20 @@ const NavBar = () => {
     }
   };
 
+  const handleNavButtonClick = (path: string, state?: StateType) => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      setIsLoginModalOpen(true);
+    } else {
+      navigate(path, { state });
+    }
+  };
+
   return (
     <div css={Container}>
       <button
         type="button"
-        onClick={() => navigate('/main-page')}
+        onClick={() => handleNavButtonClick('/main-page')}
         css={NavButton}
       >
         {handleActiveBtn('/main-page') === 'active' ? (
@@ -37,7 +54,11 @@ const NavBar = () => {
           <HomeBtnGRAY />
         )}
       </button>
-      <button type="button" onClick={() => navigate('/chat')} css={NavButton}>
+      <button
+        type="button"
+        onClick={() => handleNavButtonClick('/chat')}
+        css={NavButton}
+      >
         {handleActiveBtn('/chat') === 'active' ? (
           <ChatBtn000 />
         ) : (
@@ -47,7 +68,7 @@ const NavBar = () => {
       <button
         type="button"
         onClick={() =>
-          navigate('/nungillist', { state: { selectedBtn: 'received' } })
+          handleNavButtonClick('/nungillist', { selectedBtn: 'received' })
         }
         css={NavButton}
       >
@@ -57,7 +78,11 @@ const NavBar = () => {
           <HeartBtnGRAY />
         )}
       </button>
-      <button type="button" onClick={() => navigate('/mypage')} css={NavButton}>
+      <button
+        type="button"
+        onClick={() => handleNavButtonClick('/mypage')}
+        css={NavButton}
+      >
         {handleActiveBtn('/mypage') === 'active' ? (
           <PeopleBtn000 />
         ) : (
