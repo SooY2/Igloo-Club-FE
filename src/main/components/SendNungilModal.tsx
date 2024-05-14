@@ -204,6 +204,6 @@ const StCompleteMent = styled.span`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  color: #4dca9a;
+  color: #505050;
   text-align: center;
 `;

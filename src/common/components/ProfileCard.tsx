@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { theme } from '../styles/theme';
 import AnimalProfile from './AnimalProfile';
-import { Watch } from '../assets/svgs';
+// import { Watch } from '../assets/svgs';
 import { ProfileDataTypesProps } from '../type/ProfileDataTypesProps';
 
 export const shortenWords = (description: string, length = 300) => {
@@ -27,11 +27,11 @@ export const calculateDday = (expiredAt: string) => {
 const ProfileCard = ({
   profileData,
   ClickProfileCard,
-  nungilState,
+  //nungilState,
 }: {
   profileData: ProfileDataTypesProps[] | null;
   ClickProfileCard: (nungilId: number, nickname: string) => void;
-  nungilState: string;
+  // nungilState: string;
 }) => {
   const detailbtn = '상세 프로필 보기 >';
 
@@ -47,14 +47,16 @@ const ProfileCard = ({
             <div css={Profile.Top}>
               <AnimalProfile animalFace={profile.animalFace} />
               <div css={Profile.Detail}>
-                <span css={Profile.CompanyName}>{profile.companyName}</span>
-                <span css={Profile.Job}>{profile.job}</span>
+                <span css={Profile.nickname}>{profile.nickname}</span>
+                <span css={Profile.Job}>
+                  {profile.job}, {profile.sex}
+                </span>
               </div>
             </div>
             <div css={Profile.DescriptionBox}>
               <span>{shortenWords(profile.description)}</span>
             </div>
-            {nungilState === 'received' || nungilState === 'sent' ? (
+            {/* {nungilState === 'received' || nungilState === 'sent' ? (
               <StDdaySection>
                 <Watch />
                 <span>
@@ -62,7 +64,8 @@ const ProfileCard = ({
                 </span>
                 <StDetailBtn>{detailbtn}</StDetailBtn>
               </StDdaySection>
-            ) : null}
+            ) : null} */}
+            <StDetailBtn>{detailbtn}</StDetailBtn>
           </StProfileWrapper>
         ))}
     </div>
@@ -128,7 +131,7 @@ const Profile = {
     gap: 0.3rem;
   `,
 
-  CompanyName: css`
+  nickname: css`
     font-size: 1.4rem;
     font-weight: 600;
     color: ${theme.colors.white};
@@ -150,19 +153,19 @@ const Profile = {
   `,
 };
 
-const StDdaySection = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 0.7rem;
-  align-items: center;
-  width: 100%;
-  padding-top: 1.5rem;
-  margin-top: 2rem;
-  ${({ theme }) => theme.fonts.body3};
-`;
+// const StDdaySection = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   gap: 0.7rem;
+//   align-items: center;
+//   width: 100%;
+//   padding-top: 1.5rem;
+//   margin-top: 2rem;
+//   ${({ theme }) => theme.fonts.body3};
+// `;
 
 const StDetailBtn = styled.p`
-  margin-left: 8.5rem;
+  margin-left: 20.5rem;
   font-size: 1.1rem;
   font-weight: 500;
   color: ${({ theme }) => theme.colors.gray0};
