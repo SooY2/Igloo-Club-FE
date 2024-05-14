@@ -41,6 +41,8 @@ const NavBar = ({
     }
   };
 
+  //
+
   return (
     <div css={Container}>
       <button
@@ -104,7 +106,7 @@ const Container = css`
   width: 100%;
   max-width: 42.5rem;
   height: 6.2rem;
-  padding: 0 3rem;
+  padding: 3rem;
   background-color: ${theme.colors.white};
 `;
 
