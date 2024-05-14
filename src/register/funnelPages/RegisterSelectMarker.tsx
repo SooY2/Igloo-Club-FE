@@ -53,6 +53,7 @@ const 장소선택 = ({
         ...registerScheduleValues,
         markerList: thisValues,
       });
+      await instance.post('/api/nungil/addRecommendNungil', {});
       onNext();
     } catch (err) {
       console.log(err);
