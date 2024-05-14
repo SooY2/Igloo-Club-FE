@@ -99,7 +99,7 @@ const 장소선택 = ({
                             <img src={markerImg} />
                             <p>{item.title}</p>
                           </StCradTitle>
-                          <StAddress>{item.address}</StAddress>
+                          {/* <StAddress>{item.address}</StAddress> */}
                         </div>
                       </CheckBoxItem>
                     );
@@ -133,9 +133,4 @@ const StCradTitle = styled.div`
   align-items: center;
 
   ${({ theme }) => theme.fonts.body1b};
-`;
-
-const StAddress = styled.p`
-  color: ${({ theme }) => theme.colors.gray5};
-  ${({ theme }) => theme.fonts.body2m};
 `;
