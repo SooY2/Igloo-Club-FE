@@ -35,11 +35,11 @@ const ReceivedNungil = () => {
 
   return (
     <div css={Container}>
-      <div css={NotifyDate}>
+      {/* <div css={NotifyDate}>
         <span>내가 받은 눈길 내역은 받은 날부터</span>
         <span css={NotifyBold}>7일</span>
         <span>만 열람 가능해요</span>
-      </div>
+      </div> */}
       <div css={ProfileData}>
         <ProfileCard
           profileData={profileData}
@@ -63,26 +63,26 @@ const Container = css`
   background: ${theme.colors.white};
 `;
 
-const NotifyDate = css`
-  position: sticky;
-  top: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 3rem;
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 600;
-  text-align: center;
-  background: ${theme.colors.gray0};
-`;
+// const NotifyDate = css`
+//   position: sticky;
+//   top: 0;
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   justify-content: center;
+//   width: 100%;
+//   height: 3rem;
+//   font-size: 11px;
+//   font-style: normal;
+//   font-weight: 600;
+//   text-align: center;
+//   background: ${theme.colors.gray0};
+// `;
 
-const NotifyBold = css`
-  padding-left: 0.3rem;
-  color: ${theme.colors.primary};
-`;
+// const NotifyBold = css`
+//   padding-left: 0.3rem;
+//   color: ${theme.colors.primary};
+// `;
 
 const ProfileData = css`
   display: flex;

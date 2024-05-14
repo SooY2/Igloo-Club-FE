@@ -7,19 +7,20 @@ const Landing = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
-    const STEP = localStorage.getItem('STEP');
+    // const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
+    // const STEP = localStorage.getItem('STEP');
     console.log(pathname);
 
-    if (!ACCESS_TOKEN || !STEP) {
-      navigate('/login', { state: pathname });
-    } else if (STEP !== '가입완료') {
-      navigate('/register');
-    } else if (pathname !== '/') {
-      navigate(pathname);
-    } else {
-      navigate('/main-page');
-    }
+    // if (!ACCESS_TOKEN || !STEP) {
+    //   navigate('/login', { state: pathname });
+    // } else if (STEP !== '가입완료') {
+    //   navigate('/register');
+    // } else if (pathname !== '/') {
+    //   navigate(pathname);
+    // } else {
+    //   navigate('/main-page');
+    // }
+    navigate('/main-page');
   }, []);
 
   return (

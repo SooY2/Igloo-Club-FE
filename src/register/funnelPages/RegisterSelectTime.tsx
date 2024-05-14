@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import { ScheduleTypes } from '../types/scheduleTypes';
 import { css } from '@emotion/react';
 import { RegisterBasicInput } from '../components/RegisterInputs';
-import { AVAILABLETIME, YOILLIST } from '../constants/schedule';
+import { AVAILABLETIME } from '../constants/schedule';
 import CheckBoxItem from '../components/CheckBoxItem';
 
 interface ScedultPropsTypes {
@@ -24,15 +24,13 @@ const 지역선택 = ({
   registerScheduleValues,
 }: ScedultPropsTypes) => {
   const [isActive, setIsActive] = useState(false);
-  const [thisValues, setThisValues] = useState<string[]>(
-    registerScheduleValues.yoilList,
-  );
+  const [thisValues] = useState<string[]>(registerScheduleValues.yoilList);
   const [thisTimeValues, setThisTimeValues] = useState<string[]>(
     registerScheduleValues.availableTimeList,
   );
 
   useEffect(() => {
-    if (thisValues.length) setIsActive(true);
+    if (thisTimeValues.length) setIsActive(true);
     else setIsActive(false);
   }, [thisValues, thisTimeValues]);
 
@@ -53,38 +51,24 @@ const 지역선택 = ({
       <article css={St.articleStyles}>
         <section css={St.sectionStyles}>
           <TitleBox>
-            <St.Title>평일 점심 시간대에 만남이 가능한</St.Title>
-            <St.Title>요일과 시간대를 알려주세요</St.Title>
+            <St.Title>봄 축제 기간 동안 상대방과의 </St.Title>
+            <St.Title>만남이 가능한 시간대를 알려주세요</St.Title>
           </TitleBox>
           <div css={subTitleBoxStyles}>
             <St.SubTitle>
-              평일 오전 11시부터 오후 3시 사이에 만남이 가능한 요일과
+              봄 축제 기간인 목요일과 금요일에 만남이 가능한 시간을
             </St.SubTitle>
             <St.SubTitle>
-              시간을 선택해 주세요. 상대방과의 약속을 잡을 때 쓰여요.
+              모두 선택해 주세요. 상대방과의 약속을 잡을 때 쓰여요.
             </St.SubTitle>
           </div>
 
           <div
             css={{ display: 'flex', flexDirection: 'column', gap: '3.9rem' }}
           >
-            <RegisterBasicInput label="만남 가능 요일">
-              <div css={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem' }}>
-                {YOILLIST.map((item) => (
-                  <CheckBoxItem
-                    key={item.value}
-                    value={item.value}
-                    name="yoilList"
-                    setValues={setThisValues}
-                    label={item.label}
-                    values={thisValues}
-                  />
-                ))}
-              </div>
-            </RegisterBasicInput>
             <RegisterBasicInput
               label="만남 가능 시간"
-              explain="시간은 30분 단위로 선택이 가능해요."
+              explain="시간은 한 시간 단위로 선택이 가능해요."
             >
               <div css={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem' }}>
                 {AVAILABLETIME.map((item) => (

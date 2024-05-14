@@ -12,6 +12,7 @@ const ChatRoomFooter = ({
   handleSubmit: () => void;
 }) => {
   const ref = useRef<HTMLTextAreaElement>(null);
+
   return (
     <StContainer>
       <StTextarea
@@ -38,7 +39,7 @@ const ChatRoomFooter = ({
 export default ChatRoomFooter;
 
 const StContainer = styled.footer`
-  position: absolute;
+  position: sticky;
   bottom: 0;
   display: flex;
   gap: 1rem;

@@ -25,11 +25,15 @@ export const YOILLIST = [
 
 export const AVAILABLETIME = [
   { label: '11:00', value: 'T1100' },
-  { label: '11:30', value: 'T1130' },
   { label: '12:00', value: 'T1200' },
-  { label: '12:30', value: 'T1230' },
   { label: '13:00', value: 'T1300' },
-  { label: '13:30', value: 'T1330' },
   { label: '14:00', value: 'T1400' },
-  { label: '14:30', value: 'T1430' },
+  { label: '15:00', value: 'T1500' },
+  { label: '16:00', value: 'T1600' },
+  { label: '17:00', value: 'T1700' },
+  { label: '18:00', value: 'T1800' },
+  { label: '19:00', value: 'T1900' },
+  { label: '20:00', value: 'T2000' },
+  { label: '21:00', value: 'T2100' },
+  { label: '22:00', value: 'T2200' },
 ];

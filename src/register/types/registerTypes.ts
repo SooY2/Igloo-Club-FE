@@ -6,17 +6,16 @@ export interface Registertypes {
   contactInstagram?: string | null;
   animalFace: string;
   job: string;
-  height: number | string;
+  height?: number | string;
   mbti: string;
-  marriageState: string;
-  religion: string;
-  alcohol: string;
-  smoke: string;
+  marriageState?: string;
+  religion?: string;
+  alcohol?: string;
+  smoke?: string;
   faceDepictionList: string[];
   personalityDepictionList: string[];
   description: string;
-  disableCompany: boolean;
+  disableCompany?: boolean;
   // 선택 사항
-  markerList?: string[];
   hobbyList: string[];
 }

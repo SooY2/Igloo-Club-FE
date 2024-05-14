@@ -28,10 +28,14 @@ const DetailProfile = () => {
 
   const genderText = profileData?.sex === 'MALE' ? '남성' : '여성';
 
-  const context = `#${profileData?.companyName.replace(/\s+/g, '_')} 에 재직 중인\n 
-  #${profileData?.age}세 ${genderText}이고 #${profileData?.job.replace(/\s+/g, '_')}\n 
-  얼굴은 #${profileData?.animalFace} 
-  키는 #${profileData?.height}cm\n 성격 유형은 #${profileData?.mbti}`;
+  // const context = `#${profileData?.companyName.replace(/\s+/g, '_')} 에 재직 중인\n
+  // #${profileData?.age}세 ${genderText}이고 #${profileData?.job.replace(/\s+/g, '_')}\n
+  // 얼굴은 #${profileData?.animalFace}
+  // 키는 #${profileData?.height}cm\n 성격 유형은 #${profileData?.mbti}`;
+
+  const context = `#${profileData?.job.replace(/\s+/g, '_')} 에 재학 중인\n 
+  #${profileData?.age}살 ${genderText}이고\n 
+  얼굴은 #${profileData?.animalFace} 성격 유형은 #${profileData?.mbti}`;
 
   let AnimalFace, AnimalFaceImg;
 
@@ -45,10 +49,7 @@ const DetailProfile = () => {
             nungilId: nungilId,
           },
         });
-
         setProfileData(res.data);
-
-        console.log(res.data);
       } catch (error) {
         console.log(error);
       } finally {
@@ -213,7 +214,7 @@ const DetailProfile = () => {
                 ))}
           </div>
         </div>
-        <div css={Middle.Notice}>
+        {/* <div css={Middle.Notice}>
           <div css={Middle.NoticeTitle}>
             <span>이건 알아두세요!</span>
           </div>
@@ -231,7 +232,7 @@ const DetailProfile = () => {
               음주 : {profileData?.alcohol && profileData.alcohol}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

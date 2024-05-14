@@ -40,21 +40,22 @@ const MapBase = ({ matchData, setMap, onMapLoad }: MapContainerProps) => {
           let center;
 
           if (matchData) {
-            if (matchData.location === '광화문') {
-              center = new window.kakao.maps.LatLng(
-                37.5709578373114,
-                126.977928770123,
-              );
-            } else if (matchData.location === '판교') {
-              center = new window.kakao.maps.LatLng(
-                37.39525750009229,
-                127.11148651523494,
-              );
-            }
+            // if (matchData.location === '광화문') {
+            //   center = new window.kakao.maps.LatLng(
+            //     37.5709578373114,
+            //     126.977928770123,
+            //   );
+            // } else if (matchData.location === '판교') {
+            //   center = new window.kakao.maps.LatLng(
+            //     37.39525750009229,
+            //     127.11148651523494,
+            //   );
+            // }
+            center = new window.kakao.maps.LatLng(37.496503, 126.957227);
           }
 
           const mapOption = {
-            center: center || new window.kakao.maps.LatLng(37.5665, 126.978),
+            center: center, // || new window.kakao.maps.LatLng(37.5665, 126.978),
             level: 6,
           };
 

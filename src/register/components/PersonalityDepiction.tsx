@@ -3,30 +3,31 @@ import { ArrowLeft } from '../assets/svgs/0_index';
 import * as St from '../styles/registerStyles';
 import RegisterBtn from './RegisterBtn';
 import { PERSONALITYDEPICTION } from '../constants/profileConstants';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import CheckBoxItem from './CheckBoxItem';
+import { ExtendedNavTypesProps } from '../types/navTypes';
 
-interface PersonalityDepictionProps {
+interface PersonalityDepictionProps extends ExtendedNavTypesProps {
   values: string[];
   handleValues: (value: string | string[], name?: string) => void;
-  setShowPersonalityDepiction: Dispatch<SetStateAction<boolean>>;
 }
 
 const PersonalityDepiction = ({
+  onNext,
+  onPrev,
   values,
   handleValues,
-  setShowPersonalityDepiction,
 }: PersonalityDepictionProps) => {
   const [thisValues, setThisValues] = useState<string[]>(values);
 
   const handleSubmit = () => {
     handleValues(thisValues, 'personalityDepictionList');
-    setShowPersonalityDepiction(false);
+    onNext();
   };
 
   return (
     <StBackgroud>
-      <ArrowLeft onClick={() => setShowPersonalityDepiction(false)} />
+      <ArrowLeft onClick={() => onPrev()} />
       <StArticleStyles>
         <section css={St.sectionStyles}>
           <St.TitleBox>

@@ -3,26 +3,51 @@ import { ArrowLeft } from '../assets/svgs/0_index';
 import * as St from '../styles/registerStyles';
 import RegisterBtn from './RegisterBtn';
 import { HOBBY } from '../constants/profileConstants';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import CheckBoxItem from './CheckBoxItem';
+import { ExtendedNavTypesProps } from '../types/navTypes';
+import { Registertypes } from '../types/registerTypes';
+import instance from '../../common/apis/axiosInstanse';
 
-interface HobbyListProps {
+interface HobbyListProps extends ExtendedNavTypesProps {
   values: string[];
   handleValues: (value: string | string[], name?: string) => void;
-  setShowHobby: Dispatch<SetStateAction<boolean>>;
 }
 
-const HobbyList = ({ values, handleValues, setShowHobby }: HobbyListProps) => {
+const HobbyList = ({
+  values,
+  onNext,
+  onPrev,
+  registerValues,
+}: HobbyListProps) => {
   const [thisValues, setThisValues] = useState<string[]>(values);
+  const [thisRegisterValues] = useState<Registertypes>(registerValues);
 
   const handleSubmit = () => {
-    handleValues(thisValues, 'hobbyList');
-    setShowHobby(false);
+    const updatedRegisterValues = {
+      ...thisRegisterValues,
+      hobbyList: thisValues,
+    };
+    // 상태를 업데이트합니다.
+    console.log(updatedRegisterValues);
+    postSubmit(updatedRegisterValues);
+
+    onNext();
+  };
+
+  //데이터 보내기
+  const postSubmit = async (value: Registertypes) => {
+    console.log(value);
+    try {
+      await instance.patch('/api/member', value);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <StBackgroud>
-      <ArrowLeft onClick={() => setShowHobby(false)} />
+      <ArrowLeft onClick={() => onPrev()} />
       <StArticleStyles>
         <section css={St.sectionStyles}>
           <St.TitleBox>
