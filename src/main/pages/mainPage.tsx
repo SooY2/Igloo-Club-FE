@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { theme } from '../../common/styles/theme';
-import instance from '../../common/apis/axiosInstanse';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../common/components/NavBar';
 import ComingSoon from '../components/ComingSoon';
@@ -13,26 +12,44 @@ import ProfileCard from '../../common/components/ProfileCard';
 import CustomSelect from '../components/CustomSelect';
 import LoginModal from '../components/LoginModal';
 import { ProfileDataTypesProps } from '../../common/type/ProfileDataTypesProps';
+import axios, { AxiosRequestConfig } from 'axios';
 // import CountDown from '../components/CountDown';
 
 const MainPage = () => {
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState<ProfileDataTypesProps[]>([]);
-  const [selected, setSelected] = useState<string>('');
+  const [selected] = useState<string>('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
+  const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
 
   const handleGetAllProfile = async () => {
+    const headerss: Record<string, string> = {
+      'Content-Type': 'application/json',
+    };
+
+    // 토큰이 있으면 Authorization 헤더에 추가합니다.
+    if (ACCESS_TOKEN) {
+      headerss['Authorization'] = `Bearer ${ACCESS_TOKEN}`;
+    }
+
+    // config 객체 내에서 headers를 직접 정의합니다.
+    const config: AxiosRequestConfig = {
+      headers: headerss,
+    };
+
     try {
-      const res = await instance.get('/api/nungil/nungils?status=RECOMMENDED', {
+      console.log({ ...config });
+      const res = await axios.get('/api/nungil/nungils?status=RECOMMENDED', {
+        ...config,
         params: {
           page: 0,
           size: 10,
         },
       });
-
+      console.log(res);
       setProfileData(res.data.content);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -54,16 +71,18 @@ const MainPage = () => {
     }
   };
 
-  const handleSelectedChange = (newSelected: string) => {
-    setSelected(newSelected);
-    handleGetAllProfile();
-  };
+  // const handleSelectedChange = (newSelected: string) => {
+  //   setSelected(newSelected);
+  //   handleGetAllProfile();
+  // };
 
   return (
     <div css={Container}>
       <div css={Top.Wrapper}>
         <div css={Top.TitleTop}>
-          <CustomSelect onSelectedChange={handleSelectedChange} />
+          <CustomSelect
+          // onSelectedChange={handleSelectedChange}
+          />
           <span>에서</span>
         </div>
         <div css={Top.TitleBottom}>
@@ -87,7 +106,7 @@ const MainPage = () => {
           <ProfileCard
             profileData={profileData}
             ClickProfileCard={ClickProfileBtn}
-            nungilState="main"
+            // nungilState="main"
             css={Bottom.ProfileData}
           />
         )}
