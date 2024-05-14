@@ -1,20 +1,44 @@
 import styled from '@emotion/styled';
 
 interface RegisterBtnProps {
+  subContent?: string;
   isActive: boolean;
   onClick: () => void;
   content: string;
 }
 
-const RegisterBtn = ({ isActive, onClick, content }: RegisterBtnProps) => {
+const RegisterBtn = ({
+  isActive,
+  onClick,
+  content,
+  subContent,
+}: RegisterBtnProps) => {
   return (
-    <Button isActive={isActive} disabled={!isActive} onClick={onClick}>
-      {content}
-    </Button>
+    <Container>
+      <p>{subContent}</p>
+      <Button isActive={isActive} disabled={!isActive} onClick={onClick}>
+        {content}
+      </Button>
+    </Container>
   );
 };
 
 export default RegisterBtn;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+
+  & > p {
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.gray6};
+    letter-spacing: -0.3px;
+  }
+`;
 
 const Button = styled.button<{ isActive: boolean }>`
   position: relative;

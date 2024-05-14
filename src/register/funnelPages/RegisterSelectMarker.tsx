@@ -110,21 +110,11 @@ const 장소선택 = ({
             </div>
           </div>
         </section>
-        <div
-          css={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1.7rem',
-            marginTop: '1rem',
-          }}
-        >
-          <RegisterBtn
-            isActive={isActive}
-            content={`총 ${thisValues.length}개의 장소를 선택했어요`}
-            onClick={handleSubmit}
-          />
-        </div>
+        <RegisterBtn
+          isActive={isActive}
+          content={`총 ${thisValues.length}개의 장소를 선택했어요`}
+          onClick={handleSubmit}
+        />
       </article>
     </>
   );
