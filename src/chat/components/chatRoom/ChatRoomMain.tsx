@@ -29,7 +29,7 @@ const ChatRoomMain = ({ chatData }: { chatData: ChatDataTypes[] }) => {
         margin: '14rem 0 0',
         backgroundColor: '#fff',
         height: `${windowHeight}`,
-        marginBottom: '9rem',
+        // marginBottom: '9rem',
       }}
     >
       {chatData ? (

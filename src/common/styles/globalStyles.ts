@@ -60,7 +60,7 @@ const globalStyles = css`
   }
 
   :root {
-    --vh: 100%;
+    --vh: 100vh;
   }
 
   #root {

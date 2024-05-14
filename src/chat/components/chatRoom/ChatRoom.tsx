@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import instance from '../../../common/apis/axiosInstanse';
 import ChatRoomMain from './ChatRoomMain';
@@ -15,6 +15,7 @@ const ChatRoom = () => {
   const { chatRoomId } = useParams();
   const [stompClient, setStompClient] = useState<Client | null>(null);
   const [chatData, setChatData] = useState<ChatDataTypes[]>([]);
+  const divRef = useRef<HTMLDivElement | null>(null);
   const [chatSenderInfo, setChatSenderInfo] = useState({
     animalFace: '',
     companyName: '',
@@ -24,6 +25,34 @@ const ChatRoom = () => {
   });
   const [chat, setChat] = useState('');
   const accessToken = localStorage.getItem('ACCESS_TOKEN');
+
+  useEffect(() => {
+    const handleVisualViewportResize = () => {
+      const currentVisualViewportHeight = window.visualViewport?.height;
+      if (divRef.current && currentVisualViewportHeight) {
+        // div의 높이를 viewport의 높이로 조정
+        divRef.current.style.height = `${currentVisualViewportHeight}px`;
+        window.scrollTo(0, 0);
+      }
+    };
+
+    // visualViewport가 존재하면 이벤트 리스너 등록
+    window.visualViewport?.addEventListener(
+      'resize',
+      handleVisualViewportResize,
+    );
+
+    // 컴포넌트 언마운트 시 이벤트 리스너 해제 및 스타일 초기화
+    return () => {
+      window.visualViewport?.removeEventListener(
+        'resize',
+        handleVisualViewportResize,
+      );
+      // 스타일 초기화
+      document.body.style.maxHeight = '';
+      document.body.style.overflow = '';
+    };
+  }, []);
 
   useEffect(() => {
     getChatData();
@@ -109,7 +138,7 @@ const ChatRoom = () => {
   };
 
   return (
-    <section css={chatRoomStyles}>
+    <div ref={divRef} css={chatRoomStyles}>
       <ChatRoomHeader
         animalFace={chatSenderInfo.animalFace}
         companyName={chatSenderInfo.companyName}
@@ -125,7 +154,7 @@ const ChatRoom = () => {
         handleSubmit={handleSubmit}
         css={FooterBox}
       />
-    </section>
+    </div>
   );
 };
 
@@ -134,8 +163,10 @@ export default ChatRoom;
 const chatRoomStyles = css`
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  overflow: hidden;
 `;
 
 const HeaderBox = css`
