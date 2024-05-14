@@ -33,7 +33,7 @@ const NavBar = ({
   };
 
   const handleNavButtonClick = (path: string, state?: StateType) => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('ACCESS_TOKEN');
     if (!accessToken) {
       setIsLoginModalOpen(true);
     } else {
