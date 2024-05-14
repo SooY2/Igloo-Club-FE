@@ -5,6 +5,7 @@ import CheckNone from './CheckNone.svg?react';
 import CancelIcon from './CancelIcon.svg?react';
 import MarkerIcon from './MarkerIcon.svg?react';
 import CheckApplication from './CheckApplication.svg?react';
+import Kakao from './kakao.svg?react';
 
 export {
   ArrowLeft,
@@ -14,4 +15,5 @@ export {
   CancelIcon,
   MarkerIcon,
   CheckApplication,
+  Kakao,
 };

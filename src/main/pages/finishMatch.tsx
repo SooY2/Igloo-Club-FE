@@ -42,8 +42,6 @@ const FinishMatch = () => {
       });
       setMatchData(res.data);
 
-      console.log(res.data);
-
       if (res.data.matchDate) {
         const date = res.data.matchDate;
         let month = date.slice(4, 6);

@@ -53,6 +53,7 @@ const 장소선택 = ({
         ...registerScheduleValues,
         markerList: thisValues,
       });
+      await instance.post('/api/nungil/addRecommendNungil', {});
       onNext();
     } catch (err) {
       console.log(err);
@@ -98,7 +99,7 @@ const 장소선택 = ({
                             <img src={markerImg} />
                             <p>{item.title}</p>
                           </StCradTitle>
-                          <StAddress>{item.address}</StAddress>
+                          {/* <StAddress>{item.address}</StAddress> */}
                         </div>
                       </CheckBoxItem>
                     );
@@ -110,21 +111,11 @@ const 장소선택 = ({
             </div>
           </div>
         </section>
-        <div
-          css={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1.7rem',
-            marginTop: '1rem',
-          }}
-        >
-          <RegisterBtn
-            isActive={isActive}
-            content={`총 ${thisValues.length}개의 장소를 선택했어요`}
-            onClick={handleSubmit}
-          />
-        </div>
+        <RegisterBtn
+          isActive={isActive}
+          content={`총 ${thisValues.length}개의 장소를 선택했어요`}
+          onClick={handleSubmit}
+        />
       </article>
     </>
   );
@@ -142,9 +133,4 @@ const StCradTitle = styled.div`
   align-items: center;
 
   ${({ theme }) => theme.fonts.body1b};
-`;
-
-const StAddress = styled.p`
-  color: ${({ theme }) => theme.colors.gray5};
-  ${({ theme }) => theme.fonts.body2m};
 `;

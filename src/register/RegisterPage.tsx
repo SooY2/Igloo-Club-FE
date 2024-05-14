@@ -2,20 +2,17 @@ import useFunnel from './hooks/useFunnel';
 import styled from '@emotion/styled';
 
 import {
-  약관동의,
   전화번호입력,
   전화번호인증,
-  회사이메일입력,
-  회사이메일인증,
   닉네임입력,
   성별생년월일,
-  // SNS계정,
   기본프로필입력1,
-  기본프로필입력2,
-  지역선택,
+  FaceDepictionList,
   시간선택,
   장소선택,
   회원가입완료,
+  PersonalityDepiction,
+  HobbyList,
 } from './funnelPages/0_index';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -23,17 +20,14 @@ import { Registertypes } from './types/registerTypes';
 import { ScheduleTypes } from './types/scheduleTypes';
 
 type StepType =
-  | '약관동의'
   | '전화번호입력'
   | '전화번호인증'
-  | '회사이메일입력'
-  | '회사이메일인증'
   | '닉네임입력'
   | '성별생년월일'
-  | 'SNS계정'
   | '기본프로필입력1'
-  | '기본프로필입력2'
-  | '지역선택'
+  | 'FaceDepictionList'
+  | 'PersonalityDepiction'
+  | 'HobbyList'
   | '시간선택'
   | '장소선택'
   | '회원가입완료';
@@ -55,31 +49,20 @@ const Register = () => {
 
   const [Funnel, setStep] = useFunnel(
     [
-      '약관동의',
       '전화번호입력',
       '전화번호인증',
-      '회사이메일입력',
-      '회사이메일인증',
       '닉네임입력',
       '성별생년월일',
-      'SNS계정',
       '기본프로필입력1',
-      '기본프로필입력2',
-      '지역선택',
+      'FaceDepictionList',
+      'PersonalityDepiction',
+      'HobbyList',
       '시간선택',
       '장소선택',
       '회원가입완료',
     ] as const,
     initialState as StepType,
   );
-
-  const [emailInfo, setEmailInfo] = useState<{
-    email: string;
-    companyName: string | string[] | number;
-  }>({
-    email: '',
-    companyName: '',
-  });
 
   const [phoneNum, setPhoneNum] = useState('');
 
@@ -100,7 +83,6 @@ const Register = () => {
     faceDepictionList: [],
     personalityDepictionList: [],
     description: '',
-    markerList: [],
     hobbyList: [],
     disableCompany: false,
   });
@@ -109,6 +91,14 @@ const Register = () => {
     setRegisterValues((prevValues) => ({
       ...prevValues,
       ...data,
+    }));
+  };
+  //특성 선택 핸들러
+  const handleValues = (value: string | string[], name?: string) => {
+    if (!name) return;
+    setRegisterValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
     }));
   };
 
@@ -130,54 +120,31 @@ const Register = () => {
   return (
     <RagisterLayout>
       <Funnel>
-        <Funnel.Step name="약관동의">
-          <약관동의 onNext={() => setStep('전화번호입력')} percent={8} />
-        </Funnel.Step>
         <Funnel.Step name="전화번호입력">
           <전화번호입력
-            onPrev={() => setStep('약관동의')}
             onNext={() => setStep('전화번호인증')}
             setPhoneNum={setPhoneNum}
-            percent={10}
+            percent={20}
           />
         </Funnel.Step>
         <Funnel.Step name="전화번호인증">
           <전화번호인증
             onPrev={() => setStep('전화번호입력')}
             onNext={() => {
-              setStep('회사이메일입력');
+              setStep('닉네임입력');
               localStorage.setItem('STEP', '회사이메일입력');
             }}
             phoneNum={phoneNum}
-            percent={20}
-          />
-        </Funnel.Step>
-        <Funnel.Step name="회사이메일입력">
-          <회사이메일입력
-            onPrev={() => setStep('전화번호입력')}
-            onNext={() => setStep('회사이메일인증')}
-            setEmailInfo={setEmailInfo}
-            percent={28}
-          />
-        </Funnel.Step>
-        <Funnel.Step name="회사이메일인증">
-          <회사이메일인증
-            onPrev={() => setStep('회사이메일입력')}
-            onNext={() => {
-              setStep('닉네임입력');
-              localStorage.setItem('STEP', '닉네임입력');
-            }}
-            emailInfo={emailInfo}
-            percent={35}
+            percent={30}
           />
         </Funnel.Step>
         <Funnel.Step name="닉네임입력">
           <닉네임입력
-            onPrev={() => setStep('회사이메일입력')}
+            onPrev={() => setStep('전화번호인증')}
             onNext={() => setStep('성별생년월일')}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
-            percent={43}
+            percent={40}
           />
         </Funnel.Step>
         <Funnel.Step name="성별생년월일">
@@ -189,46 +156,53 @@ const Register = () => {
             percent={50}
           />
         </Funnel.Step>
-        {/* <Funnel.Step name="SNS계정">
-          <SNS계정
-            onPrev={() => setStep('성별생년월일')}
-            onNext={() => setStep('기본프로필입력1')}
-            handleRegisterValue={handleRegisterValue}
-            registerValues={registerValues}
-          />
-        </Funnel.Step> */}
         <Funnel.Step name="기본프로필입력1">
           <기본프로필입력1
             onPrev={() => setStep('닉네임입력')}
-            onNext={() => setStep('기본프로필입력2')}
+            onNext={() => setStep('FaceDepictionList')}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
             percent={60}
           />
         </Funnel.Step>
-        <Funnel.Step name="기본프로필입력2">
-          <기본프로필입력2
-            onPrev={() => setStep('기본프로필입력1')}
+        <Funnel.Step name="FaceDepictionList">
+          <FaceDepictionList
+            values={registerValues.faceDepictionList}
+            handleValues={handleValues}
+            onPrev={() => setStep('닉네임입력')}
+            onNext={() => setStep('PersonalityDepiction')}
+            handleRegisterValue={handleRegisterValue}
+            registerValues={registerValues}
+            percent={70}
+          />
+        </Funnel.Step>
+        <Funnel.Step name="PersonalityDepiction">
+          <PersonalityDepiction
+            values={registerValues.personalityDepictionList}
+            handleValues={handleValues}
+            onPrev={() => setStep('FaceDepictionList')}
+            onNext={() => setStep('HobbyList')}
+            handleRegisterValue={handleRegisterValue}
+            registerValues={registerValues}
+            percent={80}
+          />
+        </Funnel.Step>
+        <Funnel.Step name="HobbyList">
+          <HobbyList
+            values={registerValues.hobbyList}
+            handleValues={handleValues}
+            onPrev={() => setStep('PersonalityDepiction')}
             onNext={() => {
-              setStep('지역선택'), localStorage.setItem('STEP', '지역선택');
+              setStep('시간선택');
             }}
             handleRegisterValue={handleRegisterValue}
             registerValues={registerValues}
-            percent={75}
-          />
-        </Funnel.Step>
-        <Funnel.Step name="지역선택">
-          <지역선택
-            onPrev={() => setStep('기본프로필입력2')}
-            onNext={() => setStep('시간선택')}
-            handleScheduleValue={handleScheduleValue}
-            registerScheduleValues={registerScheduleValues}
-            percent={85}
+            percent={90}
           />
         </Funnel.Step>
         <Funnel.Step name="시간선택">
           <시간선택
-            onPrev={() => setStep('지역선택')}
+            onPrev={() => setStep('HobbyList')}
             onNext={() => setStep('장소선택')}
             handleScheduleValue={handleScheduleValue}
             registerScheduleValues={registerScheduleValues}
