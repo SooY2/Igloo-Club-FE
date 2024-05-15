@@ -7,8 +7,8 @@ const Landing = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
-    // const STEP = localStorage.getItem('STEP');
+    const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
+    const STEP = localStorage.getItem('STEP');
     console.log(pathname);
 
     // if (!ACCESS_TOKEN || !STEP) {
@@ -22,6 +22,9 @@ const Landing = () => {
     // }
 
     navigate('/main-page');
+    if (ACCESS_TOKEN && STEP && pathname !== '/') {
+      navigate(pathname);
+    }
   }, []);
 
   return (
