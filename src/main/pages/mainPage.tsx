@@ -39,7 +39,6 @@ const MainPage = () => {
     };
 
     try {
-      console.log({ ...config });
       const res = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/api/nungil/nungils?status=RECOMMENDED`,
         {
@@ -50,7 +49,6 @@ const MainPage = () => {
           },
         },
       );
-      console.log(res);
       setProfileData(res.data.content);
     } catch (error) {
       console.error(error);
