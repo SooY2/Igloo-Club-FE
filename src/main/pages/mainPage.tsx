@@ -20,7 +20,7 @@ const MainPage = () => {
   const [profileData, setProfileData] = useState<ProfileDataTypesProps[]>([]);
   const [selected] = useState<string>('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
-  const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
+
   const STEP = localStorage.getItem('STEP');
 
   const handleGetAllProfile = async () => {
@@ -29,7 +29,8 @@ const MainPage = () => {
     };
 
     // 토큰이 있으면 Authorization 헤더에 추가합니다.
-    if (ACCESS_TOKEN) {
+    const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
+    if (ACCESS_TOKEN && localStorage.getItem('STEP') === '가입완료') {
       headerss['Authorization'] = `Bearer ${ACCESS_TOKEN}`;
     }
 
