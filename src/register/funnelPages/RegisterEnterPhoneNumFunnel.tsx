@@ -54,7 +54,7 @@ const 전화번호입력 = ({ onNext, setPhoneNum }: PhoneNumProps) => {
 
   return (
     <>
-      <RegisterHeader percent={20} />
+      <RegisterHeader percent={20} isFirst={true} />
       {isLoading ? (
         <>인증번호 가는중,,</>
       ) : (
