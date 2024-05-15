@@ -22,6 +22,9 @@ const Landing = () => {
     // }
 
     navigate('/main-page');
+    if (pathname !== '/') {
+      navigate(pathname);
+    }
   }, []);
 
   return (
