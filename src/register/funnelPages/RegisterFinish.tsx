@@ -8,7 +8,7 @@ const 회원가입완료 = ({ onNext }: { onNext: () => void }) => {
       <StContainer>
         <StIMG>
           <StLogo src={prefinish} />
-          <StText>사전 프로필 등록이 완료되었어요!</StText>
+          <StText>프로필 등록이 완료되었어요!</StText>
           <div>
             <StSub>눈길 보내고 숭실대 친구와 즐거운 축제 즐기세요!</StSub>
             <Stbox>

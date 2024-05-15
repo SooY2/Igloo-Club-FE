@@ -25,6 +25,7 @@ const ChatRoom = () => {
   });
   const [chat, setChat] = useState('');
   const accessToken = localStorage.getItem('ACCESS_TOKEN');
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
   useEffect(() => {
     const handleVisualViewportResize = () => {
@@ -32,6 +33,7 @@ const ChatRoom = () => {
       if (divRef.current && currentVisualViewportHeight) {
         // div의 높이를 viewport의 높이로 조정
         divRef.current.style.height = `${currentVisualViewportHeight}px`;
+        setWindowHeight(currentVisualViewportHeight);
         window.scrollTo(0, 0);
       }
     };
@@ -138,7 +140,11 @@ const ChatRoom = () => {
   };
 
   return (
-    <div ref={divRef} css={chatRoomStyles}>
+    <div
+      ref={divRef}
+      css={chatRoomStyles}
+      style={{ height: `${windowHeight}px` }}
+    >
       <ChatRoomHeader
         animalFace={chatSenderInfo.animalFace}
         companyName={chatSenderInfo.companyName}

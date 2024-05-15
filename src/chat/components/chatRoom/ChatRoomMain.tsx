@@ -1,25 +1,16 @@
 import { css } from '@emotion/react';
 import { ChatDataTypes } from '../../types/chatDataTypes';
 import ChatSpeechBubble from './ChatSpeechBubble';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 const ChatRoomMain = ({ chatData }: { chatData: ChatDataTypes[] }) => {
-  const messagesEndRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView();
+    if (mainRef.current) {
+      mainRef.current.scrollTop = mainRef.current.scrollHeight;
+    }
   }, [chatData]);
-
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  useEffect(() => {
-    const handleResize = () => setWindowHeight(window.innerHeight);
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   return (
     <main
@@ -28,8 +19,6 @@ const ChatRoomMain = ({ chatData }: { chatData: ChatDataTypes[] }) => {
         overflow: 'scroll',
         margin: '14rem 0 0',
         backgroundColor: '#fff',
-        height: `${windowHeight}`,
-        // marginBottom: '9rem',
       }}
     >
       {chatData ? (
@@ -44,7 +33,7 @@ const ChatRoomMain = ({ chatData }: { chatData: ChatDataTypes[] }) => {
               );
             })}
           </div>
-          <div ref={messagesEndRef} />
+          <div />
         </>
       ) : (
         <></>
