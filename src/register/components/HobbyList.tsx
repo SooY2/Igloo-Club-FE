@@ -29,7 +29,6 @@ const HobbyList = ({
       hobbyList: thisValues,
     };
     // 상태를 업데이트합니다.
-    console.log(updatedRegisterValues);
     postSubmit(updatedRegisterValues);
 
     onNext();
@@ -37,7 +36,6 @@ const HobbyList = ({
 
   //데이터 보내기
   const postSubmit = async (value: Registertypes) => {
-    console.log(value);
     try {
       await instance.patch('/api/member', value);
     } catch (err) {
