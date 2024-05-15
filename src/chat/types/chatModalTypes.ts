@@ -1,6 +1,5 @@
 export interface ChatModalTypes {
-  yoil: string[];
-  time: string[];
+  time: string;
   marker: Array<{
     value: string;
     title: string;
