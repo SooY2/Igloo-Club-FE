@@ -21,6 +21,7 @@ const MainPage = () => {
   const [selected] = useState<string>('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
+  const STEP = localStorage.getItem('STEP');
 
   const handleGetAllProfile = async () => {
     const headerss: Record<string, string> = {
@@ -66,8 +67,7 @@ const MainPage = () => {
   // };
 
   const ClickProfileBtn = (nungilId: number, nickname: string) => {
-    const accessToken = localStorage.getItem('ACCESS_TOKEN');
-    if (!accessToken) {
+    if (STEP !== '가입완료') {
       setIsLoginModalOpen(true);
     } else {
       navigate(`/detailpage/${nungilId}`, { state: { nungilId, nickname } });
