@@ -58,7 +58,7 @@ const MainPage = () => {
 
   useEffect(() => {
     handleGetAllProfile();
-  }, []);
+  }, [STEP]);
 
   // const ClickPickProfile = () => {
   //   handleGetAllProfile();
