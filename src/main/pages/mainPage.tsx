@@ -97,7 +97,9 @@ const MainPage = () => {
             <CountDown />
           </span> */}
           {/* <span css={Middle.PrimaryText}>인연 프로필 삭제</span> */}
-          <span>📢 보이는 카드들은 전부 앞으로 만날 수 있는 사람들이에요.</span>
+          <span css={{ textAlign: 'center' }}>
+            📢 보이는 카드들은 가까운 정각에 바로 만날 수 있어요.
+          </span>
         </div>
       </div>
       <div css={Bottom.Wrapper}>

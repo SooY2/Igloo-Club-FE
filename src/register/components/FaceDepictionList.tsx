@@ -32,7 +32,7 @@ const FaceDepictionList = ({
           <St.TitleBox>
             <St.Title>회원님의 외모를 가장 잘 나타내는</St.Title>
             <St.Title>키워드를 여러 개 선택해 주세요</St.Title>
-            <St.SubTitle>필수 3개부터 최대 5개까지 선택가능해요</St.SubTitle>
+            <St.SubTitle>필수 1개부터 최대 5개까지 선택가능해요</St.SubTitle>
           </St.TitleBox>
           <div css={St.checkBoxContainerStyles}>
             {FACEDEPICTION.map((item) => {
@@ -53,7 +53,7 @@ const FaceDepictionList = ({
         </section>
 
         <RegisterBtn
-          isActive={thisValues.length > 2}
+          isActive={thisValues.length > 0}
           content="선택완료"
           onClick={handleSubmit}
         />
@@ -69,8 +69,9 @@ const StBackgroud = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   padding: 3.3rem 2rem;
+  overflow-y: scroll;
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
@@ -78,7 +79,6 @@ const StArticleStyles = styled.article`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
-  padding-top: 5.3rem;
-  overflow-y: scroll;
+  height: auto;
+  padding-top: 3rem;
 `;
