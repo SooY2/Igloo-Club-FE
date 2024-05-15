@@ -15,13 +15,13 @@ const FinishMatch = () => {
   const location = useLocation();
   const { state } = useLocation();
   const [matchData, setMatchData] = useState<MatchDatatypes | undefined>();
-  const [formattedDate, setFormattedDate] = useState<string>('');
+  //  const [formattedDate, setFormattedDate] = useState<string>('');
   const [isClickedMarker, setIsClickedMarker] = useState<{
     title: string;
     address: string;
   } | null>(null);
   const title = `축하해요 🎉\n 서로의 눈길이 매칭되었어요`;
-  const subtitle = `서로의 눈길이 닿아 매칭이 성사되었어요.\n 채팅방을 통해 두 분의 첫만남 약속을 잡아보세요!`;
+  const subtitle = `서로의 눈길이 닿아 매칭이 성사되었어요.\n 채팅방을 통해 두 분의 만남 약속을 잡아보세요!`;
 
   const ClickXIcon = () => {
     navigate('/nungillist', {
@@ -48,10 +48,10 @@ const FinishMatch = () => {
         if (month.startsWith('0')) {
           month = month.slice(1);
         }
-        const day = date.slice(6, 8);
+        // const day = date.slice(6, 8);
 
-        const formatted = `${month}월 ${day}일`;
-        setFormattedDate(formatted);
+        // const formatted = `${month}월 ${day}일`;
+        // setFormattedDate(formatted);
       }
     } catch (error) {
       console.log(error);
@@ -75,12 +75,12 @@ const FinishMatch = () => {
       </div>
       <div css={Recommend.Wrapper}>
         <div css={Recommend.Title}>
-          <span>두 분에게 어울리는 커피챗 시간과 장소를 알려드려요</span>
+          <span>최적의 만남 시간을 알려드려요</span>
         </div>
         <div css={Recommend.SubTitle}>
           두 분이 모두 만남이 가능하다고 응답하신 요일과 시간대에요.
         </div>
-        <div css={Recommend.RecoBox}>
+        {/* <div css={Recommend.RecoBox}>
           <span css={Recommend.RecoTitle}>🗓️ 가능한 요일</span>
           {matchData?.matchYoil && matchData?.matchDate ? (
             <span css={Recommend.RecoContent}>
@@ -89,24 +89,22 @@ const FinishMatch = () => {
           ) : (
             <span css={Recommend.RecoContent}>매칭되는 요일이 없어요 😢</span>
           )}
-        </div>
+        </div> */}
         <div css={Recommend.RecoBox}>
           <span css={Recommend.RecoTitle}>⏰ 가능 시간대</span>
           {matchData?.time ? (
             <span css={Recommend.RecoContent}>{matchData.time}</span>
           ) : (
-            <span css={Recommend.RecoContent}>
-              채팅을 통해 시간과 장소를 잡아보세요!
-            </span>
+            <span css={Recommend.RecoContent}>채팅으로 시간을 정해보세요!</span>
           )}
         </div>
       </div>
       <div css={Place.Wrapper}>
         <div css={Place.Title}>
-          <span>첫만남 장소, 이런 곳은 어떠세요?</span>
+          <span>만남 장소, 이런 곳은 어떠세요?</span>
         </div>
         <div css={Place.SubTitle}>
-          <span>두분의 의견을 반영하여 최적의 첫만남 장소를 골라봤어요 📝</span>
+          <span>두분의 의견을 반영하여 최적의 만남 장소를 골라봤어요 📝</span>
         </div>
         <div css={Place.Map}>
           <Map matchData={matchData} setIsClickedMarker={setIsClickedMarker} />

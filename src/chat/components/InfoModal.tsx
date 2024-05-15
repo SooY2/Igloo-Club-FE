@@ -40,9 +40,9 @@ const InfoModal = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const sliceFirstDay = (day: string) => {
-    return day.slice(0, 1);
-  };
+  // const sliceFirstDay = (day: string) => {
+  //   return day.slice(0, 1);
+  // };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleOutsideClick = (e: any) => {
@@ -59,7 +59,7 @@ const InfoModal = ({
         </StXButton>
         <StInfoTitle>{title}</StInfoTitle>
         <StPossibleWrapper>
-          <StPossibleBox>
+          {/* <StPossibleBox>
             <StPossibleTitle>🗓️ 가능한 요일</StPossibleTitle>
             <StPossibleContent>
               {matchData?.yoil ? (
@@ -72,14 +72,16 @@ const InfoModal = ({
                 <StPossibleValue>없음</StPossibleValue>
               )}
             </StPossibleContent>
-          </StPossibleBox>
+          </StPossibleBox>*/}
           <StPossibleBox>
             <StPossibleTitle>⏰ 가능 시간대</StPossibleTitle>
             <StPossibleContent>
-              {matchData?.time ? (
+              {/* {matchData?.time ? (
                 matchData.time.map((timeSlot: string, index: number) => (
                   <StPossibleValue key={index}>{timeSlot}</StPossibleValue>
-                ))
+                )) */}{' '}
+              {matchData?.time ? (
+                matchData.time
               ) : (
                 <StPossibleValue>없음</StPossibleValue>
               )}
@@ -162,7 +164,7 @@ const StPossibleBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-width: 30rem;
+  min-width: 28rem;
   max-width: 30rem;
   height: 5.9rem;
   padding: 0 1.5rem;
