@@ -10,13 +10,7 @@ const 회원가입완료 = ({ onNext }: { onNext: () => void }) => {
           <StLogo src={prefinish} />
           <StText>사전 프로필 등록이 완료되었어요!</StText>
           <div>
-            <StSub>
-              사전 프로필 등록을 완료했어요. 봄 축제가 시작되는 16일부터
-            </StSub>
-            <StSub>
-              이용가능해요. 봄 축제 당일에 <StBold>순차적으로 연락</StBold>
-              드릴게요.
-            </StSub>
+            <StSub>눈길 보내고 숭실대 친구와 즐거운 축제 즐기세요!</StSub>
             <Stbox>
               <Kakao />
               <span>문자 메시지가 도착하면 꼭 확인해 주세요</span>
@@ -90,10 +84,6 @@ const StSub = styled.p`
   color: #556372;
   text-align: center;
   letter-spacing: -0.3px;
-`;
-
-const StBold = styled.span`
-  font-weight: 800;
 `;
 
 const Stbox = styled.div`
