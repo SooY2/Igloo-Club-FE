@@ -32,10 +32,8 @@ const SendBtn = css`
   max-width: 42.5rem;
   height: 5.5rem;
   padding: 1.5rem 7rem;
-  font-size: 14px;
-  font-style: normal;
+  font-size: 1.4rem;
   font-weight: 700;
-  line-height: normal;
   color: #b7bcc5;
   text-align: center;
   background-color: #e8e9ef;

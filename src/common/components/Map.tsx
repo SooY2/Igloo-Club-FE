@@ -92,7 +92,6 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
         newMarkers.push(newMarker);
       });
 
-      // Set the new markers array
       setMarkers(newMarkers);
     }
   }, [map, matchData, clickedMarker]);
