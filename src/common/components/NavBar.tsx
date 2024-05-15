@@ -33,8 +33,8 @@ const NavBar = ({
   };
 
   const handleNavButtonClick = (path: string, state?: StateType) => {
-    const accessToken = localStorage.getItem('ACCESS_TOKEN');
-    if (!accessToken) {
+    const STEP = localStorage.getItem('STEP');
+    if (STEP !== '가입완료') {
       setIsLoginModalOpen(true);
     } else {
       navigate(path, { state });
