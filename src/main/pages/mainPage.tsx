@@ -177,7 +177,7 @@ const Middle = {
     height: 4rem;
     padding: 1.2rem;
     margin-right: 2rem;
-    margin-bottom: 2.9rem;
+    margin-bottom: 1rem;
     margin-left: 2rem;
     font-size: 1.3rem;
     font-style: normal;
@@ -222,6 +222,7 @@ const Bottom = {
     gap: 1.5rem;
     width: 100%;
     padding: 0 2.6rem 7rem;
+    padding-top: 1rem;
     margin-bottom: 6.5rem;
     overflow-y: scroll;
     font-size: 1.8rem;
