@@ -17,7 +17,6 @@ interface ChatRoomHeaderProps {
 
 const ChatRoomHeader = ({
   animalFace,
-  companyName,
   job,
   nickname,
   chatRoomId,
@@ -37,9 +36,7 @@ const ChatRoomHeader = ({
           <AnimalProfile animalFace={animalFace} />
           <div css={senderProfileStyles}>
             <StSenderName>{nickname}</StSenderName>
-            <StSenderJob>
-              {companyName}, {job}
-            </StSenderJob>
+            <StSenderJob>{job}</StSenderJob>
           </div>
         </span>
       </header>

@@ -88,8 +88,9 @@ const StBackgroud = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   padding: 3.3rem 2rem;
+  overflow-y: scroll;
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
@@ -97,7 +98,6 @@ const StArticleStyles = styled.article`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
-  padding-top: 5.3rem;
-  overflow-y: scroll;
+  height: auto;
+  padding-top: 3rem;
 `;
