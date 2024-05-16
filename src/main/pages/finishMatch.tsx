@@ -78,7 +78,7 @@ const FinishMatch = () => {
           <span>최적의 만남 시간을 알려드려요</span>
         </div>
         <div css={Recommend.SubTitle}>
-          두 분이 모두 만남이 가능하다고 응답하신 요일과 시간대에요.
+          두 분이 모두 만남이 가능하다고 응답하신 시간대에요.
         </div>
         {/* <div css={Recommend.RecoBox}>
           <span css={Recommend.RecoTitle}>🗓️ 가능한 요일</span>

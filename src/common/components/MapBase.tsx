@@ -52,6 +52,8 @@ const MapBase = ({ matchData, setMap, onMapLoad }: MapContainerProps) => {
             //   );
             // }
             center = new window.kakao.maps.LatLng(37.496503, 126.957227);
+          } else {
+            center = new window.kakao.maps.LatLng(37.496503, 126.957227);
           }
 
           const mapOption = {
