@@ -54,11 +54,14 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
           marker.longitude,
         );
 
+        const isClicked = index === clickedMarker;
+
         const content = `
           <div>
-            <img src="${index === clickedMarker ? clickedpin : pin}" alt="Marker" />
-            <div>Title: ${marker.title}</div>
-            <div>Address: ${marker.address}</div>
+            <img src="${isClicked ? clickedpin : pin}" alt="Marker"
+            style='width: ${
+              isClicked ? '35px' : '22px'
+            }; height: ${isClicked ? '48px' : '30px'} />
           </div>
       `;
 
@@ -69,15 +72,15 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
 
         overlay.setMap(map);
 
-        overlay.addListener('click', () => {
+        window.kakao.maps.event.addListener(overlay, 'click', () => {
           handleClickMarker(index);
         });
 
-        overlay.addListener('touchstart', () => {
+        window.kakao.maps.event.addListener(overlay, 'touchstart', () => {
           handleClickMarker(index);
         });
 
-        overlay.addListener('touchend', () => {
+        window.kakao.maps.event.addListener(overlay, 'touchend', () => {
           handleClickMarker(index);
         });
 
