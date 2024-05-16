@@ -20,6 +20,20 @@ const MainPage = () => {
   const [profileData, setProfileData] = useState<ProfileDataTypesProps[]>([]);
   const [selected] = useState<string>('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
+  const [randomMessage, setRandomMessage] = useState<string>('');
+
+  const messages = [
+    '이번 축제에 보드게임 카페가 있대요! 진리관 근처라는데..?',
+    '보이는 카드들은 전부 앞으로 만날 수 있는 사람들이에요.',
+    '패션에 자신 있다면? 슈돌이의 코디 매치 부스는 어떨까요?',
+    '그거 아세요? 경상관 1층에는 편의점이 있습니다.',
+    '매칭 장소로 백마상 앞이 설정되면 기운이 좋다는 속설이..',
+    '오늘 나의 행운은? 친구와 함께 운세 뽑기 부스 어떠세요?',
+    '만남 10분 전에 리마인드를 드려요!',
+    '매칭이 성사되면 채팅을 통해 상대와 연락할 수 있어요.',
+    '소개글을 자세히 적을 수록 매칭 확률이 높아져요.',
+    '채팅을 통해 인상 착의를 미리 확인하면 유리해요.',
+  ];
 
   const STEP = localStorage.getItem('STEP');
 
@@ -78,6 +92,15 @@ const MainPage = () => {
   //   handleGetAllProfile();
   // };
 
+  const getRandomMessage = () => {
+    const randomIndex = Math.floor(Math.random() * messages.length);
+    return messages[randomIndex];
+  };
+
+  useEffect(() => {
+    setRandomMessage(getRandomMessage());
+  }, []);
+
   return (
     <div css={Container}>
       <div css={Top.Wrapper}>
@@ -87,9 +110,9 @@ const MainPage = () => {
           />
           <span>에서</span>
         </div>
-        <div css={Top.TitleBottom}>
-          <p>우리 학교 친구와</p>
-          <p>빠르게 만나 봄 축제 즐기기 ⚡️️</p>
+        <div>
+          <p css={Top.TitleBottom}>우리 학교 친구와</p>
+          <p css={Top.TitleBottom2}>빠르게 만나 봄 축제 즐기기 ⚡️️</p>
         </div>
       </div>
       <div css={Middle.Wrapper}>
@@ -98,9 +121,8 @@ const MainPage = () => {
             <CountDown />
           </span> */}
           {/* <span css={Middle.PrimaryText}>인연 프로필 삭제</span> */}
-          <span css={{ textAlign: 'center' }}>
-            📢 보이는 카드들은 가까운 정각에 바로 만날 수 있어요.
-          </span>
+          <span css={{ color: '#3c3939' }}>Tip!</span>
+          <span css={{ textAlign: 'center' }}>{randomMessage}</span>
         </div>
       </div>
       <div css={Bottom.Wrapper}>
@@ -164,6 +186,20 @@ const Top = {
 
   TitleBottom: css`
     ${theme.fonts.title};
+
+    margin-bottom: 0.5rem;
+  `,
+
+  TitleBottom2: css`
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: var(
+      --linear,
+      linear-gradient(275deg, #ff6264 5.58%, #ffa490 95.87%)
+    );
+    background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   `,
 };
 

@@ -23,6 +23,7 @@ const ChatRoomHeader = ({
 }: ChatRoomHeaderProps) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const handleClickModal = () => {
     setIsModalOpen(true);
   };

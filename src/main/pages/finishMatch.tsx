@@ -111,7 +111,7 @@ const FinishMatch = () => {
         </div>
         <div css={Place.InfoBox}>
           <ul css={Place.InfoPlaceName}>
-            <li css={Place.InfoTitle}>장소명</li>
+            {/* <li css={Place.InfoTitle}>장소명</li> */}
             {isClickedMarker ? (
               <li css={Place.InfoContent}>{isClickedMarker.title}</li>
             ) : matchData?.marker && matchData?.marker.length > 0 ? (
@@ -122,7 +122,7 @@ const FinishMatch = () => {
               <li css={Place.InfoContent}>매칭된 장소가 존재하지 않아요</li>
             )}
           </ul>
-          <ul css={Place.InfoAddress}>
+          {/* <ul css={Place.InfoAddress}>
             <li css={Place.InfoTitle}>주소</li>
             {isClickedMarker ? (
               <li css={Place.InfoContent}>{isClickedMarker.address}</li>
@@ -133,7 +133,7 @@ const FinishMatch = () => {
             ) : (
               <li css={Place.InfoContent}>매칭된 장소가 존재하지 않아요 😭</li>
             )}
-          </ul>
+          </ul> */}
         </div>
       </div>
       <div css={StartBtn}>
@@ -313,8 +313,8 @@ const Place = {
     gap: 1.5rem;
     justify-content: center;
     min-width: 30rem;
-    height: 8.7rem;
-    padding-left: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     margin-top: 1.4rem;
     margin-bottom: 5rem;
     background-color: #fafafa;
@@ -342,11 +342,11 @@ const Place = {
   `,
 
   InfoContent: css`
-    display: flex;
-    font-size: 13px;
-    font-style: normal;
+    width: 100%;
+    font-size: 1.3rem;
     font-weight: 500;
     color: ${theme.colors.gray7};
+    text-align: center;
   `,
 };
 
