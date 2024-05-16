@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from 'react';
 import { css } from '@emotion/react';
 import { MatchDatatypes } from '../../main/types/MatchDatatypes';
@@ -13,14 +12,14 @@ declare global {
   }
 }
 
-// interface MarkerTypes {
-//   marker: Array<{
-//     title: string;
-//     address: string;
-//     latitude: number;
-//     longitude: number;
-//   }>;
-// }
+interface MarkerTypes {
+  marker: Array<{
+    title: string;
+    address: string;
+    latitude: number;
+    longitude: number;
+  }>;
+}
 
 interface MapProps {
   matchData: MatchDatatypes | undefined;
@@ -31,7 +30,7 @@ interface MapProps {
 
 const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
   const [clickedMarker, setClickedMarker] = useState<number | null>(null);
-  const [map, setMap] = useState<any>(null);
+  const [map, setMap] = useState<MarkerTypes>();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [markers, setMarkers] = useState<any[]>([]);
 
@@ -46,7 +45,8 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
         existingMarker.setMap(null);
       });
 
-      const newMarkers: any[] = [];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const newOverlays: any[] = [];
 
       matchData.marker.forEach((marker, index) => {
         const position = new window.kakao.maps.LatLng(
@@ -54,33 +54,12 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
           marker.longitude,
         );
 
-        const imageSrc = index === clickedMarker ? clickedpin : pin;
-        const imageSize =
-          index === clickedMarker
-            ? new window.kakao.maps.Size(35, 48)
-            : new window.kakao.maps.Size(22, 30);
-        const imageOption =
-          index === clickedMarker
-            ? { offset: new window.kakao.maps.Point(30, 40) }
-            : { offset: new window.kakao.maps.Point(20, 30) };
-
-        const markerImage = new window.kakao.maps.MarkerImage(
-          imageSrc,
-          imageSize,
-          imageOption,
-        );
-
-        const newMarker = new window.kakao.maps.Marker({
-          position: position,
-          image: markerImage,
-          title: marker.title,
-        });
-
         const content = `
-        <div>
-          <div>Title: ${marker.title}</div>
-          <div>Address: ${marker.address}</div>
-        </div>
+          <div>
+            <img src="${index === clickedMarker ? clickedpin : pin}" alt="Marker" />
+            <div>Title: ${marker.title}</div>
+            <div>Address: ${marker.address}</div>
+          </div>
       `;
 
         const overlay = new window.kakao.maps.CustomOverlay({
@@ -88,30 +67,26 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
           content: content,
         });
 
-        const markerData = { newMarker, overlay };
+        overlay.setMap(map);
 
-        window.kakao.maps.event.addListener(newMarker, 'click', function () {
+        overlay.addListener('click', () => {
           handleClickMarker(index);
         });
 
-        window.kakao.maps.event.addListener(
-          newMarker,
-          'touchstart',
-          function () {
-            handleClickMarker(index);
-          },
-        );
-
-        window.kakao.maps.event.addListener(newMarker, 'touchend', function () {
+        overlay.addListener('touchstart', () => {
           handleClickMarker(index);
         });
 
-        newMarkers.push(markerData);
+        overlay.addListener('touchend', () => {
+          handleClickMarker(index);
+        });
+
+        newOverlays.push(overlay);
       });
 
-      setMarkers(newMarkers);
+      setMarkers(newOverlays);
     }
-  }, [map, matchData, clickedMarker]);
+  }, [map, matchData, clickedMarker, markers]);
 
   const handleClickMarker = (index: number) => {
     setClickedMarker((prevIndex) => (prevIndex === index ? null : index));
