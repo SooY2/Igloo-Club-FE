@@ -85,6 +85,10 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
           },
         );
 
+        window.kakao.maps.event.addListener(newMarker, 'touchend', function () {
+          handleClickMarker(index);
+        });
+
         window.kakao.maps.event.addListener(newMarker, 'click', function () {
           handleClickMarker(index);
         });
