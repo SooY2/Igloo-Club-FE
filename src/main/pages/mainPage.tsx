@@ -60,7 +60,7 @@ const MainPage = () => {
           ...config,
           params: {
             page: 0,
-            size: 10,
+            size: 100,
           },
         },
       );
@@ -197,7 +197,6 @@ const Top = {
       --linear,
       linear-gradient(275deg, #ff6264 5.58%, #ffa490 95.87%)
     );
-    background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   `,
