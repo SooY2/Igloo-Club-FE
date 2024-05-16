@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from 'react';
 import { css } from '@emotion/react';
 import { MatchDatatypes } from '../../main/types/MatchDatatypes';
@@ -12,14 +13,14 @@ declare global {
   }
 }
 
-interface MarkerTypes {
-  marker: Array<{
-    title: string;
-    address: string;
-    latitude: number;
-    longitude: number;
-  }>;
-}
+// interface MarkerTypes {
+//   marker: Array<{
+//     title: string;
+//     address: string;
+//     latitude: number;
+//     longitude: number;
+//   }>;
+// }
 
 interface MapProps {
   matchData: MatchDatatypes | undefined;
@@ -30,7 +31,7 @@ interface MapProps {
 
 const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
   const [clickedMarker, setClickedMarker] = useState<number | null>(null);
-  const [map, setMap] = useState<MarkerTypes>();
+  const [map, setMap] = useState<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [markers, setMarkers] = useState<any[]>([]);
 
@@ -45,7 +46,7 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
         existingMarker.setMap(null);
       });
 
-      const newMarkers: MarkerTypes[] = [];
+      const newMarkers: any[] = [];
 
       matchData.marker.forEach((marker, index) => {
         const position = new window.kakao.maps.LatLng(
@@ -75,7 +76,23 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
           title: marker.title,
         });
 
-        newMarker.setMap(map);
+        const content = `
+        <div>
+          <div>Title: ${marker.title}</div>
+          <div>Address: ${marker.address}</div>
+        </div>
+      `;
+
+        const overlay = new window.kakao.maps.CustomOverlay({
+          position: position,
+          content: content,
+        });
+
+        const markerData = { newMarker, overlay };
+
+        window.kakao.maps.event.addListener(newMarker, 'click', function () {
+          handleClickMarker(index);
+        });
 
         window.kakao.maps.event.addListener(
           newMarker,
@@ -89,11 +106,7 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
           handleClickMarker(index);
         });
 
-        window.kakao.maps.event.addListener(newMarker, 'click', function () {
-          handleClickMarker(index);
-        });
-
-        newMarkers.push(newMarker);
+        newMarkers.push(markerData);
       });
 
       setMarkers(newMarkers);
