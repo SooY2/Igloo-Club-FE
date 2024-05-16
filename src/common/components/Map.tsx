@@ -57,12 +57,11 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
         const isClicked = index === clickedMarker;
 
         const content = `
-          <div>
-            <img src="${isClicked ? clickedpin : pin}" alt="Marker"
-            style='width: ${
-              isClicked ? '35px' : '22px'
-            }; height: ${isClicked ? '48px' : '30px'} />
-          </div>
+        <div style="position: relative; transform: translate(-50%, -100%);">
+        <img src="${isClicked ? clickedpin : pin}" alt="Marker"
+        style="width: ${isClicked ? '35px' : '22px'};
+               height: ${isClicked ? '48px' : '30px'};" />
+      </div>
       `;
 
         const overlay = new window.kakao.maps.CustomOverlay({
@@ -72,24 +71,23 @@ const Map = ({ matchData, setIsClickedMarker }: MapProps) => {
 
         overlay.setMap(map);
 
-        window.kakao.maps.event.addListener(overlay, 'click', () => {
+        const handleClick = () => {
           handleClickMarker(index);
-        });
+        };
 
-        window.kakao.maps.event.addListener(overlay, 'touchstart', () => {
-          handleClickMarker(index);
-        });
-
-        window.kakao.maps.event.addListener(overlay, 'touchend', () => {
-          handleClickMarker(index);
-        });
+        const divElement = document.createElement('div');
+        divElement.innerHTML = content;
+        divElement.addEventListener('click', handleClick);
+        divElement.addEventListener('touchstart', handleClick);
+        divElement.addEventListener('touchend', handleClick);
+        overlay.setContent(divElement);
 
         newOverlays.push(overlay);
       });
 
       setMarkers(newOverlays);
     }
-  }, [map, matchData, clickedMarker, markers]);
+  }, [map, matchData, clickedMarker]);
 
   const handleClickMarker = (index: number) => {
     setClickedMarker((prevIndex) => (prevIndex === index ? null : index));
