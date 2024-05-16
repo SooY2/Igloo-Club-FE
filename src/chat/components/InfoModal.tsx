@@ -19,7 +19,7 @@ const InfoModal = ({
     title: string;
     address: string;
   } | null>(null);
-  const title = `${nickname} 님이 알려주신\n 만남이 가능한 시간대와 장소에요`;
+  const title = `${nickname} 님이 알려주신\n 만남이 가능한 시간대에요`;
 
   const ClickXBtn = () => {
     closeModal();
@@ -72,12 +72,12 @@ const InfoModal = ({
                 <StPossibleValue>없음</StPossibleValue>
               )}
             </StPossibleContent>
-          </StPossibleBox>*/}
+          </StPossibleBox> */}
           <StPossibleBox>
             <StPossibleTitle>⏰ 가능 시간대</StPossibleTitle>
             <StPossibleContent>
-              {/* {matchData?.time ? (
-                matchData.time.map((timeSlot: string, index: number) => (
+              {/* {matchData?.times ? (
+                matchData.times.map((timeSlot: string, index: number) => (
                   <StPossibleValue key={index}>{timeSlot}</StPossibleValue>
                 )) */}{' '}
               {matchData?.time ? (
@@ -180,7 +180,6 @@ const StPossibleTitle = styled.span`
   justify-content: start;
   width: 100%;
   font-size: 1.3rem;
-  font-style: normal;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.gray8};
 `;
