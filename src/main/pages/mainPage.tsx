@@ -1,6 +1,6 @@
 /** 메인 페이지 **/
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { theme } from '../../common/styles/theme';
@@ -21,6 +21,9 @@ const MainPage = () => {
   const [selected] = useState<string>('');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [randomMessage, setRandomMessage] = useState<string>('');
+
+  const observerRef = React.useRef<IntersectionObserver>();
+  const boxRef = React.useRef<HTMLDivElement>(null);
 
   const messages = [
     '이번 축제에 보드게임 카페가 있대요! 진리관 근처라는데..?',
@@ -73,6 +76,23 @@ const MainPage = () => {
   useEffect(() => {
     handleGetAllProfile();
   }, [STEP]);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(intersectionObserver);
+    boxRef.current && observerRef.current.observe(boxRef.current);
+  }, [profileData]);
+
+  const intersectionObserver = (
+    entries: IntersectionObserverEntry[],
+    io: IntersectionObserver,
+  ) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        io.unobserve(entry.target);
+        handleGetAllProfile();
+      }
+    });
+  };
 
   // const ClickPickProfile = () => {
   //   handleGetAllProfile();
